@@ -6,6 +6,6 @@ public class StartGame : MonoBehaviour
 
     private void Start()
     {
-        _playerMoney.AddMoney(100);
+        _playerMoney.AddMoney(1000);
     }
 }

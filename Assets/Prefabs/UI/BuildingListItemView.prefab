@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 2083695778439187024}
   - component: {fileID: 2083695778439187025}
   - component: {fileID: 2083695778439187022}
+  - component: {fileID: 1024386581755483407}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -466,6 +467,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 0.02, y: -0.02}
   m_UseGraphicAlpha: 1
+--- !u!114 &1024386581755483407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083695778439187027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a8aa0b2765d5040bdca4b181631ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: {fileID: 2083695779245038583}
 --- !u!1 &2083695778903148069
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60993db436dfd9f4da47afa72cd9ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _title: {fileID: 2083695779219825721}
+  _image: {fileID: 2083695778175292964}
+  _buyButton: {fileID: 1024386581755483407}
 --- !u!1 &2083695779219825723
 GameObject:
   m_ObjectHideFlags: 0

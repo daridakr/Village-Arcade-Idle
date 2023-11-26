@@ -18,21 +18,13 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void StartCleaning()
+    public void StartInteract(string animationParamName)
     {
-        _animator.SetBool(AnimationParams.IsClean, true);
+        _animator.SetBool(animationParamName, true);
     }
 
-    public void StopCleaning()
+    public void StopInteract(string animationParamName)
     {
-        _animator.SetBool(AnimationParams.IsClean, false);
-    }
-
-    private static class AnimationParams
-    {
-        public static readonly string Speed = nameof(Speed);
-        public static readonly string Idle = nameof(Idle);
-        public static readonly string Flying = nameof(Flying);
-        public static readonly string IsClean = nameof(IsClean);
+        _animator.SetBool(animationParamName, false);
     }
 }

@@ -4,13 +4,14 @@ public class BuildingZone : MonoBehaviour
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
     [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
+    [SerializeField] private BuildingBuilder _builder;
     [SerializeField] private BuildingZoneView _view;
 
     [SerializeField] private GameObject _building; // to destroy if it's destroyed state
     [SerializeField] private ParticleSystem _effect;
 
     private BuildingZoneState _currentState;
-    private int _price = 20;
+    private int _clearPrice = 20;
 
     public BuildingZoneState State => _currentState;
 
@@ -20,18 +21,30 @@ public class BuildingZone : MonoBehaviour
         _moneyOwnerTrigger.Exit += TriggerExit;
 
         _view.ClearStarted += ClearZone;
+        _view.BuildStarted += BuildZone;
     }
 
     private void ClearZone()
     {
         MoneyOwner buyer = _moneyOwnerTrigger.Owner;
-        buyer.SpendMoney(_price);
+        buyer.SpendMoney(_clearPrice);
 
-        _buildingCleaner.StartClean(this);
+        _buildingCleaner.Clean(this);
 
         Destroy(_building);
         _effect.Stop();
         _currentState = BuildingZoneState.Empty;
+    }
+
+    private void BuildZone(Building building)
+    {
+        MoneyOwner buyer = _moneyOwnerTrigger.Owner;
+        buyer.SpendMoney(building.Price);
+
+        _builder.Build(this);
+        Instantiate(building);
+
+        _currentState = BuildingZoneState.Builded;
     }
 
     private void TriggerEnter(MoneyOwner moneyOwner)
@@ -41,7 +54,7 @@ public class BuildingZone : MonoBehaviour
         switch (_currentState)
         {
             case BuildingZoneState.Destroyed:
-                _view.ShowClearCanvas(_price, moneyOwner.Balance);
+                _view.ShowClearCanvas(_clearPrice, moneyOwner.Balance);
                 break;
             case BuildingZoneState.Empty:
                 _view.ShowBuildCanvas();
@@ -65,6 +78,9 @@ public class BuildingZone : MonoBehaviour
     {
         _moneyOwnerTrigger.Enter -= TriggerEnter;
         _moneyOwnerTrigger.Exit -= TriggerExit;
+
+        _view.ClearStarted -= ClearZone;
+        _view.BuildStarted -= BuildZone;
     }
 }
 
