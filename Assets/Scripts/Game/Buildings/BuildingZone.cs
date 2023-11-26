@@ -3,6 +3,7 @@ using UnityEngine;
 public class BuildingZone : MonoBehaviour
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
+    [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
     [SerializeField] private BuildingZoneView _view;
 
     [SerializeField] private GameObject _building; // to destroy if it's destroyed state
@@ -10,6 +11,8 @@ public class BuildingZone : MonoBehaviour
 
     private BuildingZoneState _currentState;
     private int _price = 20;
+
+    public BuildingZoneState State => _currentState;
 
     private void OnEnable()
     {
@@ -21,7 +24,11 @@ public class BuildingZone : MonoBehaviour
 
     private void ClearZone()
     {
-        _moneyOwnerTrigger.Owner.SpendMoney(_price);
+        MoneyOwner buyer = _moneyOwnerTrigger.Owner;
+        buyer.SpendMoney(_price);
+
+        _buildingCleaner.StartClean(this);
+
         Destroy(_building);
         _effect.Stop();
         _currentState = BuildingZoneState.Empty;
@@ -40,7 +47,7 @@ public class BuildingZone : MonoBehaviour
                 _view.ShowBuildCanvas();
                 break;
             case BuildingZoneState.Builded:
-                _view.ShowUpgradeCanvas();
+                //_view.ShowUpgradeCanvas();
                 break;
             default:
                 break;
@@ -51,7 +58,7 @@ public class BuildingZone : MonoBehaviour
 
     private void TriggerExit(MoneyOwner moneyOwner)
     {
-        _view.HideClearCanvas();
+        _view.HideCanvas();
     }
 
     private void OnDisable()
