@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuildingBuilder : BuildingInteraction
+public class BuildingBuilder : BuildingInteractor
 {
     [SerializeField] private GameObject _hammer;
 

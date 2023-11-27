@@ -8,7 +8,7 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private Transform _buildPoint;
     [SerializeField] private BuildingZoneView _view;
 
-    private Building _building;
+    private BuildingRenderer _building;
     private BuildingZoneState _currentState;
     private int _clearPrice = 20;
 
@@ -21,10 +21,6 @@ public class BuildingZone : MonoBehaviour
 
         _view.CanClear += OnClearZone;
         _view.CanBuild += OnBuildZone;
-
-        _builder.Stopped += Build;
-
-        //_buildingPoint = _destroyed.transform;
     }
 
 
@@ -35,11 +31,20 @@ public class BuildingZone : MonoBehaviour
         buyer.SpendMoney(_clearPrice);
 
         _buildingCleaner.Clean(this);
-
-        DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
-        destroyedBuilding.Clear();
+        _buildingCleaner.Stopped += ClearBuilding;
 
         _currentState = BuildingZoneState.Empty;
+    }
+
+    private void ClearBuilding()
+    {
+        if (_currentState == BuildingZoneState.Empty)
+        {
+            DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
+            destroyedBuilding?.Clear();
+
+            _buildingCleaner.Stopped -= ClearBuilding;
+        }
     }
 
     private void OnBuildZone(BuildingData buildingData)
@@ -47,17 +52,20 @@ public class BuildingZone : MonoBehaviour
         MoneyOwner buyer = _moneyOwnerTrigger.Owner;
         buyer.SpendMoney(buildingData.Price);
 
+        _building = buildingData.Renderer;
+
         _builder.StartBuildIn(this);
-        //_building.Init(buildingData);
+        _builder.Stopped += SetBuilding;
 
         _currentState = BuildingZoneState.Builded;
     }
 
-    private void Build()
+    private void SetBuilding()
     {
         if (_currentState == BuildingZoneState.Builded && _building != null)
         {
-            Building building = Instantiate(_building, _buildPoint);
+            Instantiate(_building, _buildPoint);
+            _builder.Stopped -= SetBuilding;
         }
     }
 
@@ -95,8 +103,6 @@ public class BuildingZone : MonoBehaviour
 
         _view.CanClear -= OnClearZone;
         _view.CanBuild -= OnBuildZone;
-
-        _builder.Stopped -= Build;
     }
 }
 

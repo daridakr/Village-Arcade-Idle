@@ -5,34 +5,34 @@ using UnityEngine.UI;
 
 public class BuildingListView : CanvasAnimatedView
 {
-    [SerializeField] private BuildingListItemView _prefab;
+    [SerializeField] private BuildingListItemView _listViewItem;
     [SerializeField] private VerticalLayoutGroup _content;
-    // temp. in future - class smth like PlayerBuildings or PlayerBluePrints
-    [SerializeField] private Building[] _availableBuldings;
+
+    [SerializeField] private PlayerBuildingsList _availableBuildings;
     [SerializeField] private MoneyOwner _moneyOwner;
 
     private List<BuildingListItemView> _buildingViews = new List<BuildingListItemView>();
 
-    public event Action<BuildingListItemView> OnBuyed;
+    public event Action<BuildingData> OnSmthBuyed;
 
     public override void Display()
     {
         base.Display();
         ClearOldData();
 
-        for (int i = 0; i < _availableBuldings.Length; i++)
+        foreach (BuildingData building in _availableBuildings.Data)
         {
-            BuildingListItemView buildingView = Instantiate(_prefab, _content.transform);
-            buildingView.Render(_availableBuldings[i].Data, _moneyOwner.Balance);
+            BuildingListItemView buildingView = Instantiate(_listViewItem, _content.transform);
+            buildingView.Render(building, _moneyOwner.Balance);
             buildingView.OnBuy += OnBuildingBuyed;
             _buildingViews.Add(buildingView);
         }
     }
 
-    private void OnBuildingBuyed(BuildingListItemView buildingViewItem)
+    private void OnBuildingBuyed(BuildingData buildingData)
     {
         Hide();
-        OnBuyed?.Invoke(buildingViewItem);
+        OnSmthBuyed?.Invoke(buildingData);
     }
 
     private void ClearOldData()

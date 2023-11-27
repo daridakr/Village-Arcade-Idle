@@ -1,4 +1,4 @@
-public class BuildingCleaner : BuildingInteraction
+public class BuildingCleaner : BuildingInteractor
 {
     public void Clean(BuildingZone zone)
     {

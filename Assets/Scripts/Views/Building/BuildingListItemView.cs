@@ -11,9 +11,7 @@ public class BuildingListItemView : MonoBehaviour
 
     private BuildingData _buildingData;
 
-    public BuildingData BuildingData => _buildingData;
-
-    public event Action<BuildingListItemView> OnBuy;
+    public event Action<BuildingData> OnBuy;
 
     private void OnEnable()
     {
@@ -32,7 +30,7 @@ public class BuildingListItemView : MonoBehaviour
 
     private void OnBuyButtonClicked()
     {
-        OnBuy?.Invoke(this);
+        OnBuy?.Invoke(_buildingData);
     }
 
     private void OnDisable()

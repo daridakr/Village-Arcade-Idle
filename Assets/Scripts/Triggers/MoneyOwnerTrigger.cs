@@ -1,3 +1,6 @@
+
+using UnityEngine;
+
 public class MoneyOwnerTrigger : Trigger<MoneyOwner>
 {
     private MoneyOwner _enteredOwner;

@@ -2,27 +2,27 @@ using UnityEngine;
 
 public abstract class SavedObject<T> where T : class
 {
-    private readonly string _key;
+    private readonly string _saveKey;
 
     public SavedObject(string key)
     {
-        _key = key;
+        _saveKey = key;
     }
 
     public void Save()
     {
         var jsonString = JsonUtility.ToJson(this as T);
-        PlayerPrefs.SetString(_key, jsonString);
+        PlayerPrefs.SetString(_saveKey, jsonString);
     }
 
     public void Load()
     {
-        if (PlayerPrefs.HasKey(_key) == false)
+        if (PlayerPrefs.HasKey(_saveKey) == false)
         {
             return;
         }
 
-        var jsonString = PlayerPrefs.GetString(_key);
+        var jsonString = PlayerPrefs.GetString(_saveKey);
         var loadedObject = JsonUtility.FromJson(jsonString, typeof(T));
 
         OnLoad(loadedObject as T);

@@ -20,7 +20,6 @@ public class BuildingZoneView : MonoBehaviour
     {
         _clearCanvas.ClearButtonClicked += OnClearZone;
         _buildCanvas.BuildButtonClicked += OnShowBuildings;
-        _buildingListView.OnBuyed += OnBuildZone;
     }
 
     public void ShowClearCanvas(int clearPrice, int balance)
@@ -49,15 +48,18 @@ public class BuildingZoneView : MonoBehaviour
     private void OnShowBuildings()
     {
         _buildingListView.Display();
+        _buildingListView.OnSmthBuyed += OnBuildZone;
     }
 
-    private void OnBuildZone(BuildingListItemView building)
+    private void OnBuildZone(BuildingData data)
     {
         _buildCanvas.Hide();
+        _buildingListView.OnSmthBuyed -= OnBuildZone;
+
         _dottedSquare.enabled = false;
         _buildEffect.Play();
 
-        CanBuild?.Invoke(building.BuildingData);
+        CanBuild?.Invoke(data);
         Invoke(nameof(StopEffect), 2f);
     }
 
@@ -70,6 +72,5 @@ public class BuildingZoneView : MonoBehaviour
     {
         _clearCanvas.ClearButtonClicked -= OnClearZone;
         _buildCanvas.BuildButtonClicked -= OnShowBuildings;
-        _buildingListView.OnBuyed -= OnBuildZone;
     }
 }

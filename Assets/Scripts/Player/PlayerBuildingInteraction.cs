@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerBuildingInteraction : MonoBehaviour
 {
-    [SerializeField] private BuildingInteraction[] _buildingInteractions;
+    [SerializeField] private BuildingInteractor[] _buildingInteractions;
     [SerializeField] private InputSwitcher _inputSwitcher;
 
     private void OnEnable()
     {
-        foreach (BuildingInteraction interaction in _buildingInteractions)
+        foreach (BuildingInteractor interaction in _buildingInteractions)
         {
             interaction.Started += OnStarted;
             interaction.Stopped += OnStopped;
@@ -26,7 +26,7 @@ public class PlayerBuildingInteraction : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (BuildingInteraction interaction in _buildingInteractions)
+        foreach (BuildingInteractor interaction in _buildingInteractions)
         {
             interaction.Started -= OnStarted;
             interaction.Stopped -= OnStopped;

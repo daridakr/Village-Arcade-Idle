@@ -7,4 +7,19 @@ public class ReferenceObjectList<T> : MonoBehaviour where T : MonoBehaviour
 
     public IEnumerable<T> Data => _data;
 
+    public void UnlockData(T reference, string guid)
+    {
+        _data.Add(reference);
+        AfterUnlocked(reference as T, guid);
+    }
+
+    //private void OnUnlocked(T reference, string guid)
+    //{
+    //    _data.Add(reference);
+    //    //Unlocked?.Invoke(reference as T, onLoad, guid);
+
+    //    AfterUnlocked(reference as T, guid);
+    //}
+
+    protected virtual void AfterUnlocked(T reference, string guid) { }
 }
