@@ -9,9 +9,9 @@ public class BuildingListItemView : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private ButtonTextView _buyButton;
 
-    private Building _building;
+    private BuildingData _buildingData;
 
-    public Building BuildingData => _building;
+    public BuildingData BuildingData => _buildingData;
 
     public event Action<BuildingListItemView> OnBuy;
 
@@ -20,13 +20,14 @@ public class BuildingListItemView : MonoBehaviour
         _buyButton.Clicked += OnBuyButtonClicked;
     }
 
-    public void Render(Building building, int playerBalance)
+    public void Render(BuildingData buildingData, int playerBalance)
     {
-        _title.text = building.Name;
-        _buyButton.ChangeTitle(building.Price.ToString());
-        _buyButton.SetInteractable(playerBalance >= building.Price);
+        _title.text = buildingData.Name;
+        _image.sprite = buildingData.Icon;
+        _buyButton.ChangeTitle(buildingData.Price.ToString());
+        _buyButton.SetInteractable(playerBalance >= buildingData.Price);
 
-        _building = building;
+        _buildingData = buildingData;
     }
 
     private void OnBuyButtonClicked()

@@ -8,10 +8,13 @@ public class BuildingZoneView : MonoBehaviour
     [SerializeField] private BuildingListView _buildingListView;
     [SerializeField] private SpriteRenderer _dottedSquare;
 
+    [SerializeField] private ParticleSystem _freeEffect;
+    [SerializeField] private ParticleSystem _buildEffect;
+
     private CanvasAnimatedView _currentCanvas;
 
-    public event Action ClearStarted;
-    public event Action<Building> BuildStarted;
+    public event Action CanClear;
+    public event Action<BuildingData> CanBuild;
 
     private void OnEnable()
     {
@@ -37,17 +40,10 @@ public class BuildingZoneView : MonoBehaviour
         _currentCanvas.Hide();
     }
 
-    public void ShowCircleTimer()
-    {
-
-    }
-
     private void OnClearZone()
     {
-        // show new canvas circle timer circle
-        ShowCircleTimer();
-
-        ClearStarted?.Invoke();
+        _freeEffect.Stop();
+        CanClear?.Invoke();
     }
 
     private void OnShowBuildings()
@@ -57,8 +53,17 @@ public class BuildingZoneView : MonoBehaviour
 
     private void OnBuildZone(BuildingListItemView building)
     {
+        _buildCanvas.Hide();
         _dottedSquare.enabled = false;
-        BuildStarted?.Invoke(building.BuildingData);
+        _buildEffect.Play();
+
+        CanBuild?.Invoke(building.BuildingData);
+        Invoke(nameof(StopEffect), 2f);
+    }
+
+    private void StopEffect()
+    {
+        _buildEffect.Stop();
     }
 
     private void OnDisable()

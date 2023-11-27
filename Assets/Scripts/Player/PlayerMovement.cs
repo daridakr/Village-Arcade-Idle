@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
         IsMoving = true;
     }
 
+    public void MoveToTarget(Transform target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
+    }
+
     public void Stop()
     {
         if (_rigidbody != null)

@@ -2,12 +2,32 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    // should add BuildingData as Scriptable Game Object
-    [SerializeField] private string _name;
-    [SerializeField] private int _price;
+    [SerializeField] private BuildingData _data;
+    [SerializeField] private PlayerMovementTrigger _playerMovementTrigger;
+    [SerializeField] private Transform _playerEnterPoint;
 
-    public string Name => _name;
-    public int Price => _price;
+    public BuildingData Data => _data;
 
-    // type of building
+    private void OnEnable()
+    {
+        _playerMovementTrigger.Stay += OnPlayerTriggerStay;
+    }
+
+    //public void Init(BuildingData data)
+    //{
+    //    if (data.IsCorrect && _data == null)
+    //    {
+    //        _data = data;
+    //    }
+    //}
+
+    private void OnPlayerTriggerStay(PlayerMovement playerMovement)
+    {
+        playerMovement.MoveToTarget(_playerEnterPoint);
+    }
+
+    private void OnDisable()
+    {
+        _playerMovementTrigger.Stay -= OnPlayerTriggerStay;
+    }
 }

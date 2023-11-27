@@ -1,10 +1,21 @@
+using UnityEngine;
+
 public class BuildingBuilder : BuildingInteraction
 {
-    public void Build(BuildingZone zone)
+    [SerializeField] private GameObject _hammer;
+
+    public void StartBuildIn(BuildingZone zone)
     {
         if (zone.State == BuildingZoneState.Empty)
         {
-            StartInteract(zone, AnimationParams.IsClean);
+            _hammer.SetActive(true);
+            StartInteract(zone, AnimationParams.IsBuild);
         }
+    }
+
+    protected override void OnCompleted()
+    {
+        base.OnCompleted();
+        _hammer.SetActive(false);
     }
 }

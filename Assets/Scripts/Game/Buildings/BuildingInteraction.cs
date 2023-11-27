@@ -34,7 +34,7 @@ public abstract class BuildingInteraction : MonoBehaviour
         Started?.Invoke();
     }
 
-    public virtual void OnCompleted()
+    protected virtual void OnCompleted()
     {
         _playerAnimation.StopInteract(_animationParametr);
         _timer.Completed -= OnCompleted;

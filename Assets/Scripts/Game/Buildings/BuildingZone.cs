@@ -5,11 +5,10 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
     [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
     [SerializeField] private BuildingBuilder _builder;
+    [SerializeField] private Transform _buildPoint;
     [SerializeField] private BuildingZoneView _view;
 
-    [SerializeField] private GameObject _building; // to destroy if it's destroyed state
-    [SerializeField] private ParticleSystem _effect;
-
+    private Building _building;
     private BuildingZoneState _currentState;
     private int _clearPrice = 20;
 
@@ -20,31 +19,46 @@ public class BuildingZone : MonoBehaviour
         _moneyOwnerTrigger.Enter += TriggerEnter;
         _moneyOwnerTrigger.Exit += TriggerExit;
 
-        _view.ClearStarted += ClearZone;
-        _view.BuildStarted += BuildZone;
+        _view.CanClear += OnClearZone;
+        _view.CanBuild += OnBuildZone;
+
+        _builder.Stopped += Build;
+
+        //_buildingPoint = _destroyed.transform;
     }
 
-    private void ClearZone()
+
+    // maybe should separate class with abstract method like Interact()? bc these two methods almost the same 
+    private void OnClearZone()
     {
         MoneyOwner buyer = _moneyOwnerTrigger.Owner;
         buyer.SpendMoney(_clearPrice);
 
         _buildingCleaner.Clean(this);
 
-        Destroy(_building);
-        _effect.Stop();
+        DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
+        destroyedBuilding.Clear();
+
         _currentState = BuildingZoneState.Empty;
     }
 
-    private void BuildZone(Building building)
+    private void OnBuildZone(BuildingData buildingData)
     {
         MoneyOwner buyer = _moneyOwnerTrigger.Owner;
-        buyer.SpendMoney(building.Price);
+        buyer.SpendMoney(buildingData.Price);
 
-        _builder.Build(this);
-        Instantiate(building);
+        _builder.StartBuildIn(this);
+        //_building.Init(buildingData);
 
         _currentState = BuildingZoneState.Builded;
+    }
+
+    private void Build()
+    {
+        if (_currentState == BuildingZoneState.Builded && _building != null)
+        {
+            Building building = Instantiate(_building, _buildPoint);
+        }
     }
 
     private void TriggerEnter(MoneyOwner moneyOwner)
@@ -79,8 +93,10 @@ public class BuildingZone : MonoBehaviour
         _moneyOwnerTrigger.Enter -= TriggerEnter;
         _moneyOwnerTrigger.Exit -= TriggerExit;
 
-        _view.ClearStarted -= ClearZone;
-        _view.BuildStarted -= BuildZone;
+        _view.CanClear -= OnClearZone;
+        _view.CanBuild -= OnBuildZone;
+
+        _builder.Stopped -= Build;
     }
 }
 

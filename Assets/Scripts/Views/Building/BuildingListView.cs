@@ -23,7 +23,7 @@ public class BuildingListView : CanvasAnimatedView
         for (int i = 0; i < _availableBuldings.Length; i++)
         {
             BuildingListItemView buildingView = Instantiate(_prefab, _content.transform);
-            buildingView.Render(_availableBuldings[i], _moneyOwner.Balance);
+            buildingView.Render(_availableBuldings[i].Data, _moneyOwner.Balance);
             buildingView.OnBuy += OnBuildingBuyed;
             _buildingViews.Add(buildingView);
         }
