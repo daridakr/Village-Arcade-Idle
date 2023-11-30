@@ -1,9 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerBuildingInteraction : MonoBehaviour
 {
     [SerializeField] private BuildingInteractor[] _buildingInteractions;
-    [SerializeField] private InputSwitcher _inputSwitcher;
+
+    private IInputService _inputService;
+
+    [Inject]
+    public void Construct(IInputService inputService)
+    {
+        _inputService = inputService;
+    }
 
     private void OnEnable()
     {
@@ -16,12 +24,12 @@ public class PlayerBuildingInteraction : MonoBehaviour
 
     private void OnStarted()
     {
-        _inputSwitcher.Disable();
+        _inputService.Disable();
     }
 
     private void OnStopped()
     {
-        _inputSwitcher.Enable();
+        _inputService.Enable();
     }
 
     private void OnDisable()

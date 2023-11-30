@@ -8,11 +8,11 @@ public class Region : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerInteraction player))
+        if (other.TryGetComponent(out PlayerInteractor player))
         {
             if (!_isUnlocked)
             {
-                player.DisableInteraction();
+                //player.DisableInteraction();
             }
         }
     }

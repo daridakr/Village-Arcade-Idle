@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class BuildingZoneView : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class BuildingZoneView : MonoBehaviour
 
     public event Action CanClear;
     public event Action<BuildingData> CanBuild;
+
+    [Inject]
+    public void Construct(BuildingListView buildingsList)
+    {
+        _buildingListView = buildingsList;
+    }
 
     private void OnEnable()
     {

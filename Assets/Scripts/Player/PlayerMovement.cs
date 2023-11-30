@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -7,11 +8,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerAnimation _animation;
     [SerializeField] private float _speed;
 
+    private IControlService _controlService;
     private Rigidbody _rigidbody;
+
     private float _speedRate = 1f;
     private float _flySpeedRate = 1f;
 
     public bool IsMoving { get; private set; }
+
+    [Inject]
+    public void Construct(IControlService controlService)
+    {
+        _controlService = controlService;
+
+        _controlService.OnMove += Move;
+        _controlService.OnStand += Stop;
+    }
 
     private void Awake()
     {
@@ -34,12 +46,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void Stop()
     {
-        if (_rigidbody != null)
+        if (IsMoving)
         {
-            _rigidbody.velocity = Vector3.zero;
-        }
+            if (_rigidbody != null)
+            {
+                _rigidbody.velocity = Vector3.zero;
+            }
 
-        _animation.SetSpeed(0);
-        IsMoving = false;
+            _animation.SetSpeed(0);
+            IsMoving = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _controlService.OnMove -= Move;
+        _controlService.OnStand -= Stop;
     }
 }

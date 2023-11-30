@@ -16,7 +16,7 @@ public class RegionZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerInteraction player))
+        if (other.TryGetComponent(out PlayerInteractor player))
         {
             
         }

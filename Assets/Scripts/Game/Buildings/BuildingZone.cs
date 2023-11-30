@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class BuildingZone : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class BuildingZone : MonoBehaviour
     private int _clearPrice = 20;
 
     public BuildingZoneState State => _currentState;
+
+    [Inject]
+    public void Construct(BuildingCleaner cleaner, BuildingBuilder builder)
+    {
+        _buildingCleaner = cleaner;
+        _builder = builder;
+    }
 
     private void OnEnable()
     {
