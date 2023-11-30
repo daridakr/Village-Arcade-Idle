@@ -7,7 +7,7 @@ public abstract class BuildingInteractor : MonoBehaviour
     [SerializeField] private TimerView _timerView;
 
     private readonly Timer _timer = new Timer();
-    private float _interactionTime = 3f;
+    private const float _interactionTime = 3f;
     private string _animationParametr;
 
     public event Action Started;

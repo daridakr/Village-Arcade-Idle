@@ -11,7 +11,8 @@ public class BuildingZone : MonoBehaviour
 
     private BuildingRenderer _building;
     private BuildingZoneState _currentState;
-    private int _clearPrice = 20;
+
+    private const int _clearPrice = 20;
 
     public BuildingZoneState State => _currentState;
 

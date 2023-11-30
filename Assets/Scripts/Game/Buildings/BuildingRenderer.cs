@@ -11,14 +11,6 @@ public class BuildingRenderer : GUIDObjectData
         _playerMovementTrigger.Stay += OnPlayerTriggerStay;
     }
 
-    //public void Init(BuildingData data)
-    //{
-    //    if (data.IsCorrect && _data == null)
-    //    {
-    //        _data = data;
-    //    }
-    //}
-
     private void OnPlayerTriggerStay(PlayerMovement playerMovement)
     {
         playerMovement.MoveToTarget(_playerEnterPoint);
