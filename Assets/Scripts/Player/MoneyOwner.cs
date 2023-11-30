@@ -11,7 +11,7 @@ public class MoneyOwner : MonoBehaviour
 
     private void OnEnable()
     {
-        _money = new MoneyBalance();
+        _money = new MoneyBalance(SaveKeyParams.Player.MoneyBalance);
         _money.Load();
 
         _money.ValueChanged += OnBalanceChanged;
@@ -35,7 +35,6 @@ public class MoneyOwner : MonoBehaviour
     {
         _money.Spend(value);
     }
-
 
     private void OnDisable()
     {

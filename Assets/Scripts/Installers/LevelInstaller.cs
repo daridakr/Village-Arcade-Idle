@@ -12,8 +12,8 @@ public class LevelInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindBuildingZones();
         BindViews();
+        BindBuildingZones();
     }
 
     private void BindBuildingZones()

@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    [SerializeField] private MoneyOwner _playerMoney;
     [SerializeField] private PlayerBuildingsList _buildingList;
     [SerializeField] private BuildingData[] _buildingsInStart;
 
     private void Start()
     {
-        // temp
-        _playerMoney.AddMoney(1000);
         AddStartBuildings();
 
         //if (PlayerPrefs.GetInt("First") == 0)
