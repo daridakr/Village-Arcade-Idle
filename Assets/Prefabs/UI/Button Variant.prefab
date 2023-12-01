@@ -85,7 +85,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5580471421182193960, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Name
-      value: BuyButton
+      value: Button Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5580471421182193961, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Pivot.x
@@ -199,7 +199,8 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 39.65
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4541071992992215309, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
 --- !u!1 &3808263711612801468 stripped
 GameObject:

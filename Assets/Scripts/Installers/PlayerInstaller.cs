@@ -4,6 +4,7 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
+    [SerializeField] private PlayerLevel _level;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private BuildingCleaner _cleaner;
     [SerializeField] private BuildingBuilder _builder;
@@ -13,6 +14,7 @@ public class PlayerInstaller : MonoInstaller
     {
         // temp
         BindPlayerBuildingInteractions();
+        BindVillageInfo();
 
         BindInputControl();
     }
@@ -21,6 +23,11 @@ public class PlayerInstaller : MonoInstaller
     {
         Container.Bind<BuildingCleaner>().FromInstance(_cleaner).AsSingle();
         Container.Bind<BuildingBuilder>().FromInstance(_builder).AsSingle();
+    }
+
+    private void BindVillageInfo()
+    {
+        Container.Bind<PlayerLevel>().FromInstance(_level).AsSingle();
     }
 
     private void BindInputControl()

@@ -7,16 +7,14 @@ public class ButtonView : MonoBehaviour
 {
     private Button _button;
 
+    public bool Interactable => _button.interactable;
+
     public event Action Clicked;
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(OnButtonClicked);
-    }
-
-    private void Awake()
-    {
         _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnButtonClicked);
     }
 
     public void SetInteractable(bool value)
