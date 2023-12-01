@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ClearZoneCanvas : CanvasAnimatedView
 {
-    [SerializeField] private PriceButtonView _clearButton;
+    [SerializeField] private ButtonView _clearButton;
     [SerializeField] private PriceView _priceView;
 
     public event Action ClearButtonClicked;

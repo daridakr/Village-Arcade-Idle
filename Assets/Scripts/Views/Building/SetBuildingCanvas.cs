@@ -4,7 +4,7 @@ using UnityEngine;
 public class SetBuildingCanvas : CanvasAnimatedView
 {
     // should define to common interface for canvas with button and according click event
-    [SerializeField] private PriceButtonView _buildButton; 
+    [SerializeField] private ButtonView _buildButton; 
 
     public event Action BuildButtonClicked;
 
