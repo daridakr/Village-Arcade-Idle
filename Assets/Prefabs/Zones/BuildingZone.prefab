@@ -29470,7 +29470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearButton: {fileID: 3339947664561524794}
-  _priceView: {fileID: 0}
+  _priceView: {fileID: 4660103879116152763}
 --- !u!111 &8706381483795878760
 Animation:
   m_ObjectHideFlags: 0
@@ -30040,6 +30040,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4801363039282070334, guid: ce17eb4a4d266674ebe906bcb6000349, type: 3}
   m_PrefabInstance: {fileID: 5170921415185965594}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4660103879116152763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 535592355177037217, guid: ce17eb4a4d266674ebe906bcb6000349, type: 3}
+  m_PrefabInstance: {fileID: 5170921415185965594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88aabe0760f6f9408367d1c3a4c90f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6121041459033260697
 PrefabInstance:
   m_ObjectHideFlags: 0

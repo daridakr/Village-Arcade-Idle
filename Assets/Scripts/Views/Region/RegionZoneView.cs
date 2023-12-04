@@ -3,8 +3,8 @@ using UnityEngine;
 public class RegionZoneView : MonoBehaviour
 {
     [SerializeField] private RegionZone _zone;
-    [SerializeField] private LockedRegionCanvas _lockedCanvas;
-    [SerializeField] private BuyRegionCanvas _buyCanvas;
+    [SerializeField] private TextDisplayCanvas _lockedCanvas;
+    [SerializeField] private TextDisplayCanvas _buyCanvas;
 
     private void OnEnable()
     {
@@ -13,14 +13,14 @@ public class RegionZoneView : MonoBehaviour
         _zone.Buyed += OnRegionBuyed;
     }
 
-    private void DisplayLockedZone(int requiredLevel)
+    private void DisplayLockedZone(int required)
     {
-        _lockedCanvas.Display(requiredLevel);
+        _lockedCanvas.Display($"Level {required}");
     }
 
     private void DisplayUnlockedZone(int price)
     {
-        _buyCanvas.Display(price);
+        _buyCanvas.Display(price.ToString());
 
         if (_lockedCanvas.IsVisible)
         {

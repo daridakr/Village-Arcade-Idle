@@ -4,7 +4,7 @@ using Zenject;
 
 public class BuildingZoneView : MonoBehaviour
 {
-    [SerializeField] private ClearZoneCanvas _clearCanvas;
+    [SerializeField] private ClearBuildingZoneCanvas _clearCanvas;
     [SerializeField] private SetBuildingCanvas _buildCanvas;
     [SerializeField] private BuildingListView _buildingListView;
     [SerializeField] private SpriteRenderer _dottedSquare;
