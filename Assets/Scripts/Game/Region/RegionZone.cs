@@ -1,66 +1,113 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 
 public class RegionZone : MonoBehaviour
 {
-    [SerializeField] private Region _region;
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
 
-    private int _price;
+    private DynamicCost _cost;
+    private Coroutine _tryBuy;
+    private int _reduceValue = 1;
 
-    private void OnEnable()
+    public event Action<int> Locked;
+    public event Action<int> PriceUpdated;
+    //public event Action Buying;
+    public event Action Buyed;
+
+    public void Lock(int required)
     {
-        _region.Unlocked += OnUnlockedRegion;
+        Locked?.Invoke(required);
+        _moneyOwnerTrigger.Disable();
     }
 
-    private void OnUnlockedRegion(int price)
+    public void Unlock(int price)
     {
-        _region.Unlocked -= OnUnlockedRegion;
+        _cost = new DynamicCost(price);
+        PriceUpdated?.Invoke(_cost.Current);
 
+        _moneyOwnerTrigger.Enable();
         _moneyOwnerTrigger.Enter += TriggerEnter;
         _moneyOwnerTrigger.Exit += TriggerExit;
-        _price = price;
-
-        _region.Buyed += OnBuyedRegion;
-    }
-
-    private void OnBuyedRegion()
-    {
-        Destroy(this);
     }
 
     private void TriggerEnter(MoneyOwner moneyOwner)
     {
-        //ShowRewardPlacement?.Invoke(_placement);
+        if (_tryBuy != null)
+            StopCoroutine(_tryBuy);
 
-        //switch (_currentState)
-        //{
-        //    //case BuildingZoneState.Destroyed:
-        //    //    _view.ShowClearCanvas(_clearPrice, moneyOwner.Balance);
-        //    //    break;
-        //    //case BuildingZoneState.Empty:
-        //    //    _view.ShowBuildCanvas();
-        //    //    break;
-        //    //case BuildingZoneState.Builded:
-        //    //    //_view.ShowUpgradeCanvas();
-        //    //    break;
-        //    //default:
-        //    //    break;
-        //}
-
-        //UpdateView();
+        _tryBuy = StartCoroutine(TryBuyRegion(moneyOwner));
     }
 
     private void TriggerExit(MoneyOwner moneyOwner)
     {
+        StopCoroutine(_tryBuy);
+        //_region.Save();
+    }
 
+    private IEnumerator TryBuyRegion(MoneyOwner playerMoney)
+    {
+        yield return null;
+
+        bool delayed = false;
+
+        var playerMovement = playerMoney.GetComponent<PlayerMovement>();
+
+        while (true)
+        {
+            if (playerMovement.IsMoving == false)
+            {
+                if (delayed == false)
+                    yield return new WaitForSeconds(0.75f);
+
+                BuyRegion(playerMoney);
+                //PriceUpdated?.Invoke(_price.Current);
+                delayed = true;
+            }
+            else
+            {
+                delayed = false;
+            }
+
+            yield return null;
+        }
+    }
+
+    private void BuyRegion(MoneyOwner moneyOwner)
+    {
+        if (moneyOwner.HasMoney == false)
+            return;
+
+        _reduceValue = Mathf.Clamp((int)(_cost.Total * 1.5f * Time.deltaTime), 1, _cost.Total);
+        if (_cost.Current < _reduceValue)
+        {
+            _reduceValue = _cost.Current;
+        }
+
+        _reduceValue = Mathf.Clamp(_reduceValue, 1, moneyOwner.Balance);
+
+        ReduceCost(_reduceValue);
+        moneyOwner.SpendMoney(_reduceValue);
+
+        //Buying?.Invoke();
+    }
+
+    private void ReduceCost(int value)
+    {
+        _cost.Subtract(value);
+        PriceUpdated?.Invoke(_cost.Current);
+
+        if (_cost.Current == 0)
+        {
+            Buyed?.Invoke();
+            Destroy(gameObject);
+        }
     }
 
     private void OnDestroy()
     {
+        _moneyOwnerTrigger.Disable();
         _moneyOwnerTrigger.Enter -= TriggerEnter;
         _moneyOwnerTrigger.Exit -= TriggerExit;
-
-        _region.Buyed -= OnBuyedRegion;
     }
 }

@@ -29470,7 +29470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clearButton: {fileID: 3339947664561524794}
-  _priceView: {fileID: 388175569128027946}
+  _priceView: {fileID: 0}
 --- !u!111 &8706381483795878760
 Animation:
   m_ObjectHideFlags: 0
@@ -29761,7 +29761,7 @@ GameObject:
   - component: {fileID: 8706381484603982193}
   - component: {fileID: 8706381484603982199}
   - component: {fileID: 8706381484603982195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30035,17 +30035,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce17eb4a4d266674ebe906bcb6000349, type: 3}
---- !u!114 &388175569128027946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4801363039880402224, guid: ce17eb4a4d266674ebe906bcb6000349, type: 3}
-  m_PrefabInstance: {fileID: 5170921415185965594}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c06eca33f00574690f1abd3767eb4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &388175569650950436 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4801363039282070334, guid: ce17eb4a4d266674ebe906bcb6000349, type: 3}

@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class RegionZoneView : MonoBehaviour
 {
-    [SerializeField] private Region _region;
+    [SerializeField] private RegionZone _zone;
     [SerializeField] private LockedRegionCanvas _lockedCanvas;
     [SerializeField] private BuyRegionCanvas _buyCanvas;
 
     private void OnEnable()
     {
-        _region.Locked += DisplayLockedZone;
-        _region.Unlocked += DisplayUnlockedZone;
-        _region.Buyed += Hide;
+        _zone.Locked += DisplayLockedZone;
+        _zone.PriceUpdated += DisplayUnlockedZone;
+        _zone.Buyed += OnRegionBuyed;
     }
 
     private void DisplayLockedZone(int requiredLevel)
@@ -20,19 +20,23 @@ public class RegionZoneView : MonoBehaviour
 
     private void DisplayUnlockedZone(int price)
     {
-        _lockedCanvas.Hide();
         _buyCanvas.Display(price);
+
+        if (_lockedCanvas.IsVisible)
+        {
+            _lockedCanvas.Hide();
+        }
     }
 
-    private void Hide()
+    private void OnRegionBuyed()
     {
-        _buyCanvas.Hide();
+        Destroy(gameObject);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _region.Locked -= DisplayLockedZone;
-        _region.Unlocked -= DisplayUnlockedZone;
-        _region.Buyed -= Hide;
+        _zone.Locked -= DisplayLockedZone;
+        _zone.PriceUpdated -= DisplayUnlockedZone;
+        _zone.Buyed -= OnRegionBuyed;
     }
 }

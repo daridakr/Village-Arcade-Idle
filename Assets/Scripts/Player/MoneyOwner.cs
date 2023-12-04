@@ -6,6 +6,7 @@ public class MoneyOwner : MonoBehaviour
     private MoneyBalance _money;
 
     public int Balance => _money.Value;
+    public bool HasMoney => _money.Value > 0;
 
     public event UnityAction<int> BalanceChanged;
 

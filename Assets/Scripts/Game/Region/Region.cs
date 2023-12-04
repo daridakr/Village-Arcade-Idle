@@ -1,16 +1,13 @@
-using System;
 using UnityEngine;
 
 public class Region : MonoBehaviour
 {
     [SerializeField] private int _price;
-    [SerializeField] private MeshRenderer _lockRenderer;
     [SerializeField] private int _requiredLevel; // need to define spec unlock required class
+    [SerializeField] private RegionZone _zone;
+    [SerializeField] private MeshRenderer _lockRenderer;
+    [SerializeField] private GameObject _data;
     [SerializeField] private PlayerLevel _playerLevel;
-
-    public event Action<int> Locked;
-    public event Action<int> Unlocked;
-    public event Action Buyed;
 
     private bool _locked;
 
@@ -23,7 +20,7 @@ public class Region : MonoBehaviour
     {
         if (_locked)
         {
-            Locked?.Invoke(_requiredLevel);
+            _zone.Lock(_requiredLevel);
         }
     }
 
@@ -31,13 +28,22 @@ public class Region : MonoBehaviour
     {
         if (level >= _requiredLevel) // should somehow indefy if is region already buyed
         {
-            Unlocked?.Invoke(_price);
+            //_unlockable.Unlock(transform, onLoad, GUID);
             _locked = false;
+            _zone.Unlock(_price);
+            _zone.Buyed += OnRegionBuyed;
             _playerLevel.LevelChanged -= OnPlayerLevelChanged;
         }
         else
         {
             _locked = true;
         }
+    }
+
+    private void OnRegionBuyed()
+    {
+        _zone.Buyed -= OnRegionBuyed;
+        Destroy(_lockRenderer.gameObject);
+        _data.SetActive(true);
     }
 }
