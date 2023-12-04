@@ -4,7 +4,7 @@ using UnityEngine;
 public class ClearZoneCanvas : CanvasAnimatedView
 {
     [SerializeField] private ButtonView _clearButton;
-    [SerializeField] private PriceView _priceView;
+    [SerializeField] private TextDisplay _priceView;
 
     public event Action ClearButtonClicked;
 
@@ -16,7 +16,7 @@ public class ClearZoneCanvas : CanvasAnimatedView
     public void Display(int price, int balance)
     {
         base.Display();
-        _priceView.Init(price);
+        _priceView.Display(price.ToString());
         _clearButton.SetInteractable(balance >= price);
     }
 

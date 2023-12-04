@@ -1,19 +1,43 @@
+using System;
 using UnityEngine;
 
 public class Region : MonoBehaviour
 {
-    [SerializeField] private float _cost;
+    [SerializeField] private int _price;
+    [SerializeField] private MeshRenderer _lockRenderer;
+    [SerializeField] private int _requiredLevel; // need to define spec unlock required class
+    [SerializeField] private PlayerLevel _playerLevel;
 
-    private bool _isUnlocked => _cost == 0;
+    public event Action<int> Locked;
+    public event Action<int> Unlocked;
+    public event Action Buyed;
 
-    private void OnTriggerEnter(Collider other)
+    private bool _locked;
+
+    private void OnEnable()
     {
-        if (other.TryGetComponent(out PlayerInteractor player))
+        _playerLevel.LevelChanged += OnPlayerLevelChanged;
+    }
+
+    private void Start()
+    {
+        if (_locked)
         {
-            if (!_isUnlocked)
-            {
-                //player.DisableInteraction();
-            }
+            Locked?.Invoke(_requiredLevel);
+        }
+    }
+
+    private void OnPlayerLevelChanged(int level)
+    {
+        if (level >= _requiredLevel) // should somehow indefy if is region already buyed
+        {
+            Unlocked?.Invoke(_price);
+            _locked = false;
+            _playerLevel.LevelChanged -= OnPlayerLevelChanged;
+        }
+        else
+        {
+            _locked = true;
         }
     }
 }

@@ -7,7 +7,7 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
     [SerializeField] private BuildingBuilder _builder;
     [SerializeField] private Transform _buildPoint;
-    [SerializeField] private BuildingZoneView _view;
+    [SerializeField] private BuildingZoneView _view; // should define a spec events for view handle
 
     private BuildingRenderer _building;
     private BuildingZoneState _currentState;

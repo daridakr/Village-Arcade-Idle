@@ -12,6 +12,6 @@ public class Test : MonoBehaviour
 
     public void AddExp(int value)
     {
-        _playerLevel.GainExp(value);
+        _playerLevel.TakeExp(value);
     }
 }

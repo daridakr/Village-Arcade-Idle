@@ -5,8 +5,8 @@ public class PlayerLevel : MonoBehaviour
 {
     private ExperienceLevel _level;
 
-    public int Level => _level.Value;
-    public float Experience => _level.ExperienceNormalazed;
+    private int Level => _level.Value;
+    private float Experience => _level.ExperienceNormalazed;
 
     public event UnityAction<int> LevelChanged;
     public event UnityAction<float> ExperienceChanged;
@@ -18,21 +18,24 @@ public class PlayerLevel : MonoBehaviour
 
         _level.Increased += OnLevelIncreased;
         _level.ExperienceGained += OnExperienceGainded;
+
+        LevelChanged?.Invoke(Level);
+        ExperienceChanged?.Invoke(Experience);
     }
 
     private void OnLevelIncreased()
     {
-        LevelChanged?.Invoke(_level.Value);
+        LevelChanged?.Invoke(Level);
         _level.Save();
     }
 
     private void OnExperienceGainded()
     {
-        ExperienceChanged?.Invoke(_level.ExperienceNormalazed);
+        ExperienceChanged?.Invoke(Experience);
         _level.Save();
     }
 
-    public void GainExp(int value)
+    public void TakeExp(int value)
     {
         _level.AddExperience(value);
     }

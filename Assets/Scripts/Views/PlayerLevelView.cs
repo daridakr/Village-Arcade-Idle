@@ -14,12 +14,6 @@ public class PlayerLevelView : MonoBehaviour
         _playerLevel.LevelChanged += OnLevelChanged;
     }
 
-    private void Start()
-    {
-        _levelTextDisplay.text = _playerLevel.Level.ToString();
-        _levelProgressSlider.value = _playerLevel.Experience;
-    }
-
     private void OnExperienceChanged(float normalazedValue)
     {
         _levelProgressSlider.value = normalazedValue;

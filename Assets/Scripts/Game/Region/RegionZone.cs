@@ -1,24 +1,66 @@
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
-[RequireComponent (typeof(BoxCollider))]
 public class RegionZone : MonoBehaviour
 {
-    private BoxCollider _collider;
+    [SerializeField] private Region _region;
+    [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
 
-    private void OnDrawGizmos()
+    private int _price;
+
+    private void OnEnable()
     {
-        _collider = GetComponent<BoxCollider>();
-        Gizmos.color = Color.red;
-        Matrix4x4 rotationMatrix = Matrix4x4.TRS(_collider.transform.position, _collider.transform.rotation, _collider.transform.lossyScale);
-        Gizmos.matrix = rotationMatrix;
-        Gizmos.DrawWireCube(_collider.center, _collider.size);
+        _region.Unlocked += OnUnlockedRegion;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnUnlockedRegion(int price)
     {
-        if (other.TryGetComponent(out PlayerInteractor player))
-        {
-            
-        }
+        _region.Unlocked -= OnUnlockedRegion;
+
+        _moneyOwnerTrigger.Enter += TriggerEnter;
+        _moneyOwnerTrigger.Exit += TriggerExit;
+        _price = price;
+
+        _region.Buyed += OnBuyedRegion;
+    }
+
+    private void OnBuyedRegion()
+    {
+        Destroy(this);
+    }
+
+    private void TriggerEnter(MoneyOwner moneyOwner)
+    {
+        //ShowRewardPlacement?.Invoke(_placement);
+
+        //switch (_currentState)
+        //{
+        //    //case BuildingZoneState.Destroyed:
+        //    //    _view.ShowClearCanvas(_clearPrice, moneyOwner.Balance);
+        //    //    break;
+        //    //case BuildingZoneState.Empty:
+        //    //    _view.ShowBuildCanvas();
+        //    //    break;
+        //    //case BuildingZoneState.Builded:
+        //    //    //_view.ShowUpgradeCanvas();
+        //    //    break;
+        //    //default:
+        //    //    break;
+        //}
+
+        //UpdateView();
+    }
+
+    private void TriggerExit(MoneyOwner moneyOwner)
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        _moneyOwnerTrigger.Enter -= TriggerEnter;
+        _moneyOwnerTrigger.Exit -= TriggerExit;
+
+        _region.Buyed -= OnBuyedRegion;
     }
 }

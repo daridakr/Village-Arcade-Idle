@@ -9,7 +9,7 @@ public class VillageInfo : StringSavedValue
     private string _name;
     private readonly PlayerLevel _playerLevel;
 
-    public int Level => _playerLevel.Level;
+    //public int Level => _playerLevel.Level;
 
     public event Action<string> Named;
 
