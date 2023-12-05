@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,14 +8,18 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
     [SerializeField] private BuildingBuilder _builder;
     [SerializeField] private Transform _buildPoint;
-    [SerializeField] private BuildingZoneView _view; // should define a spec events for view handle
+    [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
     private BuildingRenderer _building;
-    private BuildingZoneState _currentState;
+    private BuildingZoneState _currentState; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
     private const int _clearPrice = 20;
 
-    public BuildingZoneState State => _currentState;
+    public BuildingZoneState State => _currentState; // should remove after save builded buildings implementation and rewrite to like regionZone w events
+
+    public event Action Destroyed;
+    public event Action Cleared;
+    public event Action Builded;
 
     [Inject]
     public void Construct(BuildingCleaner cleaner, BuildingBuilder builder)
@@ -115,6 +120,7 @@ public class BuildingZone : MonoBehaviour
     }
 }
 
+// should remove after save builded buildings implementation and rewrite to like regionZone w events
 public enum BuildingZoneState
 {
     Destroyed,

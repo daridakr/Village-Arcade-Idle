@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent (typeof(TMP_InputField))]
 public class InputFieldData : MonoBehaviour
 {
-    [SerializeField] private ButtonView _handlerButton;
+    [SerializeField] private ButtonDisplay _handlerButton;
 
     protected TMP_InputField _inputField;
 

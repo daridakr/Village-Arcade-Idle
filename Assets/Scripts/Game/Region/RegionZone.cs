@@ -12,7 +12,7 @@ public class RegionZone : MonoBehaviour
 
     public event Action<int> Locked;
     public event Action<int> PriceUpdated;
-    //public event Action Buying;
+    public event Action Buying; // for haptic in future
     public event Action Buyed;
 
     public void Lock(int required)
@@ -89,7 +89,7 @@ public class RegionZone : MonoBehaviour
         ReduceCost(_reduceValue);
         moneyOwner.SpendMoney(_reduceValue);
 
-        //Buying?.Invoke();
+        Buying?.Invoke();
     }
 
     private void ReduceCost(int value)

@@ -4,14 +4,14 @@ using Zenject;
 
 public class BuildingZoneView : MonoBehaviour
 {
-    [SerializeField] private ClearBuildingZoneCanvas _clearCanvas;
-    [SerializeField] private SetBuildingCanvas _buildCanvas;
-    [SerializeField] private BuildingListView _buildingListView;
+    [SerializeField] private BuildingZone _zone;
+    [SerializeField] private MessageDisplayCanvas _clearCanvas;
+    [SerializeField] private ButtonCanvas _buildCanvas;
     [SerializeField] private SpriteRenderer _dottedSquare;
-
     [SerializeField] private ParticleSystem _freeEffect;
     [SerializeField] private ParticleSystem _buildEffect;
 
+    private BuildingListView _buildingListView;
     private CanvasAnimatedView _currentCanvas;
 
     public event Action CanClear;
@@ -25,13 +25,13 @@ public class BuildingZoneView : MonoBehaviour
 
     private void OnEnable()
     {
-        _clearCanvas.ClearButtonClicked += OnClearZone;
-        _buildCanvas.BuildButtonClicked += OnShowBuildings;
+        _clearCanvas.ButtonClicked += OnClearZone;
+        _buildCanvas.ButtonClicked += OnShowBuildings;
     }
 
     public void ShowClearCanvas(int clearPrice, int balance)
     {
-        _clearCanvas.Display(clearPrice, balance);
+        _clearCanvas.Display(clearPrice, balance >= clearPrice);
         _currentCanvas = _clearCanvas;
     }
 
@@ -48,12 +48,14 @@ public class BuildingZoneView : MonoBehaviour
 
     private void OnClearZone()
     {
+        _clearCanvas.Hide();
         _freeEffect.Stop();
         CanClear?.Invoke();
     }
 
     private void OnShowBuildings()
     {
+        _buildCanvas.Hide();
         _buildingListView.Display();
         _buildingListView.OnSmthBuyed += OnBuildZone;
     }
@@ -77,7 +79,7 @@ public class BuildingZoneView : MonoBehaviour
 
     private void OnDisable()
     {
-        _clearCanvas.ClearButtonClicked -= OnClearZone;
-        _buildCanvas.BuildButtonClicked -= OnShowBuildings;
+        _clearCanvas.ButtonClicked -= OnClearZone;
+        _buildCanvas.ButtonClicked -= OnShowBuildings;
     }
 }

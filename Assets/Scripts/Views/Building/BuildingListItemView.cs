@@ -7,7 +7,7 @@ public class BuildingListItemView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _title;
     [SerializeField] private Image _image;
-    [SerializeField] private ButtonTextView _buyButton;
+    [SerializeField] private ButtonTextDisplay _buyButton;
 
     private BuildingData _buildingData;
 
