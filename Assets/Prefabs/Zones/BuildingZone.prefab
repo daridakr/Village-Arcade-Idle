@@ -28891,6 +28891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8706381484431543946}
   - component: {fileID: 8706381484431543940}
+  - component: {fileID: 5003509046155598478}
   m_Layer: 0
   m_Name: BuildingZone
   m_TagString: Untagged
@@ -28933,6 +28934,24 @@ MonoBehaviour:
   _builder: {fileID: 0}
   _buildPoint: {fileID: 388175569984979506}
   _view: {fileID: 8706381484507289182}
+--- !u!114 &5003509046155598478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706381484431543947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98267f4a3b5836d42bae8e89730e6488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _expPointPrefab: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba, type: 3}
+  _spawnOffset: {x: 0, y: 0, z: 0}
+  _prePushDelay: 0
+  _pushForce: 10
+  _pushHeightExtra: 10
+  _spawnBetweenDelay: 0.1
 --- !u!1 &8706381484507289181
 GameObject:
   m_ObjectHideFlags: 0
@@ -28982,6 +29001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52564b1daceed2459bd5f1a052f299d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _zone: {fileID: 0}
   _clearCanvas: {fileID: 588120823306959348}
   _buildCanvas: {fileID: 1123213671999946387}
   _dottedSquare: {fileID: 7726189481313760190}

@@ -12,6 +12,7 @@ public class BuildingZone : MonoBehaviour
 
     private BuildingRenderer _building;
     private BuildingZoneState _currentState; // should remove after save builded buildings implementation and rewrite to like regionZone w events
+    private IExperiencePointGiver _experienceGiver;
 
     private const int _clearPrice = 20;
 
@@ -26,6 +27,11 @@ public class BuildingZone : MonoBehaviour
     {
         _buildingCleaner = cleaner;
         _builder = builder;
+    }
+
+    public void ConstructExperience(IExperiencePointGiver experienceGiver)
+    {
+        _experienceGiver = experienceGiver;
     }
 
     private void OnEnable()
@@ -56,6 +62,7 @@ public class BuildingZone : MonoBehaviour
         {
             DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
             destroyedBuilding?.Clear();
+            _experienceGiver.Give();
 
             _buildingCleaner.Stopped -= ClearBuilding;
         }

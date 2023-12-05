@@ -28,8 +28,13 @@ public class LevelInstaller : MonoInstaller
             BuildingZone buildingZone = Container.
                 InstantiatePrefabForComponent<BuildingZone>(
                 _buildingZoneTempalte, point.position, Quaternion.identity, point);
-
             Container.Bind<BuildingZone>().FromInstance(buildingZone);
+
+            ExperiencePointGiver experienceGiver = buildingZone.GetComponent<ExperiencePointGiver>();
+            Container.BindInterfacesTo<ExperiencePointGiver>().
+                FromInstance(experienceGiver);
+
+            buildingZone.ConstructExperience(experienceGiver);
         }
     }
 
