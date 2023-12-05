@@ -8,15 +8,12 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private BuildingCleaner _cleaner;
     [SerializeField] private BuildingBuilder _builder;
-    [SerializeField] private JoystickInputControl _playerControl;
 
     public override void InstallBindings()
     {
         // temp
         BindPlayerBuildingInteractions();
         BindVillageInfo();
-
-        BindInputControl();
     }
 
     private void BindPlayerBuildingInteractions()
@@ -28,12 +25,6 @@ public class PlayerInstaller : MonoInstaller
     private void BindVillageInfo()
     {
         Container.Bind<PlayerLevel>().FromInstance(_level).AsSingle();
-    }
-
-    private void BindInputControl()
-    {
-        Container.BindInterfacesTo<JoystickInputControl>().
-          FromComponentInNewPrefab(_playerControl).AsSingle();
     }
 
     private void SpawnPlayer()

@@ -7,13 +7,18 @@ public class LevelInstaller : MonoInstaller
     [SerializeField] private BuildingZone _buildingZoneTempalte;
     [SerializeField] private Transform[] _buildingZonePoints;
 
+    [Header("Regions")]
+    [SerializeField] private RegionReachLevelCondition _regionUnlockCondition;
+
     [Header("Views")]
     [SerializeField] private BuildingListView _buildingListView;
 
     public override void InstallBindings()
     {
         BindViews();
+
         BindBuildingZones();
+        BindRegionZones();
     }
 
     private void BindBuildingZones()
@@ -26,6 +31,12 @@ public class LevelInstaller : MonoInstaller
 
             Container.Bind<BuildingZone>().FromInstance(buildingZone);
         }
+    }
+
+    private void BindRegionZones()
+    {
+        Container.BindInterfacesTo<RegionReachLevelCondition>().
+          FromInstance(_regionUnlockCondition).AsSingle();
     }
 
     private void BindViews()

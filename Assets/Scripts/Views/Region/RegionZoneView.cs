@@ -9,16 +9,16 @@ public class RegionZoneView : MonoBehaviour
     private void OnEnable()
     {
         _zone.Locked += DisplayLockedZone;
-        _zone.PriceUpdated += DisplayUnlockedZone;
-        _zone.Buyed += OnRegionBuyed;
+        _zone.Available += DisplayAvailableZone;
+        _zone.Paid += OnRegionZonePaid;
     }
 
-    private void DisplayLockedZone(int required)
+    private void DisplayLockedZone(int condition)
     {
-        _lockedCanvas.Display($"Level {required}");
+        _lockedCanvas.Display($"Level {condition}");
     }
 
-    private void DisplayUnlockedZone(int price)
+    private void DisplayAvailableZone(int price)
     {
         _buyCanvas.Display(price.ToString());
 
@@ -28,7 +28,7 @@ public class RegionZoneView : MonoBehaviour
         }
     }
 
-    private void OnRegionBuyed()
+    private void OnRegionZonePaid()
     {
         Destroy(gameObject);
     }
@@ -36,7 +36,7 @@ public class RegionZoneView : MonoBehaviour
     private void OnDestroy()
     {
         _zone.Locked -= DisplayLockedZone;
-        _zone.PriceUpdated -= DisplayUnlockedZone;
-        _zone.Buyed -= OnRegionBuyed;
+        _zone.Available -= DisplayAvailableZone;
+        _zone.Paid -= OnRegionZonePaid;
     }
 }

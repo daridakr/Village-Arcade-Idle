@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class JoystickInputControl : MonoBehaviour, IInputService, IInputReady, IControlService
 {
-    [SerializeField] private Joystick _joystick;
+    private Joystick _joystick;
 
     public bool IsEnable { get; private set; }
 
@@ -14,6 +15,12 @@ public class JoystickInputControl : MonoBehaviour, IInputService, IInputReady, I
 
     public event Action<Vector3> OnMove;
     public event Action OnStand;
+
+    [Inject]
+    public void Construct(Joystick joystick)
+    {
+        _joystick = joystick;
+    }
 
     private void Start()
     {

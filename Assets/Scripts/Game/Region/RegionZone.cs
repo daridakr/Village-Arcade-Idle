@@ -5,26 +5,43 @@ using UnityEngine;
 public class RegionZone : MonoBehaviour
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
+    [SerializeField] private ReachableRegion _region;
 
     private DynamicCost _cost;
     private Coroutine _tryBuy;
     private int _reduceValue = 1;
 
     public event Action<int> Locked;
-    public event Action<int> PriceUpdated;
-    public event Action Buying; // for haptic in future
-    public event Action Buyed;
+    public event Action<int> Available;
+    public event Action Triggering; // for haptic in future
+    public event Action Paid;
 
-    public void Lock(int required)
+    private void OnEnable()
     {
-        Locked?.Invoke(required);
+        _region.Unreached += Lock;
+        _region.Reached += Unlock;
+    }
+
+    public void Init(int price)
+    {
+        _cost = new DynamicCost(price);
+    }
+
+    public void Lock(int condition)
+    {
+        Locked?.Invoke(condition);
+        _region.Unreached -= Lock;
         _moneyOwnerTrigger.Disable();
     }
 
-    public void Unlock(int price)
+    public void Unlock()
     {
-        _cost = new DynamicCost(price);
-        PriceUpdated?.Invoke(_cost.Current);
+        if (_cost == null)
+        {
+            return;
+        }
+
+        Available?.Invoke(_cost.Current);
 
         _moneyOwnerTrigger.Enable();
         _moneyOwnerTrigger.Enter += TriggerEnter;
@@ -89,17 +106,17 @@ public class RegionZone : MonoBehaviour
         ReduceCost(_reduceValue);
         moneyOwner.SpendMoney(_reduceValue);
 
-        Buying?.Invoke();
+        Triggering?.Invoke();
     }
 
     private void ReduceCost(int value)
     {
         _cost.Subtract(value);
-        PriceUpdated?.Invoke(_cost.Current);
+        Available?.Invoke(_cost.Current);
 
         if (_cost.Current == 0)
         {
-            Buyed?.Invoke();
+            Paid?.Invoke();
             Destroy(gameObject);
         }
     }
