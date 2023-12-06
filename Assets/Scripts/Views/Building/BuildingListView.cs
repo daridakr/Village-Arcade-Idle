@@ -9,7 +9,7 @@ public class BuildingListView : CanvasAnimatedView
     [SerializeField] private VerticalLayoutGroup _content;
 
     [SerializeField] private PlayerBuildingsList _availableBuildings;
-    [SerializeField] private MoneyOwner _moneyOwner;
+    [SerializeField] private PlayerMoney _moneyOwner;
 
     private List<BuildingListItemView> _buildingViews = new List<BuildingListItemView>();
 

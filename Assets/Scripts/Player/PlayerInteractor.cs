@@ -7,15 +7,15 @@ public class PlayerInteractor : MonoBehaviour
 {
     private Collider _collider;
     private Rigidbody _body;
-    private IInputReady _inputReady;
+    private IInputState _inputState;
 
     [Inject]
-    public void Construct(IInputReady inputReady)
+    public void Construct(IInputState inputState)
     {
-        _inputReady = inputReady;
+        _inputState = inputState;
 
-        _inputReady.OnEnabled += EnableInteraction;
-        _inputReady.OnDisabled += DisableInteraction;
+        _inputState.OnEnabled += EnableInteraction;
+        _inputState.OnDisabled += DisableInteraction;
     }
 
     private void Awake()
@@ -38,7 +38,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private void OnDestroy()
     {
-        _inputReady.OnEnabled -= EnableInteraction;
-        _inputReady.OnDisabled -= DisableInteraction;
+        _inputState.OnEnabled -= EnableInteraction;
+        _inputState.OnDisabled -= DisableInteraction;
     }
 }

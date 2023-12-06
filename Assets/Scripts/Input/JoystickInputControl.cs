@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class JoystickInputControl : MonoBehaviour, IInputService, IInputReady, IControlService
+public class JoystickInputControl : MonoBehaviour, IInputService, IInputState, IControlService
 {
     private Joystick _joystick;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MoneyView : MonoBehaviour
 {
-    [SerializeField] private MoneyOwner _playerMoney;
+    [SerializeField] private PlayerMoney _playerMoney;
     [SerializeField] private TMP_Text _moneyTextDisplay;
 
     private void OnEnable()

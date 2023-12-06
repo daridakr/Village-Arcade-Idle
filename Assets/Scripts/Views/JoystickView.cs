@@ -2,10 +2,10 @@ using Zenject;
 
 public class JoystickView : CanvasView
 {
-    private IInputReady _inputReady;
+    private IInputState _inputReady;
 
     [Inject]
-    public void Construct(IInputReady inputReady)
+    public void Construct(IInputState inputReady)
     {
         _inputReady = inputReady;
 

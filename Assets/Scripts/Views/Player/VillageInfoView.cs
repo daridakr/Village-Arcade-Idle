@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VillageInfoView : MonoBehaviour
 {
-    [SerializeField] private VillageInfo _villageInfo;
+    [SerializeField] private PlayerVillageInfo _villageInfo;
     [SerializeField] private TMP_Text _nameDisplay;
 
     private void OnEnable()

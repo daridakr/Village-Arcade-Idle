@@ -48,7 +48,7 @@ public class RegionZone : MonoBehaviour
         _moneyOwnerTrigger.Exit += TriggerExit;
     }
 
-    private void TriggerEnter(MoneyOwner moneyOwner)
+    private void TriggerEnter(PlayerMoney moneyOwner)
     {
         if (_tryBuy != null)
             StopCoroutine(_tryBuy);
@@ -56,13 +56,13 @@ public class RegionZone : MonoBehaviour
         _tryBuy = StartCoroutine(TryBuyRegion(moneyOwner));
     }
 
-    private void TriggerExit(MoneyOwner moneyOwner)
+    private void TriggerExit(PlayerMoney moneyOwner)
     {
         StopCoroutine(_tryBuy);
         //_region.Save();
     }
 
-    private IEnumerator TryBuyRegion(MoneyOwner playerMoney)
+    private IEnumerator TryBuyRegion(PlayerMoney playerMoney)
     {
         yield return null;
 
@@ -90,7 +90,7 @@ public class RegionZone : MonoBehaviour
         }
     }
 
-    private void BuyRegion(MoneyOwner moneyOwner)
+    private void BuyRegion(PlayerMoney moneyOwner)
     {
         if (moneyOwner.HasMoney == false)
             return;
@@ -104,7 +104,7 @@ public class RegionZone : MonoBehaviour
         _reduceValue = Mathf.Clamp(_reduceValue, 1, moneyOwner.Balance);
 
         ReduceCost(_reduceValue);
-        moneyOwner.SpendMoney(_reduceValue);
+        moneyOwner.Spend(_reduceValue);
 
         Triggering?.Invoke();
     }

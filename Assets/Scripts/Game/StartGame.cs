@@ -17,9 +17,6 @@ public class StartGame : IntSavedValue
 
     private void Start()
     {
-        // temp
-        AddStartBuildings();
-
         if (IsNewGame)
         {
             NewGameStarted?.Invoke();
@@ -32,7 +29,7 @@ public class StartGame : IntSavedValue
         VillageNamed?.Invoke(name);
         GameBegined?.Invoke();
 
-        //AddStartBuildings();
+        AddStartBuildings();
         Save(Convert.ToInt32(BeginGame));
     }
 
@@ -40,7 +37,7 @@ public class StartGame : IntSavedValue
     {
         foreach (var building in _buildingsInStart)
         {
-            _buildingList.UnlockData(building, building.Renderer.GUID);
+            _buildingList.Append(building, building.GUID);
         }
     }
 

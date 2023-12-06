@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Collider))]
-public class BuildingRenderer : GUIDObjectData
+public class BuildingRenderer : MonoBehaviour
 {
     [SerializeField] private PlayerMovementTrigger _playerMovementTrigger;
     [SerializeField] private Transform _playerEnterPoint;

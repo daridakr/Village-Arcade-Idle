@@ -1,18 +1,18 @@
 
 using UnityEngine;
 
-public class MoneyOwnerTrigger : Trigger<MoneyOwner>
+public class MoneyOwnerTrigger : Trigger<PlayerMoney>
 {
-    private MoneyOwner _enteredOwner;
+    private PlayerMoney _enteredOwner;
 
-    public MoneyOwner Owner => _enteredOwner;
+    public PlayerMoney Owner => _enteredOwner;
 
-    protected override void OnEnter(MoneyOwner triggered)
+    protected override void OnEnter(PlayerMoney triggered)
     {
         _enteredOwner = triggered;
     }
 
-    protected override void OnExit(MoneyOwner triggered)
+    protected override void OnExit(PlayerMoney triggered)
     {
         _enteredOwner = null;
     }

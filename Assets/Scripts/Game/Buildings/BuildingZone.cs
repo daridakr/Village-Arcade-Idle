@@ -5,8 +5,8 @@ using Zenject;
 public class BuildingZone : MonoBehaviour
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
-    [SerializeField] private BuildingCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
-    [SerializeField] private BuildingBuilder _builder;
+    [SerializeField] private PlayerTimerCleaner _buildingCleaner; // need somehow divide that class to destroyed bulding, empty etc
+    [SerializeField] private PlayerTimerBuilder _builder;
     [SerializeField] private Transform _buildPoint;
     [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
@@ -23,7 +23,7 @@ public class BuildingZone : MonoBehaviour
     public event Action Builded;
 
     [Inject]
-    public void Construct(BuildingCleaner cleaner, BuildingBuilder builder)
+    public void Construct(PlayerTimerCleaner cleaner, PlayerTimerBuilder builder)
     {
         _buildingCleaner = cleaner;
         _builder = builder;
@@ -47,10 +47,10 @@ public class BuildingZone : MonoBehaviour
     // maybe should separate class with abstract method like Interact()? bc these two methods almost the same 
     private void OnClearZone()
     {
-        MoneyOwner buyer = _moneyOwnerTrigger.Owner;
-        buyer.SpendMoney(_clearPrice);
+        PlayerMoney buyer = _moneyOwnerTrigger.Owner;
+        buyer.Spend(_clearPrice);
 
-        _buildingCleaner.Clean(this);
+        _buildingCleaner.StartClean(this);
         _buildingCleaner.Stopped += ClearBuilding;
 
         _currentState = BuildingZoneState.Empty;
@@ -70,12 +70,12 @@ public class BuildingZone : MonoBehaviour
 
     private void OnBuildZone(BuildingData buildingData)
     {
-        MoneyOwner buyer = _moneyOwnerTrigger.Owner;
-        buyer.SpendMoney(buildingData.Price);
+        PlayerMoney buyer = _moneyOwnerTrigger.Owner;
+        buyer.Spend(buildingData.Price);
 
         _building = buildingData.Renderer;
 
-        _builder.StartBuildIn(this);
+        _builder.StartBuild(this);
         _builder.Stopped += SetBuilding;
 
         _currentState = BuildingZoneState.Builded;
@@ -90,7 +90,7 @@ public class BuildingZone : MonoBehaviour
         }
     }
 
-    private void TriggerEnter(MoneyOwner moneyOwner)
+    private void TriggerEnter(PlayerMoney moneyOwner)
     {
         //ShowRewardPlacement?.Invoke(_placement);
 
@@ -112,7 +112,7 @@ public class BuildingZone : MonoBehaviour
         //UpdateView();
     }
 
-    private void TriggerExit(MoneyOwner moneyOwner)
+    private void TriggerExit(PlayerMoney moneyOwner)
     {
         _view.HideCanvas();
     }
