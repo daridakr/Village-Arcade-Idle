@@ -46,9 +46,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 5
-  m_Height: 3.8085546
+  m_Height: 13.698857
   m_Direction: 1
-  m_Center: {x: 0, y: -0.6979625, z: 0}
+  m_Center: {x: 0, y: 1.1514695, z: 0}
 --- !u!114 &3149212210927166260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 7977778888329470072}
   _animation: {fileID: 1298750777788395753}
-  _speed: 5
+  _speed: 6
 --- !u!114 &2913873961723331183
 MonoBehaviour:
   m_ObjectHideFlags: 0

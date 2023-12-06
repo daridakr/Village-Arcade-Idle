@@ -4820,7 +4820,7 @@ Transform:
   m_GameObject: {fileID: 1134506517514714170}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1134506517514600920}
@@ -9562,9 +9562,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134506517514941278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13999999, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0.02, y: 0.13999999, z: -0.03}
+  m_LocalScale: {x: 1.8, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1134506517514678020}
   - {fileID: 1134506517514620926}
@@ -28949,9 +28949,6 @@ MonoBehaviour:
   _expPointPrefab: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba, type: 3}
   _spawnOffset: {x: 0, y: 0, z: 0}
   _prePushDelay: 0
-  _pushForce: 10
-  _pushHeightExtra: 10
-  _spawnBetweenDelay: 0.1
 --- !u!1 &8706381484507289181
 GameObject:
   m_ObjectHideFlags: 0

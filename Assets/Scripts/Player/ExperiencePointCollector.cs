@@ -19,7 +19,7 @@ public class ExperiencePointCollector : MonoBehaviour
         ExperiencePoint expPoint = dropExpPoint.Capture();
         _playerLevel.TakeExp(expPoint.Experience);
 
-        _magnit.AttractLinear(expPoint);
+        _magnit.Attract(expPoint);
     }
 
     private void OnDisable()

@@ -32,7 +32,7 @@ public abstract class DroppableItem<T> : MonoBehaviour
 
     public void Push(Vector3 direction)
     {
-        _body.AddForce(direction, ForceMode.VelocityChange);
+        _body.AddForce(direction, ForceMode.Impulse);
 
         StartCoroutine(DisableBodyWhenStop());
     }

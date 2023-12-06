@@ -8,7 +8,7 @@ public class ExperiencePointGiver : MonoBehaviour, IExperiencePointGiver
     [SerializeField] private float _prePushDelay = 0.1f;
 
     private const float _pushForce = 10f;
-    private const float _pushHeightExtra = 10f;
+    private const float _pushHeightExtra = 5f;
     private const float _spawnBetweenDelay = 0.1f;
 
     private const int _count = 5;
