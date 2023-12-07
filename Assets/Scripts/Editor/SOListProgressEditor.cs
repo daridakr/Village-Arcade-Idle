@@ -1,18 +1,19 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ListProgress))]
-public class ListProgressEditor : Editor
+[CustomEditor(typeof(ListSOProgress))]
+public class SOListProgressEditor : Editor
 {
     private const string LockKey = "LockEditProgressKey";
 
-    private ListProgress _progress;
+    private ListSOProgress _progress;
     private bool _lock;
 
     private void Awake()
     {
-        _progress = target as ListProgress;
+        _progress = target as ListSOProgress;
         _progress.Load();
 
         _lock = EditorPrefs.GetBool(LockKey, false);
@@ -43,8 +44,15 @@ public class ListProgressEditor : Editor
             EditorGUILayout.TextField("Save Data:");
             EditorGUI.indentLevel++;
 
+            var settingsArr = new UnityEngine.Object[_progress.Data.Count()];
+            int i = 0;
+
             foreach (var data in _progress.Data)
-                EditorGUILayout.TextField(data);
+            {
+                settingsArr[i] = data;
+                settingsArr[i] = EditorGUILayout.ObjectField(data, typeof(UnityEngine.Object), false);
+                i++;
+            }
 
             EditorGUI.indentLevel--;
             GUI.enabled = true;

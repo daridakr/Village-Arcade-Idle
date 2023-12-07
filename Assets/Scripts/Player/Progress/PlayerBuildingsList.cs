@@ -1,46 +1,24 @@
-using Palmmedia.ReportGenerator.Core.Common;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerBuildingsList : DataList<BuildingData>
 {
-    [SerializeField] private ListProgress _buildingsProgress;
+    [SerializeField] private ListSOProgress _buildingsProgress;
 
-    private void Awake()
-    {
-        if (_buildingsProgress.Data.Count() > 0)
-        {
-            LoadProgress();
-        }
-    }
-
-    protected override void AfterAppended(BuildingData reference, string guid)
+    protected override void AfterAppended(BuildingData reference)
     {
         //reference.Init(_characterReferences);
 
-        if (_buildingsProgress.Contains(guid))
+        if (_buildingsProgress.Contains(reference))
         {
             return;
         }
 
-        SaveProgress(guid);
+        SaveProgress(reference);
     }
 
-    private void LoadProgress()
+    private void SaveProgress(BuildingData reference)
     {
-        JsonSerializer serializer = new JsonSerializer();
-
-        foreach (string guid in _buildingsProgress.Data)
-        {
-            //BuildingData unlockedData = JsonUtility.FromJson<BuildingData>(guid);
-            //BuildingData unlockedData = (BuildingData)serializer.Deserialize(writer);
-            //Append(unlockedData, unlockedData.GUID);
-        }
-    }
-
-    private void SaveProgress(string guid)
-    {
-        _buildingsProgress.Add(guid);
+        _buildingsProgress.Add(reference);
         _buildingsProgress.Save();
     }
 }

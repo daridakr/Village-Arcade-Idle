@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewListProgressData", menuName = "ProgressData/ListProgressData", order = 51)]
-public class ListProgress : ProgressData
+[CreateAssetMenu(fileName = "GuidListProgressData", menuName = "ProgressData/GuidListProgressData", order = 51)]
+public class ListGuidProgress : ProgressData
 {
     private GuidListData _data;
 

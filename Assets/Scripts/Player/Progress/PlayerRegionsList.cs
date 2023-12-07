@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerRegionsList : DataList<RegionData>
 {
-    [SerializeField] private ListProgress _regionsProgress;
+    [SerializeField] private ListGuidProgress _regionsProgress;
 
     protected override void AfterAppended(RegionData reference, string guid)
     {
