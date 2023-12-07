@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class PlayerVillageInfo : StringSavedValue
 {
     [SerializeField] private StartGame _start;
+    [SerializeField] private PlayerRegionsList _playerRegionsList;
+    [SerializeField] private List<RegionPriceLock> _availableRegions;
 
     private string _name;
     private readonly PlayerLevel _playerLevel;
@@ -23,6 +26,7 @@ public class PlayerVillageInfo : StringSavedValue
         {
             _name = Get();
             Named?.Invoke(_name);
+            PrepareRegions();
         }
     }
 
@@ -34,6 +38,23 @@ public class PlayerVillageInfo : StringSavedValue
         Save(_name);
 
         Named?.Invoke(name);
+        PrepareRegions();
+    }
+
+    private void PrepareRegions()
+    {
+        foreach (var availableRegion in _availableRegions)
+        {
+            availableRegion.Buyed += OnNewRegionBuyed;
+        }
+    }
+
+    private void OnNewRegionBuyed(RegionPriceLock regionLock, RegionData regionData)
+    {
+        regionLock.Buyed -= OnNewRegionBuyed;
+        _availableRegions.Remove(regionLock);
+
+        _playerRegionsList.Append(regionData, regionData.GUID);
     }
 
     //[Inject]

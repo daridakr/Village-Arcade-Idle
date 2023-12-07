@@ -6,6 +6,8 @@ public class StartGame : IntSavedValue
     [SerializeField] private InputFieldData _villageNameField;
     [SerializeField] private PlayerBuildingsList _buildingList;
     [SerializeField] private BuildingData[] _buildingsInStart;
+    [SerializeField] private PlayerRegionsList _regionList;
+    [SerializeField] private RegionData[] _regionsInStart;
 
     private bool BeginGame = true;
 
@@ -30,6 +32,7 @@ public class StartGame : IntSavedValue
         GameBegined?.Invoke();
 
         AddStartBuildings();
+        AddStartRegions();
         Save(Convert.ToInt32(BeginGame));
     }
 
@@ -38,6 +41,14 @@ public class StartGame : IntSavedValue
         foreach (var building in _buildingsInStart)
         {
             //_buildingList.Append(building, building.GUID);
+        }
+    }
+
+    private void AddStartRegions()
+    {
+        foreach (var region in _regionsInStart)
+        {
+            _regionList.Append(region, region.GUID);
         }
     }
 
