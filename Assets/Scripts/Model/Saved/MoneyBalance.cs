@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class MoneyBalance : SavedObject<MoneyBalance>
+public class MoneyBalance : KeySavedObject<MoneyBalance>
 {
     [SerializeField] private int _value;
 

@@ -2,46 +2,52 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class RegionZone : MonoBehaviour
+public class RegionZone : GUIDDataObject
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
     [SerializeField] private ReachableRegion _region;
 
-    private DynamicCost _cost;
+    private BuyZone _buyZone;
     private Coroutine _tryBuy;
     private int _reduceValue = 1;
 
     public event Action<int> Locked;
-    public event Action<int> Available;
+    public event Action Unlocked;
+    public event Action<int> Updated;
     public event Action Triggering; // for haptic in future
     public event Action Paid;
 
     private void OnEnable()
     {
-        _region.Unreached += Lock;
-        _region.Reached += Unlock;
+        _region.Unreached += LockBy;
+        _region.Reached += UnlockToBuy;
     }
 
-    public void Init(int price)
+    public void InitPrice(int price)
     {
-        _cost = new DynamicCost(price);
+        _buyZone = new BuyZone(price, GUID);
+        _buyZone.CostUpdated += OnCostUpdated;
+        _buyZone.Unlocked += OnZonePaid;
+        _buyZone.Load();
     }
 
-    public void Lock(int condition)
+    private void OnCostUpdated(int cost)
+    {
+        Updated?.Invoke(cost);
+        _buyZone.Save();
+    }
+
+    private void LockBy(int condition)
     {
         Locked?.Invoke(condition);
-        _region.Unreached -= Lock;
+        _region.Unreached -= LockBy;
         _moneyOwnerTrigger.Disable();
     }
 
-    public void Unlock()
+    private void UnlockToBuy()
     {
-        if (_cost == null)
-        {
-            return;
-        }
-
-        Available?.Invoke(_cost.Current);
+        _region.Reached -= UnlockToBuy;
+        Unlocked?.Invoke();
 
         _moneyOwnerTrigger.Enable();
         _moneyOwnerTrigger.Enter += TriggerEnter;
@@ -59,7 +65,6 @@ public class RegionZone : MonoBehaviour
     private void TriggerExit(PlayerMoney moneyOwner)
     {
         StopCoroutine(_tryBuy);
-        //_region.Save();
     }
 
     private IEnumerator TryBuyRegion(PlayerMoney playerMoney)
@@ -95,30 +100,27 @@ public class RegionZone : MonoBehaviour
         if (moneyOwner.HasMoney == false)
             return;
 
-        _reduceValue = Mathf.Clamp((int)(_cost.Total * 1.5f * Time.deltaTime), 1, _cost.Total);
-        if (_cost.Current < _reduceValue)
+        _reduceValue = Mathf.Clamp((int)(_buyZone.TotalCost * 1.5f * Time.deltaTime), 1, _buyZone.TotalCost);
+        if (_buyZone.CurrentCost < _reduceValue)
         {
-            _reduceValue = _cost.Current;
+            _reduceValue = _buyZone.CurrentCost;
         }
 
         _reduceValue = Mathf.Clamp(_reduceValue, 1, moneyOwner.Balance);
 
-        ReduceCost(_reduceValue);
+        _buyZone.ReduceCost(_reduceValue);
         moneyOwner.Spend(_reduceValue);
 
         Triggering?.Invoke();
     }
 
-    private void ReduceCost(int value)
+    private void OnZonePaid()
     {
-        _cost.Subtract(value);
-        Available?.Invoke(_cost.Current);
+        _buyZone.CostUpdated -= OnCostUpdated;
+        _buyZone.Unlocked -= OnZonePaid;
 
-        if (_cost.Current == 0)
-        {
-            Paid?.Invoke();
-            Destroy(gameObject);
-        }
+        Paid?.Invoke();
+        Destroy(gameObject);
     }
 
     private void OnDestroy()

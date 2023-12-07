@@ -7,13 +7,19 @@ public class RegionLock : MonoBehaviour
 
     private void OnEnable()
     {
-        _interactionZone.Init(_region.Price);
+        _interactionZone.Unlocked += OnRegionUnlockToBuy;
         _interactionZone.Paid += OnRegionPaid;
     }
 
     private void Start()
     {
         _region.Hide();
+    }
+
+    private void OnRegionUnlockToBuy()
+    {
+        _interactionZone.Unlocked -= OnRegionUnlockToBuy;
+        _interactionZone.InitPrice(_region.Price);
     }
 
     private void OnRegionPaid()

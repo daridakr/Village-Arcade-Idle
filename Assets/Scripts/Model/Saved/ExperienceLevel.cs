@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ExperienceLevel : SavedObject<ExperienceLevel>
+public class ExperienceLevel : KeySavedObject<ExperienceLevel>
 {
     [SerializeField] private int _value;
     [SerializeField] private int _experience;

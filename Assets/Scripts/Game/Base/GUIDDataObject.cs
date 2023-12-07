@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public abstract class GUIDDataObject : ScriptableObject
+public abstract class GUIDDataObject : MonoBehaviour
 {
 #if UNITY_EDITOR
     //[ReadOnly]
@@ -18,7 +18,7 @@ public abstract class GUIDDataObject : ScriptableObject
     public void RegenerateGUID()
     {
         _guid = Guid.NewGuid().ToString();
-        //EditorUtility.SetDirty(gameObject);
+       EditorUtility.SetDirty(gameObject);
     }
 #endif
 }

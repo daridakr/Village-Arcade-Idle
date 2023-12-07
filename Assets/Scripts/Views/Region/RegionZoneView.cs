@@ -9,7 +9,7 @@ public class RegionZoneView : MonoBehaviour
     private void OnEnable()
     {
         _zone.Locked += DisplayLockedZone;
-        _zone.Available += DisplayAvailableZone;
+        _zone.Updated += DisplayAvailableZone;
         _zone.Paid += OnRegionZonePaid;
     }
 
@@ -36,7 +36,7 @@ public class RegionZoneView : MonoBehaviour
     private void OnDestroy()
     {
         _zone.Locked -= DisplayLockedZone;
-        _zone.Available -= DisplayAvailableZone;
+        _zone.Updated -= DisplayAvailableZone;
         _zone.Paid -= OnRegionZonePaid;
     }
 }
