@@ -6,18 +6,12 @@ public class BuildingZoneView : MonoBehaviour
 {
     [SerializeField] private MessageDisplayCanvas _clearCanvas;
     [SerializeField] private ButtonCanvas _buildCanvas;
+    [SerializeField] private BuildingsStoreDisplay _buildingsStore;
 
-    private BuildingListView _buildingListView;
     private CanvasAnimatedView _currentCanvas;
 
     public event Action CanClear;
-    public event Action<BuildingData> CanBuild;
-
-    [Inject]
-    public void Construct(BuildingListView buildingsList)
-    {
-        _buildingListView = buildingsList;
-    }
+    public event Action<Building> CanBuild;
 
     private void OnEnable()
     {
@@ -51,16 +45,16 @@ public class BuildingZoneView : MonoBehaviour
     private void OnShowBuildings()
     {
         _buildCanvas.Hide();
-        _buildingListView.Display();
-        _buildingListView.OnSmthBuyed += OnBuildZone;
+        _buildingsStore.Display();
+        _buildingsStore.OnSmthBuyed += OnBuildZone;
     }
 
-    private void OnBuildZone(BuildingData data)
+    private void OnBuildZone(Building building)
     {
         _buildCanvas.Hide();
-        _buildingListView.OnSmthBuyed -= OnBuildZone;
+        _buildingsStore.OnSmthBuyed -= OnBuildZone;
 
-        CanBuild?.Invoke(data);
+        CanBuild?.Invoke(building);
     }
 
     private void OnDisable()

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEditor.ObjectChangeEventStream;
 
 [RequireComponent(typeof(GuidableObject))]
 [RequireComponent(typeof(ExperiencePointGiver))]
@@ -13,27 +14,16 @@ public class BuildingZone : MonoBehaviour
 
     private IExperiencePointGiver _experienceGiver;
     private const int _clearPrice = 20;
+    private Building _building;
 
-    private BuildZone _model;
+    private SerializableBuldingZone _model;
     private GuidableObject _guidable;
-
-    //private Building _building;
 
     public BuildingZoneState State => _model.State; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
     public event Action Cleared;
-
-    //[Inject]
-    //public void Construct(PlayerTimerCleaner cleaner, PlayerTimerBuilder builder)
-    //{
-    //    _cleaner = cleaner;
-    //    _builder = builder;
-    //}
-
-    //public void ConstructExperience(IExperiencePointGiver experienceGiver)
-    //{
-    //    _experienceGiver = experienceGiver;
-    //}
+    public event Action Building;
+    public event Action Builded;
 
     private void OnEnable()
     {
@@ -41,11 +31,10 @@ public class BuildingZone : MonoBehaviour
         _moneyOwnerTrigger.Exit += TriggerExit;
 
         _guidable = GetComponent<GuidableObject>();
-        _model = new BuildZone(BuildingZoneState.Destroyed, _guidable.GUID);
+        _model = new SerializableBuldingZone(BuildingZoneState.Destroyed, _guidable.GUID);
         _model.Destroyed += OnDestroyedZone;
         _model.Cleared += OnClearedZone;
-        _model.Builded += OnBuildedZone;
-        //_zone.Unlocked += OnZonePaid;
+        _model.BuildingLoaded += OnBuildingLoaded;
         _model.Load();
     }
 
@@ -92,35 +81,46 @@ public class BuildingZone : MonoBehaviour
         _view.CanBuild += Build;
     }
 
-    private void Build(BuildingData buildingData)
+    private void Build(Building building)
     {
         _view.CanBuild -= Build;
 
         PlayerMoney buyer = _moneyOwnerTrigger.Owner;
-        buyer.Spend(buildingData.Price);
+        buyer.Spend(building.Data.Price);
 
-        //_building = buildingData.Renderer;
+        _building = building;
 
+        Building?.Invoke();
         _builder.StartBuild(this);
-        _model.Build();
-
         _builder.Stopped += OnBuildStopped;
-
-        //_currentState = BuildingZoneState.Builded;
     }
 
     private void OnBuildStopped()
     {
-        _builder.Stopped -= OnBuildedZone;
+        _builder.Stopped -= OnBuildStopped;
+        Builded?.Invoke();
 
+        SetupBuilding();
         _experienceGiver.Give();
     }
 
-    private void OnBuildedZone()
+    private void SetupBuilding()
     {
-        _model.Builded -= OnBuildedZone;
+        Building builded = Instantiate(_building, _buildPoint);
+        _model.ZoneBuilded(_building.name, builded.Guid);
+    }
 
-        //Instantiate(_building, _buildPoint);
+    private void OnBuildingLoaded(BuildedBuilding serializedData)
+    {
+        _model.BuildingLoaded -= OnBuildingLoaded;
+
+        Building buildingPrefab = Resources.Load<Building>(serializedData.Prefab);
+        Building builded = Instantiate(buildingPrefab, _buildPoint);
+
+        Builded?.Invoke();
+
+        // data initialize
+        //builded.Instantiate(serializedData);
     }
 
     private void TriggerEnter(PlayerMoney moneyOwner)

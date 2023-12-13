@@ -28,6 +28,6 @@ public class Store : KeySavedObject<Store>
 
     protected override void OnLoad(Store loadedObject)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }

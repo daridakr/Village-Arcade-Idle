@@ -609,8 +609,8 @@ GameObject:
   - component: {fileID: 2083695778904171188}
   - component: {fileID: 2083695778904171186}
   - component: {fileID: 2083695778904171187}
-  - component: {fileID: 1521590382}
   - component: {fileID: 5058017437296666977}
+  - component: {fileID: 1093879650261359706}
   m_Layer: 5
   m_Name: BuildingListItemView
   m_TagString: Untagged
@@ -679,21 +679,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1521590382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083695778904171189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60993db436dfd9f4da47afa72cd9ad92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _title: {fileID: 2083695779219825721}
-  _image: {fileID: 2083695778175292964}
-  _buyButton: {fileID: 9105483854552058780}
 --- !u!114 &5058017437296666977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +694,21 @@ MonoBehaviour:
   m_EffectColor: {r: 0.8301887, g: 0.8253974, b: 0.8098256, a: 1}
   m_EffectDistance: {x: 3, y: 4}
   m_UseGraphicAlpha: 1
+--- !u!114 &1093879650261359706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083695778904171189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c866a5cef0db8b4d823119c111dd9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: {fileID: 2083695779219825721}
+  _image: {fileID: 2083695778175292964}
+  _buyButton: {fileID: 9105483854552058780}
 --- !u!1 &2083695779219825723
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ public class StartGame : IntSavedValue
     {
         foreach (var building in _buildingsInStart)
         {
-            //_buildingList.Append(building, building.GUID);
+            _buildingList.Append(building);
         }
     }
 

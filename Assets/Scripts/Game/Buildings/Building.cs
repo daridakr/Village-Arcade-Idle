@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(GuidableObject))]
 public abstract class Building : MonoBehaviour
 {
     [SerializeField] private BuildingData _data;
@@ -9,7 +10,9 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected int _countInOneRegion;
     [SerializeField] protected int _maxLevel;
 
-    private Builded _builded;
+    private BuildedBuilding _model;
+    //need unique guid for building and also guid for builded building
+    private GuidableObject _guidable;
 
     private int _level = 0;
     private BuildingLevel _currentLevel;
@@ -17,8 +20,18 @@ public abstract class Building : MonoBehaviour
     // unlock type (blueprint, quest, level)
 
     public BuildingData Data => _data;
+    public string Guid => _guidable.GUID;
 
     public event Action Upgraded;
+
+    private void OnEnable()
+    {
+        _guidable = GetComponent<GuidableObject>();
+        _guidable.RegenerateGUID();
+        //_model.Destroyed += OnDestroyedZone;
+        //_model.Cleared += OnClearedZone;
+        //_model.Builded += OnBuildedZone;
+    }
 
     private void Awake()
     {

@@ -7,6 +7,8 @@ public class BuildingStore : MonoBehaviour
 
     private Store _store;
 
+    public IEnumerable<Building> Buildings => _availableBuildings.Data;
+
     private void OnEnable()
     {
         _store = new Store(SaveKeyParams.Game.BuildingStore);
@@ -20,15 +22,15 @@ public class BuildingStore : MonoBehaviour
         _store.Add(building);
     }
 
-    public IEnumerable<BuildingData> GetBuildingsData()
-    {
-        List<BuildingData> _datas = new List<BuildingData>();
+    //public IEnumerable<BuildingData> GetBuildingsData()
+    //{
+    //    List<BuildingData> _datas = new List<BuildingData>();
 
-        foreach (Building building in _availableBuildings.Data)
-        {
-            _datas.Add(building.Data);
-        }
+    //    foreach (Building building in _availableBuildings.Data)
+    //    {
+    //        _datas.Add(building.Data);
+    //    }
 
-        return _datas;
-    }
+    //    return _datas;
+    //}
 }

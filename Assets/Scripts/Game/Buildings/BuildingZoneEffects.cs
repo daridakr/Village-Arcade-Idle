@@ -10,21 +10,26 @@ public class BuildingZoneEffects : MonoBehaviour
     private void OnEnable()
     {
         _zone.Cleared += OnZoneCleared;
+        _zone.Building += OnZoneBuildingEffect;
+        _zone.Builded += OnZoneBuilded;
     }
 
     private void OnZoneCleared()
     {
+        _zone.Cleared -= OnZoneCleared;
         _freeEffect.Stop();
     }
 
     private void OnZoneBuildingEffect()
     {
-        _dottedSquare.enabled = false;
+        _zone.Building -= OnZoneBuildingEffect;
         _buildEffect.Play();
     }
 
     private void OnZoneBuilded()
     {
+        _zone.Builded -= OnZoneBuilded;
+        _dottedSquare.enabled = false;
         _buildEffect.Stop();
     }
 }

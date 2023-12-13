@@ -11,7 +11,7 @@ public class LevelInstaller : MonoInstaller
     [SerializeField] private RegionReachLevelCondition _regionUnlockCondition;
 
     [Header("Views")]
-    [SerializeField] private BuildingListView _buildingListView;
+    [SerializeField] private BuildingsStoreDisplay _buildingListView;
 
     public override void InstallBindings()
     {
@@ -46,6 +46,6 @@ public class LevelInstaller : MonoInstaller
 
     private void BindViews()
     {
-        Container.Bind<BuildingListView>().FromInstance(_buildingListView).AsSingle();
+        Container.Bind<BuildingsStoreDisplay>().FromInstance(_buildingListView).AsSingle();
     }
 }
