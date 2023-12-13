@@ -5,7 +5,7 @@ public class StartGame : IntSavedValue
 {
     [SerializeField] private InputFieldData _villageNameField;
     [SerializeField] private PlayerBuildingsList _buildingList;
-    [SerializeField] private BuildingData[] _buildingsInStart;
+    [SerializeField] private Building[] _buildingsInStart;
     [SerializeField] private PlayerRegionsList _regionList;
     [SerializeField] private RegionData[] _regionsInStart;
 
@@ -40,7 +40,7 @@ public class StartGame : IntSavedValue
     {
         foreach (var building in _buildingsInStart)
         {
-            _buildingList.Append(building);
+            //_buildingList.Append(building, building.GUID);
         }
     }
 
@@ -48,7 +48,7 @@ public class StartGame : IntSavedValue
     {
         foreach (var region in _regionsInStart)
         {
-            _regionList.Append(region, region.GUID);
+            _regionList.Append(region, region.Guid);
         }
     }
 

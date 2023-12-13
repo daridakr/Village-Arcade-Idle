@@ -54,7 +54,7 @@ public class PlayerVillageInfo : StringSavedValue
         regionLock.Buyed -= OnNewRegionBuyed;
         _availableRegions.Remove(regionLock);
 
-        _playerRegionsList.Append(regionData, regionData.GUID);
+        _playerRegionsList.Append(regionData, regionData.Guid);
     }
 
     //[Inject]

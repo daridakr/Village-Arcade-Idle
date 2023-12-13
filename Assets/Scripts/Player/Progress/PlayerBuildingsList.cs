@@ -1,24 +1,24 @@
 using UnityEngine;
 
-public class PlayerBuildingsList : DataList<BuildingData>
+public class PlayerBuildingsList : DataList<Building>
 {
-    [SerializeField] private ListSOProgress _buildingsProgress;
+    [SerializeField] private ListGuidProgress _buildingsProgress;
 
-    protected override void AfterAppended(BuildingData reference)
+    protected override void AfterAppended(Building reference, string guid)
     {
         //reference.Init(_characterReferences);
 
-        if (_buildingsProgress.Contains(reference))
+        if (_buildingsProgress.Contains(guid))
         {
             return;
         }
 
-        SaveProgress(reference);
+        SaveProgress(guid);
     }
 
-    private void SaveProgress(BuildingData reference)
+    private void SaveProgress(string guid)
     {
-        _buildingsProgress.Add(reference);
+        _buildingsProgress.Add(guid);
         _buildingsProgress.Save();
     }
 }

@@ -3,9 +3,9 @@ using Zenject;
 
 public class LevelInstaller : MonoInstaller
 {
-    [Header("Buildings")]
-    [SerializeField] private BuildingZone _buildingZoneTempalte;
-    [SerializeField] private Transform[] _buildingZonePoints;
+    //[Header("Buildings")]
+    //[SerializeField] private BuildingZone _buildingZoneTempalte;
+    //[SerializeField] private Transform[] _buildingZonePoints;
 
     [Header("Regions")]
     [SerializeField] private RegionReachLevelCondition _regionUnlockCondition;
@@ -23,19 +23,19 @@ public class LevelInstaller : MonoInstaller
 
     private void BindBuildingZones()
     {
-        foreach(Transform point in _buildingZonePoints)
-        {
-            BuildingZone buildingZone = Container.
-                InstantiatePrefabForComponent<BuildingZone>(
-                _buildingZoneTempalte, point.position, Quaternion.identity, point);
-            Container.Bind<BuildingZone>().FromInstance(buildingZone);
+        //foreach(Transform point in _buildingZonePoints)
+        //{
+        //    BuildingZone buildingZone = Container.
+        //        InstantiatePrefabForComponent<BuildingZone>(
+        //        _buildingZoneTempalte, point.position, Quaternion.identity, point);
+        //    Container.Bind<BuildingZone>().FromInstance(buildingZone);
 
-            ExperiencePointGiver experienceGiver = buildingZone.GetComponent<ExperiencePointGiver>();
-            Container.BindInterfacesTo<ExperiencePointGiver>().
-                FromInstance(experienceGiver);
+        //    ExperiencePointGiver experienceGiver = buildingZone.GetComponent<ExperiencePointGiver>();
+        //    Container.BindInterfacesTo<ExperiencePointGiver>().
+        //        FromInstance(experienceGiver);
 
-            buildingZone.ConstructExperience(experienceGiver);
-        }
+        //    buildingZone.ConstructExperience(experienceGiver);
+        //}
     }
 
     private void BindRegionZones()

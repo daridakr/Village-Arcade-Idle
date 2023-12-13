@@ -4,12 +4,8 @@ using Zenject;
 
 public class BuildingZoneView : MonoBehaviour
 {
-    [SerializeField] private BuildingZone _zone;
     [SerializeField] private MessageDisplayCanvas _clearCanvas;
     [SerializeField] private ButtonCanvas _buildCanvas;
-    [SerializeField] private SpriteRenderer _dottedSquare;
-    [SerializeField] private ParticleSystem _freeEffect;
-    [SerializeField] private ParticleSystem _buildEffect;
 
     private BuildingListView _buildingListView;
     private CanvasAnimatedView _currentCanvas;
@@ -49,7 +45,6 @@ public class BuildingZoneView : MonoBehaviour
     private void OnClearZone()
     {
         _clearCanvas.Hide();
-        _freeEffect.Stop();
         CanClear?.Invoke();
     }
 
@@ -65,16 +60,7 @@ public class BuildingZoneView : MonoBehaviour
         _buildCanvas.Hide();
         _buildingListView.OnSmthBuyed -= OnBuildZone;
 
-        _dottedSquare.enabled = false;
-        _buildEffect.Play();
-
         CanBuild?.Invoke(data);
-        Invoke(nameof(StopEffect), 2f);
-    }
-
-    private void StopEffect()
-    {
-        _buildEffect.Stop();
     }
 
     private void OnDisable()

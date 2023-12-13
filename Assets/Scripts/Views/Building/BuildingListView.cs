@@ -8,9 +8,10 @@ public class BuildingListView : CanvasAnimatedView
     [SerializeField] private BuildingListItemView _listViewItem;
     [SerializeField] private VerticalLayoutGroup _content;
 
-    [SerializeField] private PlayerBuildingsList _availableBuildings;
+    [SerializeField] private BuildingStore _store;
     [SerializeField] private PlayerMoney _moneyOwner;
 
+    private IEnumerable<BuildingData> _buildingDatas;
     private List<BuildingListItemView> _buildingViews = new List<BuildingListItemView>();
 
     public event Action<BuildingData> OnSmthBuyed;
@@ -20,10 +21,12 @@ public class BuildingListView : CanvasAnimatedView
         base.Display();
         ClearOldData();
 
-        foreach (BuildingData building in _availableBuildings.Data)
+        _buildingDatas = _store.GetBuildingsData();
+
+        foreach (BuildingData buildingData in _buildingDatas)
         {
             BuildingListItemView buildingView = Instantiate(_listViewItem, _content.transform);
-            buildingView.Render(building, _moneyOwner.Balance);
+            buildingView.Render(buildingData, _moneyOwner.Balance);
             buildingView.OnBuy += OnBuildingBuyed;
             _buildingViews.Add(buildingView);
         }

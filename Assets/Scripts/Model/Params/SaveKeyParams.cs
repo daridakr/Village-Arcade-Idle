@@ -3,6 +3,7 @@ public static class SaveKeyParams
     public static class Game
     {
         public const string New = nameof(New);
+        public const string BuildingStore = nameof(BuildingStore);
     }
 
     public static class Player

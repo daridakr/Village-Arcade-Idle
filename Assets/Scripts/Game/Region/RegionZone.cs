@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class RegionZone : GUIDDataObject
+[RequireComponent(typeof(GuidableObject))]
+public class RegionZone : MonoBehaviour
 {
     [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
     [SerializeField] private ReachableRegion _region;
 
+    private GuidableObject _guidable;
     private BuyZone _buyZone;
     private Coroutine _tryBuy;
     private int _reduceValue = 1;
@@ -25,7 +27,8 @@ public class RegionZone : GUIDDataObject
 
     public void InitPrice(int price)
     {
-        _buyZone = new BuyZone(price, GUID);
+        _guidable = GetComponent<GuidableObject>();
+        _buyZone = new BuyZone(price, _guidable.GUID);
         _buyZone.CostUpdated += OnCostUpdated;
         _buyZone.Unlocked += OnZonePaid;
         _buyZone.Load();

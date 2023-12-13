@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class RegionData : GUIDDataObject
+[RequireComponent (typeof(GuidableObject))]
+public class RegionData : MonoBehaviour
 {
     [SerializeField] private GameObject _data;
 
+    private GuidableObject _guidable;
+
+    public string Guid => _guidable.GUID;
+
     private void Awake()
     {
+        _guidable = GetComponent<GuidableObject>();
+
         Display();
     }
 

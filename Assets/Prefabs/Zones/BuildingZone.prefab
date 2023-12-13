@@ -28892,6 +28892,7 @@ GameObject:
   - component: {fileID: 8706381484431543946}
   - component: {fileID: 8706381484431543940}
   - component: {fileID: 5003509046155598478}
+  - component: {fileID: 1173775627795954257}
   m_Layer: 0
   m_Name: BuildingZone
   m_TagString: Untagged
@@ -28930,7 +28931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyOwnerTrigger: {fileID: 8706381484603982195}
-  _buildingCleaner: {fileID: 0}
+  _cleaner: {fileID: 0}
   _builder: {fileID: 0}
   _buildPoint: {fileID: 388175569984979506}
   _view: {fileID: 8706381484507289182}
@@ -28949,6 +28950,19 @@ MonoBehaviour:
   _expPointPrefab: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba, type: 3}
   _spawnOffset: {x: 0, y: 0, z: 0}
   _prePushDelay: 0
+--- !u!114 &1173775627795954257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706381484431543947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a760baccc959bb4e872a63af10a5ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
 --- !u!1 &8706381484507289181
 GameObject:
   m_ObjectHideFlags: 0
@@ -28959,6 +28973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8706381484507289180}
   - component: {fileID: 8706381484507289182}
+  - component: {fileID: 8412684586535614480}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -28998,9 +29013,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52564b1daceed2459bd5f1a052f299d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zone: {fileID: 0}
   _clearCanvas: {fileID: 588120823306959348}
   _buildCanvas: {fileID: 1123213671999946387}
+--- !u!114 &8412684586535614480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706381484507289181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d7037806ae50f489a9263b82377a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zone: {fileID: 8706381484431543940}
   _dottedSquare: {fileID: 7726189481313760190}
   _freeEffect: {fileID: 1134506517500477320}
   _buildEffect: {fileID: 1134506517520445437}
