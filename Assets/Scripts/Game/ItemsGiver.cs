@@ -11,13 +11,11 @@ public abstract class ItemsGiver<T> : MonoBehaviour where T : DroppableItem
     private const float _pushHeightExtra = 5f;
     private const float _spawnBetweenDelay = 0.1f;
 
-    private const int _count = 5;
-
     private Vector3 _spawnPosition => transform.position + _spawnOffset + Random.insideUnitSphere * 0.5f;
 
-    public void Give(int multiplier = 1)
+    public void Give(int count)
     {
-        StartCoroutine(CreateItem(multiplier * _count));
+        StartCoroutine(CreateItem(count));
     }
 
     private IEnumerator CreateItem(int count)

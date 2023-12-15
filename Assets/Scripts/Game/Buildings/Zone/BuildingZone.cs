@@ -12,6 +12,8 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
     private ExperiencePointGiver _experienceGiver;
+    private const int _expPointsCount = 5;
+
     private const int _clearPrice = 20;
     private Building _building;
 
@@ -66,7 +68,7 @@ public class BuildingZone : MonoBehaviour
     {
         _cleaner.Stopped -= OnCleanStopped;
 
-        _experienceGiver.Give();
+        _experienceGiver.Give(_expPointsCount);
     }
 
     private void OnClearedZone()
@@ -100,7 +102,7 @@ public class BuildingZone : MonoBehaviour
         Builded?.Invoke();
 
         SetupBuilding();
-        _experienceGiver.Give();
+        _experienceGiver.Give(_expPointsCount);
     }
 
     private void SetupBuilding()

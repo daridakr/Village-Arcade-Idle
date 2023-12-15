@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(GuidableObject))]
@@ -19,7 +18,7 @@ public abstract class Building : MonoBehaviour
     //need unique guid for building and also guid for builded building
     private GuidableObject _guidable;
 
-    private int _level = 0;
+    private int _levelNumber = 0;
     private BuildingLevel _currentLevel;
     protected float _upgradeMultiplier;
     // unlock type (blueprint, quest, level)
@@ -43,7 +42,7 @@ public abstract class Building : MonoBehaviour
 
     private void InitLevels()
     {
-        _currentLevel = _levels[_level];
+        _currentLevel = _levels[_levelNumber];
 
         foreach (var level in _levels)
         {
@@ -54,7 +53,7 @@ public abstract class Building : MonoBehaviour
     // virtual?
     public virtual void Upgrade()
     {
-        _level++;
+        _levelNumber++;
         Upgraded?.Invoke();
     }
 

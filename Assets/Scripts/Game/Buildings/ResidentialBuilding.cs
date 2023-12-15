@@ -11,10 +11,14 @@ public class ResidentialBuilding : Building
     [SerializeField] private float _baseGemRate = 0.1f;
 
     [SerializeField] private int _villagersCapacity = 1;
+    [SerializeField] private PlayerTrigger _playerTrigger;
+
+    private Coroutine _gemGenerationRoutine;
+    float _currentGemProgress = 0;
     private int _currentVillagersCount = 0;
 
     private float _multiplicator = 2f;
-    private int _gemGenerationTimeRate = 30;
+    private const int _gemGenerationTimeRate = 30;
     private GemsGiver _gemsGiver;
 
     //private Villager[] _villagers;
@@ -27,11 +31,11 @@ public class ResidentialBuilding : Building
     public event Action<int, int> VillagersUpdated;
     public event Action<int, int> GemsUpdated;
     public event Action<float> GemGenerationStarted;
-    //public event Action<int> VillagerCapacityUpgraded;
 
     private void Awake()
     {
         _gemsGiver = GetComponent<GemsGiver>();
+        _playerTrigger.Enter += OnPlayerTriggerEnter;
     }
 
     private void Start()
@@ -41,13 +45,15 @@ public class ResidentialBuilding : Building
         VillagersUpdated?.Invoke(_currentVillagersCount, _villagersCapacity);
         GemsUpdated?.Invoke(0, _gemsCapacity);
 
-        StartCoroutine(StartGenerate());
+        if (_gemGenerationRoutine == null)
+        {
+            _gemGenerationRoutine = StartCoroutine(StartGenerate());
+        }
     }
 
     private IEnumerator StartGenerate()
     {
         float totalGemRate = _baseGemRate * _multiplicator;
-        float currentGemProgress = 0;
 
         float countOfCycles = _gemsCapacity / totalGemRate;
         float totalTime = _gemGenerationTimeRate * Mathf.Ceil(countOfCycles);
@@ -66,16 +72,28 @@ public class ResidentialBuilding : Building
             }
 
             float progressPercentage = elapsedTime / totalTime;
+            _currentGemProgress = progressPercentage * _gemsCapacity;
 
-            currentGemProgress = progressPercentage * _gemsCapacity;
-
-            GemsUpdated?.Invoke((int)currentGemProgress, _gemsCapacity);
+            GemsUpdated?.Invoke((int)_currentGemProgress, _gemsCapacity);
 
             yield return null;
 
-        } while (currentGemProgress < _gemsCapacity);
+        } while (_currentGemProgress < _gemsCapacity);
 
         Debug.Log("Gem generation completed!");
+    }
+
+    private void OnPlayerTriggerEnter(Player player)
+    {
+        if (_currentGemProgress > 0.99f)
+        {
+            StopCoroutine(_gemGenerationRoutine);
+            int generatedGems = Mathf.FloorToInt(_currentGemProgress);
+            _gemsGiver.Give(generatedGems);
+            _currentGemProgress -= generatedGems;
+            GemsUpdated?.Invoke((int)_currentGemProgress, _gemsCapacity);
+            _gemGenerationRoutine = StartCoroutine(StartGenerate());
+        }
     }
 
     public override void Upgrade()
@@ -97,6 +115,10 @@ public class ResidentialBuilding : Building
         return stats;
     }
 
+    private void OnDisable()
+    {
+        _playerTrigger.Enter -= OnPlayerTriggerEnter;
+    }
     // gemsGiver
     // gemGenerationTimeRate
     // StartGemGeneration()
