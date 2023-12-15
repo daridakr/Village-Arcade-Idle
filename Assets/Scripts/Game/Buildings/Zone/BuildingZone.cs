@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ExperiencePointGiver))]
 public class BuildingZone : MonoBehaviour
 {
-    [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
+    [SerializeField] private PlayerCoinsTrigger _playerCoinsTrigger;
     [SerializeField] private PlayerTimerCleaner _cleaner; // need somehow divide that class to destroyed bulding, empty etc
     [SerializeField] private PlayerTimerBuilder _builder;
     [SerializeField] private Transform _buildPoint;
@@ -26,8 +26,8 @@ public class BuildingZone : MonoBehaviour
 
     private void OnEnable()
     {
-        _moneyOwnerTrigger.Enter += TriggerEnter;
-        _moneyOwnerTrigger.Exit += TriggerExit;
+        _playerCoinsTrigger.Enter += TriggerEnter;
+        _playerCoinsTrigger.Exit += TriggerExit;
 
         _guidable = GetComponent<GuidableObject>();
         _model = new SerializableBuldingZone(BuildingZoneState.Destroyed, _guidable.GUID);
@@ -53,7 +53,7 @@ public class BuildingZone : MonoBehaviour
     {
         _view.CanClear -= ClearBuilding;
 
-        PlayerMoney buyer = _moneyOwnerTrigger.Owner;
+        PlayerCoins buyer = _playerCoinsTrigger.Entered;
         buyer.Spend(_clearPrice);
 
         _cleaner.StartClean(this);
@@ -84,7 +84,7 @@ public class BuildingZone : MonoBehaviour
     {
         _view.CanBuild -= Build;
 
-        PlayerMoney buyer = _moneyOwnerTrigger.Owner;
+        PlayerCoins buyer = _playerCoinsTrigger.Entered;
         buyer.Spend(building.Data.Price);
 
         _building = building;
@@ -122,14 +122,14 @@ public class BuildingZone : MonoBehaviour
         //builded.Instantiate(serializedData);
     }
 
-    private void TriggerEnter(PlayerMoney moneyOwner)
+    private void TriggerEnter(PlayerCoins coins)
     {
         //ShowRewardPlacement?.Invoke(_placement);
 
         switch (State)
         {
             case BuildingZoneState.Destroyed:
-                _view.ShowClearCanvas(_clearPrice, moneyOwner.Balance);
+                _view.ShowClearCanvas(_clearPrice, coins.Balance);
                 break;
             case BuildingZoneState.Empty:
                 _view.ShowBuildCanvas();
@@ -144,15 +144,15 @@ public class BuildingZone : MonoBehaviour
         //UpdateView();
     }
 
-    private void TriggerExit(PlayerMoney moneyOwner)
+    private void TriggerExit(PlayerCoins coins)
     {
         _view.HideCanvas();
     }
 
     private void OnDisable()
     {
-        _moneyOwnerTrigger.Enter -= TriggerEnter;
-        _moneyOwnerTrigger.Exit -= TriggerExit;
+        _playerCoinsTrigger.Enter -= TriggerEnter;
+        _playerCoinsTrigger.Exit -= TriggerExit;
     }
 }
 

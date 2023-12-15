@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private PlayerMoney _playerMoney;
+    [SerializeField] private PlayerCoins _playerCoins;
+    [SerializeField] private PlayerGems _playerGems;
     [SerializeField] private PlayerLevel _playerLevel;
 
-    public void AddMoney(int money)
+    public void AddMoney(int value)
     {
-        _playerMoney.Get(money);
+        _playerCoins.Get(value);
+    }
+
+    public void AddGems(int count)
+    {
+        _playerGems.Get(count);
     }
 
     public void AddExp(int value)

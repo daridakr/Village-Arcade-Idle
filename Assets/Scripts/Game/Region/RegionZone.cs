@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(GuidableObject))]
 public class RegionZone : MonoBehaviour
 {
-    [SerializeField] private MoneyOwnerTrigger _moneyOwnerTrigger;
+    [SerializeField] private PlayerCoinsTrigger _playerCoinsTrigger;
     [SerializeField] private ReachableRegion _region;
 
     private GuidableObject _guidable;
@@ -44,7 +44,7 @@ public class RegionZone : MonoBehaviour
     {
         Locked?.Invoke(condition);
         _region.Unreached -= LockBy;
-        _moneyOwnerTrigger.Disable();
+        _playerCoinsTrigger.Disable();
     }
 
     private void UnlockToBuy()
@@ -52,31 +52,31 @@ public class RegionZone : MonoBehaviour
         _region.Reached -= UnlockToBuy;
         Unlocked?.Invoke();
 
-        _moneyOwnerTrigger.Enable();
-        _moneyOwnerTrigger.Enter += TriggerEnter;
-        _moneyOwnerTrigger.Exit += TriggerExit;
+        _playerCoinsTrigger.Enable();
+        _playerCoinsTrigger.Enter += TriggerEnter;
+        _playerCoinsTrigger.Exit += TriggerExit;
     }
 
-    private void TriggerEnter(PlayerMoney moneyOwner)
+    private void TriggerEnter(PlayerCoins coins)
     {
         if (_tryBuy != null)
             StopCoroutine(_tryBuy);
 
-        _tryBuy = StartCoroutine(TryBuyRegion(moneyOwner));
+        _tryBuy = StartCoroutine(TryBuyRegion(coins));
     }
 
-    private void TriggerExit(PlayerMoney moneyOwner)
+    private void TriggerExit(PlayerCoins coins)
     {
         StopCoroutine(_tryBuy);
     }
 
-    private IEnumerator TryBuyRegion(PlayerMoney playerMoney)
+    private IEnumerator TryBuyRegion(PlayerCoins playerWithCoins)
     {
         yield return null;
 
         bool delayed = false;
 
-        var playerMovement = playerMoney.GetComponent<PlayerMovement>();
+        var playerMovement = playerWithCoins.GetComponent<PlayerMovement>();
 
         while (true)
         {
@@ -85,7 +85,7 @@ public class RegionZone : MonoBehaviour
                 if (delayed == false)
                     yield return new WaitForSeconds(0.75f);
 
-                BuyRegion(playerMoney);
+                BuyRegion(playerWithCoins);
                 //PriceUpdated?.Invoke(_price.Current);
                 delayed = true;
             }
@@ -98,9 +98,9 @@ public class RegionZone : MonoBehaviour
         }
     }
 
-    private void BuyRegion(PlayerMoney moneyOwner)
+    private void BuyRegion(PlayerCoins coins)
     {
-        if (moneyOwner.HasMoney == false)
+        if (coins.IsEmpty == false)
             return;
 
         _reduceValue = Mathf.Clamp((int)(_buyZone.TotalCost * 1.5f * Time.deltaTime), 1, _buyZone.TotalCost);
@@ -109,10 +109,10 @@ public class RegionZone : MonoBehaviour
             _reduceValue = _buyZone.CurrentCost;
         }
 
-        _reduceValue = Mathf.Clamp(_reduceValue, 1, moneyOwner.Balance);
+        _reduceValue = Mathf.Clamp(_reduceValue, 1, coins.Balance);
 
         _buyZone.ReduceCost(_reduceValue);
-        moneyOwner.Spend(_reduceValue);
+        coins.Spend(_reduceValue);
 
         Triggering?.Invoke();
     }
@@ -128,8 +128,8 @@ public class RegionZone : MonoBehaviour
 
     private void OnDestroy()
     {
-        _moneyOwnerTrigger.Disable();
-        _moneyOwnerTrigger.Enter -= TriggerEnter;
-        _moneyOwnerTrigger.Exit -= TriggerExit;
+        _playerCoinsTrigger.Disable();
+        _playerCoinsTrigger.Enter -= TriggerEnter;
+        _playerCoinsTrigger.Exit -= TriggerExit;
     }
 }

@@ -8,7 +8,8 @@ public static class SaveKeyParams
 
     public static class Player
     {
-        public const string MoneyBalance = nameof(MoneyBalance);
+        public const string CoinsBalance = nameof(CoinsBalance);
+        public const string GemsBalance = nameof(GemsBalance);
         public const string ExperienceLevel = nameof(ExperienceLevel);
         public const string VillageName = nameof(VillageName);
     }
