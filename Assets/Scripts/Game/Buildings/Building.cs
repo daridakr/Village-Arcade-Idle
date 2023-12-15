@@ -10,7 +10,6 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected int _countInOneRegion;
     [SerializeField] protected int _maxLevel;
 
-    private BuildedBuilding _model;
     //need unique guid for building and also guid for builded building
     private GuidableObject _guidable;
 
@@ -23,14 +22,12 @@ public abstract class Building : MonoBehaviour
     public string Guid => _guidable.GUID;
 
     public event Action Upgraded;
+    public event Action Builded;
 
     private void OnEnable()
     {
         _guidable = GetComponent<GuidableObject>();
         _guidable.RegenerateGUID();
-        //_model.Destroyed += OnDestroyedZone;
-        //_model.Cleared += OnClearedZone;
-        //_model.Builded += OnBuildedZone;
     }
 
     private void Awake()

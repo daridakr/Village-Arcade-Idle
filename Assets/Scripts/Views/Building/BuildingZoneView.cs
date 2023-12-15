@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 public class BuildingZoneView : MonoBehaviour
 {
     [SerializeField] private MessageDisplayCanvas _clearCanvas;
     [SerializeField] private ButtonCanvas _buildCanvas;
+    [SerializeField] private ButtonCanvas _upgradeCanvas;
     [SerializeField] private BuildingsStoreDisplay _buildingsStore;
 
     private CanvasAnimatedView _currentCanvas;
@@ -29,6 +29,12 @@ public class BuildingZoneView : MonoBehaviour
     {
         _buildCanvas.Display();
         _currentCanvas = _buildCanvas;
+    }
+
+    public void ShowUpgradeCanvas()
+    {
+        _upgradeCanvas.Display();
+        _currentCanvas = _upgradeCanvas;
     }
 
     public void HideCanvas()

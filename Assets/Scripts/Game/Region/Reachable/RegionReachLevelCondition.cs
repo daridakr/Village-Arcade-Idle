@@ -8,6 +8,8 @@ public class RegionReachLevelCondition : MonoBehaviour, IRegionReachCondition
     [SerializeField] private PlayerLevel _playerLevel;
     [SerializeField] private int _requiredLevel;
 
+    private ReachableRegion _reachable;
+
     public int Condition => _requiredLevel;
     public bool IsCompleted { get; private set; }
 
@@ -15,6 +17,9 @@ public class RegionReachLevelCondition : MonoBehaviour, IRegionReachCondition
 
     private void OnEnable()
     {
+        _reachable = GetComponent<ReachableRegion>();
+        _reachable.Init(this);
+
         _playerLevel.LevelChanged += OnPlayerLevelChanged;
     }
 

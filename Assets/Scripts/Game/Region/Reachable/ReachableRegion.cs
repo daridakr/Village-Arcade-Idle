@@ -9,11 +9,16 @@ public class ReachableRegion : MonoBehaviour
     public event Action Reached;
     public event Action<int> Unreached;
 
-    [Inject]
-    public void Construct(IRegionReachCondition condition)
+    public void Init(IRegionReachCondition condition)
     {
         _reachCondition = condition;
     }
+
+    //[Inject]
+    //public void Construct(IRegionReachCondition condition)
+    //{
+    //    _reachCondition = condition;
+    //}
 
     private void Start()
     {

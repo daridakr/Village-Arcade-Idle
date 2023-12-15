@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class SerializableBuldingZone : KeySavedObject<SerializableBuldingZone>
 {
-    [SerializeField] private BuildingZoneState _currentState; // should remove after save builded buildings implementation and rewrite to like regionZone w events
+    [SerializeField] private BuildingZoneState _currentState;
     [SerializeField] private BuildedBuilding _building;
 
     public BuildingZoneState State => _currentState;
@@ -38,7 +38,6 @@ public class SerializableBuldingZone : KeySavedObject<SerializableBuldingZone>
                 Destroyed?.Invoke();
                 Cleared?.Invoke();
                 LoadBuilding();
-                //Builded?.Invoke(_building);
                 break;
             default:
                 break;
@@ -95,19 +94,6 @@ public class BuildedBuilding : KeySavedObject<BuildedBuilding>
     }
 
     public void Instantiate()
-    {
-
-    }
-}
-
-[Serializable]
-public abstract class BuildingLevelModel : KeySavedObject<BuildingLevelModel>
-{
-    // сделать модель уровня как DynamicPrice
-
-
-    public BuildingLevelModel(string guid)
-: base(guid)
     {
 
     }
