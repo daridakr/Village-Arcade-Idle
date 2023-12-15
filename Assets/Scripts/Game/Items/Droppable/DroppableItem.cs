@@ -4,9 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public abstract class DroppableItem<T> : MonoBehaviour
+public abstract class DroppableItem : MonoBehaviour
 {
-    [SerializeField] private T _item;
+    [SerializeField] private Item _item;
     [SerializeField] private float _captureDelay;
 
     private Rigidbody _body;
@@ -37,7 +37,7 @@ public abstract class DroppableItem<T> : MonoBehaviour
         StartCoroutine(DisableBodyWhenStop());
     }
 
-    public virtual T Capture()
+    public virtual Item Capture()
     {
         if (!CanCapture)
             throw new InvalidOperationException();

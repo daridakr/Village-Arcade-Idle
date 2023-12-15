@@ -28947,7 +28947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98267f4a3b5836d42bae8e89730e6488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _expPointPrefab: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba, type: 3}
+  _droppableItemTemplate: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba, type: 3}
   _spawnOffset: {x: 0, y: 5, z: 0}
   _prePushDelay: 0
 --- !u!114 &1173775627795954257

@@ -11,7 +11,7 @@ public class BuildingZone : MonoBehaviour
     [SerializeField] private Transform _buildPoint;
     [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
-    private IExperiencePointGiver _experienceGiver;
+    private ExperiencePointGiver _experienceGiver;
     private const int _clearPrice = 20;
     private Building _building;
 

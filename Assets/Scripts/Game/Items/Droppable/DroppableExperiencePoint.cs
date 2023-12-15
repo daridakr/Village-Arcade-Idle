@@ -1,4 +1,4 @@
-public class DroppableExperiencePoint : DroppableItem<ExperiencePoint>
+public class DroppableExperiencePoint : DroppableItem
 {
 
 }

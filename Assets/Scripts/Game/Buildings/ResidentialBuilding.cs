@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(GemsGiver))]
 public class ResidentialBuilding : Building
 {
     [SerializeField] private int _gemsCapacity = 1;
@@ -13,6 +14,8 @@ public class ResidentialBuilding : Building
     private float _multiplicator = 2f;
     private int _gemGenerationTimeRate = 30;
 
+    private GemsGiver _gemsGiver;
+
     //private Villager[] _villagers;
     //list of views of this building
 
@@ -20,6 +23,11 @@ public class ResidentialBuilding : Building
     public event Action<int, int> GemsUpdated;
     public event Action<float> GemGenerationStarted;
     //public event Action<int> VillagerCapacityUpgraded;
+
+    private void Awake()
+    {
+        _gemsGiver = GetComponent<GemsGiver>();
+    }
 
     private void Start()
     {
