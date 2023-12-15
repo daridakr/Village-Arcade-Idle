@@ -1,14 +1,20 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(GuidableObject))]
 public abstract class Building : MonoBehaviour
 {
-    [SerializeField] private BuildingData _data;
+    [SerializeField] private SpecificBuildingData _specificData;
+    [SerializeField] private BuildingTypeData _typeData;
     [SerializeField] private BuildingLevel[] _levels;
 
     [SerializeField] protected int _countInOneRegion;
     [SerializeField] protected int _maxLevel;
+
+    private List<int> _stats;
 
     //need unique guid for building and also guid for builded building
     private GuidableObject _guidable;
@@ -18,7 +24,9 @@ public abstract class Building : MonoBehaviour
     protected float _upgradeMultiplier;
     // unlock type (blueprint, quest, level)
 
-    public BuildingData Data => _data;
+    public SpecificBuildingData SpecificData => _specificData;
+    public BuildingTypeData TypeData => _typeData;
+
     public string Guid => _guidable.GUID;
 
     public event Action Upgraded;
@@ -28,9 +36,12 @@ public abstract class Building : MonoBehaviour
     {
         _guidable = GetComponent<GuidableObject>();
         _guidable.RegenerateGUID();
+
+        _stats = InitStats();
+        InitLevels();
     }
 
-    private void Awake()
+    private void InitLevels()
     {
         _currentLevel = _levels[_level];
 
@@ -51,4 +62,30 @@ public abstract class Building : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public Dictionary<Sprite, int> GetStatesWithIcons()
+    {
+        if (!gameObject.activeInHierarchy)
+        {
+            _stats = InitStats();
+        }
+
+        if (_stats.Count != TypeData.StatIcons.Count())
+        {
+            return null;
+        }
+
+        var statsWithIcons = new Dictionary<Sprite, int>();
+        int statNumber = 0;
+
+        foreach (var icon in TypeData.StatIcons)
+        {
+            statsWithIcons.Add(icon, _stats[statNumber]);
+            statNumber++;
+        }
+
+        return statsWithIcons;
+    }
+
+    protected abstract List<int> InitStats();
 }

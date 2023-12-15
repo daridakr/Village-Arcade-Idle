@@ -1011,6 +1011,7 @@ GameObject:
   - component: {fileID: 4686369504134710640}
   - component: {fileID: 3063220499241045571}
   - component: {fileID: 521712093626473704}
+  - component: {fileID: 5558025658045910693}
   m_Layer: 0
   m_Name: Hovel
   m_TagString: Untagged
@@ -1050,7 +1051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc0f34d73359fc4fa43458eb01ad92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 4a9a93d95e37a3446af64e4aa79b1843, type: 2}
+  _specificData: {fileID: 11400000, guid: 4a9a93d95e37a3446af64e4aa79b1843, type: 2}
+  _typeData: {fileID: 11400000, guid: f27b40f0f7659c64db2ad98fc1da58fc, type: 2}
   _levels:
   - {fileID: 2422637948820816797}
   - {fileID: 7925037478650418347}
@@ -1058,7 +1060,8 @@ MonoBehaviour:
   - {fileID: 8102425370814804635}
   _countInOneRegion: 3
   _maxLevel: 4
-  _gemsCapacity: 4
+  _gemsCapacity: 3
+  _baseGemRate: 0.3
   _villagersCapacity: 1
 --- !u!114 &3063220499241045571
 MonoBehaviour:
@@ -1085,6 +1088,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3209338ee8fdb9848862f5cc3e4bcba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5558025658045910693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827927995857663419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc298fbdc20338044b6f28f01fa0ed0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _droppableItemTemplate: {fileID: 8289189762867894044, guid: 23de6ebb45b9a3748b5086c2723cb2c8, type: 3}
+  _spawnOffset: {x: 0.38, y: 2.2, z: 0}
+  _prePushDelay: 0.1
 --- !u!1 &6865270403679270279
 GameObject:
   m_ObjectHideFlags: 0

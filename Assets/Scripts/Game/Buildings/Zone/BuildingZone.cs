@@ -85,7 +85,7 @@ public class BuildingZone : MonoBehaviour
         _view.CanBuild -= Build;
 
         PlayerCoins buyer = _playerCoinsTrigger.Entered;
-        buyer.Spend(building.Data.Price);
+        buyer.Spend(building.SpecificData.Price);
 
         _building = building;
 

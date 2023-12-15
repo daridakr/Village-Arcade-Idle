@@ -43,4 +43,14 @@ public class StackableBuilding : Building
         _capacity += (int)_upgradeMultiplier;
         CapacityUpdated?.Invoke(_capacity);
     }
+
+    protected override List<int> InitStats()
+    {
+        List<int> stats = new List<int>
+        {
+            _capacity
+        };
+
+        return stats;
+    }
 }
