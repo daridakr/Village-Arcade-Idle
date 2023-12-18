@@ -11,7 +11,7 @@ public class BuildingsStoreDisplay : CanvasAnimatedView
     [SerializeField] private BuildingStore _store;
     [SerializeField] private PlayerMoney _moneyOwner;
 
-    [SerializeField] private Button _mainButton;
+    [SerializeField] private Button _mainTab;
     [SerializeField] private Image _tabFocus;
 
     private List<BuildingStoreItemView> _buildingStoreViews = new List<BuildingStoreItemView>();
@@ -23,10 +23,13 @@ public class BuildingsStoreDisplay : CanvasAnimatedView
     {
         base.Display();
         ClearOldData();
-        _currentTabFocus = Instantiate(_tabFocus, _mainButton.transform);
+
+        _mainTab.Select();
+        _currentTabFocus = Instantiate(_tabFocus, _mainTab.transform);
 
         foreach (Building building in _store.Buildings)
         {
+            // for tabs allocation
             if (building.TryGetComponent(out ResidentialBuilding residential))
             {
 
