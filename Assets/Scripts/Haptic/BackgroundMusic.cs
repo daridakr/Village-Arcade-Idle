@@ -1,6 +1,7 @@
+using ForeverVillage.Scripts;
 using UnityEngine;
 
-[RequireComponent (typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
 public class BackgroundMusic : MonoBehaviour
 {
     private AudioSource _audioSource;
