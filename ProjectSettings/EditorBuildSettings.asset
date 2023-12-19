@@ -11,4 +11,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Match3Game.unity
     guid: 7bb408a25bda7284fa16fdd6c99e8295
+  - enabled: 1
+    path: Assets/Plugins/Epic Toon FX/Demo/Scenes/etfx_powerups2.unity
+    guid: 3fa05937c0d498e4688b6eb2ba76e5da
+  - enabled: 1
+    path: Assets/Plugins/Epic Toon FX/Demo/Scenes/etfx_powerups.unity
+    guid: 2c56ab0803e494e4d83581cfca9f47f2
+  - enabled: 1
+    path: Assets/Plugins/Zenject/OptionalExtras/IntegrationTests/SceneContractTests/AutoLoader/Scene3.unity
+    guid: faa2053ed94777648896eb4be8f2b5c1
+  - enabled: 1
+    path: Assets/Plugins 1/TypedScenes/Samples/SampleScene.unity
+    guid: f583b1cf09661fa4baac3efa1999a6b4
+  - enabled: 1
+    path: Assets/SweetSugar/LeanTween/Testing/TestingSequencer.unity
+    guid: 086642bd5cf3543fda601bb4ac7c0fb1
+  - enabled: 1
+    path: Assets/Plugins/Epic Toon FX/Demo/Scenes/etfx_fire.unity
+    guid: 88a9ddda0ca72bb488c72771c26caba4
+  - enabled: 1
+    path: Assets/Plugins/Epic Toon FX/Demo/Scenes/etfx_emojis.unity
+    guid: b0de468b5dc93da4d8ee716d4782d2ba
+  - enabled: 1
+    path: Assets/Plugins/Epic Toon FX/Demo/Scenes/etfx_fire3.unity
+    guid: 237fa454a1c11d24d8a92ad2acf18735
+  - enabled: 1
+    path: Assets/SweetSugar/LeanTween/Testing/PerformanceTests.unity
+    guid: be4c50759d544de4f971b6dc2f2c5a62
+  - enabled: 1
+    path: Assets/Plugins/Zenject/OptionalExtras/IntegrationTests/SceneContractTests/Decorators/Scene1.unity
+    guid: 9561978599724fa4695e4683cf4af028
+  - enabled: 1
+    path: Assets/Plugins/FlatKit/Demos/[Demo] Mugs/Mugs___Scene1___OneColorVariousParameters.unity
+    guid: c9a0adb0c9c33334bae83f61e6eed3c4
   m_configObjects: {}

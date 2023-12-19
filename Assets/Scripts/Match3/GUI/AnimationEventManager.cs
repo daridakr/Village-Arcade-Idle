@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using IJunior.TypedScenes;
 using JetBrains.Annotations;
 using SweetSugar.Scripts.AdsEvents;
 using SweetSugar.Scripts.Core;
@@ -354,7 +355,8 @@ namespace SweetSugar.Scripts.GUI
                 BackToMap();
             }
             else if (gameObject.name == "Settings" && LevelManager.GetGameStatus() == GameState.Map)
-                SceneManager.LoadScene("main");
+                Main.Load(InitScript.Gems);
+                //SceneManager.LoadScene("main");
 
             //        SoundBase.Instance.PlayOneShot(SoundBase.Instance.swish[1]);
 

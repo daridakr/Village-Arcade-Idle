@@ -1,16 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using SweetSugar.Scriptable.Rewards;
+using ForeverVillage.Scripts;
+using IJunior.TypedScenes;
 using SweetSugar.Scripts.GUI;
 using SweetSugar.Scripts.GUI.Boost;
-using SweetSugar.Scripts.Integrations;
-using SweetSugar.Scripts.Integrations.Network;
 using SweetSugar.Scripts.Level;
 using SweetSugar.Scripts.MapScripts;
 using SweetSugar.Scripts.System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
 namespace SweetSugar.Scripts.Core
@@ -18,7 +15,7 @@ namespace SweetSugar.Scripts.Core
     /// <summary>
     /// class for main system variables, ads control and in-app purchasing
     /// </summary>
-    public class InitScript : MonoBehaviour
+    public class InitScript : MonoBehaviour, ISceneLoadHandler<PlayerCoins>
     {
         public static InitScript Instance;
 
@@ -49,11 +46,8 @@ namespace SweetSugar.Scripts.Core
         //EDITOR: time for rest life
         public float TotalTimeForRestLifeSec = 60;
 
-        //EDITOR: coins gifted in start
-        public int FirstGems = 20;
-
         //amount of coins
-        public static int Gems;
+        //public static int Gems;
 
         //wait for purchasing of coins succeed
         public static int waitedPurchaseGems;
@@ -70,13 +64,16 @@ namespace SweetSugar.Scripts.Core
         private GameObject rate;
 
         //EDITOR: amount for rewarded ads
-        public int rewardedGems = 5;
+        public int rewardedGems = 10;
 
         //EDITOR: should player lose a life for every passed level
         public bool losingLifeEveryGame;
 
         //daily reward popup reference
         public GameObject DailyMenu;
+
+        private static PlayerCoins _playerCoins;
+        public static int Gems => _playerCoins.Balance;
 
         // Use this for initialization
         void Awake()
@@ -88,15 +85,13 @@ namespace SweetSugar.Scripts.Core
             if (DateOfExit == "" || DateOfExit == default(DateTime).ToString())
                 DateOfExit = ServerTime.THIS.serverTime.ToString();
             DebugLogKeeper.Init();
-            Gems = PlayerPrefs.GetInt("Gems");
             lifes = PlayerPrefs.GetInt("Lifes");
             if (PlayerPrefs.GetInt("Lauched") == 0)
             {
                 //First lauching
                 lifes = CapOfLife;
                 PlayerPrefs.SetInt("Lifes", lifes);
-                Gems = FirstGems;
-                PlayerPrefs.SetInt("Gems", Gems);
+                //PlayerPrefs.SetInt("Gems", Gems);
                 PlayerPrefs.SetInt("Music", 1);
                 PlayerPrefs.SetInt("Sound", 1);
 
@@ -184,31 +179,32 @@ namespace SweetSugar.Scripts.Core
             AddGems(amount);
         }
 
-        public void SetGems(int count)
-        {
-            Gems = count;
-            PlayerPrefs.SetInt("Gems", Gems);
-            PlayerPrefs.Save();
-        }
+        //public void SetGems(int count)
+        //{
+        //    Gems = count;
+        //    PlayerPrefs.SetInt("Gems", Gems);
+        //    PlayerPrefs.Save();
+        //}
 
 
         public void AddGems(int count)
         {
-            Gems += count;
-            PlayerPrefs.SetInt("Gems", Gems);
-            PlayerPrefs.Save();
+            _playerCoins.Get(count);
+            //Gems += count;
+            //PlayerPrefs.SetInt("Gems", Gems);
+            //PlayerPrefs.Save();
 #if PLAYFAB || GAMESPARKS
             NetworkManager.currencyManager.IncBalance(count);
 #endif
-
         }
 
         public void SpendGems(int count)
         {
             SoundBase.Instance.PlayOneShot(SoundBase.Instance.cash);
-            Gems -= count;
-            PlayerPrefs.SetInt("Gems", Gems);
-            PlayerPrefs.Save();
+            _playerCoins.Spend(count);
+            //Gems -= count;
+            //PlayerPrefs.SetInt("Gems", Gems);
+            //PlayerPrefs.Save();
 #if PLAYFAB || GAMESPARKS
             NetworkManager.currencyManager.DecBalance(count);
 #endif
@@ -377,6 +373,11 @@ namespace SweetSugar.Scripts.Core
         {
             yield return new WaitForSeconds(sec);
             action?.Invoke();
+        }
+
+        public void OnSceneLoaded(PlayerCoins argument)
+        {
+            _playerCoins = argument;
         }
     }
 

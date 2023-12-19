@@ -695,7 +695,7 @@ namespace SweetSugar.Scripts.Core
             NetworkManager.dataManager.SetStars();
 #endif
 
-
+            InitScript.Instance.AddGems(100);
             gameStatus = GameState.Win;
         }
 

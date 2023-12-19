@@ -1163,8 +1163,8 @@ namespace SweetSugar.Scripts.Editor
 
             GUILayout.Space(20);
 
-            initscript.FirstGems = EditorGUILayout.IntField("Start gems", initscript.FirstGems, GUILayout.Width(200),
-                GUILayout.MaxWidth(200));
+            //initscript.FirstGems = EditorGUILayout.IntField("Start gems", initscript.FirstGems, GUILayout.Width(200),
+                //GUILayout.MaxWidth(200));
             GUILayout.Space(20);
             
             EditorGUI.BeginChangeCheck();

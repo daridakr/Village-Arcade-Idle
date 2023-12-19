@@ -13,7 +13,8 @@ namespace ForeverVillage.Scripts
         public event Action ValueChanged;
 
         public MoneyBalance(string saveKey) : base(saveKey)
-        { }
+        {
+        }
 
         public void Add(int value)
         {
@@ -36,8 +37,21 @@ namespace ForeverVillage.Scripts
             _value -= value;
 
             if (_value < 0)
+            {
                 _value = 0;
+            }
 
+            ValueChanged?.Invoke();
+        }
+
+        public void Set(int value)
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value));
+            }
+
+            _value = value;
             ValueChanged?.Invoke();
         }
 

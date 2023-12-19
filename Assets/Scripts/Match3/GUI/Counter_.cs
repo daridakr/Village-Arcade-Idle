@@ -2,10 +2,8 @@
 using System.Linq;
 using SweetSugar.Scripts.Core;
 using SweetSugar.Scripts.Level;
-using SweetSugar.Scripts.TargetScripts.TargetSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SweetSugar.Scripts.GUI
 {
@@ -14,9 +12,9 @@ namespace SweetSugar.Scripts.GUI
     /// </summary>
     public class Counter_ : MonoBehaviour
     {
-        TextMeshProUGUI txt;
+        private TextMeshProUGUI _text;
         private float lastTime;
-        bool alert;
+        private bool alert;
 
         private LevelData _thisLevelData;
 
@@ -30,13 +28,9 @@ namespace SweetSugar.Scripts.GUI
             set => _thisLevelData = value;
         }
 
-        // Use this for initialization
         void Awake()
         {
- 
-
-            // txt = GetComponent<Text>();
-            txt = GetComponent<TextMeshProUGUI>();
+            _text = GetComponent<TextMeshProUGUI>();
         }
 
         private void Start()
@@ -57,7 +51,7 @@ namespace SweetSugar.Scripts.GUI
         {
             while (true)
             {
-                if (txt == null) continue;
+                if (_text == null) continue;
 
                 UpdateText();
                 yield return new WaitForSeconds(0.5f);
@@ -68,24 +62,24 @@ namespace SweetSugar.Scripts.GUI
         {
             if (name == "Score")
             {
-                txt.text = "" + LevelManager.Score;
+                _text.text = "" + LevelManager.Score;
             }
 
             if (name == "BestScore")
             {
-                txt.text = "Best score:" + PlayerPrefs.GetInt("Score" + PlayerPrefs.GetInt("OpenLevel"));
+                _text.text = "Best score:" + PlayerPrefs.GetInt("Score" + PlayerPrefs.GetInt("OpenLevel"));
             }
 
             if (name == "Limit" && ThisLevelData != null)
             {
                 if (ThisLevelData.limitType == LIMIT.MOVES)
                 {
-                    txt.text = "" + Mathf.Clamp(ThisLevelData.limit, 0, ThisLevelData.limit);
-                    txt.transform.localScale = Vector3.one;
+                    _text.text = "" + Mathf.Clamp(ThisLevelData.limit, 0, ThisLevelData.limit);
+                    _text.transform.localScale = Vector3.one;
                     if (ThisLevelData.limit <= 5)
                     {
-                        txt.color = new Color(255f / 255f, 132f / 255, 222f / 255);
-                        txt.outlineColor = Color.white;
+                        _text.color = new Color(255f / 255f, 132f / 255, 222f / 255);
+                        _text.outlineColor = Color.white;
                         if (!alert)
                         {
                             alert = true;
@@ -95,7 +89,7 @@ namespace SweetSugar.Scripts.GUI
                     else
                     {
                         alert = false;
-                        txt.color = Color.white;
+                        _text.color = Color.white;
                         // txt.GetComponent<Outline>().effectColor = new Color(148f / 255f, 61f / 255f, 95f / 255f);
                     }
                 }
@@ -103,9 +97,9 @@ namespace SweetSugar.Scripts.GUI
                 {
                     var minutes = Mathf.FloorToInt(ThisLevelData.limit / 60F);
                     var seconds = Mathf.FloorToInt(ThisLevelData.limit - minutes * 60);
-                    txt.text = "" + $"{minutes:00}:{seconds:00}";
-                    txt.transform.localScale = Vector3.one * 0.68f;
-                    txt.fontSize = 80;
+                    _text.text = "" + $"{minutes:00}:{seconds:00}";
+                    _text.transform.localScale = Vector3.one * 0.68f;
+                    _text.fontSize = 80;
                     if (ThisLevelData.limit <= 5 && LevelManager.THIS.gameStatus == GameState.Playing)
                     {
                         // txt.color = new Color(216f / 255f, 0, 0);
@@ -118,49 +112,48 @@ namespace SweetSugar.Scripts.GUI
                     }
                     else
                     {
-                        txt.color = Color.white;
-                        txt.outlineColor = new Color(148f / 255f, 61f / 255f, 95f / 255f);
+                        _text.color = Color.white;
+                        _text.outlineColor = new Color(148f / 255f, 61f / 255f, 95f / 255f);
                     }
                 }
             }
 
             if (name == "Lifes")
             {
-                txt.text = "" + InitScript.Instance?.GetLife();
+                _text.text = "" + InitScript.Instance?.GetLife();
             }
 
             if (name == "FailedCount")
             {
                 if (ThisLevelData.limitType == LIMIT.MOVES)
-                    txt.text = "+" + LevelManager.THIS.ExtraFailedMoves;
+                    _text.text = "+" + LevelManager.THIS.ExtraFailedMoves;
                 else
-                    txt.text = "+" + LevelManager.THIS.ExtraFailedSecs;
+                    _text.text = "+" + LevelManager.THIS.ExtraFailedSecs;
             }
 
             if (name == "FailedPrice")
             {
-                txt.text = "" + LevelManager.THIS.FailedCost;
+                _text.text = "" + LevelManager.THIS.FailedCost;
             }
 
             if (name == "FailedDescription")
             {
-                txt.text = "" + LevelData.THIS.GetTargetCounters().First(i => !i.IsTotalTargetReached()).targetLevel.GetFailedDescription();
+                _text.text = "" + LevelData.THIS.GetTargetCounters().First(i => !i.IsTotalTargetReached()).targetLevel.GetFailedDescription();
             }
-
 
             if (name == "Gems")
             {
-                txt.text = "" + InitScript.Gems;
+                _text.text = "" + InitScript.Gems;
             }
 
             if (name == "TargetScore")
             {
-                txt.text = "" + ThisLevelData.star1;
+                _text.text = "" + ThisLevelData.star1;
             }
 
             if (name == "Level")
             {
-                txt.text = "" + PlayerPrefs.GetInt("OpenLevel");
+                _text.text = "" + PlayerPrefs.GetInt("OpenLevel");
             }
 
             // if (name == "TargetDescription1")

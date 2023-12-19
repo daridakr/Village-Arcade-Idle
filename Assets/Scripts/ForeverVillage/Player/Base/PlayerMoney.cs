@@ -13,7 +13,7 @@ namespace ForeverVillage.Scripts
 
         public event UnityAction<int> BalanceChanged;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _saveKey = GetSaveKey();
 
@@ -40,6 +40,11 @@ namespace ForeverVillage.Scripts
         public void Spend(int value)
         {
             _balance.Spend(value);
+        }
+
+        public void SetNewBalance(int value)
+        {
+            _balance.Set(value);
         }
 
         private void OnDisable()
