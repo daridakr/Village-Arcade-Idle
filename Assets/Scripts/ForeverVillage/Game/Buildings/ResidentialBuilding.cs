@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -14,6 +15,7 @@ namespace ForeverVillage.Scripts
 
         [SerializeField] private int _villagersCapacity = 1;
         [SerializeField] private PlayerTrigger _playerTrigger;
+        [SerializeField] private ResidentialView _view;
 
         private Coroutine _gemGenerationRoutine;
         float _currentGemProgress = 0;
@@ -33,6 +35,12 @@ namespace ForeverVillage.Scripts
         public event Action<int, int> VillagersUpdated;
         public event Action<int, int> GemsUpdated;
         public event Action<float> GemGenerationStarted;
+
+        [Inject]
+        public void Construct(VillagersStoreDisplay villagersStore)
+        {
+            _view.Init(this, villagersStore);
+        }
 
         private void Awake()
         {

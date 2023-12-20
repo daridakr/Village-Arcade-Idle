@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 2083695778904171186}
   - component: {fileID: 2083695778904171187}
   - component: {fileID: 5058017437296666977}
-  - component: {fileID: 7284279171662996399}
+  - component: {fileID: 8886641597558126587}
   m_Layer: 5
   m_Name: BuildingListItemView
   m_TagString: Untagged
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0.8301887, g: 0.8253974, b: 0.8098256, a: 1}
   m_EffectDistance: {x: 3, y: 4}
   m_UseGraphicAlpha: 1
---- !u!114 &7284279171662996399
+--- !u!114 &8886641597558126587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,15 +767,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2083695778904171189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba4ea9b9a31a88f41a5a8616761bc64a, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb6970245edc304880e34c7bf6e79ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _title: {fileID: 2083695779219825721}
   _image: {fileID: 2083695778175292964}
   _description: {fileID: 2083695778903148067}
+  _buyButton: {fileID: 9105483854552058780}
   _statsGroup: {fileID: 7966698109021915265}
   _statTemplate: {fileID: 7479651616582873876, guid: 80b04a1352979654cbeeff7715db708b, type: 3}
-  _buyButton: {fileID: 9105483854552058780}
 --- !u!1 &2083695779219825723
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +995,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2083695778904171188}
     m_Modifications:
+    - target: {fileID: 2310652153817958507, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310652153817958507, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310652153817958507, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3808263711612801468, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
       propertyPath: m_Name
       value: BuyButton
@@ -1081,6 +1093,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3808263711612801469, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808263711892202742, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808263711892202742, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808263711892202742, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808263711892202742, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

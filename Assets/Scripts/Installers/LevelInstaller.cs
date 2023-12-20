@@ -13,6 +13,9 @@ public class LevelInstaller : MonoInstaller
 
     [Header("Views")]
     [SerializeField] private BuildingsStoreDisplay _buildingListView;
+    [SerializeField] private VillagersStoreDisplay _vilalgersListView;
+
+    public ResidentialView _buildingView;
 
     public override void InstallBindings()
     {
@@ -20,6 +23,8 @@ public class LevelInstaller : MonoInstaller
 
         BindBuildingZones();
         BindRegionZones();
+        BindBuildingsView();
+        BindResidential();
     }
 
     private void BindBuildingZones()
@@ -48,5 +53,21 @@ public class LevelInstaller : MonoInstaller
     private void BindViews()
     {
         Container.Bind<BuildingsStoreDisplay>().FromInstance(_buildingListView).AsSingle();
+        //Container.Bind<VillagersStoreDisplay>().FromInstance(_vilalgersListView).AsSingle();
+    }
+
+    private void BindBuildingsView()
+    {
+        //Container.BindInterfacesTo<ResidentialViewCreator>().AsSingle();
+        //Container.BindFactory<ResidentialBuilding, ResidentialView, ResidentialView.Factory>().FromComponentInNewPrefab(_buildingView);
+    }
+
+    private void BindResidential()
+    {
+        Container.Bind<IResidentialViewFactory>().To<ResidentialViewFactory>().AsSingle();
+        Container.BindInterfacesTo<ResidentialBuilding>().AsSingle();
+        Container.Bind<VillagersStoreDisplay>().FromInstance(_vilalgersListView).AsSingle();
+
+        //Container.BindFactory<ResidentialView, ResidentialViewFactory>().FromComponentInNewPrefab(_buildingView);
     }
 }

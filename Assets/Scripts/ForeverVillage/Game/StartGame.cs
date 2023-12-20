@@ -6,8 +6,13 @@ namespace ForeverVillage.Scripts
     public class StartGame : IntSavedValue
     {
         [SerializeField] private InputFieldData _villageNameField;
+
         [SerializeField] private PlayerBuildingsList _buildingList;
         [SerializeField] private Building[] _buildingsInStart;
+
+        [SerializeField] private PlayerVillagersList _villagersList;
+        [SerializeField] private Villager[] _villagersInStart;
+
         [SerializeField] private PlayerRegionsList _regionList;
         [SerializeField] private RegionData[] _regionsInStart;
 
@@ -34,6 +39,7 @@ namespace ForeverVillage.Scripts
             GameBegined?.Invoke();
 
             AddStartBuildings();
+            AddStartVillagers();
             AddStartRegions();
             Save(Convert.ToInt32(BeginGame));
         }
@@ -43,6 +49,14 @@ namespace ForeverVillage.Scripts
             foreach (var building in _buildingsInStart)
             {
                 _buildingList.Append(building);
+            }
+        }
+
+        private void AddStartVillagers()
+        {
+            foreach (var villager in _villagersInStart)
+            {
+                _villagersList.Append(villager);
             }
         }
 

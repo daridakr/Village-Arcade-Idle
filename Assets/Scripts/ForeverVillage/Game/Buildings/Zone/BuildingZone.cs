@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -27,6 +28,14 @@ namespace ForeverVillage.Scripts
         public event Action Cleared;
         public event Action Building;
         public event Action Builded;
+
+        private DiContainer _diContainer;
+
+        [Inject]
+        public void Construct(DiContainer diContainer)
+        {
+            _diContainer = diContainer;
+        }
 
         private void OnEnable()
         {
@@ -89,7 +98,7 @@ namespace ForeverVillage.Scripts
             _view.CanBuild -= Build;
 
             PlayerCoins buyer = _playerCoinsTrigger.Entered;
-            buyer.Spend(building.SpecificData.Price);
+            buyer.Spend(building.Price);
 
             _building = building;
 
@@ -109,7 +118,7 @@ namespace ForeverVillage.Scripts
 
         private void SetupBuilding()
         {
-            Building builded = Instantiate(_building, _buildPoint);
+            Building builded = _diContainer.InstantiatePrefabForComponent<Building>(_building, _buildPoint);
             _model.ZoneBuilded(_building.name, builded.Guid);
         }
 
@@ -118,7 +127,7 @@ namespace ForeverVillage.Scripts
             _model.BuildingLoaded -= OnBuildingLoaded;
 
             Building buildingPrefab = Resources.Load<Building>(serializedData.Prefab);
-            Building builded = Instantiate(buildingPrefab, _buildPoint);
+            Building builded = _diContainer.InstantiatePrefabForComponent<Building>(buildingPrefab, _buildPoint);
 
             Builded?.Invoke();
 

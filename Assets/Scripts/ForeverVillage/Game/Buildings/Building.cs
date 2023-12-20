@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ForeverVillage.Scripts
 {
     [RequireComponent(typeof(GuidableObject))]
-    public abstract class Building : MonoBehaviour
+    public abstract class Building : MonoBehaviour, IStorableObject
     {
         [SerializeField] private SpecificBuildingData _specificData;
         [SerializeField] private BuildingTypeData _typeData;
@@ -25,10 +25,12 @@ namespace ForeverVillage.Scripts
         protected float _upgradeMultiplier;
         // unlock type (blueprint, quest, level)
 
-        public SpecificBuildingData SpecificData => _specificData;
-        public BuildingTypeData TypeData => _typeData;
-
         public string Guid => _guidable.GUID;
+
+        public string Description => _typeData.Description;
+        public string Name => _specificData.Name;
+        public int Price => _specificData.Price;
+        public Sprite Icon => _specificData.MainIcon;
 
         public event Action Upgraded;
         public event Action Builded;
@@ -71,7 +73,7 @@ namespace ForeverVillage.Scripts
                 _stats = InitStats();
             }
 
-            if (_stats.Count != TypeData.StatIcons.Count())
+            if (_stats.Count != _typeData.StatIcons.Count())
             {
                 return null;
             }
@@ -79,7 +81,7 @@ namespace ForeverVillage.Scripts
             var statsWithIcons = new Dictionary<Sprite, int>();
             int statNumber = 0;
 
-            foreach (var icon in TypeData.StatIcons)
+            foreach (var icon in _typeData.StatIcons)
             {
                 statsWithIcons.Add(icon, _stats[statNumber]);
                 statNumber++;
