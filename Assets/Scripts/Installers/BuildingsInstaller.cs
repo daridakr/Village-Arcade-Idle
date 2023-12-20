@@ -8,7 +8,13 @@ public class BuildingsInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindFactory();
         BindResidential();
+    }
+
+    private void BindFactory()
+    {
+        Container.Bind<IBuildingFactory>().To<BuildingFactory>().AsSingle();
     }
 
     private void BindResidential()

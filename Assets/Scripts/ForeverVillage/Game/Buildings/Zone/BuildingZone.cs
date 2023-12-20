@@ -16,12 +16,11 @@ namespace ForeverVillage.Scripts
 
         private ExperiencePointGiver _experienceGiver;
         private const int _expPointsCount = 5;
-
         private const int _clearPrice = 20;
         private Building _building;
-
         private SerializableBuldingZone _savedModel;
         private GuidableObject _guidable;
+        private IBuildingFactory _buildingFactory;
 
         public BuildingZoneState State => _savedModel.State; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
@@ -29,12 +28,10 @@ namespace ForeverVillage.Scripts
         public event Action Building;
         public event Action Builded;
 
-        private DiContainer _diContainer;
-
         [Inject]
-        public void Construct(DiContainer diContainer)
+        public void Construct(IBuildingFactory buildingFactory)
         {
-            _diContainer = diContainer;
+            _buildingFactory = buildingFactory;
         }
 
         private void OnEnable()
@@ -118,7 +115,8 @@ namespace ForeverVillage.Scripts
 
         private void SetupBuilding()
         {
-            Building builded = _diContainer.InstantiatePrefabForComponent<Building>(_building, _buildPoint);
+            //Building builded = _diContainer.InstantiatePrefabForComponent<Building>(_building, _buildPoint);
+            Building builded = _buildingFactory.Create(_building, _buildPoint);
             _savedModel.ZoneBuilded(_building.name, builded.Guid);
         }
 
@@ -127,7 +125,8 @@ namespace ForeverVillage.Scripts
             _savedModel.BuildingLoaded -= OnBuildingLoaded;
 
             Building buildingPrefab = Resources.Load<Building>(serializedData.Prefab);
-            Building builded = _diContainer.InstantiatePrefabForComponent<Building>(buildingPrefab, _buildPoint);
+            Building builded = _buildingFactory.Create(buildingPrefab, _buildPoint);
+            //Building builded = _diContainer.InstantiatePrefabForComponent<Building>(buildingPrefab, _buildPoint);
 
             Builded?.Invoke();
 
