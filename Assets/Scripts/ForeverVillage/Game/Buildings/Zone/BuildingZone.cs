@@ -20,10 +20,10 @@ namespace ForeverVillage.Scripts
         private const int _clearPrice = 20;
         private Building _building;
 
-        private SerializableBuldingZone _model;
+        private SerializableBuldingZone _savedModel;
         private GuidableObject _guidable;
 
-        public BuildingZoneState State => _model.State; // should remove after save builded buildings implementation and rewrite to like regionZone w events
+        public BuildingZoneState State => _savedModel.State; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
         public event Action Cleared;
         public event Action Building;
@@ -43,11 +43,11 @@ namespace ForeverVillage.Scripts
             _playerCoinsTrigger.Exit += TriggerExit;
 
             _guidable = GetComponent<GuidableObject>();
-            _model = new SerializableBuldingZone(BuildingZoneState.Destroyed, _guidable.GUID);
-            _model.Destroyed += OnDestroyedZone;
-            _model.Cleared += OnClearedZone;
-            _model.BuildingLoaded += OnBuildingLoaded;
-            _model.Load();
+            _savedModel = new SerializableBuldingZone(BuildingZoneState.Destroyed, _guidable.GUID);
+            _savedModel.Destroyed += OnDestroyedZone;
+            _savedModel.Cleared += OnClearedZone;
+            _savedModel.BuildingLoaded += OnBuildingLoaded;
+            _savedModel.Load();
         }
 
         private void Awake()
@@ -57,7 +57,7 @@ namespace ForeverVillage.Scripts
 
         private void OnDestroyedZone()
         {
-            _model.Destroyed -= OnDestroyedZone;
+            _savedModel.Destroyed -= OnDestroyedZone;
             _view.CanClear += ClearBuilding;
         }
 
@@ -70,7 +70,7 @@ namespace ForeverVillage.Scripts
             buyer.Spend(_clearPrice);
 
             _cleaner.StartClean(this);
-            _model.Clear();
+            _savedModel.Clear();
 
             _cleaner.Stopped += OnCleanStopped;
         }
@@ -84,7 +84,7 @@ namespace ForeverVillage.Scripts
 
         private void OnClearedZone()
         {
-            _model.Cleared -= OnClearedZone;
+            _savedModel.Cleared -= OnClearedZone;
 
             DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
             destroyedBuilding?.Clear();
@@ -119,12 +119,12 @@ namespace ForeverVillage.Scripts
         private void SetupBuilding()
         {
             Building builded = _diContainer.InstantiatePrefabForComponent<Building>(_building, _buildPoint);
-            _model.ZoneBuilded(_building.name, builded.Guid);
+            _savedModel.ZoneBuilded(_building.name, builded.Guid);
         }
 
         private void OnBuildingLoaded(BuildedBuilding serializedData)
         {
-            _model.BuildingLoaded -= OnBuildingLoaded;
+            _savedModel.BuildingLoaded -= OnBuildingLoaded;
 
             Building buildingPrefab = Resources.Load<Building>(serializedData.Prefab);
             Building builded = _diContainer.InstantiatePrefabForComponent<Building>(buildingPrefab, _buildPoint);

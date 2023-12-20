@@ -92,5 +92,4 @@ namespace ForeverVillage.Scripts
 
         protected abstract List<int> InitStats();
     }
-
 }

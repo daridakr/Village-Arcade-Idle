@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -11,13 +10,14 @@ namespace ForeverVillage.Scripts
         [SerializeField] private TimerView _timerCanvas;
         [SerializeField] private ButtonCanvas _summonVillagersCanvas;
 
-        private ResidentialBuilding _residential;
+        private ResidentialBuilding _targetView;
         private VillagersStoreDisplay _villagersStore;
+
         private readonly Timer _timer = new Timer();
 
-        public void Init(ResidentialBuilding residential, VillagersStoreDisplay villagersStoreDisplay )
+        public void Init(ResidentialBuilding target, VillagersStoreDisplay villagersStoreDisplay)
         {
-            _residential = residential;
+            _targetView = target;
             _villagersStore = villagersStoreDisplay;
         }
 
@@ -25,11 +25,11 @@ namespace ForeverVillage.Scripts
         {
             _timerCanvas.Init(_timer);
 
-            _summonVillagersCanvas.ButtonClicked += OnAddVillagerCanvas;
+            _targetView.VillagersUpdated += OnVillagersUpdated;
+            _targetView.GemsUpdated += OnGemsUpdated;
+            _targetView.GemGenerationStarted += OnGemGenerationStarted;
 
-            _residential.VillagersUpdated += OnVillagersUpdated;
-            _residential.GemsUpdated += OnGemsUpdated;
-            _residential.GemGenerationStarted += OnGemGenerationStarted;
+            _summonVillagersCanvas.ButtonClicked += OnSummonVillagerCanvas;
         }
 
         private void Start()
@@ -43,7 +43,7 @@ namespace ForeverVillage.Scripts
             _timer.Tick(Time.deltaTime);
         }
 
-        private void OnAddVillagerCanvas()
+        private void OnSummonVillagerCanvas()
         {
             _villagersStore.Display();
             //_villagersStore.OnSmthBuyed += OnBuildZone;
@@ -77,10 +77,11 @@ namespace ForeverVillage.Scripts
 
         private void OnDisable()
         {
-            _summonVillagersCanvas.ButtonClicked -= OnAddVillagerCanvas;
+            _targetView.VillagersUpdated -= OnVillagersUpdated;
+            _targetView.GemsUpdated -= OnGemsUpdated;
+            _targetView.GemGenerationStarted -= OnGemGenerationStarted;
 
-            _residential.VillagersUpdated -= OnVillagersUpdated;
-            _residential.GemsUpdated -= OnGemsUpdated;
+            _summonVillagersCanvas.ButtonClicked -= OnSummonVillagerCanvas;
         }
     }
 }

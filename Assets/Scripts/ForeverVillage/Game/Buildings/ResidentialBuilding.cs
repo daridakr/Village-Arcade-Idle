@@ -17,24 +17,21 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerTrigger _playerTrigger;
         [SerializeField] private ResidentialView _view;
 
-        private Coroutine _gemGenerationRoutine;
-        float _currentGemProgress = 0;
-        private int _currentVillagersCount = 0;
-
-        private float _multiplicator = 2f;
-        private const int _gemGenerationTimeRate = 30;
         private GemsGiver _gemsGiver;
+        private Coroutine _gemGenerationRoutine;
+        private const int _gemGenerationTimeRate = 30;
+        float _currentGemProgress = 0;
+        private float _multiplicator = 2f; // temp. villager replace it
 
+        private int _currentVillagersCount = 0;
         //private Villager[] _villagers;
-        //list of views of this building
 
         public int GemCapacity => _gemsCapacity;
         public int VillagerCapacity => _villagersCapacity;
-        public float GemRate => _baseGemRate;
 
-        public event Action<int, int> VillagersUpdated;
-        public event Action<int, int> GemsUpdated;
         public event Action<float> GemGenerationStarted;
+        public event Action<int, int> GemsUpdated;
+        public event Action<int, int> VillagersUpdated; // temp name?
 
         [Inject]
         public void Construct(VillagersStoreDisplay villagersStore)
@@ -45,12 +42,13 @@ namespace ForeverVillage.Scripts
         private void Awake()
         {
             _gemsGiver = GetComponent<GemsGiver>();
+
             _playerTrigger.Enter += OnPlayerTriggerEnter;
         }
 
         private void Start()
         {
-            _upgradeMultiplier = 1;
+            _upgradeMultiplier = 1; // temp
 
             VillagersUpdated?.Invoke(_currentVillagersCount, _villagersCapacity);
             GemsUpdated?.Invoke(0, _gemsCapacity);
@@ -93,6 +91,8 @@ namespace ForeverVillage.Scripts
             Debug.Log("Gem generation completed!");
         }
 
+        // Populate(Villager newVillager);
+
         private void OnPlayerTriggerEnter(Player player)
         {
             if (_currentGemProgress > 0.99f)
@@ -129,9 +129,5 @@ namespace ForeverVillage.Scripts
         {
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
         }
-        // gemsGiver
-        // gemGenerationTimeRate
-        // StartGemGeneration()
-        // Populate(Villager newVillager)
     }
 }
