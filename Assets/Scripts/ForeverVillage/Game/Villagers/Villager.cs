@@ -9,10 +9,12 @@ namespace ForeverVillage.Scripts
         [SerializeField] private string _description;
         [SerializeField] private int _price;
         [SerializeField] private Sprite _icon;
+        [SerializeField] private float _multiplicator = 1f;
 
         public string Name => _name;
         public string Description => _description;
         public int Price => _price;
         public Sprite Icon => _icon;
+        public float Multiplicator => _multiplicator;
     }
 }

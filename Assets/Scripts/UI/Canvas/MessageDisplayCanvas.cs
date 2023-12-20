@@ -6,8 +6,7 @@ public class MessageDisplayCanvas : ButtonCanvas
 
     public void Display(int message, bool interactable = true)
     {
-        base.Display();
+        base.Display(interactable);
         _textDisplay.Display(message.ToString());
-        _buttonDisplay.SetInteractable(interactable);
     }
 }

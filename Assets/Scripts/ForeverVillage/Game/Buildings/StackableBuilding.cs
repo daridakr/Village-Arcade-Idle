@@ -38,7 +38,7 @@ namespace ForeverVillage.Scripts
             return _store;
         }
 
-        public override void Upgrade()
+        protected override void Upgrade()
         {
             base.Upgrade();
 

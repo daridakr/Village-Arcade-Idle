@@ -7,10 +7,11 @@ public class ButtonCanvas : CanvasAnimatedView
 
     public event Action ButtonClicked;
 
-    public override void Display()
+    public void Display(bool interactable = true)
     {
         base.Display();
         _buttonDisplay.Clicked += OnButtonClicked;
+        _buttonDisplay.SetInteractable(interactable);
     }
 
     private void OnButtonClicked()

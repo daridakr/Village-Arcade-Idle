@@ -55,7 +55,7 @@ namespace ForeverVillage.Scripts
         }
 
         // virtual?
-        public virtual void Upgrade()
+        protected virtual void Upgrade()
         {
             _levelNumber++;
             Upgraded?.Invoke();

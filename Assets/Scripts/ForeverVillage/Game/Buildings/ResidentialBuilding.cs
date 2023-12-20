@@ -21,10 +21,8 @@ namespace ForeverVillage.Scripts
         private Coroutine _gemGenerationRoutine;
         private const int _gemGenerationTimeRate = 30;
         float _currentGemProgress = 0;
-        private float _multiplicator = 2f; // temp. villager replace it
 
-        private int _currentVillagersCount = 0;
-        //private Villager[] _villagers;
+        private List<Villager> _villagers = new List<Villager>();
 
         public int GemCapacity => _gemsCapacity;
         public int VillagerCapacity => _villagersCapacity;
@@ -37,6 +35,7 @@ namespace ForeverVillage.Scripts
         public void Construct(VillagersStoreDisplay villagersStore)
         {
             _view.Init(this, villagersStore);
+            _view.VillagerSummoned += OnVilalgerSummoned;
         }
 
         private void Awake()
@@ -50,7 +49,7 @@ namespace ForeverVillage.Scripts
         {
             _upgradeMultiplier = 1; // temp
 
-            VillagersUpdated?.Invoke(_currentVillagersCount, _villagersCapacity);
+            VillagersUpdated?.Invoke(_villagers.Count, _villagersCapacity);
             GemsUpdated?.Invoke(0, _gemsCapacity);
 
             if (_gemGenerationRoutine == null)
@@ -61,7 +60,17 @@ namespace ForeverVillage.Scripts
 
         private IEnumerator StartGenerate()
         {
-            float totalGemRate = _baseGemRate * _multiplicator;
+            float totalMultiplicator = 1f;
+
+            foreach(Villager villager in _villagers)
+            {
+                totalMultiplicator += villager.Multiplicator;
+            }
+
+            Debug.Log("Total Mult: " + totalMultiplicator);
+
+            float totalGemRate = _baseGemRate * totalMultiplicator;
+            Debug.Log("Total Rate: " + totalGemRate);
 
             float countOfCycles = _gemsCapacity / totalGemRate;
             float totalTime = _gemGenerationTimeRate * Mathf.Ceil(countOfCycles);
@@ -106,7 +115,39 @@ namespace ForeverVillage.Scripts
             }
         }
 
-        public override void Upgrade()
+        private void OnVilalgerSummoned(Villager newVillager)
+        {
+            if (newVillager == null)
+            {
+                return;
+            }
+
+            if (TryPopulate(newVillager))
+            {
+                VillagersUpdated?.Invoke(_villagers.Count, _villagersCapacity);
+
+                StopCoroutine(_gemGenerationRoutine);
+                _gemGenerationRoutine = StartCoroutine(StartGenerate());
+
+                if (_villagers.Count == _villagersCapacity)
+                {
+                    _view.VillagerSummoned -= OnVilalgerSummoned;
+                }
+            }
+        }
+
+        private bool TryPopulate(Villager newVillager)
+        {
+            if (_villagers.Count + 1 <= _villagersCapacity)
+            {
+                _villagers.Add(newVillager);
+                return true;
+            }
+
+            return false;
+        }
+
+        protected override void Upgrade()
         {
             base.Upgrade();
 
@@ -128,6 +169,7 @@ namespace ForeverVillage.Scripts
         private void OnDisable()
         {
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
+            _view.VillagerSummoned -= OnVilalgerSummoned;
         }
     }
 }

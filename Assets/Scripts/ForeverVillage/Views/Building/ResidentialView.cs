@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -10,14 +11,16 @@ namespace ForeverVillage.Scripts
         [SerializeField] private TimerView _timerCanvas;
         [SerializeField] private ButtonCanvas _summonVillagersCanvas;
 
-        private ResidentialBuilding _targetView;
+        private ResidentialBuilding _targetToView;
         private VillagersStoreDisplay _villagersStore;
 
         private readonly Timer _timer = new Timer();
 
+        public Action<Villager> VillagerSummoned;
+
         public void Init(ResidentialBuilding target, VillagersStoreDisplay villagersStoreDisplay)
         {
-            _targetView = target;
+            _targetToView = target;
             _villagersStore = villagersStoreDisplay;
         }
 
@@ -25,17 +28,11 @@ namespace ForeverVillage.Scripts
         {
             _timerCanvas.Init(_timer);
 
-            _targetView.VillagersUpdated += OnVillagersUpdated;
-            _targetView.GemsUpdated += OnGemsUpdated;
-            _targetView.GemGenerationStarted += OnGemGenerationStarted;
+            _targetToView.VillagersUpdated += OnVillagersUpdated;
+            _targetToView.GemsUpdated += OnGemsUpdated;
+            _targetToView.GemGenerationStarted += OnGemGenerationStarted;
 
-            _summonVillagersCanvas.ButtonClicked += OnSummonVillagerCanvas;
-        }
-
-        private void Start()
-        {
-            _summonVillagersCanvas.Display();
-            _timerCanvas.Display();
+            _summonVillagersCanvas.ButtonClicked += OnSummonVillagerButtonClicked;
         }
 
         private void Update()
@@ -43,14 +40,9 @@ namespace ForeverVillage.Scripts
             _timer.Tick(Time.deltaTime);
         }
 
-        private void OnSummonVillagerCanvas()
-        {
-            _villagersStore.Display();
-            //_villagersStore.OnSmthBuyed += OnBuildZone;
-        }
-
         private void OnGemGenerationStarted(float time)
         {
+            _timerCanvas.Display();
             _timer.Start(time);
             _timer.Completed += OnCompleted;
         }
@@ -62,12 +54,26 @@ namespace ForeverVillage.Scripts
 
         private void OnVillagersUpdated(int current, int capacity)
         {
+            _summonVillagersCanvas.Display(current < capacity);
             _villagers.text = GetRatioInText(current, capacity);
         }
 
         private void OnGemsUpdated(int current, int capacity)
         {
             _gems.text = GetRatioInText(current, capacity);
+        }
+
+        private void OnSummonVillagerButtonClicked()
+        {
+            _villagersStore.Display();
+            _villagersStore.OnSmthBuyed += OnVillagerBuyed;
+        }
+
+        private void OnVillagerBuyed(Villager villager)
+        {
+            _villagersStore.OnSmthBuyed -= OnVillagerBuyed;
+
+            VillagerSummoned?.Invoke(villager);
         }
 
         private string GetRatioInText(int current, int capacity)
@@ -77,11 +83,11 @@ namespace ForeverVillage.Scripts
 
         private void OnDisable()
         {
-            _targetView.VillagersUpdated -= OnVillagersUpdated;
-            _targetView.GemsUpdated -= OnGemsUpdated;
-            _targetView.GemGenerationStarted -= OnGemGenerationStarted;
+            _targetToView.VillagersUpdated -= OnVillagersUpdated;
+            _targetToView.GemsUpdated -= OnGemsUpdated;
+            _targetToView.GemGenerationStarted -= OnGemGenerationStarted;
 
-            _summonVillagersCanvas.ButtonClicked -= OnSummonVillagerCanvas;
+            _summonVillagersCanvas.ButtonClicked -= OnSummonVillagerButtonClicked;
         }
     }
 }
