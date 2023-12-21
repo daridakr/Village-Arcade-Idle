@@ -55,13 +55,13 @@ namespace ForeverVillage.Scripts
         private void OnDestroyedZone()
         {
             _savedModel.Destroyed -= OnDestroyedZone;
-            _view.CanClear += ClearBuilding;
+            _view.CanClear += Clear;
         }
 
         // maybe should separate class with abstract method like Interact()? bc these two methods almost the same 
-        private void ClearBuilding()
+        private void Clear()
         {
-            _view.CanClear -= ClearBuilding;
+            _view.CanClear -= Clear;
 
             PlayerCoins buyer = _playerCoinsTrigger.Entered;
             buyer.Spend(_clearPrice);
@@ -141,13 +141,10 @@ namespace ForeverVillage.Scripts
             switch (State)
             {
                 case BuildingZoneState.Destroyed:
-                    _view.ShowClearCanvas(_clearPrice, coins.Balance);
+                    _view.ShowClearButton(_clearPrice, coins.Balance);
                     break;
                 case BuildingZoneState.Empty:
-                    _view.ShowBuildCanvas();
-                    break;
-                case BuildingZoneState.Builded:
-                    _view.ShowUpgradeCanvas();
+                    _view.ShowBuildButton();
                     break;
                 default:
                     break;
@@ -158,7 +155,7 @@ namespace ForeverVillage.Scripts
 
         private void TriggerExit(PlayerCoins coins)
         {
-            _view.HideCanvas();
+            _view.HideView();
         }
 
         private void OnDisable()

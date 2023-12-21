@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -11,6 +12,8 @@ namespace ForeverVillage.Scripts
         [SerializeField] private SpecificBuildingData _specificData;
         [SerializeField] private BuildingTypeData _typeData;
         [SerializeField] private BuildingLevel[] _levels;
+        [SerializeField] private PlayerWalletTrigger _playerWalletTrigger;
+        [SerializeField] private BuildingView _commonView;
 
         [SerializeField] protected int _countInOneRegion;
         [SerializeField] protected int _maxLevel;
@@ -31,34 +34,78 @@ namespace ForeverVillage.Scripts
         public string Name => _specificData.Name;
         public int Price => _specificData.Price;
         public Sprite Icon => _specificData.MainIcon;
+        public BuildingLevel NextLevel => _levels[_levelNumber + 1];
+        public bool CanUpgrade => _levelNumber + 1 < _maxLevel;
 
-        public event Action Upgraded;
-        public event Action Builded;
+        [Inject]
+        public void Construct(UpgradeBuildingPanel upgradePanel)
+        {
+            _commonView.Init(this, upgradePanel);
+        }
 
         private void OnEnable()
         {
             _guidable = GetComponent<GuidableObject>();
             _guidable.RegenerateGUID();
 
+            _playerWalletTrigger.Enter += OnPlayerWalletEnter;
+            _playerWalletTrigger.Exit += OnPlayerWalletExit;
+
             _stats = InitStats();
             InitLevels();
+            RenderLevel();
         }
 
-        private void InitLevels()
+        private void OnPlayerWalletEnter(PlayerWallet playerWallet)
+        {
+            if (CanUpgrade)
+            {
+                _commonView.ShowView();
+                _commonView.EarnedNextLevel += Upgrade;
+            }
+        }
+
+        protected virtual void Upgrade()
+        {
+            _levelNumber++;
+            RenderLevel();
+
+            PlayerWallet playerWallet = _playerWalletTrigger.Entered;
+
+            playerWallet.SpendCoins(_currentLevel.Price);
+            playerWallet.SpendGems(_currentLevel.GemsPrice);
+        }
+
+        private void OnPlayerWalletExit(PlayerWallet wallet)
+        {
+            _commonView.HideView();
+            _commonView.EarnedNextLevel -= Upgrade;
+        }
+
+        private void RenderLevel()
         {
             _currentLevel = _levels[_levelNumber];
 
-            foreach (var level in _levels)
+            foreach (BuildingLevel level in _levels)
             {
                 level.gameObject.SetActive(level != _currentLevel ? false : true);
             }
         }
 
-        // virtual?
-        protected virtual void Upgrade()
+        private void InitLevels()
         {
-            _levelNumber++;
-            Upgraded?.Invoke();
+            if (_specificData.Icons.Count() != _levels.Length)
+            {
+                throw new Exception("Don't enought building icons for levels");
+            }
+
+            int levelIndex = 0;
+
+            foreach (Sprite icon in _specificData.Icons)
+            {
+                _levels[levelIndex].Init(Name, icon);
+                levelIndex++;
+            }
         }
 
         public virtual void Destroy()
@@ -91,5 +138,11 @@ namespace ForeverVillage.Scripts
         }
 
         protected abstract List<int> InitStats();
+
+        private void OnDisable()
+        {
+            _playerWalletTrigger.Enter -= OnPlayerWalletEnter;
+            _playerWalletTrigger.Exit -= OnPlayerWalletExit;
+        }
     }
 }

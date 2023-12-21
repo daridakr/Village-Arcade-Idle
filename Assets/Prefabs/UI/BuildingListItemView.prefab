@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.46324316, b: 0.46324316, a: 1}
+  m_Color: {r: 0.7058824, g: 0.4627451, b: 0.4627451, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 2083695778904171186}
   - component: {fileID: 2083695778904171187}
   - component: {fileID: 5058017437296666977}
-  - component: {fileID: 8886641597558126587}
+  - component: {fileID: 2395265109343362030}
   m_Layer: 5
   m_Name: BuildingListItemView
   m_TagString: Untagged
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0.8301887, g: 0.8253974, b: 0.8098256, a: 1}
   m_EffectDistance: {x: 3, y: 4}
   m_UseGraphicAlpha: 1
---- !u!114 &8886641597558126587
+--- !u!114 &2395265109343362030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2083695778904171189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb6970245edc304880e34c7bf6e79ad, type: 3}
+  m_Script: {fileID: 11500000, guid: f699c533c72cde349bbffb178b14e513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _title: {fileID: 2083695779219825721}

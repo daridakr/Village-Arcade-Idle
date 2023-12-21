@@ -66,12 +66,12 @@ namespace ForeverVillage.Scripts
         private void OnSummonVillagerButtonClicked()
         {
             _villagersStore.Display();
-            _villagersStore.OnSmthBuyed += OnVillagerBuyed;
+            _villagersStore.Buyed += OnVillagerBuyed;
         }
 
         private void OnVillagerBuyed(Villager villager)
         {
-            _villagersStore.OnSmthBuyed -= OnVillagerBuyed;
+            _villagersStore.Buyed -= OnVillagerBuyed;
 
             VillagerSummoned?.Invoke(villager);
         }

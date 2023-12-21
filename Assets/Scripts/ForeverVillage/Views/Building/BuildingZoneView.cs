@@ -1,74 +1,76 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
     public class BuildingZoneView : MonoBehaviour
     {
-        [SerializeField] private MessageDisplayCanvas _clearCanvas;
-        [SerializeField] private ButtonCanvas _buildCanvas;
-        [SerializeField] private ButtonCanvas _upgradeCanvas;
-        [SerializeField] private BuildingsStoreDisplay _buildingsStore;
+        [SerializeField] private MessageDisplayCanvas _clearButton;
+        [SerializeField] private ButtonCanvas _buildButton;
 
         private CanvasAnimatedView _currentCanvas;
+        private BuildingsStoreDisplay _buildingsStoreDisplay;
 
         public event Action CanClear;
         public event Action<Building> CanBuild;
 
+        [Inject]
+        public void Construct(BuildingsStoreDisplay buildingsStore)
+        {
+            _buildingsStoreDisplay = buildingsStore;
+        }
+
         private void OnEnable()
         {
-            _clearCanvas.ButtonClicked += OnClearZone;
-            _buildCanvas.ButtonClicked += OnShowBuildings;
+            _clearButton.ButtonClicked += OnClearButtonClicked;
+            _buildButton.ButtonClicked += ShowBuildings;
         }
 
-        public void ShowClearCanvas(int clearPrice, int balance)
+        public void ShowClearButton(int clearPrice, int balance)
         {
-            _clearCanvas.Display(clearPrice, balance >= clearPrice);
-            _currentCanvas = _clearCanvas;
+            _clearButton.Display(clearPrice, balance >= clearPrice);
+            _currentCanvas = _clearButton;
         }
 
-        public void ShowBuildCanvas()
+        public void ShowBuildButton()
         {
-            _buildCanvas.Display();
-            _currentCanvas = _buildCanvas;
+            _buildButton.Display();
+            _currentCanvas = _buildButton;
         }
 
-        public void ShowUpgradeCanvas()
+        public void HideView()
         {
-            _upgradeCanvas.Display();
-            _currentCanvas = _upgradeCanvas;
+            if (_currentCanvas != null) 
+            {
+                _currentCanvas.Hide();
+            }
         }
 
-        public void HideCanvas()
+        private void OnClearButtonClicked()
         {
-            _currentCanvas.Hide();
-        }
-
-        private void OnClearZone()
-        {
-            _clearCanvas.Hide();
+            _clearButton.Hide();
             CanClear?.Invoke();
         }
 
-        private void OnShowBuildings()
+        private void ShowBuildings()
         {
-            _buildCanvas.Hide();
-            _buildingsStore.Display();
-            _buildingsStore.OnSmthBuyed += OnBuildZone;
+            _buildButton.Hide();
+            _buildingsStoreDisplay.Display();
+            _buildingsStoreDisplay.Buyed += OnBuyed;
         }
 
-        private void OnBuildZone(Building building)
+        private void OnBuyed(Building building)
         {
-            _buildCanvas.Hide();
-            _buildingsStore.OnSmthBuyed -= OnBuildZone;
+            _buildingsStoreDisplay.Buyed -= OnBuyed;
 
             CanBuild?.Invoke(building);
         }
 
         private void OnDisable()
         {
-            _clearCanvas.ButtonClicked -= OnClearZone;
-            _buildCanvas.ButtonClicked -= OnShowBuildings;
+            _clearButton.ButtonClicked -= OnClearButtonClicked;
+            _buildButton.ButtonClicked -= ShowBuildings;
         }
     }
 }

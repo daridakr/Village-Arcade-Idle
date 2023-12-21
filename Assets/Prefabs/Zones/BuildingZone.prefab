@@ -29014,10 +29014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52564b1daceed2459bd5f1a052f299d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clearCanvas: {fileID: 588120823306959348}
-  _buildCanvas: {fileID: 1123213671999946387}
-  _upgradeCanvas: {fileID: 4918838250264344643}
-  _buildingsStore: {fileID: 0}
+  _clearButton: {fileID: 588120823306959348}
+  _buildButton: {fileID: 1123213671999946387}
+  _buildingsStoreDisplay: {fileID: 0}
 --- !u!114 &8412684586535614480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29216,9 +29215,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6189783918961375701, guid: 6000adde202bab940a09101427936fd0, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6189783918961375707, guid: 6000adde202bab940a09101427936fd0, type: 3}
       propertyPath: m_Name
-      value: ClearZoneCanvas
+      value: ClearButton
       objectReference: {fileID: 0}
     - target: {fileID: 8149493419408161465, guid: 6000adde202bab940a09101427936fd0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -29315,7 +29318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3942947475729541048, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_Name
-      value: BuildCanvas
+      value: BuildButton
       objectReference: {fileID: 0}
     - target: {fileID: 3942947475729541051, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_Pivot.x
@@ -29444,19 +29447,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1441586105294898503, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1441586105294898503, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1441586105294898503, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 1441586105294898503, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1441586105522892812, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -29489,6 +29492,10 @@ PrefabInstance:
     - target: {fileID: 3942947475729541048, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_Name
       value: UpgradeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942947475729541048, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3942947475729541051, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_Pivot.x
@@ -29580,33 +29587,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877358363859374029, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7877358363859374029, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7877358363859374029, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7877358363859374029, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
---- !u!114 &4918838250264344643 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4345215712998277206, guid: 2f174d4805397d349a3f86f55791734b, type: 3}
-  m_PrefabInstance: {fileID: 8650983843729864725}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3f605ea51c7654688f0db9687df2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5671824333350674350 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3942947475729541051, guid: 2f174d4805397d349a3f86f55791734b, type: 3}

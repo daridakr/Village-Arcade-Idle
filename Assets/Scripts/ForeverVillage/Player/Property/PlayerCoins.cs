@@ -7,6 +7,7 @@ namespace ForeverVillage.Scripts
         private int _receivedBalace;
         private bool _isReceivedNewBalance;
 
+        // should make separate class like scene enter for game scene, w playercoins link
         public void OnSceneLoaded(int balance)
         {
             _receivedBalace = balance;

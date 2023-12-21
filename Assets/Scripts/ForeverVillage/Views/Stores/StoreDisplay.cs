@@ -14,7 +14,7 @@ namespace ForeverVillage.Scripts
 
         private List<StoreItemView<T>> _storeViews = new List<StoreItemView<T>>();
 
-        public event Action<T> OnSmthBuyed;
+        public event Action<T> Buyed;
 
         public override void Display()
         {
@@ -35,7 +35,7 @@ namespace ForeverVillage.Scripts
         private void OnBuyed(T buyed)
         {
             Hide();
-            OnSmthBuyed?.Invoke(buyed);
+            Buyed?.Invoke(buyed);
         }
 
         private void ClearOldData()

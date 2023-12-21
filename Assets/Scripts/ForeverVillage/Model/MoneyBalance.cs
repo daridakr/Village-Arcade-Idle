@@ -29,7 +29,7 @@ namespace ForeverVillage.Scripts
 
         public void Spend(int value)
         {
-            if (value <= 0)
+            if (value < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
