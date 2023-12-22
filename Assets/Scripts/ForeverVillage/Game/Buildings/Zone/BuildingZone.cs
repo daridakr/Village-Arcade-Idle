@@ -115,7 +115,6 @@ namespace ForeverVillage.Scripts
 
         private void SetupBuilding()
         {
-            //Building builded = _diContainer.InstantiatePrefabForComponent<Building>(_building, _buildPoint);
             Building builded = _buildingFactory.Create(_building, _buildPoint);
             _savedModel.ZoneBuilded(_building.name, builded.Guid);
         }
@@ -126,7 +125,6 @@ namespace ForeverVillage.Scripts
 
             Building buildingPrefab = Resources.Load<Building>(serializedData.Prefab);
             Building builded = _buildingFactory.Create(buildingPrefab, _buildPoint);
-            //Building builded = _diContainer.InstantiatePrefabForComponent<Building>(buildingPrefab, _buildPoint);
 
             Builded?.Invoke();
 

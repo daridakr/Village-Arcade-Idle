@@ -103,7 +103,7 @@ namespace ForeverVillage.Scripts
 
             foreach (Sprite icon in _specificData.Icons)
             {
-                _levels[levelIndex].Init(Name, icon);
+                _levels[levelIndex].Init(levelIndex, icon, Name);
                 levelIndex++;
             }
         }

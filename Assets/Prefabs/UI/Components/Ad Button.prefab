@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3808263711892202743, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
       propertyPath: m_fontSize
-      value: 64.45
+      value: 42.98
       objectReference: {fileID: 0}
     - target: {fileID: 3808263711892202743, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
       propertyPath: m_fontStyle
@@ -253,6 +253,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587241960013732663, guid: 31deafde3e761a648ae9ea29a7e205c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

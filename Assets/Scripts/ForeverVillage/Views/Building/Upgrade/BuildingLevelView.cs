@@ -9,7 +9,12 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private Image _image;
+        [SerializeField] private TMP_Text _level;
+        [SerializeField] private HorizontalLayoutGroup _statsGroup;
+        [SerializeField] private BuildingStatView _statTemplate;
         [SerializeField] private ButtonTextDisplay _buyButton;
+        [SerializeField] private PriceDisplay _coinsPrice;
+        [SerializeField] private PriceDisplay _gemsPrice;
 
         public event Action Buyed;
 
@@ -22,16 +27,10 @@ namespace ForeverVillage.Scripts
         {
             _title.text = level.Name;
             _image.sprite = level.Icon;
-            _buyButton.ChangeTitle(SetPrice(level.Price, level.GemsPrice));
+            _level.text = $"LV {level.Value}";
+            _coinsPrice.SetPrice(level.Price);
+            _gemsPrice.SetPrice(level.GemsPrice);
             _buyButton.SetInteractable(playerCoins >= level.Price && playerGems >= level.GemsPrice);
-        }
-
-        private string SetPrice(int coins, int gems)
-        {
-            string coinsPrice = coins != 0 ? coins.ToString() : string.Empty;
-            string gemsPrice = gems != 0 ? gems.ToString() : string.Empty;
-
-            return coinsPrice + gemsPrice;
         }
 
         private void OnBuyButtonClicked()

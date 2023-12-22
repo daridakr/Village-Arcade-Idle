@@ -11,12 +11,15 @@ namespace ForeverVillage.Scripts
         private string _levelName;
         private string _levelDescription;
         private Sprite _icon;
+        private BuildingLevelType _type;
 
-        public void Init(string name, Sprite icon, string description = "")
+        private const int _levelTypesAmount = 4; // should relocate
+
+        public void Init(int value, Sprite icon, string buildingName = "", string description = "")
         {
-            if (string.IsNullOrEmpty(name))
+            if (value < 0 || value > _levelTypesAmount)
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
 
             if (icon == null)
@@ -24,8 +27,9 @@ namespace ForeverVillage.Scripts
                 throw new ArgumentNullException(nameof(icon));
             }
 
-            _levelName = name;
+            _type = (BuildingLevelType)value;
             _icon = icon;
+            _levelName = $"{_type} {buildingName}";
             _levelDescription = description;
         }
 
@@ -37,5 +41,18 @@ namespace ForeverVillage.Scripts
         public int GemsPrice => _gemsPrice;
 
         public Sprite Icon => _icon;
+        public int Value => (int)_type + 1;
+    }
+
+    public enum BuildingLevelType
+    {
+        Common,
+        Cozy,
+        Charming,
+        Elegant,
+        Prestigious,
+        Exquisite,
+        Majestic,
+        Legendary
     }
 }

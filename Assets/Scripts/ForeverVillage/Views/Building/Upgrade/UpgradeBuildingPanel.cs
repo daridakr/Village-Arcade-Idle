@@ -8,12 +8,13 @@ namespace ForeverVillage.Scripts
         [SerializeField] private BuildingLevelView _levelViewPrefab;
         [SerializeField] private PlayerWallet _playerWallet;
         [SerializeField] private RectTransform _content;
+        [SerializeField] private ButtonDisplay _destroyButton;
 
         private BuildingLevelView _currentLevelView;
 
         public event Action Upgraded;
 
-        public void Display(BuildingLevel nextUpgradeLevel)
+        public void Display(BuildingLevel nextUpgradeLevel) // , Dictionary<Sprite, int> upgradeStats
         {
             base.Display();
 
@@ -22,6 +23,12 @@ namespace ForeverVillage.Scripts
             levelView.Buyed += OnNextLevelBuyed;
 
             _currentLevelView = levelView;
+            _destroyButton.Clicked += OnDestroyButtonClicked;
+        }
+
+        private void OnDestroyButtonClicked()
+        {
+            Debug.Log("lox");
         }
 
         public override void Hide()
@@ -33,6 +40,8 @@ namespace ForeverVillage.Scripts
                 _currentLevelView.Buyed -= OnNextLevelBuyed;
                 Destroy(_currentLevelView.gameObject);
             }
+
+            _destroyButton.Clicked -= OnDestroyButtonClicked;
         }
 
         private void OnNextLevelBuyed()
