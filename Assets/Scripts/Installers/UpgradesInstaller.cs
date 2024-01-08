@@ -5,14 +5,24 @@ using Zenject;
 
 public class UpgradesInstaller : MonoInstaller
 {
+    [SerializeField] private UpgradesController _upgradeController;
     [SerializeField] private MovementSpeedUpgradeConfig _movementConfig;
 
     public override void InstallBindings()
     {
-        BindPlayerUpgrades();
+        BindUpgradesSystem();
+
+        BindMovementUpgrade();
     }
 
-    private void BindPlayerUpgrades()
+    private void BindUpgradesSystem()
+    {
+        Container.BindInterfacesTo<UpgradesController>().FromInstance(_upgradeController);
+        Container.BindInterfacesTo<UpgradesRepository>().AsSingle();
+        Container.BindInterfacesAndSelfTo<UpgradesInteractor>().AsSingle();
+    }
+
+    private void BindMovementUpgrade()
     {
         Container.Bind<MovementSpeedUpgradeConfig>().FromInstance(_movementConfig).AsSingle();
         Container.BindInterfacesAndSelfTo<MovementSpeedUpgrade>().AsSingle();

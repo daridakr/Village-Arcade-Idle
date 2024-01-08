@@ -36,12 +36,12 @@ namespace ForeverVillage.Scripts
         {
             IUpgrade[] upgrades = _upgradesController.GetAllUpgrades();
 
-            foreach (var upgrade in upgrades)
+            foreach (var model in upgrades)
             {
                 UpgradeView view = Instantiate(_viewPrefab, _content);
                 _views.Add(view);
 
-                var presenter = new UpgradePresenter(upgrade, view);
+                var presenter = new UpgradePresenter(model, view);
                 presenter.Initialize(_upgradesController, _playerWallet);
                 _presenters.Add(presenter);
             }
