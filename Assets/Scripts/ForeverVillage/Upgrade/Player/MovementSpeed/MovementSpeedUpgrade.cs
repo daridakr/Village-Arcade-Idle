@@ -8,8 +8,10 @@ namespace ForeverVillage.Scripts.Upgrades.Player
     {
         private readonly MovementSpeedUpgradeConfig _config;
 
-        public override string CurrentStats => _config.GetSpeedFor(Level).ToString();
-        public override string NextImprovement => _config.SpeedStep.ToString();
+        private float _current => _config.GetSpeedFor(Level);
+
+        public override string CurrentStats => _current.ToString();
+        public override string NextImprovement => (_current + _config.SpeedStep).ToString("0.00");
 
         public Action<float> Updated;
 

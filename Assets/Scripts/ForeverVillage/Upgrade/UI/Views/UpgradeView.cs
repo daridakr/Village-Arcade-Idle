@@ -11,7 +11,9 @@ namespace ForeverVillage.Scripts
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _stats;
         [SerializeField] private TMP_Text _level;
-        [SerializeField] private ButtonTextDisplay _upgradeButton;
+        [SerializeField] private ButtonIconDisplay _upgradeButton;
+
+        private const string MAX = "MAX";
 
         public event Action OnUpgradeClick;
         //[SerializeField] private TMP_Text _statsText;
@@ -36,16 +38,10 @@ namespace ForeverVillage.Scripts
             _title.text = title;
         }
 
-        public void SetStats(string value, string profit = null)
+        public void SetStats(string current, string next = null)
         {
-            string stats = $"Value: {value}";
-
-            if (profit != null)
-            {
-                stats += $"(+{profit})";
-            }
-
-            _stats.text = stats;
+            _stats.text = $"From <color=#{ColorUtility.ToHtmlStringRGB(Color.red)}>{current}</color>" +
+                $" to <color=#{ColorUtility.ToHtmlStringRGB(Color.green)}>{next}</color>";
         }
 
         public void SetLevel(int level)
@@ -53,9 +49,17 @@ namespace ForeverVillage.Scripts
             _level.text = $"LV {level}";
         }
 
-        public void SetPrice(int price)
+        public void SetPrice(int price, int playerBalance)
         {
             _upgradeButton.ChangeTitle(price.ToString());
+            _upgradeButton.SetInteractable(playerBalance >= price);
+        }
+
+        public void SetMaxLevel()
+        {
+            _upgradeButton.ChangeTitle(MAX);
+            _upgradeButton.SetInteractable(false);
+            _upgradeButton.ShowIcon(false);
         }
 
         private void OnDisable()

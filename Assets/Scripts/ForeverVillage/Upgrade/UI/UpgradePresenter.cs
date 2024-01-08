@@ -27,8 +27,6 @@ namespace ForeverVillage.Scripts
             UpdateState();
         }
 
-       // idispose, dispose() with -= from actions
-
         private void OnLevelUped(int level)
         {
             UpdateState();
@@ -46,14 +44,21 @@ namespace ForeverVillage.Scripts
             if (_upgrade.IsMaxLevel)
             {
                 _view.SetStats(_upgrade.CurrentStats);
+                _view.SetMaxLevel();
                 //set upgrade button state to max
             }
             else
             {
                 _view.SetStats(_upgrade.CurrentStats, _upgrade.NextImprovement);
-                _view.SetPrice(_upgrade.NextPrice);
+                _view.SetPrice(_upgrade.NextPrice, _playerWallet.Coins);
                 // update button state
             }
+        }
+
+        public void Dispose()
+        {
+            _upgrade.OnLevelUp -= OnLevelUped;
+            _view.OnUpgradeClick -= OnUpgradeClicked;
         }
     }
 }

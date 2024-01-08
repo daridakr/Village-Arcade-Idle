@@ -51,7 +51,7 @@ namespace ForeverVillage.Scripts
         {
             foreach (var presenter in _presenters)
             {
-                //presenter.Dispose();
+                presenter.Dispose();
             }
 
             _presenters.Clear();

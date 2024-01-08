@@ -88,7 +88,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!225 &3942947475729541054
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
 --- !u!114 &3942947475729541052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +387,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3942947475986289003}
     m_Modifications:
+    - target: {fileID: 754506035595178897, guid: 960826c8330161a4dbf938a1b2bc4b11, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754506035595178897, guid: 960826c8330161a4dbf938a1b2bc4b11, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754506035595178897, guid: 960826c8330161a4dbf938a1b2bc4b11, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754506035595178897, guid: 960826c8330161a4dbf938a1b2bc4b11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8298162014753028378, guid: 960826c8330161a4dbf938a1b2bc4b11, type: 3}
       propertyPath: m_Name
       value: BuildButton
