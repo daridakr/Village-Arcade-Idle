@@ -18,7 +18,7 @@ namespace ForeverVillage.Scripts
 
         public void Add(int value)
         {
-            if (value <= 0)
+            if (value < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
@@ -29,18 +29,12 @@ namespace ForeverVillage.Scripts
 
         public void Spend(int value)
         {
-            if (value < 0)
+            if (value < 0 || value > _value)
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
 
             _value -= value;
-
-            if (_value < 0)
-            {
-                _value = 0;
-            }
-
             ValueChanged?.Invoke();
         }
 

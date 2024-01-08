@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e050c0ceb83cd24caf10601e626161f, type: 3}
+  m_Name: MovementSpeedUpgradeConfig
+  m_EditorClassIdentifier: 
+  _id: MovementSpeedUpgrade
+  _maxLevel: 20
+  _metadata:
+    Title: Speed
+    Icon: {fileID: 21300000, guid: 577423c68243c7a418741f648df7afda, type: 3}
+  _priceTable:
+    _basePrice: 20
+    _levels: 00000000280000003c0000005000000064000000780000008c000000a0000000b4000000c8000000dc000000f000000004010000180100002c0100004001000054010000680100007c01000090010000
+  _movement: {fileID: 0}
+  _speedTable:
+    _startValue: 6
+    _endValue: 15
+    _step: 0.47
+    _table:
+    - 6
+    - 6.47
+    - 6.94
+    - 7.41
+    - 7.88
+    - 8.35
+    - 8.82
+    - 9.29
+    - 9.76
+    - 10.23
+    - 10.7
+    - 11.17
+    - 11.64
+    - 12.11
+    - 12.58
+    - 13.05
+    - 13.52
+    - 13.99
+    - 14.46
+    - 15

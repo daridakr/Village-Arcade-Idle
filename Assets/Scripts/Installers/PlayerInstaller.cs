@@ -9,6 +9,7 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private PlayerTimerCleaner _cleaner;
     [SerializeField] private PlayerTimerBuilder _builder;
+    [SerializeField] private PlayerMovement _movement;
 
     public override void InstallBindings()
     {
@@ -21,6 +22,8 @@ public class PlayerInstaller : MonoInstaller
     {
         Container.Bind<PlayerTimerCleaner>().FromInstance(_cleaner).AsSingle();
         Container.Bind<PlayerTimerBuilder>().FromInstance(_builder).AsSingle();
+
+        Container.Bind<PlayerMovement>().FromInstance(_movement).AsSingle();
     }
 
     private void BindVillageInfo()

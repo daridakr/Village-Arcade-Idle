@@ -28,7 +28,7 @@ namespace ForeverVillage.Scripts
 
         private void OnDestroyButtonClicked()
         {
-            Debug.Log("lox");
+            Debug.Log("destroy");
         }
 
         public override void Hide()

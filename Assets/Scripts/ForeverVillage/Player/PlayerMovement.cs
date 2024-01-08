@@ -1,3 +1,4 @@
+using ForeverVillage.Scripts.Upgrades.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,23 +9,25 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField] private Transform _playerModel;
         [SerializeField] private PlayerAnimation _animation;
-        [SerializeField] private float _speed;
 
-        private IControlService _controlService;
         private Rigidbody _rigidbody;
-
+        private float _speed;
         private float _speedRate = 1f;
         private float _flySpeedRate = 1f;
+        private IControlService _controlService;
+        private MovementSpeedUpgrade _upgrade;
 
         public bool IsMoving { get; private set; }
 
         [Inject]
-        public void Construct(IControlService controlService)
+        public void Construct(IControlService controlService, MovementSpeedUpgrade upgrade)
         {
             _controlService = controlService;
-
             _controlService.OnMove += Move;
             _controlService.OnStand += Stop;
+
+            _upgrade = upgrade;
+            _upgrade.Updated += SetSpeed;
         }
 
         private void Awake()
@@ -32,9 +35,21 @@ namespace ForeverVillage.Scripts
             _rigidbody = GetComponent<Rigidbody>();
         }
 
+        public void SetSpeed(float value)
+        {
+            if (value <= 0f)
+            {
+                return;
+            }
+
+            _speed = value;
+            Debug.Log(_speed);
+        }
+
         public void Move(Vector3 direction)
         {
             _playerModel.LookAt(_playerModel.position + direction);
+            Debug.Log($"Move: {_speed}");
             _rigidbody.velocity = direction * _speed * _speedRate * _flySpeedRate;
 
             _animation.SetSpeed(direction.magnitude);
@@ -64,6 +79,7 @@ namespace ForeverVillage.Scripts
         {
             _controlService.OnMove -= Move;
             _controlService.OnStand -= Stop;
+            _upgrade.Updated -= SetSpeed;
         }
     }
 }

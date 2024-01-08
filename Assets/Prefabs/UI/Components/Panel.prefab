@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1300412890052928570, guid: da4091e135ee2114ea6923718742fdd8, type: 3}
+      propertyPath: m_MovementType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300412890052928570, guid: da4091e135ee2114ea6923718742fdd8, type: 3}
+      propertyPath: m_DecelerationRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1494151719244803074, guid: da4091e135ee2114ea6923718742fdd8, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

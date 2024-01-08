@@ -15,6 +15,7 @@ TagManager:
   - SPIRAL
   - MarmaladeAnimation
   - Simple_firework
+  - GameContext
   layers:
   - Default
   - TransparentFX
