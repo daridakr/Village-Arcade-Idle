@@ -8,10 +8,7 @@ namespace ForeverVillage.Scripts
         IDisposable
     {
         private IUpgradesRepository _repository;
-        private UpgradesAssetSupplier _assetSuplier;
-
         private IUpgradesController _controller;
-
         private UpgradesSaver _saver;
 
         public UpgradesInteractor(IUpgradesRepository repository, IUpgradesController controller)
@@ -22,9 +19,6 @@ namespace ForeverVillage.Scripts
 
         public void Initialize()
         {
-            //var upgradesLoader = new UpgradesLoader(_repository);
-            //UpgradeData[] upgradesData = upgradesLoader.Load();
-
             _saver = new UpgradesSaver(_repository, _controller);
 
             var upgradesInstaller = new UpgradesInstaller(_controller);
