@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 namespace ForeverVillage.Scripts
 {
-    public abstract class PlayerMoney : MonoBehaviour
+    public abstract class PlayerMoney : MonoBehaviour,
+        IGameSaveDataListener
     {
         private MoneyBalance _balance;
         private string _saveKey;
@@ -54,5 +55,10 @@ namespace ForeverVillage.Scripts
         }
 
         protected abstract string GetSaveKey();
+
+        public void OnSaveData(GameSaveReason reason)
+        {
+            _balance.Save();
+        }
     }
 }
