@@ -7,7 +7,7 @@ namespace ForeverVillage.Scripts.Upgrades.Player
     [Serializable]
     public sealed class MovementSpeedUpgradeTable
     {
-        [SerializeField][InfoBox("Speed: Linear Function")] private float _startValue;
+        [SerializeField] private float _startValue;
         [SerializeField] private float _endValue;
         [SerializeField][ReadOnly] private float _step;
 

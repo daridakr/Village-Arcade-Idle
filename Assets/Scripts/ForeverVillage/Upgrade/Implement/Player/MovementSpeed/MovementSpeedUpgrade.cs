@@ -9,7 +9,6 @@ namespace ForeverVillage.Scripts.Upgrades.Player
         private readonly MovementSpeedUpgradeConfig _config;
 
         private float _current => _config.GetSpeedFor(Level);
-
         public override string CurrentStats => _current.ToString();
         public override string NextImprovement => (_current + _config.SpeedStep).ToString("0.00");
 
@@ -23,13 +22,13 @@ namespace ForeverVillage.Scripts.Upgrades.Player
 
         public void Initialize()
         {
-            var speed = _config.GetSpeedFor(Level);
+            float speed = _config.GetSpeedFor(Level);
             Updated?.Invoke(speed);
         }
 
         protected override void UpdateLevel(int newLevel)
         {
-            var speed = _config.GetSpeedFor(newLevel);
+            float speed = _config.GetSpeedFor(newLevel);
             Updated?.Invoke(speed);
         }
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts.Upgrades.Player
 {
-    [CreateAssetMenu(fileName = "MovementSpeedUpgradeConfig", menuName = "Upgrades/MovementSpeed")]
+    [CreateAssetMenu(fileName = "MovementSpeedUpgradeConfig", menuName = "Upgrades/Player/MovementSpeed")]
     public sealed class MovementSpeedUpgradeConfig : UpgradeConfig
     {
         [SerializeField] private MovementSpeedUpgradeTable _speedTable;

@@ -39,7 +39,7 @@ namespace ForeverVillage.Scripts
 
         private void UpdateState()
         {
-            _view.SetLevel(_upgrade.Level);
+            _view.SetLevel(_upgrade.Level + 1);
 
             if (_upgrade.IsMaxLevel)
             {
