@@ -30,9 +30,9 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Zenject
-    - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Zenject-IntegrationTests
+    - Assembly-CSharp
     - Cinemachine
     - Purchasing.Common
     - Sirenix.OdinInspector.CompatibilityLayer
