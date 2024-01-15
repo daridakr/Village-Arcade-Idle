@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fc3f2f66aebf94cbf458498964b2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCoinsTrigger: {fileID: 4183546151515780582}
+  _playerWalletTrigger: {fileID: 4678987545442194088}
   _region: {fileID: 0}
 --- !u!114 &3018896907665471568
 MonoBehaviour:
@@ -756,7 +756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4183546151515780580}
   - component: {fileID: 4183546151515780583}
-  - component: {fileID: 4183546151515780582}
+  - component: {fileID: 4678987545442194088}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -792,7 +792,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.7559385, y: 7.3224115, z: 3.2607813}
   m_Center: {x: -0.00017881393, y: 0.17557383, z: 1.6303906}
---- !u!114 &4183546151515780582
+--- !u!114 &4678987545442194088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4183546151515780581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8474862f8094d1d4889166012b41b48d, type: 3}
+  m_Script: {fileID: 11500000, guid: 87fff4e6be51c8a4cb27db224fed6121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _disableStayCallback: 0

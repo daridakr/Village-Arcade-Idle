@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 484719879, guid: 47d8a91e3026e405a96bac590c863934, type: 3}
-  name: "\u5F37\u5316\u5291"
-  description: "\u7372\u5F97\u56DE\u8840\u80FD\u529B"
+  name: Strengthener
+  description: Gained blood returning ability.
   rarity: 50
   recovery:
     value: 1

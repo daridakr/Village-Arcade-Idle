@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -9,12 +10,18 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField] private Store<T> _store;
         [SerializeField] private StoreItemView<T> _storeItemView;
-        [SerializeField] private PlayerMoney _moneyOwner;
         [SerializeField] private VerticalLayoutGroup _content;
 
         private List<StoreItemView<T>> _storeViews = new List<StoreItemView<T>>();
+        private PlayerWallet _playerWallet;
 
         public event Action<T> Buyed;
+
+        [Inject]
+        public void Construct(PlayerWallet playerWallet)
+        {
+            _playerWallet = playerWallet;
+        }
 
         public override void Display()
         {
@@ -25,7 +32,7 @@ namespace ForeverVillage.Scripts
             {
                 StoreItemView<T> storeItemView = Instantiate(_storeItemView, _content.transform);
 
-                storeItemView.Render(storable, _moneyOwner.Balance);
+                storeItemView.Render(storable, _playerWallet.Coins);
 
                 storeItemView.Buyed += OnBuyed;
                 _storeViews.Add(storeItemView);

@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: -1217583073, guid: 47d8a91e3026e405a96bac590c863934, type: 3}
-  name: "\u65A7\u982D"
-  description: "\u570D\u7E5E\u89D2\u8272\u653B\u64CA"
+  name: Axe
+  description: Surround Character Attack.
   rarity: 50
   bookPrefab: {fileID: 447603797795093572, guid: e2d35550233314fcfab86def8f42f79a, type: 3}
   monsterLayer:
@@ -56,6 +56,7 @@ MonoBehaviour:
     value: 1
     upgrades: 01000000010000000100000001000000
     projectilesPer: 1
+    <UpgradeName>k__BackingField: "\u5B50\u5F48\u6578\u91CF"
   radius:
     value: 1.35
     upgrades:

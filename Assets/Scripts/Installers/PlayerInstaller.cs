@@ -5,37 +5,30 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
-    [SerializeField] private PlayerLevel _level;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private PlayerTimerCleaner _cleaner;
-    [SerializeField] private PlayerTimerBuilder _builder;
-    [SerializeField] private PlayerMovement _movement;
 
     public override void InstallBindings()
     {
-        // temp
-        BindPlayerBuildingInteractions();
-        BindVillageInfo();
+        SpawnAndBindPlayer();
     }
 
-    private void BindPlayerBuildingInteractions()
+    private void SpawnAndBindPlayer()
     {
-        Container.Bind<PlayerTimerCleaner>().FromInstance(_cleaner).AsSingle();
-        Container.Bind<PlayerTimerBuilder>().FromInstance(_builder).AsSingle();
+        Player playerInstance =
+            Container.InstantiatePrefabForComponent<Player>(_player.gameObject, _spawnPoint.position, Quaternion.identity, null);
 
-        Container.Bind<PlayerMovement>().FromInstance(_movement).AsSingle();
-    }
+        Container.Bind<Player>().FromInstance(playerInstance).AsSingle().NonLazy();
 
-    private void BindVillageInfo()
-    {
-        Container.Bind<PlayerLevel>().FromInstance(_level).AsSingle();
-    }
+        Container.Bind<PlayerMovement>().FromInstance(playerInstance.Movement).AsSingle();
+        Container.Bind<PlayerTimerCleaner>().FromInstance(playerInstance.Cleaner).AsSingle();
+        Container.Bind<PlayerTimerBuilder>().FromInstance(playerInstance.Builder).AsSingle();
+        Container.Bind<PlayerWallet>().FromInstance(playerInstance.Wallet).AsSingle();
+        Container.Bind<PlayerBuildingsList>().FromInstance(playerInstance.Buildings).AsSingle();
+        Container.Bind<PlayerVillagersList>().FromInstance(playerInstance.Villagers).AsSingle();
+        Container.Bind<PlayerRegionsList>().FromInstance(playerInstance.Regions).AsSingle();
 
-    private void SpawnPlayer()
-    {
-        //Player player = Container
-        //            .InstantiatePrefabForComponent<Player>(_player, _spawnPoint.position, Quaternion.identity, null);
-
-        //Container.Bind<Player>().FromInstance(player).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerLevel>().FromInstance(playerInstance.Level).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerCoins>().FromInstance(playerInstance.Coins).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerGems>().FromInstance(playerInstance.Gems).AsSingle();
     }
 }

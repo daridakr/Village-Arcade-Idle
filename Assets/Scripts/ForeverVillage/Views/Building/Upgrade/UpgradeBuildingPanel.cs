@@ -1,18 +1,25 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
     public class UpgradeBuildingPanel : CanvasAnimatedView
     {
         [SerializeField] private BuildingLevelView _levelViewPrefab;
-        [SerializeField] private PlayerWallet _playerWallet;
         [SerializeField] private RectTransform _content;
         [SerializeField] private ButtonDisplay _destroyButton;
 
         private BuildingLevelView _currentLevelView;
+        private PlayerWallet _playerWallet;
 
         public event Action Upgraded;
+
+        [Inject]
+        public void Construct(PlayerWallet playerWallet)
+        {
+            _playerWallet = playerWallet;
+        }
 
         public void Display(BuildingLevel nextUpgradeLevel) // , Dictionary<Sprite, int> upgradeStats
         {

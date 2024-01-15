@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: -948480638, guid: 47d8a91e3026e405a96bac590c863934, type: 3}
-  name: "\u92FC\u677F"
-  description: "\u589E\u52A0\u9632\u79A6"
+  name: Armor Upgrade
+  description: Increase Defense
   rarity: 50
   upgrades: 0100000001000000010000000100000001000000

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -7,25 +8,36 @@ namespace ForeverVillage.Scripts
     [RequireComponent(typeof(ReachableRegion))]
     public class RegionReachLevelCondition : MonoBehaviour, IRegionReachCondition
     {
-        [SerializeField] private PlayerLevel _playerLevel;
         [SerializeField] private int _requiredLevel;
 
         private ReachableRegion _reachable;
+        private PlayerLevel _playerLevel;
 
         public int Condition => _requiredLevel;
         public bool IsCompleted { get; private set; }
 
         public event Action Completed;
 
+        [Inject]
+        public virtual void Construct(PlayerLevel playerLevel)
+        {
+            _playerLevel = playerLevel;
+        }
+
         private void OnEnable()
         {
             _reachable = GetComponent<ReachableRegion>();
             _reachable.Init(this);
 
-            _playerLevel.LevelChanged += OnPlayerLevelChanged;
+            _playerLevel.LevelChanged += TryComplete;
         }
 
-        private void OnPlayerLevelChanged(int level)
+        private void Start()
+        {
+            TryComplete(_playerLevel.Level);
+        }
+
+        private void TryComplete(int level)
         {
             if (level >= Condition)
             {
@@ -38,7 +50,7 @@ namespace ForeverVillage.Scripts
             IsCompleted = true;
             Destroy(this);
             Completed?.Invoke();
-            _playerLevel.LevelChanged -= OnPlayerLevelChanged;
+            _playerLevel.LevelChanged -= TryComplete;
             //_unlockable.Unlock(transform, onLoad, GUID);
         }
     }

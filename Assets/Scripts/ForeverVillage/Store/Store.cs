@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
-    public class Store<T> : MonoBehaviour where T : IStorableObject
+    public abstract class Store<T> : MonoBehaviour where T : IStorableObject
     {
-        [SerializeField] private DataList<T> _dataList;
-
-        public IEnumerable<T> Data => _dataList.Data;
+        protected abstract DataList<T> DataList { get; }
+        public IEnumerable<T> Data => DataList.Data;
     }
 }

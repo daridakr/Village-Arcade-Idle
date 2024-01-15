@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -9,10 +10,16 @@ namespace ForeverVillage.Scripts
         [SerializeField] private UpgradesController _upgradesController;
         [SerializeField] private UpgradeView _viewPrefab;
         [SerializeField] private Transform _content;
-        [SerializeField] private PlayerWallet _playerWallet;
 
         private List<UpgradePresenter> _presenters;
         private List<UpgradeView> _views;
+        private PlayerWallet _playerWallet;
+
+        [Inject]
+        public void Construct(PlayerWallet playerWallet)
+        {
+            _playerWallet = playerWallet;
+        }
 
         public UpgradesPanel()
         {

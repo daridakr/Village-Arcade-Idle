@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: -1241731715, guid: 4a9825874034d4671b1dc9f6c8707eca, type: 3}
-  name: "\u64CA\u9000\u5F37\u5316"
-  description: "\u589E\u52A0\u64CA\u9000\u529B"
+  name: Knockback Upgrade
+  description: Increase knockback power.
   rarity: 50
   upgrades:
   - 0.1

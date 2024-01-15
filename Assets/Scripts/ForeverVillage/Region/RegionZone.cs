@@ -7,7 +7,7 @@ namespace ForeverVillage.Scripts
     [RequireComponent(typeof(GuidableObject))]
     public class RegionZone : MonoBehaviour
     {
-        [SerializeField] private PlayerCoinsTrigger _playerCoinsTrigger;
+        [SerializeField] private PlayerWalletTrigger _playerWalletTrigger;
         [SerializeField] private ReachableRegion _region;
 
         private GuidableObject _guidable;
@@ -46,7 +46,7 @@ namespace ForeverVillage.Scripts
         {
             Locked?.Invoke(condition);
             _region.Unreached -= LockBy;
-            _playerCoinsTrigger.Disable();
+            _playerWalletTrigger.Disable();
         }
 
         private void UnlockToBuy()
@@ -54,31 +54,31 @@ namespace ForeverVillage.Scripts
             _region.Reached -= UnlockToBuy;
             Unlocked?.Invoke();
 
-            _playerCoinsTrigger.Enable();
-            _playerCoinsTrigger.Enter += TriggerEnter;
-            _playerCoinsTrigger.Exit += TriggerExit;
+            _playerWalletTrigger.Enable();
+            _playerWalletTrigger.Enter += TriggerEnter;
+            _playerWalletTrigger.Exit += TriggerExit;
         }
 
-        private void TriggerEnter(PlayerCoins coins)
+        private void TriggerEnter(PlayerWallet wallet)
         {
             if (_tryBuy != null)
                 StopCoroutine(_tryBuy);
 
-            _tryBuy = StartCoroutine(TryBuyRegion(coins));
+            _tryBuy = StartCoroutine(TryBuyRegion(wallet));
         }
 
-        private void TriggerExit(PlayerCoins coins)
+        private void TriggerExit(PlayerWallet wallet)
         {
             StopCoroutine(_tryBuy);
         }
 
-        private IEnumerator TryBuyRegion(PlayerCoins playerWithCoins)
+        private IEnumerator TryBuyRegion(PlayerWallet wallet)
         {
             yield return null;
 
             bool delayed = false;
 
-            var playerMovement = playerWithCoins.GetComponent<PlayerMovement>();
+            var playerMovement = wallet.GetComponent<PlayerMovement>();
 
             while (true)
             {
@@ -87,7 +87,7 @@ namespace ForeverVillage.Scripts
                     if (delayed == false)
                         yield return new WaitForSeconds(0.75f);
 
-                    BuyRegion(playerWithCoins);
+                    BuyRegion(wallet);
                     //PriceUpdated?.Invoke(_price.Current);
                     delayed = true;
                 }
@@ -100,9 +100,9 @@ namespace ForeverVillage.Scripts
             }
         }
 
-        private void BuyRegion(PlayerCoins coins)
+        private void BuyRegion(PlayerWallet wallet)
         {
-            if (coins.IsEmpty == false)
+            if (wallet.IsEmpty == false)
                 return;
 
             _reduceValue = Mathf.Clamp((int)(_data.TotalCost * 1.5f * Time.deltaTime), 1, _data.TotalCost);
@@ -111,10 +111,10 @@ namespace ForeverVillage.Scripts
                 _reduceValue = _data.CurrentCost;
             }
 
-            _reduceValue = Mathf.Clamp(_reduceValue, 1, coins.Balance);
+            _reduceValue = Mathf.Clamp(_reduceValue, 1, wallet.Coins);
 
             _data.ReduceCost(_reduceValue);
-            coins.Spend(_reduceValue);
+            wallet.SpendCoins(_reduceValue);
 
             Triggering?.Invoke();
         }
@@ -130,9 +130,9 @@ namespace ForeverVillage.Scripts
 
         private void OnDestroy()
         {
-            _playerCoinsTrigger.Disable();
-            _playerCoinsTrigger.Enter -= TriggerEnter;
-            _playerCoinsTrigger.Exit -= TriggerExit;
+            _playerWalletTrigger.Disable();
+            _playerWalletTrigger.Enter -= TriggerEnter;
+            _playerWalletTrigger.Exit -= TriggerExit;
         }
     }
 }

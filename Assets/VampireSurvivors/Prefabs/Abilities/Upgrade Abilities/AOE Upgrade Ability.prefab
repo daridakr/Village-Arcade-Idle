@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  name: "\u5F71\u97FF\u7BC4\u570D\u5F37\u5316"
-  description: "\u5F71\u97FF\u7BC4\u570D\u64F4\u5927"
+  name: AOE Upgrade
+  description: Expanded Scope of Impact.
   rarity: 50
   upgrades:
   - 0.15

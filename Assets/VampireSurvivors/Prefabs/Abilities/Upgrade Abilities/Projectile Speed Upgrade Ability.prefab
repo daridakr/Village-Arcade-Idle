@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: -1373301891, guid: 47d8a91e3026e405a96bac590c863934, type: 3}
-  name: "\u5B50\u5F48\u901F\u5EA6\u5F37\u5316"
-  description: "\u589E\u52A0\u5B50\u5F48\u901F\u5EA6"
+  name: Projectile Speed Upgrade
+  description: Increase bullet speed.
   rarity: 25
   upgrades:
   - 0.1

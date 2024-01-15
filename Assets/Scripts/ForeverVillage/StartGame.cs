@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -23,6 +24,14 @@ namespace ForeverVillage.Scripts
         public event Action NewGameStarted;
         public event Action GameBegined;
         public event Action<string> VillageNamed;
+
+        [Inject]
+        public void Construct(PlayerBuildingsList buildings, PlayerVillagersList villagers, PlayerRegionsList regions)
+        {
+            _buildingList = buildings;
+            _villagersList = villagers;
+            _regionList = regions;
+        }
 
         private void Start()
         {

@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 6e04ed4f9df5b420796169fb6b3c0c3d, type: 3}
-  name: "\u8B8A\u7570\u8840\u6E05"
-  description: "\u7372\u5F97\u5438\u8840\u80FD\u529B"
+  name: Serum
+  description: Gained blood-sucking ability.
   rarity: 50
   recovery:
     value: 1

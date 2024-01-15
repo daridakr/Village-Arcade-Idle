@@ -1,8 +1,20 @@
+using Zenject;
+
 namespace ForeverVillage.Scripts
 {
     public class BuildingsStore : Store<Building>
     {
         //private BuildingsStore _store;
+
+        private PlayerBuildingsList _buildingList;
+
+        protected override DataList<Building> DataList => _buildingList;
+
+        [Inject]
+        public void Construct(PlayerBuildingsList buildingList)
+        {
+            _buildingList = buildingList;
+        }
 
         private void OnEnable()
         {

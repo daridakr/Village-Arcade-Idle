@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1386365902, guid: 4a9825874034d4671b1dc9f6c8707eca, type: 3}
-  name: "\u5B50\u5F48\u6578\u91CF\u5F37\u5316"
-  description: "\u589E\u52A0\u5B50\u5F48\u6578\u91CF"
+  name: Projectile Count Upgrade
+  description: Increase the number of bullets.
   rarity: 50
   upgrades: 0100000001000000010000000100000001000000

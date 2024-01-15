@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bdc48cde1627a42eeb9eb5fcdf667589, type: 3}
-  name: "\u5DE6\u53F3\u528D"
-  description: "\u53EA\u5411\u5DE6\u53F3\u653B\u64CA"
+  name: Left and Right Sword
+  description: Attack left and right only.
   rarity: 50
   targetLayer:
     serializedVersion: 2

@@ -8,15 +8,18 @@ namespace ForeverVillage.Scripts
     public class PlayerVillageInfo : StringSavedValue
     {
         [SerializeField] private StartGame _start;
-        [SerializeField] private PlayerRegionsList _playerRegionsList;
         [SerializeField] private List<RegionPriceLock> _availableRegions;
 
         private string _name;
-        private readonly PlayerLevel _playerLevel;
-
-        //public int Level => _playerLevel.Level;
+        private PlayerRegionsList _playerRegionsList;
 
         public event Action<string> Named;
+
+        [Inject]
+        public void Construct(PlayerRegionsList regions)
+        {
+            _playerRegionsList = regions;
+        }
 
         private void Awake()
         {
@@ -58,12 +61,6 @@ namespace ForeverVillage.Scripts
 
             _playerRegionsList.Append(regionData, regionData.Guid);
         }
-
-        //[Inject]
-        //public void Construct(PlayerLevel playerLevel)
-        //{
-        //    _playerLevel = playerLevel;
-        //}
 
         protected override void SetKey()
         {

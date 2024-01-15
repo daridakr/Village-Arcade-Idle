@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b02080f0199ad41e4b62d6e0865fa969, type: 3}
-  name: "\u5C0F\u5200"
-  description: "\u8FD1\u8DDD\u96E2\u6D41\u8840\u653B\u64CA"
+  name: Dagger
+  description: Close Range Bleeding Attack.
   rarity: 50
   targetLayer:
     serializedVersion: 2

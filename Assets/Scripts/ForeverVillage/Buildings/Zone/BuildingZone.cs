@@ -8,19 +8,24 @@ namespace ForeverVillage.Scripts
     [RequireComponent(typeof(ExperiencePointGiver))]
     public class BuildingZone : MonoBehaviour
     {
-        [SerializeField] private PlayerCoinsTrigger _playerCoinsTrigger;
-        [SerializeField] private PlayerTimerCleaner _cleaner; // need somehow divide that class to destroyed bulding, empty etc
-        [SerializeField] private PlayerTimerBuilder _builder;
+        [SerializeField] private PlayerWalletTrigger _playerWalletTrigger;
         [SerializeField] private Transform _buildPoint;
         [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
+        #region Gameplay
         private ExperiencePointGiver _experienceGiver;
-        private const int _expPointsCount = 5;
-        private const int _clearPrice = 20;
+        private PlayerTimerCleaner _cleaner;
+        private PlayerTimerBuilder _builder;
+        #endregion
+        #region Model
         private Building _building;
+        private IBuildingFactory _buildingFactory;
         private BuldingZoneData _savedModel;
         private GuidableObject _guidable;
-        private IBuildingFactory _buildingFactory;
+        #endregion Model
+
+        private const int _clearPrice = 20;
+        private const int _expPointsCount = 5;
 
         public BuildingZoneState State => _savedModel.State; // should remove after save builded buildings implementation and rewrite to like regionZone w events
 
@@ -29,15 +34,17 @@ namespace ForeverVillage.Scripts
         public event Action Builded;
 
         [Inject]
-        public void Construct(IBuildingFactory buildingFactory)
+        public void Construct(IBuildingFactory buildingFactory, PlayerTimerCleaner cleaner, PlayerTimerBuilder builder)
         {
             _buildingFactory = buildingFactory;
+            _cleaner = cleaner;
+            _builder = builder;
         }
 
         private void OnEnable()
         {
-            _playerCoinsTrigger.Enter += TriggerEnter;
-            _playerCoinsTrigger.Exit += TriggerExit;
+            _playerWalletTrigger.Enter += TriggerEnter;
+            _playerWalletTrigger.Exit += TriggerExit;
 
             _guidable = GetComponent<GuidableObject>();
             _savedModel = new BuldingZoneData(BuildingZoneState.Destroyed, _guidable.GUID);
@@ -63,8 +70,8 @@ namespace ForeverVillage.Scripts
         {
             _view.CanClear -= Clear;
 
-            PlayerCoins buyer = _playerCoinsTrigger.Entered;
-            buyer.Spend(_clearPrice);
+            PlayerWallet buyer = _playerWalletTrigger.Entered;
+            buyer.SpendCoins(_clearPrice);
 
             _cleaner.StartClean(this);
             _savedModel.Clear();
@@ -94,8 +101,8 @@ namespace ForeverVillage.Scripts
         {
             _view.CanBuild -= Build;
 
-            PlayerCoins buyer = _playerCoinsTrigger.Entered;
-            buyer.Spend(building.Price);
+            PlayerWallet buyer = _playerWalletTrigger.Entered;
+            buyer.SpendCoins(building.Price);
 
             _building = building;
 
@@ -132,14 +139,14 @@ namespace ForeverVillage.Scripts
             //builded.Instantiate(serializedData);
         }
 
-        private void TriggerEnter(PlayerCoins coins)
+        private void TriggerEnter(PlayerWallet wallet)
         {
             //ShowRewardPlacement?.Invoke(_placement);
 
             switch (State)
             {
                 case BuildingZoneState.Destroyed:
-                    _view.ShowClearButton(_clearPrice, coins.Balance);
+                    _view.ShowClearButton(_clearPrice, wallet.Coins);
                     break;
                 case BuildingZoneState.Empty:
                     _view.ShowBuildButton();
@@ -151,15 +158,15 @@ namespace ForeverVillage.Scripts
             //UpdateView();
         }
 
-        private void TriggerExit(PlayerCoins coins)
+        private void TriggerExit(PlayerWallet wallet)
         {
             _view.HideView();
         }
 
         private void OnDisable()
         {
-            _playerCoinsTrigger.Enter -= TriggerEnter;
-            _playerCoinsTrigger.Exit -= TriggerExit;
+            _playerWalletTrigger.Enter -= TriggerEnter;
+            _playerWalletTrigger.Exit -= TriggerExit;
         }
     }
 

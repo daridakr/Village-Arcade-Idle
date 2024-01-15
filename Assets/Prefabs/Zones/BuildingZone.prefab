@@ -28930,9 +28930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2d9ef0a64caa140bcb0a50b9f50570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCoinsTrigger: {fileID: 8706381484603982195}
-  _cleaner: {fileID: 0}
-  _builder: {fileID: 0}
+  _playerWalletTrigger: {fileID: 4576708289370927}
   _buildPoint: {fileID: 388175569984979506}
   _view: {fileID: 8706381484507289182}
 --- !u!114 &5003509046155598478
@@ -29016,7 +29014,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clearButton: {fileID: 588120823306959348}
   _buildButton: {fileID: 1123213671999946387}
-  _buildingsStoreDisplay: {fileID: 0}
 --- !u!114 &8412684586535614480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29043,7 +29040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8706381484603982193}
   - component: {fileID: 8706381484603982199}
-  - component: {fileID: 8706381484603982195}
+  - component: {fileID: 4576708289370927}
   m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
@@ -29079,7 +29076,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 1, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8706381484603982195
+--- !u!114 &4576708289370927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29088,7 +29085,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8706381484603982194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8474862f8094d1d4889166012b41b48d, type: 3}
+  m_Script: {fileID: 11500000, guid: 87fff4e6be51c8a4cb27db224fed6121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _disableStayCallback: 0

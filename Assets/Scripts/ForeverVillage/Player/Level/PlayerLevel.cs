@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 namespace ForeverVillage.Scripts
 {
-    public class PlayerLevel : MonoBehaviour
+    public class PlayerLevel : MonoBehaviour,
+        IGameSaveDataListener
     {
         private ExperienceLevel _level;
 
-        private int Level => _level.Value;
-        private float Experience => _level.ExperienceNormalazed;
+        public float Experience => _level.ExperienceNormalazed;
+        public int Level => _level.Value;
 
         public event UnityAction<int> LevelChanged;
         public event UnityAction<float> ExperienceChanged;
@@ -20,9 +21,6 @@ namespace ForeverVillage.Scripts
 
             _level.Increased += OnLevelIncreased;
             _level.ExperienceGained += OnExperienceGainded;
-
-            LevelChanged?.Invoke(Level);
-            ExperienceChanged?.Invoke(Experience);
         }
 
         private void OnLevelIncreased()
@@ -47,6 +45,11 @@ namespace ForeverVillage.Scripts
             _level.Increased -= OnLevelIncreased;
             _level.ExperienceGained -= OnExperienceGainded;
 
+            _level.Save();
+        }
+
+        public void OnSaveData(GameSaveReason reason)
+        {
             _level.Save();
         }
     }

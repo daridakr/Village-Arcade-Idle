@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: -1860441063, guid: 47d8a91e3026e405a96bac590c863934, type: 3}
-  name: "\u653B\u64CA\u529B\u5F37\u5316"
-  description: "\u589E\u52A0\u653B\u64CA\u529B"
+  name: Damage Upgrade
+  description: Increase Attack Power.
   rarity: 50
   upgrades:
   - 0.1

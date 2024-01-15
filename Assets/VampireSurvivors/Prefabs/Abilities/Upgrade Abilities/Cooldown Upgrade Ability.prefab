@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1658229422, guid: 4a9825874034d4671b1dc9f6c8707eca, type: 3}
-  name: "\u653B\u64CA\u51B7\u537B\u6642\u9593\u5F37\u5316"
-  description: "\u6E1B\u5C11\u653B\u64CA\u51B7\u537B\u6642\u9593"
+  name: Cooldown Upgrade
+  description: Reduced attack cooling time.
   rarity: 50
   upgrades:
   - -0.15

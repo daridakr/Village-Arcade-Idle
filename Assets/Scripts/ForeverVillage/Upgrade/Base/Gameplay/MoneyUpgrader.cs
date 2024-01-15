@@ -9,6 +9,8 @@ namespace ForeverVillage.Scripts
             _wallet = wallet;
         }
 
+        public PlayerWallet Wallet => throw new System.NotImplementedException();
+
         public bool TryUpgrade(Upgrade upgrade)
         {
             if (upgrade.IsMaxLevel || _wallet.IsEmpty)
