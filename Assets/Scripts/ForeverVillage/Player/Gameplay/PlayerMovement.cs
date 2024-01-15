@@ -18,6 +18,7 @@ namespace ForeverVillage.Scripts
         private MovementSpeedUpgrade _upgrade;
 
         public bool IsMoving { get; private set; }
+        public Transform CurrentPosition => transform;
 
         [Inject]
         public void Construct(IControlService controlService, MovementSpeedUpgrade upgrade)

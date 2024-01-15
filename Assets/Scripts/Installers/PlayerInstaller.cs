@@ -5,17 +5,17 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
-    [SerializeField] private Transform _spawnPoint;
 
     public override void InstallBindings()
     {
         SpawnAndBindPlayer();
+        BindSaveData();
     }
 
     private void SpawnAndBindPlayer()
     {
         Player playerInstance =
-            Container.InstantiatePrefabForComponent<Player>(_player.gameObject, _spawnPoint.position, Quaternion.identity, null);
+            Container.InstantiatePrefabForComponent<Player>(_player.gameObject, _player.CurrentPoint.position, Quaternion.identity, null);
 
         Container.Bind<Player>().FromInstance(playerInstance).AsSingle().NonLazy();
 
@@ -30,5 +30,12 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerLevel>().FromInstance(playerInstance.Level).AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerCoins>().FromInstance(playerInstance.Coins).AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerGems>().FromInstance(playerInstance.Gems).AsSingle();
+    }
+
+    private void BindSaveData()
+    {
+        Container.Bind<PlayerPointRepository>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerPointSaver>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerPointSetter>().AsSingle();
     }
 }
