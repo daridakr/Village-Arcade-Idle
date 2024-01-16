@@ -3498,6 +3498,7 @@ MonoBehaviour:
   _buildings: {fileID: 534308705034334625}
   _villagers: {fileID: 3919298244408397979}
   _regions: {fileID: 5172697029549449921}
+  _movement: {fileID: 4362179068316805910}
 --- !u!114 &4362179068316805910
 MonoBehaviour:
   m_ObjectHideFlags: 0

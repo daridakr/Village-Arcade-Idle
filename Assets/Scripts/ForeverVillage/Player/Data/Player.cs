@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
-    [RequireComponent(typeof(PlayerMovement))]
     [RequireComponent(typeof(PlayerWallet))]
     public class Player : MonoBehaviour
     {
@@ -14,10 +13,9 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerBuildingsList _buildings;
         [SerializeField] private PlayerVillagersList _villagers;
         [SerializeField] private PlayerRegionsList _regions;
+        [SerializeField] private PlayerMovement _movement;
 
-        private PlayerMovement _movement;
         private PlayerWallet _wallet;
-        private Transform _currentPoint;
 
         public PlayerMovement Movement => _movement;
         public PlayerTimerCleaner Cleaner => _cleaner;
@@ -29,11 +27,10 @@ namespace ForeverVillage.Scripts
         public PlayerBuildingsList Buildings => _buildings;
         public PlayerVillagersList Villagers => _villagers;
         public PlayerRegionsList Regions => _regions;
-        public Transform CurrentPoint => _movement.CurrentPosition;
+        public Vector3 Position => _movement.CurrentPosition;
 
         private void Awake()
         {
-            _movement = GetComponent<PlayerMovement>();
             _wallet = GetComponent<PlayerWallet>();
         }
     }

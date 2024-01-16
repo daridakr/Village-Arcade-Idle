@@ -8,14 +8,13 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField] private InputFieldData _villageNameField;
 
-        [SerializeField] private PlayerBuildingsList _buildingList;
         [SerializeField] private Building[] _buildingsInStart;
-
-        [SerializeField] private PlayerVillagersList _villagersList;
         [SerializeField] private Villager[] _villagersInStart;
-
-        [SerializeField] private PlayerRegionsList _regionList;
         [SerializeField] private RegionDisplayer[] _regionsInStart;
+
+        private PlayerBuildingsList _buildingList;
+        private PlayerVillagersList _villagersList;
+        private PlayerRegionsList _regionList;
 
         private bool BeginGame = true;
 

@@ -20,7 +20,7 @@ public class PlayerInstaller : MonoInstaller
     private void SpawnAndBindPlayer()
     {
         _playerInstance = Container.InstantiatePrefabForComponent<Player>
-            (_prefab.gameObject, _prefab.CurrentPoint.position, Quaternion.identity, null);
+            (_prefab.gameObject, _prefab.Position, Quaternion.identity, null);
 
         Container.Bind<Player>().FromInstance(_playerInstance).AsSingle().NonLazy();
     }
