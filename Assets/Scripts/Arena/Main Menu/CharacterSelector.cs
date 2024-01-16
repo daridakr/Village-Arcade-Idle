@@ -1,6 +1,5 @@
 using IJunior.TypedScenes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Vampire
 {
