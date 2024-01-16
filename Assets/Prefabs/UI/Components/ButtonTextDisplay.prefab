@@ -113,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5580471421182193960, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Name
-      value: Button Variant
+      value: ButtonTextDisplay
       objectReference: {fileID: 0}
     - target: {fileID: 5580471421182193961, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Pivot.x
