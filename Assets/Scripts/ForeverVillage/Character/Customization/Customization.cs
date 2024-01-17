@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace ForeverVillage.Scripts.Character
 {
     [Serializable]
     public class Customization

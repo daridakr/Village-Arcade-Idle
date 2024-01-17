@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace ForeverVillage.Scripts.Character
 {
     public class Customizable : MonoBehaviour
     {

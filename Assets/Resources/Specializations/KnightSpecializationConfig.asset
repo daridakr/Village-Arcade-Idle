@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201755c531aa7c5489998647624afb45, type: 3}
+  m_Name: KnightSpecializationConfig
+  m_EditorClassIdentifier: 
+  _metadata:
+    Title: Knight
+    Description: Formidable warrior, renowned for exceptional defense and powerful
+      offensive skills. Masters of swordplay, Knights wear the finest armor and possess
+      the ability to absorb enemy attacks. Their unique abilities may include devastating
+      sword techniques, superior parrying skills, and a strong sense of duty on the
+      battlefield.
+    Icon: {fileID: 21300000, guid: b5ccb09f9a92c2e47b364ac5da9b0f22, type: 3}

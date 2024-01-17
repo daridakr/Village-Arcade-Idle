@@ -1,4 +1,3 @@
-using ForeverVillage.Scripts.Upgrades.Player;
 using System;
 using UnityEngine;
 
