@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601538cb722224c49ac122198c756f75, type: 3}
+  m_Name: ArcherSpecializationConfig
+  m_EditorClassIdentifier: 
+  _metadata:
+    Title: Archer
+    Description: Skilled and agile ranged combatant, specializing in precision and
+      marksmanship. Armed with a bow and arrows, Archers excel at attacking from
+      a distance, avoiding direct confrontation. They possess keen perception and
+      may have abilities such as rapid shot or precision targeting.
+    Icon: {fileID: 21300000, guid: 8aedddbd3018efa4b8cd5074a37afa33, type: 3}

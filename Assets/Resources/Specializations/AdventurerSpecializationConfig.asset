@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8a73d1841c3e34ea48776149538135, type: 3}
+  m_Name: AdventurerSpecializationConfig
+  m_EditorClassIdentifier: 
+  _metadata:
+    Title: Adventurer
+    Description: Versatile and resourceful individual, capable of adapting to various
+      challenges. Armed with a mix of skills from different disciplines, Adventurers
+      are adept at exploration, combat, and problem-solving. They may wield a variety
+      of weapons and have a range of abilities, making them adaptable to different
+      situations.
+    Icon: {fileID: 21300000, guid: 62e76ab18e84409488cd453043045aa1, type: 3}
