@@ -7,75 +7,68 @@ namespace ForeverVillage.Scripts.Character
     public sealed class SpecializationPresenter : MonoBehaviour
     {
         [SerializeField] private CreationStepDisplay _displayer;
-        [SerializeField] private SpecializationCatalog _catalog;
-        [SerializeField] private SpecializationButton _buttonPrefab;
+        [SerializeField] private SpecializationCatalog _specCatalog;
+        [SerializeField] private SpecializationButton _specButtonPrefab;
         [SerializeField] private Transform _content;
 
-        private Dictionary<SpecializationButton, Character> _buttonsWithPrefabs;
-        private SpecializationConfig[] _specializations => _catalog.GetAllSpecs();
+        private Dictionary<SpecializationButton, Character> _specButtonsWithPrefabs;
+        private SpecializationConfig[] _specializations => _specCatalog.GetAllSpecs();
 
         private CharacterCreator _creator;
         private CharacterLoader _loader;
         private GenderPresenter _genderPresenter;
 
         private Character _character;
+        private SpecializationButton _selected;
 
         [Inject]
-        public void Construct(GenderPresenter presenter, CharacterCreator creator)
+        public void Construct(CharacterCreator creator, GenderPresenter presenter)
         {
-            _buttonsWithPrefabs = new Dictionary<SpecializationButton, Character>();
+            _specButtonsWithPrefabs = new Dictionary<SpecializationButton, Character>();
             _loader = new CharacterLoader();
 
             _creator = creator;
+
             _genderPresenter = presenter;
-            _genderPresenter.Initialized += OnGenderInitialized;
-            _genderPresenter.Changed += OnGenderChanged;
+            _genderPresenter.Changed += Present;
         }
 
-        private void OnEnable()
-        {
-            _displayer.PreviousButtonClicked += ResetAndDelete;
-        }
-
-        private void OnGenderInitialized(Character character)
-        {
-            _character = character;
-            Present(_character.Gender);
-        }
-
-        private void OnGenderChanged(Character character)
-        {
-            Destroy(_character.gameObject);
-            OnGenderInitialized(character);
-        }
+        private void OnEnable() => _displayer.PreviousButtonClicked += ResetAndDelete;
 
         private void Present(Gender gender)
         {
             Reset();
-            SpecializationButton selected = null;
+            SpecializationButton @default = null;
 
             foreach (var specialization in _specializations)
             {
-                SpecializationButton specButton = Instantiate(_buttonPrefab, _content);
+                SpecializationButton specButton = Instantiate(_specButtonPrefab, _content);
                 specButton.Initialize(specialization);
                 specButton.Selected += SpecSelected;
 
                 string prefabPath = gender == Gender.Male ? specialization.MalePrefabPath : specialization.FemalePrefabPath;
                 Character characterSpecPrefab = _loader.Load(prefabPath);
-                _buttonsWithPrefabs.Add(specButton, characterSpecPrefab);
+                _specButtonsWithPrefabs.Add(specButton, characterSpecPrefab);
 
-                if (selected == null)
-                    selected = specButton;
+                if (@default == null)
+                    @default = specButton;
             }
 
-            SpecSelected(selected);
+            SpecSelected(@default);
         }
 
         private void SpecSelected(SpecializationButton button)
         {
-            Destroy(_character.gameObject);
+            if (_selected != null)
+                _selected.Unselect();
 
-            foreach (var item in _buttonsWithPrefabs)
+            button.Select();
+            _selected = button;
+
+            if (_character != null)
+                Destroy(_character.gameObject);
+
+            foreach (var item in _specButtonsWithPrefabs)
             {
                 if (button == item.Key)
                 {
@@ -86,13 +79,13 @@ namespace ForeverVillage.Scripts.Character
 
         private void Reset()
         {
-            foreach (var button in _buttonsWithPrefabs)
+            foreach (var button in _specButtonsWithPrefabs)
             {
                 button.Key.Selected -= SpecSelected;
                 Destroy(button.Key.gameObject);
             }
 
-            _buttonsWithPrefabs.Clear();
+            _specButtonsWithPrefabs.Clear();
         }
 
         private void ResetAndDelete()
@@ -104,8 +97,7 @@ namespace ForeverVillage.Scripts.Character
         private void OnDisable()
         {
             Reset();
-            _genderPresenter.Initialized -= OnGenderInitialized;
-            _genderPresenter.Changed -= OnGenderChanged;
+            _genderPresenter.Changed -= Present;
             _displayer.PreviousButtonClicked -= ResetAndDelete;
         }
     }

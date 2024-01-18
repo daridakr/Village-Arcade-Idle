@@ -7,8 +7,6 @@ namespace ForeverVillage.Scripts.Character
     {
         private Character _character;
 
-        public Gender Gender => _character.Gender;
-
         private void Awake()
         {
             _character = GetComponent<Character>();

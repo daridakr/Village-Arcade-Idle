@@ -22,13 +22,13 @@ namespace ForeverVillage.Scripts.Character
         public void Initialize(SpecializationConfig config)
         {
             _icon.sprite = config.Icon;
-
         }
+
+        public void Select() => _button.SetInteractable(false);
+        public void Unselect() => _button.SetInteractable(true);
 
         private void OnSpecClicked()
         {
-            _button.SetInteractable(false);
-
             Selected?.Invoke(this);
         }
 
