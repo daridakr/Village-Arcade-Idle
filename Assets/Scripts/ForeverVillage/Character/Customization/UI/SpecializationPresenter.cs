@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -75,6 +76,8 @@ namespace ForeverVillage.Scripts.Character
                 if (button == item.Key)
                 {
                     _character = _creator.Create(item.Value);
+                    _character.AddComponent<CharacterTouchRotator>();
+
                     _specInfoDisplayer.Display(item.Key.Info);
                 }
             }
