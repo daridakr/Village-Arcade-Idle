@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,6 +10,7 @@ namespace ForeverVillage.Scripts.Character
         [SerializeField] private CreationStepDisplay _displayer;
         [SerializeField] private SpecializationCatalog _specCatalog;
         [SerializeField] private SpecializationButton _specButtonPrefab;
+        [SerializeField] private SpecializationInfoDisplayer _specInfoDisplayer;
         [SerializeField] private Transform _content;
 
         private Dictionary<SpecializationButton, Character> _specButtonsWithPrefabs;
@@ -43,7 +45,7 @@ namespace ForeverVillage.Scripts.Character
             foreach (var specialization in _specializations)
             {
                 SpecializationButton specButton = Instantiate(_specButtonPrefab, _content);
-                specButton.Initialize(specialization);
+                specButton.Initialize(specialization.Meta);
                 specButton.Selected += SpecSelected;
 
                 string prefabPath = gender == Gender.Male ? specialization.MalePrefabPath : specialization.FemalePrefabPath;
@@ -73,6 +75,7 @@ namespace ForeverVillage.Scripts.Character
                 if (button == item.Key)
                 {
                     _character = _creator.Create(item.Value);
+                    _specInfoDisplayer.Display(item.Key.Info);
                 }
             }
         }

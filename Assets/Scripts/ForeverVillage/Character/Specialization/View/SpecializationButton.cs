@@ -10,6 +10,9 @@ namespace ForeverVillage.Scripts.Character
         [SerializeField] private Image _icon;
 
         private ButtonDisplay _button;
+        private SpecializationMetadata _info;
+
+        public SpecializationMetadata Info => _info;
 
         public event Action<SpecializationButton> Selected;
 
@@ -19,9 +22,10 @@ namespace ForeverVillage.Scripts.Character
             _button.Clicked += OnSpecClicked;
         }
 
-        public void Initialize(SpecializationConfig config)
+        public void Initialize(SpecializationMetadata data)
         {
-            _icon.sprite = config.Icon;
+            _info = data;
+            Display();
         }
 
         public void Select() => _button.SetInteractable(false);
@@ -30,6 +34,11 @@ namespace ForeverVillage.Scripts.Character
         private void OnSpecClicked()
         {
             Selected?.Invoke(this);
+        }
+
+        private void Display()
+        {
+            _icon.sprite = _info.Icon;
         }
 
         private void OnDisable()
