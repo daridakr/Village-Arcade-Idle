@@ -2003,7 +2003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 477.0642, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381593241
@@ -3130,7 +3130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 477.0642, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515414477
@@ -3496,7 +3496,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 477.0642, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596290673
@@ -4790,6 +4790,8 @@ MonoBehaviour:
     - {fileID: 2100000, guid: e9835a3673eb37f4c8133e8798ba1427, type: 2}
     - {fileID: 2100000, guid: 368ca9ed159eebc4faadf55867592699, type: 2}
     SubObjects: []
+    _materialIndex: 0
+    _subObjectIndex: 0
   - DisplayName: Hair
     Renderers: []
     Materials: []
@@ -4865,10 +4867,22 @@ MonoBehaviour:
     - {fileID: 715279056}
     - {fileID: 450361680}
     - {fileID: 10573441}
+    _materialIndex: 0
+    _subObjectIndex: 0
   - DisplayName: Body
     Renderers: []
     Materials: []
     SubObjects: []
+    _materialIndex: 0
+    _subObjectIndex: 0
+  _currentCustomizationIndex: 0
+  <CurrentCustomization>k__BackingField:
+    DisplayName: 
+    Renderers: []
+    Materials: []
+    SubObjects: []
+    _materialIndex: 0
+    _subObjectIndex: 0
 --- !u!1001 &867816272
 PrefabInstance:
   m_ObjectHideFlags: 0

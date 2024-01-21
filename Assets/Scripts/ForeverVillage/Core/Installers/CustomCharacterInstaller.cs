@@ -1,4 +1,3 @@
-using ForeverVillage.Scripts.Upgrades.Player;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +12,6 @@ namespace ForeverVillage.Scripts.Character
         {
             BindFactory();
             BindPresenters();
-            BindCustomization();
         }
 
         private void BindFactory()
@@ -26,11 +24,6 @@ namespace ForeverVillage.Scripts.Character
         {
             Container.Bind<GenderPresenter>().FromInstance(_genderPresenter).AsSingle();
             Container.Bind<SpecializationPresenter>().FromInstance(_specializationPresenter).AsSingle();
-        }
-
-        private void BindCustomization()
-        {
-            //Container.BindInterfacesAndSelfTo<SkinColorCustomization>().AsSingle().NonLazy();
         }
     }
 }

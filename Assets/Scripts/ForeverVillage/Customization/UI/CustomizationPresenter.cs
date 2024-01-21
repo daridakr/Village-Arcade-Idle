@@ -1,5 +1,4 @@
 using ForeverVillage.Scripts.Character;
-using static ResourcesParams.Character;
 
 namespace ForeverVillage.Scripts
 {
