@@ -5,45 +5,36 @@ using UnityEngine.UI;
 namespace ForeverVillage.Scripts.Character
 {
     [RequireComponent(typeof(ButtonDisplay))]
-    public class SpecializationButton : MonoBehaviour
+    public sealed class CustomizationButtonView : MonoBehaviour
     {
         [SerializeField] private Image _icon;
 
         private ButtonDisplay _button;
-        private SpecializationMetadata _info;
 
-        public SpecializationMetadata Info => _info;
-
-        public event Action<SpecializationButton> Selected;
+        public event Action<CustomizationButtonView> Selected;
 
         private void OnEnable()
         {
             _button = GetComponent<ButtonDisplay>();
-            _button.Clicked += OnSpecClicked;
+            _button.Clicked += OnClicked;
         }
 
-        public void Initialize(SpecializationMetadata data)
+        public void SetIcon(Sprite icon)
         {
-            _info = data;
-            Display();
+            _icon.sprite = icon;
         }
 
         public void Select() => _button.SetInteractable(false);
         public void Unselect() => _button.SetInteractable(true);
 
-        private void OnSpecClicked()
+        private void OnClicked()
         {
             Selected?.Invoke(this);
         }
 
-        private void Display()
-        {
-            _icon.sprite = _info.Icon;
-        }
-
         private void OnDisable()
         {
-            _button.Clicked += OnSpecClicked;
+            _button.Clicked += OnClicked;
         }
     }
 }

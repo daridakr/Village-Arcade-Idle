@@ -2132,6 +2132,7 @@ GameObject:
   - component: {fileID: 465616}
   - component: {fileID: 9553598}
   - component: {fileID: 6173309446320365551}
+  - component: {fileID: -8431396206042986826}
   m_Layer: 0
   m_Name: MaleKnight
   m_TagString: Untagged
@@ -2205,6 +2206,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b8b4d0380a71c4eb5ae5391874c327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8431396206042986826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e475a0822f071404f934c1b9838a896f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyRenderers:
+  - {fileID: 13750318}
+  - {fileID: 750456532211932281}
+  _headRig: {fileID: 463662}
 --- !u!1001 &750456532214147985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2262,6 +2279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}
+--- !u!23 &750456532211932281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2357224, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}
+  m_PrefabInstance: {fileID: 750456532214147985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &750456532213716695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441670, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}

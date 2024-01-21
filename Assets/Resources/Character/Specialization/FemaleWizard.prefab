@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 468014}
   - component: {fileID: 9576382}
   - component: {fileID: -933536229178314133}
+  - component: {fileID: 3215500393205751820}
   m_Layer: 0
   m_Name: FemaleWizard
   m_TagString: Untagged
@@ -84,6 +85,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b8b4d0380a71c4eb5ae5391874c327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3215500393205751820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e475a0822f071404f934c1b9838a896f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyRenderers:
+  - {fileID: 6522580811448021010}
+  - {fileID: 2950178750023239382}
+  _headRig: {fileID: 2756158967171447091}
 --- !u!1 &269088173657522085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,6 +2344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}
+--- !u!23 &2950178750023239382 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2330190, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}
+  m_PrefabInstance: {fileID: 2950178750025238680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2950178750025685858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 447482, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}

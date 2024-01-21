@@ -6,6 +6,12 @@ namespace ForeverVillage.Scripts.Character
     {
         public Character Load(string path)
         {
-            return Resources.Load<Character>(path);        }
+            return Resources.Load<Character>(path);
+        }
+
+        public CustomizableCharacter LoadCustomizable(string path)
+        {
+            return Resources.Load<CustomizableCharacter>(path);
+        }
     }
 }

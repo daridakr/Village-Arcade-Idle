@@ -1,4 +1,4 @@
-using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,28 +10,30 @@ namespace ForeverVillage.Scripts.Character
     {
         [SerializeField] private CreationStepDisplay _displayer;
         [SerializeField] private SpecializationCatalog _specCatalog;
-        [SerializeField] private SpecializationButton _specButtonPrefab;
+        [SerializeField] private SpecializationButtonView _specButtonPrefab;
         [SerializeField] private SpecializationInfoDisplayer _specInfoDisplayer;
         [SerializeField] private Transform _content;
+        [SerializeField] private Transform _characterPoint;
 
-        private Dictionary<SpecializationButton, Character> _specButtonsWithPrefabs;
+        private Dictionary<SpecializationButtonView, CustomizableCharacter> _specButtonsWithPrefabs;
         private SpecializationConfig[] _specializations => _specCatalog.GetAllSpecs();
 
-        private CharacterCreator _creator;
+        private ICustomizableCharacterFactory _customCharacterFactory;
         private CharacterLoader _loader;
         private GenderPresenter _genderPresenter;
 
-        private Character _character;
-        private SpecializationButton _selected;
+        private CustomizableCharacter _character;
+        private SpecializationButtonView _selected;
+
+        public event Action<CustomizableCharacter> Selected;
 
         [Inject]
-        public void Construct(CharacterCreator creator, GenderPresenter presenter)
+        public void Construct(ICustomizableCharacterFactory characterFactory, GenderPresenter presenter)
         {
-            _specButtonsWithPrefabs = new Dictionary<SpecializationButton, Character>();
+            _specButtonsWithPrefabs = new Dictionary<SpecializationButtonView, CustomizableCharacter>();
             _loader = new CharacterLoader();
 
-            _creator = creator;
-
+            _customCharacterFactory = characterFactory;
             _genderPresenter = presenter;
             _genderPresenter.Changed += Present;
         }
@@ -41,16 +43,16 @@ namespace ForeverVillage.Scripts.Character
         private void Present(Gender gender)
         {
             Reset();
-            SpecializationButton @default = null;
+            SpecializationButtonView @default = null;
 
             foreach (var specialization in _specializations)
             {
-                SpecializationButton specButton = Instantiate(_specButtonPrefab, _content);
+                SpecializationButtonView specButton = Instantiate(_specButtonPrefab, _content);
                 specButton.Initialize(specialization.Meta);
                 specButton.Selected += SpecSelected;
 
                 string prefabPath = gender == Gender.Male ? specialization.MalePrefabPath : specialization.FemalePrefabPath;
-                Character characterSpecPrefab = _loader.Load(prefabPath);
+                CustomizableCharacter characterSpecPrefab = _loader.LoadCustomizable(prefabPath);
                 _specButtonsWithPrefabs.Add(specButton, characterSpecPrefab);
 
                 if (@default == null)
@@ -60,7 +62,7 @@ namespace ForeverVillage.Scripts.Character
             SpecSelected(@default);
         }
 
-        private void SpecSelected(SpecializationButton button)
+        private void SpecSelected(SpecializationButtonView button)
         {
             if (_selected != null)
                 _selected.Unselect();
@@ -75,8 +77,10 @@ namespace ForeverVillage.Scripts.Character
             {
                 if (button == item.Key)
                 {
-                    _character = _creator.Create(item.Value);
+                    // _buildingFactory.Create(_building, _buildPoint);
+                    _character = _customCharacterFactory.Create(item.Value, _characterPoint);
                     _character.AddComponent<CharacterTouchRotator>();
+                    Selected?.Invoke(_character.GetComponent<CustomizableCharacter>());
 
                     _specInfoDisplayer.Display(item.Key.Info);
                 }

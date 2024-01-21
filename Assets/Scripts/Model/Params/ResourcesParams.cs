@@ -18,5 +18,10 @@ public static class ResourcesParams
             public const string FemaleRogue = "Character/Specialization/" + nameof(FemaleRogue);
             public const string FemaleAdventurer = "Character/Specialization/" + nameof(FemaleAdventurer);
         }
+
+        public static class Customization
+        {
+            public const string SkinColour = "Character/Customization/" + nameof(SkinColour);
+        }
     }
 }

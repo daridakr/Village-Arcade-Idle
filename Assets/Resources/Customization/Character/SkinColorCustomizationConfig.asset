@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129b5413a47a5f44cabf6aee391390e3, type: 3}
+  m_Name: SkinColorCustomizationConfig
+  m_EditorClassIdentifier: 
+  _metadata:
+    Title: Skin Color
+    Icon: {fileID: 21300000, guid: b08982ae127e5d04ebddf39c05c50698, type: 3}
+  _materials:
+  - {fileID: 2100000, guid: 1b868ce102ba0994f9b0678474742dff, type: 2}
+  - {fileID: 2100000, guid: c731790df39a49844a64af0c6dbd1b5b, type: 2}
+  - {fileID: 2100000, guid: fbbcfb1f6ab728845bc0fc3153a82f8c, type: 2}
+  - {fileID: 2100000, guid: 79c3027c208956043a02998e595f6e23, type: 2}
+  - {fileID: 2100000, guid: e9835a3673eb37f4c8133e8798ba1427, type: 2}
+  - {fileID: 2100000, guid: 368ca9ed159eebc4faadf55867592699, type: 2}

@@ -85,7 +85,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5580471421182193960, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Name
-      value: Knight
+      value: SpecializationButton
       objectReference: {fileID: 0}
     - target: {fileID: 5580471421182193961, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
       propertyPath: m_Pivot.x
@@ -195,7 +195,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5580471421182193960, guid: 78073048f2dcd094a84149a6b9032c7b, type: 3}
   m_PrefabInstance: {fileID: 4128273095963215489}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1285629489
+--- !u!114 &3971377586075844619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8375362368078100393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7d53d31549da84189d028583ea4c90, type: 3}
+  m_Script: {fileID: 11500000, guid: e581b2a6ca3ce284c9cfae3e24ad9adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 520320357}
