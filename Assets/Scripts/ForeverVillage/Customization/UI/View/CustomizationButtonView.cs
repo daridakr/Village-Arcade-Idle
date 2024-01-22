@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForeverVillage.Scripts.Character
+namespace ForeverVillage.Scripts
 {
     [RequireComponent(typeof(ButtonDisplay))]
     public sealed class CustomizationButtonView : MonoBehaviour
@@ -34,7 +34,7 @@ namespace ForeverVillage.Scripts.Character
 
         private void OnDisable()
         {
-            _button.Clicked += OnClicked;
+            _button.Clicked -= OnClicked;
         }
     }
 }

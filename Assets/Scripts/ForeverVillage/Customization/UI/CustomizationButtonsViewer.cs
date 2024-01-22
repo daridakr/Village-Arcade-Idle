@@ -1,18 +1,26 @@
 using ForeverVillage.Scripts.Character;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
-    public class CustomizationButtonsViewer : MonoBehaviour
+    public sealed class CustomizationButtonsViewer : MonoBehaviour
     {
         [SerializeField] private CreationStepDisplay _previousStep;
-        [SerializeField] private CustomizationsController _customizationsController;
         [SerializeField] private CustomizationButtonView _customButtonViewPrefab;
         [SerializeField] private Transform _content;
 
         private List<CustomizationPresenter> _presenters;
         private List<CustomizationButtonView> _buttonViews;
+
+        private ICustomizationsController _customizationsController;
+
+        [Inject]
+        public void Construct(ICustomizationsController controller)
+        {
+            _customizationsController = controller;
+        }
 
         private void OnEnable()
         {
@@ -26,16 +34,16 @@ namespace ForeverVillage.Scripts
         {
             ClearContent();
 
-            var charcter = Object.FindAnyObjectByType<CustomizableCharacter>(); // test!!!
+            var charcter = FindAnyObjectByType<CustomizableCharacter>(); // test!!!
             _customizationsController.SetupCustomizationsFor(charcter);
             ICustomization[] customizations = _customizationsController.GetAllCustomizations();
 
             foreach (var model in customizations)
             {
-                CustomizationButtonView buttonView = Instantiate(_customButtonViewPrefab, _content);
-                _buttonViews.Add(buttonView);
+                CustomizationButtonView view = Instantiate(_customButtonViewPrefab, _content);
+                _buttonViews.Add(view);
 
-                var presenter = new CustomizationPresenter(model, buttonView);
+                var presenter = new CustomizationPresenter(model, view);
                 presenter.Initialize(_customizationsController);
                 _presenters.Add(presenter);
             }
@@ -58,6 +66,11 @@ namespace ForeverVillage.Scripts
             }
 
             _buttonViews.Clear();
+        }
+
+        private void OnDisable()
+        {
+            _previousStep.NextButtonClicked -= CreateCustomizationButtons;
         }
     }
 }

@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts.Character
 {
-    public sealed class SkinColorCustomization : MaterialCustomization,
-        IInitializable
+    public sealed class SkinColorCustomization : MaterialCustomization
     {
         private readonly SkinColorCustomizationConfig _config;
         private readonly CustomizableCharacter _character;
@@ -16,11 +15,6 @@ namespace ForeverVillage.Scripts.Character
 
             foreach (Renderer renderer in character.Body)
                 _renderers.Add(renderer);
-        }
-
-        public void Initialize()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

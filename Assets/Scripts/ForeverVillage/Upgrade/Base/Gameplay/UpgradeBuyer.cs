@@ -1,17 +1,15 @@
 namespace ForeverVillage.Scripts
 {
-    public sealed class MoneyUpgrader
+    public sealed class UpgradeBuyer
     {
         private readonly PlayerWallet _wallet;
 
-        public MoneyUpgrader(PlayerWallet wallet)
+        public UpgradeBuyer(PlayerWallet wallet)
         {
             _wallet = wallet;
         }
 
-        public PlayerWallet Wallet => throw new System.NotImplementedException();
-
-        public bool TryUpgrade(Upgrade upgrade)
+        public bool TryBuy(Upgrade upgrade)
         {
             if (upgrade.IsMaxLevel || _wallet.IsEmpty)
             {

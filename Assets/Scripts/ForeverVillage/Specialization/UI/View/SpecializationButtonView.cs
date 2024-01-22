@@ -2,48 +2,40 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForeverVillage.Scripts.Character
+namespace ForeverVillage.Scripts
 {
     [RequireComponent(typeof(ButtonDisplay))]
-    public class SpecializationButtonView : MonoBehaviour
+    public sealed class SpecializationButtonView : MonoBehaviour
     {
         [SerializeField] private Image _icon;
 
         private ButtonDisplay _button;
-        private SpecializationMetadata _info;
-
-        public SpecializationMetadata Info => _info;
 
         public event Action<SpecializationButtonView> Selected;
 
         private void OnEnable()
         {
             _button = GetComponent<ButtonDisplay>();
-            _button.Clicked += OnSpecClicked;
+            _button.Clicked += Select;
         }
 
-        public void Initialize(SpecializationMetadata data)
+        public void SetIcon(Sprite icon)
         {
-            _info = data;
-            Display();
+            _icon.sprite = icon;
         }
 
-        public void Select() => _button.SetInteractable(false);
-        public void Unselect() => _button.SetInteractable(true);
+        public void SetUnclicked() => _button.SetInteractable(true);
+        public void SetClicked() => _button.SetInteractable(false);
 
-        private void OnSpecClicked()
+        public void Select()
         {
+            SetClicked();
             Selected?.Invoke(this);
-        }
-
-        private void Display()
-        {
-            _icon.sprite = _info.Icon;
         }
 
         private void OnDisable()
         {
-            _button.Clicked += OnSpecClicked;
+            _button.Clicked -= Select;
         }
     }
 }

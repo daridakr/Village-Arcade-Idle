@@ -5,12 +5,14 @@ namespace ForeverVillage.Scripts.Character
 {
     public class CustomCharacterInstaller : MonoInstaller
     {
-        [SerializeField] private GenderPresenter _genderPresenter;
-        [SerializeField] private SpecializationPresenter _specializationPresenter;
+        [SerializeField] private GenderButtonsViewer _genderPresenter;
+        [SerializeField] private SpecializationsController _specializations;
+        [SerializeField] private CustomizationsController _customizations;
 
         public override void InstallBindings()
         {
             BindFactory();
+            BindControllers();
             BindPresenters();
         }
 
@@ -20,10 +22,18 @@ namespace ForeverVillage.Scripts.Character
             Container.Bind<CustomizableCharacter>().AsSingle();
         }
 
+        private void BindControllers()
+        {
+            Container.Bind<ISpecializationsController>().
+                To<SpecializationsController>().FromInstance(_specializations).AsSingle();
+
+            Container.Bind<ICustomizationsController>().
+               To<CustomizationsController>().FromInstance(_customizations).AsSingle();
+        }
+
         private void BindPresenters()
         {
-            Container.Bind<GenderPresenter>().FromInstance(_genderPresenter).AsSingle();
-            Container.Bind<SpecializationPresenter>().FromInstance(_specializationPresenter).AsSingle();
+            Container.Bind<GenderButtonsViewer>().FromInstance(_genderPresenter).AsSingle();
         }
     }
 }

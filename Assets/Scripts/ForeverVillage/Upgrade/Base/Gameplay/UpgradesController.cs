@@ -13,18 +13,18 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerWallet _playerWallet;
         [Space][ReadOnly][ShowInInspector] private Dictionary<string, Upgrade> _upgrades;
 
-        private MoneyUpgrader _upgrader;
+        private UpgradeBuyer _buyer;
 
         private void Awake()
         {
-            _upgrader = new MoneyUpgrader(_playerWallet);
+            _buyer = new UpgradeBuyer(_playerWallet);
             _upgrades = new Dictionary<string, Upgrade>();
             SetupUpgrades();
         }
 
         public bool TryUpgrade(IUpgrade upgrade)
         {
-            return _upgrader.TryUpgrade((Upgrade)upgrade);
+            return _buyer.TryBuy((Upgrade)upgrade);
         }
 
         public IUpgrade GetUpgrade(string guid)

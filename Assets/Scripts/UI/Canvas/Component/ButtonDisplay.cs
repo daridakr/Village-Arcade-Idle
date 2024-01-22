@@ -10,6 +10,7 @@ public class ButtonDisplay : MonoBehaviour
     public bool Interactable => _button.interactable;
 
     public event Action Clicked;
+    public event Action<ButtonDisplay> Selected;
 
     private void OnEnable()
     {
@@ -22,9 +23,10 @@ public class ButtonDisplay : MonoBehaviour
         _button.interactable = value;
     }
 
-    private void OnButtonClicked()
+    public void OnButtonClicked()
     {
         Clicked?.Invoke();
+        Selected?.Invoke(this);
     }
 
     private void OnDisable()

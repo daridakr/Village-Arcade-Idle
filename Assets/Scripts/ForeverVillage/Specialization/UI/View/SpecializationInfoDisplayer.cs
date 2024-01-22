@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace ForeverVillage.Scripts
 {
     public class SpecializationInfoDisplayer : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace ForeverVillage.Scripts
 {
     public abstract class Specialization : ISpecialization
     {
@@ -11,9 +11,8 @@ namespace ForeverVillage.Scripts.Character
 
         private readonly SpecializationConfig _config;
 
-        public Specialization(SpecializationConfig config)
-        {
-            _config = config;
-        }
+        public Specialization(SpecializationConfig config) => _config = config;
+
+        public abstract string GetPrefabPath();
     }
 }

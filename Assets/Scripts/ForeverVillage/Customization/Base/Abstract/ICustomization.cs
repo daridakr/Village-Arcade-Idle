@@ -8,7 +8,7 @@ namespace ForeverVillage.Scripts
         public string Title { get; }
         public Sprite Icon { get; }
         public UnityEngine.Object[] Customs { get; }
-        public event Action<UnityEngine.Object> Customized;
+        public event Action<int> Changed;
     }
 }
 

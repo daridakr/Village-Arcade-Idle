@@ -32,13 +32,13 @@ namespace ForeverVillage.Scripts
             return _customizations.ToArray();
         }
 
-        public void SetupCustomizationsFor(MonoBehaviour customizable)
+        public void SetupCustomizationsFor(MonoBehaviour monoCustomizable)
         {
             CustomizationConfig[] configs = _catalog.GetAllCustomizations();
 
             foreach (var config in configs)
             {
-                var customization = config.InstantiateCustomization(customizable);
+                var customization = config.InstantiateCustomization(monoCustomizable);
                 _customizations.Add(customization);
             }
 

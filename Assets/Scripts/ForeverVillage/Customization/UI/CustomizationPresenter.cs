@@ -1,12 +1,10 @@
-using ForeverVillage.Scripts.Character;
-
 namespace ForeverVillage.Scripts
 {
     public sealed class CustomizationPresenter
     {
+        private ICustomizationsController _customizationsController;
         private readonly ICustomization _customization;
         private readonly CustomizationButtonView _view;
-        private CustomizationsController _customizationsController;
 
         private CustomizationButtonView _selected;
 
@@ -16,7 +14,7 @@ namespace ForeverVillage.Scripts
             _view = buttonView;
         }
 
-        public void Initialize(CustomizationsController customizationController)
+        public void Initialize(ICustomizationsController customizationController)
         {
             _customizationsController = customizationController;
 
