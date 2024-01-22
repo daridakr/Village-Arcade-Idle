@@ -11,8 +11,8 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField][FormerlySerializedAs("assets")] private UpgradeCatalog _catalog;
         [SerializeField] private PlayerWallet _playerWallet;
-        [Space][ReadOnly][ShowInInspector] private Dictionary<string, Upgrade> _upgrades;
-
+        
+        private Dictionary<string, Upgrade> _upgrades;
         private UpgradeBuyer _buyer;
 
         private void Awake()

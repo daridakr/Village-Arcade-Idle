@@ -15,23 +15,15 @@ namespace ForeverVillage.Scripts
         [SerializeField] private Transform _characterPoint;
 
         private List<Specialization> _specializations;
-        private Specialization _current;
-
-        private CharacterLoader _characterLoader;
-        private ICustomizableCharacterFactory _characterFactory;
         private CustomizableCharacter _characterInstance;
+        private SpecializationInstantiator _instantiator;
 
         public event Action Initialized;
 
         [Inject]
-        public void Construct(ICustomizableCharacterFactory customCharacterFactory)
+        public void Construct(SpecializationInstantiator instantiator)
         {
-            _characterFactory = customCharacterFactory;
-        }
-
-        private void Awake()
-        {
-            _characterLoader = new CharacterLoader();
+            _instantiator = instantiator;
         }
 
         public void SetupSpecializationsFor(object condition = null)
@@ -51,13 +43,10 @@ namespace ForeverVillage.Scripts
 
         public MonoBehaviour SelectSpecialization(ISpecialization specialization)
         {
-            _current = (Specialization)specialization;
-            CustomizableCharacter customizationPrefab = _characterLoader.LoadCustomizable(_current.GetPrefabPath());
-
             if (_characterInstance != null)
                 Destroy(_characterInstance.gameObject);
 
-            _characterInstance = _characterFactory.Create(customizationPrefab, _characterPoint);
+            _characterInstance = _instantiator.Instantiate((Specialization)specialization, _characterPoint);
             _characterInstance.AddComponent<CharacterTouchRotator>();
 
             return _characterInstance;
