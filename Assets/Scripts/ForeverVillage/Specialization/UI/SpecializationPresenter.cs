@@ -8,9 +8,11 @@ namespace ForeverVillage.Scripts
         private readonly SpecializationButtonView _view;
 
         private ISpecializationsController _controller;
-        //private SpecializationInfoDisplayer _specInfoDisplayer;
 
-        public event Action<SpecializationButtonView> Clicked;
+        public ISpecialization Model => _model;
+        public SpecializationButtonView Button => _view;
+
+        public event Action<SpecializationPresenter> Clicked;
 
         public SpecializationPresenter(ISpecialization specialization, SpecializationButtonView buttonView)
         {
@@ -28,11 +30,9 @@ namespace ForeverVillage.Scripts
 
         private void OnSpecClicked(SpecializationButtonView selected)
         {
-            //_specInfoDisplayer.Display(item.Key.Info);
-            
             _controller.SelectSpecialization(_model);
 
-            Clicked?.Invoke(selected);
+            Clicked?.Invoke(this);
         }
 
         public void Dispose()

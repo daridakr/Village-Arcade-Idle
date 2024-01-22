@@ -36,6 +36,7 @@ namespace ForeverVillage.Scripts.Character
             foreach (var model in genders)
             {
                 GenderButtonView view = Instantiate(_prefab, _content);
+                view.name = model.name;
                 _views.Add(view);
 
                 var presenter = new GenderPresenter(model, view);

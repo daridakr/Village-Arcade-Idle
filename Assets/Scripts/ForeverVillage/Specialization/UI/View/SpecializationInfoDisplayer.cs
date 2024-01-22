@@ -8,10 +8,10 @@ namespace ForeverVillage.Scripts
         [SerializeField] private TMP_Text _titleText;
         [SerializeField] private TMP_Text _descriptionText;
 
-        public void Display(SpecializationMetadata data)
+        public void Display(ISpecialization specialization)
         {
-            _titleText.text = data.Title;
-            _descriptionText.text = data.Description;
+            _titleText.text = specialization.Title;
+            _descriptionText.text = specialization.Description;
         }
     }
 }

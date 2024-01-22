@@ -1,16 +1,16 @@
-using ForeverVillage.Scripts.Character;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace ForeverVillage.Scripts
 {
-    public sealed class SpecializationButtonsViewer : MonoBehaviour
+    public sealed class SpecializationsViewer : MonoBehaviour
     {
-        [SerializeField] private CreationStepDisplay _displayer;
-        [SerializeField] private SpecializationButtonView _prefab;
-        [SerializeField] private Transform _content;
-        [SerializeField] private ISpecializationsController _controller;
+        [SerializeField] private SpecializationButtonView _buttonPrefab;
+        [SerializeField] private Transform _buttonsContent;
+        [SerializeField] private SpecializationInfoDisplayer _infoDisplayer;
+        
+        private ISpecializationsController _controller;
 
         private List<SpecializationPresenter> _presenters;
         private List<SpecializationButtonView> _views;
@@ -25,7 +25,6 @@ namespace ForeverVillage.Scripts
             _views = new List<SpecializationButtonView>();
 
             _controller.Initialized += CreateSpecializationButtons;
-            //_displayer.NextButtonClicked += ClearContent;
         }
 
         private void CreateSpecializationButtons()
@@ -36,7 +35,7 @@ namespace ForeverVillage.Scripts
 
             foreach (var model in specializations)
             {
-                SpecializationButtonView view = Instantiate(_prefab, _content);
+                SpecializationButtonView view = Instantiate(_buttonPrefab, _buttonsContent);
                 view.name = model.Title;
                 _views.Add(view);
 
@@ -49,13 +48,15 @@ namespace ForeverVillage.Scripts
             _views[0].Select();
         }
 
-        private void OnSpecButtonClicked(SpecializationButtonView clicked)
+        private void OnSpecButtonClicked(SpecializationPresenter clicked)
         {
             if (_selected != null)
                 _selected.SetUnclicked();
 
-            clicked.SetClicked();
-            _selected = clicked;
+            clicked.Button.SetClicked();
+            _selected = clicked.Button;
+
+            _infoDisplayer.Display(clicked.Model);
         }
 
         private void ClearContent()
@@ -76,10 +77,6 @@ namespace ForeverVillage.Scripts
             _views.Clear();
         }
 
-        private void OnDisable()
-        {
-            _displayer.Displayed -= CreateSpecializationButtons;
-            _displayer.NextButtonClicked -= ClearContent;
-        }
+        private void OnDisable() => _controller.Initialized -= CreateSpecializationButtons;
     }
 }
