@@ -850,7 +850,6 @@ GameObject:
   m_Component:
   - component: {fileID: 468014}
   - component: {fileID: 9576382}
-  - component: {fileID: -7790693753335816135}
   - component: {fileID: 1575871909710565379}
   m_Layer: 0
   m_Name: FemaleKnight
@@ -912,18 +911,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7790693753335816135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3b8b4d0380a71c4eb5ae5391874c327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1575871909710565379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,6 +927,7 @@ MonoBehaviour:
   - {fileID: 13771990}
   - {fileID: 2950178750023239382}
   _headRig: {fileID: 449378}
+  _head: {fileID: 2950178750024275918}
 --- !u!1 &136206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2226,11 @@ PrefabInstance:
 --- !u!23 &2950178750023239382 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2330190, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}
+  m_PrefabInstance: {fileID: 2950178750025238680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &2950178750024275918 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 3366742, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}
   m_PrefabInstance: {fileID: 2950178750025238680}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2950178750025685858 stripped

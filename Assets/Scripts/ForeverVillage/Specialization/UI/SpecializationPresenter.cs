@@ -1,4 +1,6 @@
+using ForeverVillage.Scripts.Character;
 using System;
+using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
@@ -8,6 +10,7 @@ namespace ForeverVillage.Scripts
         private readonly SpecializationButtonView _view;
 
         private ISpecializationsController _controller;
+        private ICustomizationsController _customizationsController;
 
         public ISpecialization Model => _model;
         public SpecializationButtonView Button => _view;
@@ -20,9 +23,10 @@ namespace ForeverVillage.Scripts
             _view = buttonView;
         }
 
-        public void Initialize(ISpecializationsController specializationsController)
+        public void Initialize(ISpecializationsController specializationsController, ICustomizationsController customizationsController)
         {
             _controller = specializationsController;
+            _customizationsController = customizationsController;
 
             _view.SetIcon(_model.Icon);
             _view.Selected += OnSpecClicked;
@@ -30,14 +34,12 @@ namespace ForeverVillage.Scripts
 
         private void OnSpecClicked(SpecializationButtonView selected)
         {
-            _controller.SelectSpecialization(_model);
+            MonoBehaviour instance = _controller.SelectSpecialization(_model);
+            _customizationsController.SetupCustomizationsFor(instance);
 
             Clicked?.Invoke(this);
         }
 
-        public void Dispose()
-        {
-            _view.Selected -= OnSpecClicked;
-        }
+        public void Dispose() => _view.Selected -= OnSpecClicked;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,16 +6,17 @@ namespace ForeverVillage.Scripts
     public abstract class RigObjectsCustomization : Customization
     {
         private readonly RigObjectsCustomizationConfig _config;
-        public override UnityEngine.Object[] Customs => _config.Customs;
-
-        private Transform[] _rigs;
         private List<GameObject> _createdSubObjects;
 
-        public override event Action<UnityEngine.Object> Customized;
+        protected List<Transform> _rigs;
+
+        public override Object[] Customs => _config.Customs;
 
         public RigObjectsCustomization(RigObjectsCustomizationConfig config) : base(config)
         {
             _config = config;
+
+            _rigs = new List<Transform>();
             _createdSubObjects = new List<GameObject>();
         }
 
@@ -33,7 +33,7 @@ namespace ForeverVillage.Scripts
         {
             foreach (GameObject subObject in _createdSubObjects)
             {
-                UnityEngine.Object.Destroy(subObject.gameObject);
+                Object.Destroy(subObject.gameObject);
             }
 
             _createdSubObjects.Clear();
@@ -43,7 +43,7 @@ namespace ForeverVillage.Scripts
         {
             foreach (Transform rig in _rigs)
             {
-                _createdSubObjects.Add((GameObject)UnityEngine.Object.Instantiate((UnityEngine.Object)Customs[index], rig));
+                _createdSubObjects.Add((GameObject)Object.Instantiate(Customs[index], rig));
             }
         }
     }

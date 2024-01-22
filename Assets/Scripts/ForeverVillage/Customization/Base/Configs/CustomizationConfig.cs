@@ -4,7 +4,6 @@ namespace ForeverVillage.Scripts
 {
     public abstract class CustomizationConfig : ScriptableObject
     {
-        //[SerializeField] private abstract CustomObject[] _customs;
         [SerializeField] private CustomizationMetadata _metadata;
 
         private Customization _customization;

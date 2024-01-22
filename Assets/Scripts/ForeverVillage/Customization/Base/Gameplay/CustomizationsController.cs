@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,12 +11,33 @@ namespace ForeverVillage.Scripts
         [SerializeField][FormerlySerializedAs("assets")] private CustomizationCatalog _catalog;
         
         private List<Customization> _customizations;
-        private int _startIndex = 0;
         private Customization _currentCustomization;
+        private int _startIndex = 0;
 
-        private void Awake()
+        public event Action Initialized;
+
+        public void SetupCustomizationsFor(MonoBehaviour monoCustomizable)
         {
             _customizations = new List<Customization>();
+
+            CustomizationConfig[] configs = _catalog.GetAllCustomizations();
+
+            foreach (var config in configs)
+            {
+                var customization = config.InstantiateCustomization(monoCustomizable);
+                _customizations.Add(customization);
+            }
+
+            UpdateCustoms();
+            Initialized?.Invoke();
+        }
+
+        private void UpdateCustoms()
+        {
+            foreach (var customization in _customizations)
+            {
+                customization.ApplyCustom(_startIndex);
+            }
         }
 
         public void SelectCustom(ICustomization customization)
@@ -30,27 +52,6 @@ namespace ForeverVillage.Scripts
                 return null;
 
             return _customizations.ToArray();
-        }
-
-        public void SetupCustomizationsFor(MonoBehaviour monoCustomizable)
-        {
-            CustomizationConfig[] configs = _catalog.GetAllCustomizations();
-
-            foreach (var config in configs)
-            {
-                var customization = config.InstantiateCustomization(monoCustomizable);
-                _customizations.Add(customization);
-            }
-
-            UpdateCustoms();
-        }
-
-        private void UpdateCustoms()
-        {
-            foreach (var customization in _customizations)
-            {
-                customization.ApplyCustom(_startIndex);
-            }
         }
     }
 }

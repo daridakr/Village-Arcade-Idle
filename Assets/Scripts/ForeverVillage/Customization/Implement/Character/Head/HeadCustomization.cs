@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace ForeverVillage.Scripts.Character
 {
-    public class HeadCustomization : RigObjectsCustomization
+    public sealed class HeadCustomization : MeshCustomization
     {
-        public HeadCustomization(RigObjectsCustomizationConfig config) : base(config)
+        private readonly HeadCustomizationConfig _config;
+
+        public HeadCustomization(CustomizableCharacter character, HeadCustomizationConfig config) : base(config)
         {
+            _config = config;
+
+            _meshFilter = character.Head;
         }
     }
 }

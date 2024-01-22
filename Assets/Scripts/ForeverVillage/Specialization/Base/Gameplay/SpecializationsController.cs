@@ -21,10 +21,7 @@ namespace ForeverVillage.Scripts
         public event Action Initialized;
 
         [Inject]
-        public void Construct(SpecializationInstantiator instantiator)
-        {
-            _instantiator = instantiator;
-        }
+        public void Construct(SpecializationInstantiator instantiator) => _instantiator = instantiator;
 
         public void SetupSpecializationsFor(object condition = null)
         {

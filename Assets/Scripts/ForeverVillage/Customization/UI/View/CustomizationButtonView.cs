@@ -16,7 +16,7 @@ namespace ForeverVillage.Scripts
         private void OnEnable()
         {
             _button = GetComponent<ButtonDisplay>();
-            _button.Clicked += OnClicked;
+            _button.Clicked += Select;
         }
 
         public void SetIcon(Sprite icon)
@@ -24,17 +24,18 @@ namespace ForeverVillage.Scripts
             _icon.sprite = icon;
         }
 
-        public void Select() => _button.SetInteractable(false);
-        public void Unselect() => _button.SetInteractable(true);
+        public void SetUnclicked() => _button.SetInteractable(true);
+        public void SetClicked() => _button.SetInteractable(false);
 
-        private void OnClicked()
+        public void Select()
         {
+            SetClicked();
             Selected?.Invoke(this);
         }
 
         private void OnDisable()
         {
-            _button.Clicked -= OnClicked;
+            _button.Clicked -= Select;
         }
     }
 }

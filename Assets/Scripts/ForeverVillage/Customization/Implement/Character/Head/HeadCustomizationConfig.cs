@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadCustomizationConfig : MonoBehaviour
+namespace ForeverVillage.Scripts.Character
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = "HeadCustomizationConfig", menuName = "Customization/Character/Head")]
+    public class HeadCustomizationConfig : MeshCustomizationConfig
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override Customization InstantiateCustomization(MonoBehaviour target)
+        {
+            return new HeadCustomization((CustomizableCharacter)target, this);
+        }
     }
 }

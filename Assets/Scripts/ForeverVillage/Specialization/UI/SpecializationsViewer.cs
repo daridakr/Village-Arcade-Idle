@@ -11,18 +11,23 @@ namespace ForeverVillage.Scripts
         [SerializeField] private SpecializationInfoDisplayer _infoDisplayer;
         
         private ISpecializationsController _controller;
+        private ICustomizationsController _customizationsController;
 
         private List<SpecializationPresenter> _presenters;
-        private List<SpecializationButtonView> _views;
+        private List<SpecializationButtonView> _buttonsViews;
         private SpecializationButtonView _selected;
 
         [Inject]
-        public void Construct(ISpecializationsController controller) => _controller = controller;
+        public void Construct(ISpecializationsController controller, ICustomizationsController customizationsController)
+        {
+            _controller = controller;
+            _customizationsController = customizationsController;
+        }
 
         private void OnEnable()
         {
             _presenters = new List<SpecializationPresenter>();
-            _views = new List<SpecializationButtonView>();
+            _buttonsViews = new List<SpecializationButtonView>();
 
             _controller.Initialized += CreateSpecializationButtons;
         }
@@ -37,15 +42,15 @@ namespace ForeverVillage.Scripts
             {
                 SpecializationButtonView view = Instantiate(_buttonPrefab, _buttonsContent);
                 view.name = model.Title;
-                _views.Add(view);
+                _buttonsViews.Add(view);
 
                 var presenter = new SpecializationPresenter(model, view);
-                presenter.Initialize(_controller);
+                presenter.Initialize(_controller, _customizationsController);
                 presenter.Clicked += OnSpecButtonClicked;
                 _presenters.Add(presenter);
             }
 
-            _views[0].Select();
+            _buttonsViews[0].Select();
         }
 
         private void OnSpecButtonClicked(SpecializationPresenter clicked)
@@ -69,12 +74,12 @@ namespace ForeverVillage.Scripts
 
             _presenters.Clear();
 
-            foreach (var view in _views)
+            foreach (var view in _buttonsViews)
             {
                 Destroy(view.gameObject);
             }
 
-            _views.Clear();
+            _buttonsViews.Clear();
         }
 
         private void OnDisable() => _controller.Initialized -= CreateSpecializationButtons;

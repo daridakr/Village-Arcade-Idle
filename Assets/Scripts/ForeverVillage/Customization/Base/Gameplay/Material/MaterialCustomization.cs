@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +5,11 @@ namespace ForeverVillage.Scripts
 {
     public abstract class MaterialCustomization : Customization
     {
-        protected List<Renderer> _renderers;
         private readonly MaterialCustomizationConfig _config;
-        public override UnityEngine.Object[] Customs => _config.Customs;
 
-        public override event Action<UnityEngine.Object> Customized;
+        protected List<Renderer> _renderers;
+
+        public override Object[] Customs => _config.Customs;
 
         public MaterialCustomization(MaterialCustomizationConfig config) : base(config)
         {
@@ -27,7 +26,6 @@ namespace ForeverVillage.Scripts
             {
                 renderer.material = (Material)Customs[index];
             }
-            //Customized?.Invoke(Customs[index]);
         }
     }
 }

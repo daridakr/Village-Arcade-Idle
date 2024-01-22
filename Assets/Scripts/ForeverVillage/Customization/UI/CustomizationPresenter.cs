@@ -1,41 +1,40 @@
+using System;
+
 namespace ForeverVillage.Scripts
 {
     public sealed class CustomizationPresenter
     {
-        private ICustomizationsController _customizationsController;
-        private readonly ICustomization _customization;
+        private readonly ICustomization _model;
         private readonly CustomizationButtonView _view;
 
-        private CustomizationButtonView _selected;
+        private ICustomizationsController _controller;
+
+        public ICustomization Model => _model;
+        public CustomizationButtonView Button => _view;
+
+        public event Action<CustomizationPresenter> Clicked;
 
         public CustomizationPresenter(ICustomization customization, CustomizationButtonView buttonView)
         {
-            _customization = customization;
+            _model = customization;
             _view = buttonView;
         }
 
         public void Initialize(ICustomizationsController customizationController)
         {
-            _customizationsController = customizationController;
+            _controller = customizationController;
 
-            _view.SetIcon(_customization.Icon);
+            _view.SetIcon(_model.Icon);
             _view.Selected += OnCustomClicked;
         }
 
         private void OnCustomClicked(CustomizationButtonView selected)
         {
-            if (_selected != null)
-                _selected.Unselect();
+            _controller.SelectCustom(_model);
 
-            selected.Select();
-            _selected = selected;
-
-            _customizationsController.SelectCustom(_customization);
+            Clicked?.Invoke(this);
         }
 
-        public void Dispose()
-        {
-            _view.Selected -= OnCustomClicked;
-        }
+        public void Dispose() => _view.Selected -= OnCustomClicked;
     }
 }

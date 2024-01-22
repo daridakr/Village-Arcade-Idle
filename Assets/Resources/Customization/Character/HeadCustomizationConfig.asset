@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6d92fded32671468b61d7033a5eb61, type: 3}
+  m_Name: HeadCustomizationConfig
+  m_EditorClassIdentifier: 
+  _metadata:
+    Title: Face
+    Icon: {fileID: 21300000, guid: dd80f7ecbe4836847bcb259c66592bb3, type: 3}
+  _meshes:
+  - {fileID: 3328936, guid: 76cb37c5595f27645bff2e6bac50f720, type: 3}
+  - {fileID: 3347710, guid: d8320899a5fba4a47a46734c1d354c77, type: 3}
+  - {fileID: 3366742, guid: ccbf9dfee131ccf45b0ea49caf2af621, type: 3}
+  - {fileID: 3306172, guid: 3fbf10de866b4ba40a643fe76743849d, type: 3}
+  - {fileID: 3324290, guid: 088f41b4331978a49b6c8edf001ddd2a, type: 3}
+  - {fileID: 3315778, guid: eded3815df2869e40a33fd9aa9444e56, type: 3}
+  - {fileID: 3344614, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}
+  - {fileID: 3335458, guid: f016418b3890cfa438a921bd21cf09da, type: 3}
+  - {fileID: 3322200, guid: 8349c32c673d89e43b4ef518537de2dd, type: 3}

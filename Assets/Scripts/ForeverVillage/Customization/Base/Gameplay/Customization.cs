@@ -14,7 +14,6 @@ namespace ForeverVillage.Scripts
         private readonly CustomizationConfig _config;
         private int _currentIndex;
 
-        public abstract event Action<UnityEngine.Object> Customized;
         public event Action<int> Changed;
 
         public Customization(CustomizationConfig config) => _config = config;
