@@ -9,6 +9,8 @@ namespace ForeverVillage.Scripts
         [SerializeField] private CustomizationButtonView _buttonPrefab;
         [SerializeField] private Transform _buttonsContent;
         [SerializeField] private CustomizationInfoDisplayer _infoDisplayer;
+        [SerializeField] private ButtonDisplay _nextButton;
+        [SerializeField] private ButtonDisplay _previousButton;
 
         private ICustomizationsController _controller;
 
@@ -25,6 +27,8 @@ namespace ForeverVillage.Scripts
             _buttonsViews = new List<CustomizationButtonView>();
 
             _controller.Initialized += CreateCustomizationButtons;
+            _nextButton.Clicked += _controller.NextCurrent;
+            _previousButton.Clicked += _controller.PreviousCurrent;
         }
 
         private void CreateCustomizationButtons()

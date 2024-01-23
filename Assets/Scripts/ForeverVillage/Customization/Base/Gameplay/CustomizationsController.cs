@@ -32,18 +32,20 @@ namespace ForeverVillage.Scripts
             Initialized?.Invoke();
         }
 
-        private void UpdateCustoms()
-        {
-            foreach (var customization in _customizations)
-            {
-                customization.ApplyCustom(_startIndex);
-            }
-        }
-
         public void SelectCustom(ICustomization customization)
         {
             _currentCustomization = (Customization)customization;
-            _currentCustomization.ApplyCustom(_startIndex);
+            _currentCustomization.ApplyCustom(_currentCustomization.CurrentIndex);
+        }
+
+        public void NextCurrent()
+        {
+            _currentCustomization?.Next();
+        }
+
+        public void PreviousCurrent()
+        {
+            _currentCustomization?.Previous();
         }
 
         public ICustomization[] GetAllCustomizations()
@@ -52,6 +54,14 @@ namespace ForeverVillage.Scripts
                 return null;
 
             return _customizations.ToArray();
+        }
+
+        private void UpdateCustoms()
+        {
+            foreach (var customization in _customizations)
+            {
+                customization.ApplyCustom(_startIndex);
+            }
         }
     }
 }

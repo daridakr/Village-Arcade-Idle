@@ -9,7 +9,9 @@ namespace ForeverVillage.Scripts
     {
         [ReadOnly][ShowInInspector] public string Title => _config.Meta.Title;
         [ReadOnly][PreviewField] public Sprite Icon => _config.Meta.Icon;
+
         public abstract UnityEngine.Object[] Customs { get; }
+        public int CurrentIndex => _currentIndex;
 
         private readonly CustomizationConfig _config;
         private int _currentIndex;
