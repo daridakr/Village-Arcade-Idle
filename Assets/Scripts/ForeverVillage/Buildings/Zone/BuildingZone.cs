@@ -11,11 +11,13 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerWalletTrigger _playerWalletTrigger;
         [SerializeField] private Transform _buildPoint;
         [SerializeField] private BuildingZoneView _view; // should remove after save builded buildings implementation and rewrite to like regionZone w events
+        [SerializeField] private GameObject _clearableTrash;
 
         #region Gameplay
         private ExperiencePointGiver _experienceGiver;
         private PlayerTimerCleaner _cleaner;
         private PlayerTimerBuilder _builder;
+        private GameObject _trash;
         #endregion
         #region Model
         private Building _building;
@@ -62,6 +64,7 @@ namespace ForeverVillage.Scripts
         private void OnDestroyedZone()
         {
             _savedModel.Destroyed -= OnDestroyedZone;
+            _trash = Instantiate(_clearableTrash, _buildPoint);
             _view.CanClear += Clear;
         }
 
@@ -74,8 +77,6 @@ namespace ForeverVillage.Scripts
             buyer.SpendCoins(_clearPrice);
 
             _cleaner.StartClean(this);
-            _savedModel.Clear();
-
             _cleaner.Stopped += OnCleanStopped;
         }
 
@@ -83,6 +84,7 @@ namespace ForeverVillage.Scripts
         {
             _cleaner.Stopped -= OnCleanStopped;
 
+            _savedModel.Clear();
             _experienceGiver.Give(_expPointsCount);
         }
 
@@ -90,10 +92,9 @@ namespace ForeverVillage.Scripts
         {
             _savedModel.Cleared -= OnClearedZone;
 
-            DestroyedBuilding destroyedBuilding = _buildPoint.GetComponentInChildren<DestroyedBuilding>();
-            destroyedBuilding?.Clear();
-
+            Destroy(_trash.gameObject);
             Cleared?.Invoke();
+
             _view.CanBuild += Build;
         }
 
