@@ -1,3 +1,4 @@
+using ForeverVillage.Scripts.Character;
 using UnityEngine;
 
 namespace ForeverVillage.Scripts
@@ -14,6 +15,7 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerVillagersList _villagers;
         [SerializeField] private PlayerRegionsList _regions;
         [SerializeField] private PlayerMovement _movement;
+        [SerializeField] private Transform _model;
 
         private PlayerWallet _wallet;
 
@@ -32,6 +34,12 @@ namespace ForeverVillage.Scripts
         private void Awake()
         {
             _wallet = GetComponent<PlayerWallet>();
+        }
+
+        // or smth like 'characterModel' saved entity with prefabPath to spec
+        public void InstantiateModel(CustomizableCharacter model)
+        {
+            Instantiate(model);
         }
     }
 }

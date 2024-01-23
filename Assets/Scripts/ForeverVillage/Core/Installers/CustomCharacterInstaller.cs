@@ -12,6 +12,7 @@ namespace ForeverVillage.Scripts.Character
         {
             BindFactory();
             BindControllers();
+            BindRepository();
         }
 
         private void BindFactory()
@@ -29,6 +30,11 @@ namespace ForeverVillage.Scripts.Character
                To<CustomizationsController>().FromInstance(_customizations).AsSingle();
 
             Container.Bind<SpecializationInstantiator>().AsSingle();
+        }
+
+        private void BindRepository()
+        {
+            Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
         }
     }
 }

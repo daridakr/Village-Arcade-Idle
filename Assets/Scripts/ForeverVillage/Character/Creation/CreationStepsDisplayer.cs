@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ForeverVillage.Scripts.Character
@@ -7,6 +8,8 @@ namespace ForeverVillage.Scripts.Character
         [SerializeField] private CreationStepDisplay[] _steps;
 
         private int _currentStepIndex = 0;
+
+        public event Action Ended;
 
         private void OnEnable()
         {
@@ -51,9 +54,27 @@ namespace ForeverVillage.Scripts.Character
             DisplayCurrentStep();
         }
 
+        public void ResetToLast()
+        {
+            _currentStepIndex = _steps.Length - 1;
+            DisplayCurrentStep();
+        }
+
+        public void ResetToStart()
+        {
+            _currentStepIndex = 0;
+            DisplayCurrentStep();
+        }
+
         private bool CheckForCorrectIndex()
         {
-            return _currentStepIndex >= 0 && _currentStepIndex < _steps.Length;
+            if (_currentStepIndex >= _steps.Length)
+            {
+                Ended?.Invoke();
+                return false;
+            }
+
+            return _currentStepIndex >= 0;
         }
 
         private void OnDisable()

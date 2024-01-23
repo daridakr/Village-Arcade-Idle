@@ -22,6 +22,7 @@ namespace ForeverVillage.Scripts
         {
             _playerInstance = Container.InstantiatePrefabForComponent<Player>
                 (_prefab.gameObject, _prefab.Position, Quaternion.identity, null);
+            //_playerInstance.InstantiateModel();
 
             Container.Bind<Player>().FromInstance(_playerInstance).AsSingle().NonLazy();
         }

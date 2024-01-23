@@ -15,6 +15,7 @@ namespace ForeverVillage.Scripts
         [SerializeField] private Transform _characterPoint;
 
         private List<Specialization> _specializations;
+        private Specialization _selected;
         private CustomizableCharacter _characterInstance;
         private SpecializationInstantiator _instantiator;
 
@@ -40,10 +41,12 @@ namespace ForeverVillage.Scripts
 
         public MonoBehaviour SelectSpecialization(ISpecialization specialization)
         {
+            _selected = (Specialization)specialization;
+
             if (_characterInstance != null)
                 Destroy(_characterInstance.gameObject);
 
-            _characterInstance = _instantiator.Instantiate((Specialization)specialization, _characterPoint);
+            _characterInstance = _instantiator.Instantiate(_selected, _characterPoint);
             _characterInstance.AddComponent<CharacterTouchRotator>();
 
             return _characterInstance;
@@ -52,6 +55,11 @@ namespace ForeverVillage.Scripts
         public ISpecialization[] GetAllSpecializations()
         {
             return _specializations.ToArray();
+        }
+
+        public ISpecialization GetSelectedSpecialization()
+        {
+            return _selected;
         }
     }
 }
