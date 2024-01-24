@@ -28,7 +28,8 @@ namespace ForeverVillage.Scripts
 
         private void BindComponents()
         {
-            Container.Bind<CharacterModel>().FromInstance(_playerInstance.Model).AsSingle();
+            Container.Bind<PlayerCharacterModel>().FromInstance(_playerInstance.Model).AsSingle();
+            Container.Bind<PlayerName>().FromInstance(_playerInstance.Name).AsSingle();
             Container.Bind<PlayerMovement>().FromInstance(_playerInstance.Movement).AsSingle();
             Container.Bind<PlayerTimerCleaner>().FromInstance(_playerInstance.Cleaner).AsSingle();
             Container.Bind<PlayerTimerBuilder>().FromInstance(_playerInstance.Builder).AsSingle();

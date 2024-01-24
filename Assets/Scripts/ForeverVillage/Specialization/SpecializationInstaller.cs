@@ -6,9 +6,9 @@ namespace ForeverVillage.Scripts
         IInitializable
     {
         private ISpecializationRepository _repository;
-        private readonly CharacterModel _characterModel;
+        private readonly PlayerCharacterModel _characterModel;
 
-        public SpecializationInstaller(ISpecializationRepository repository, CharacterModel characterModel)
+        public SpecializationInstaller(ISpecializationRepository repository, PlayerCharacterModel characterModel)
         {
             _repository = repository;
             _characterModel = characterModel;

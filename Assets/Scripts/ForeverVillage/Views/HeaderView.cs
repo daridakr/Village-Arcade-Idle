@@ -4,7 +4,7 @@ namespace ForeverVillage.Scripts
 {
     public class HeaderView : CanvasView
     {
-        [SerializeField] private StartGame _start;
+        [SerializeField] private GameStarter _start;
 
         private void Start()
         {

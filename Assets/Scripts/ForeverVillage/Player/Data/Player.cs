@@ -1,4 +1,3 @@
-using ForeverVillage.Scripts.Character;
 using UnityEngine;
 
 namespace ForeverVillage.Scripts
@@ -6,8 +5,7 @@ namespace ForeverVillage.Scripts
     [RequireComponent(typeof(PlayerWallet))]
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerTimerCleaner _cleaner;
-        [SerializeField] private PlayerTimerBuilder _builder;
+        [SerializeField] private PlayerName _name;
         [SerializeField] private PlayerLevel _level;
         [SerializeField] private PlayerCoins _coins;
         [SerializeField] private PlayerGems _gems;
@@ -15,11 +13,14 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerVillagersList _villagers;
         [SerializeField] private PlayerRegionsList _regions;
         [SerializeField] private PlayerMovement _movement;
-        [SerializeField] private CharacterModel _model;
+        [SerializeField] private PlayerCharacterModel _model;
+        [SerializeField] private PlayerTimerCleaner _cleaner;
+        [SerializeField] private PlayerTimerBuilder _builder;
 
         private PlayerWallet _wallet;
 
-        public CharacterModel Model => _model;
+        public PlayerName Name => _name;
+        public PlayerCharacterModel Model => _model;
         public PlayerMovement Movement => _movement;
         public PlayerTimerCleaner Cleaner => _cleaner;
         public PlayerTimerBuilder Builder => _builder;

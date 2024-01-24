@@ -102,7 +102,7 @@ namespace ForeverVillage.Scripts
 
         private void BuyRegion(PlayerWallet wallet)
         {
-            if (wallet.IsEmpty == false)
+            if (wallet.IsEmpty)
                 return;
 
             _reduceValue = Mathf.Clamp((int)(_data.TotalCost * 1.5f * Time.deltaTime), 1, _data.TotalCost);
