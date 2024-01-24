@@ -54,6 +54,9 @@ namespace ForeverVillage.Scripts
 
             Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<SpecializationInstaller>().AsSingle();
+
+            Container.Bind<ICustomizationsRepository>().To<CustomizationsRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CustomizationDataInstaller>().AsSingle();
         }
     }
 }

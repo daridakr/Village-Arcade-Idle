@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129b5413a47a5f44cabf6aee391390e3, type: 3}
   m_Name: SkinColorCustomizationConfig
   m_EditorClassIdentifier: 
+  _id: SkinColorCustomization
   _metadata:
     Title: Skin Color
     Icon: {fileID: 21300000, guid: b08982ae127e5d04ebddf39c05c50698, type: 3}

@@ -17,14 +17,14 @@ namespace ForeverVillage.Scripts
             _renderers = new List<Renderer>();
         }
 
-        public override void ApplyCustom(int index)
+        public override void ApplyCustom()
         {
             if (_renderers == null)
                 return;
 
             foreach (Renderer renderer in _renderers)
             {
-                renderer.material = (Material)Customs[index];
+                renderer.material = (Material)Customs[Index];
             }
         }
     }

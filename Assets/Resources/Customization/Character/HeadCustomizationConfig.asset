@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6d92fded32671468b61d7033a5eb61, type: 3}
   m_Name: HeadCustomizationConfig
   m_EditorClassIdentifier: 
+  _id: HeadCustomization
   _metadata:
     Title: Face
     Icon: {fileID: 21300000, guid: dd80f7ecbe4836847bcb259c66592bb3, type: 3}

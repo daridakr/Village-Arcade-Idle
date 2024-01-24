@@ -5,7 +5,7 @@ namespace ForeverVillage.Scripts
     public sealed class SpecializationInstaller :
         IInitializable
     {
-        private ISpecializationRepository _repository;
+        private readonly ISpecializationRepository _repository;
         private readonly PlayerCharacterModel _characterModel;
 
         public SpecializationInstaller(ISpecializationRepository repository, PlayerCharacterModel characterModel)
@@ -22,7 +22,7 @@ namespace ForeverVillage.Scripts
             }
         }
 
-        public void Install(SpecializationData data)
+        private void Install(SpecializationData data)
         {
             _characterModel.Setup(data.PrefabPath);
         }

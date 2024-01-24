@@ -15,12 +15,12 @@ namespace ForeverVillage.Scripts
             _config = config;
         }
 
-        public override void ApplyCustom(int index)
+        public override void ApplyCustom()
         {
             if (_meshFilter == null)
                 return;
 
-            MeshFilter meshFilter = (MeshFilter)Customs[index];
+            MeshFilter meshFilter = (MeshFilter)Customs[Index];
             _meshFilter.sharedMesh = meshFilter.sharedMesh;
         }
     }

@@ -35,6 +35,7 @@ namespace ForeverVillage.Scripts.Character
         private void BindRepository()
         {
             Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
+            Container.Bind<ICustomizationsRepository>().To<CustomizationsRepository>().AsSingle();
         }
     }
 }

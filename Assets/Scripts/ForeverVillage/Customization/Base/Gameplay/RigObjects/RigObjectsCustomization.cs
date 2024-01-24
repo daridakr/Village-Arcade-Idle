@@ -20,13 +20,13 @@ namespace ForeverVillage.Scripts
             _createdSubObjects = new List<GameObject>();
         }
 
-        public override void ApplyCustom(int index)
+        public override void ApplyCustom()
         {
             if (_rigs == null)
                 return;
 
             DestroyPreviousSubObjects();
-            CreateCurrentSubObjects(index);
+            CreateCurrentSubObjects();
         }
 
         private void DestroyPreviousSubObjects()
@@ -39,11 +39,11 @@ namespace ForeverVillage.Scripts
             _createdSubObjects.Clear();
         }
 
-        private void CreateCurrentSubObjects(int index)
+        private void CreateCurrentSubObjects()
         {
             foreach (Transform rig in _rigs)
             {
-                _createdSubObjects.Add((GameObject)Object.Instantiate(Customs[index], rig));
+                _createdSubObjects.Add((GameObject)Object.Instantiate(Customs[Index], rig));
             }
         }
     }

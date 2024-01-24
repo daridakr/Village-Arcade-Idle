@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
-    public abstract class Upgrade : IUpgrade
+    public abstract class Upgrade :
+        IUpgrade
     {
         [ReadOnly][ShowInInspector] public string Id => _config.Id;
         [ReadOnly][ShowInInspector] public int Level => _currentLevel;

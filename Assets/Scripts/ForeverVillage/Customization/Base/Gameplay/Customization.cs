@@ -5,20 +5,32 @@ using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
-    public abstract class Customization : ICustomization
+    public abstract class Customization :
+        ICustomization
     {
+        [ReadOnly][ShowInInspector] public string Id => _config.Id;
         [ReadOnly][ShowInInspector] public string Title => _config.Meta.Title;
+        [ReadOnly][ShowInInspector] public int Index => _currentIndex;
         [ReadOnly][PreviewField] public Sprite Icon => _config.Meta.Icon;
 
         public abstract UnityEngine.Object[] Customs { get; }
-        public int CurrentIndex => _currentIndex;
 
         private readonly CustomizationConfig _config;
-        private int _currentIndex;
+        private int _currentIndex = 0;
 
         public event Action<int> Changed;
 
         public Customization(CustomizationConfig config) => _config = config;
+
+        public void Setup(int index)
+        {
+            if (index <= 0 || index >= Customs.Count())
+            {
+                throw new ArgumentException($"Index {index} for customization {Title} is invalid. Max allowable index - {Customs.Count()}");
+            }
+
+            _currentIndex = index;
+        }
 
         public void Next()
         {
@@ -27,7 +39,7 @@ namespace ForeverVillage.Scripts
             if (_currentIndex >= Customs.Count())
                 _currentIndex = 0;
 
-            ApplyCustom(_currentIndex);
+            ApplyCustom();
             Changed?.Invoke(_currentIndex);
         }
 
@@ -38,10 +50,10 @@ namespace ForeverVillage.Scripts
             if (_currentIndex < 0)
                 _currentIndex = Customs.Count() - 1;
 
-            ApplyCustom(_currentIndex);
+            ApplyCustom();
             Changed?.Invoke(_currentIndex);
         }
 
-        public abstract void ApplyCustom(int index);
+        public abstract void ApplyCustom();
     }
 }

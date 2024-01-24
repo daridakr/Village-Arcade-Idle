@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,23 +10,22 @@ namespace ForeverVillage.Scripts
         ICustomizationsController
     {
         [SerializeField][FormerlySerializedAs("assets")] private CustomizationCatalog _catalog;
-        
-        private List<Customization> _customizations;
+
+        private Dictionary<string, Customization> _customizations;
         private Customization _currentCustomization;
-        private int _startIndex = 0;
 
         public event Action Initialized;
 
         public void SetupCustomizationsFor(MonoBehaviour monoCustomizable)
         {
-            _customizations = new List<Customization>();
+            _customizations = new Dictionary<string, Customization>();
 
             CustomizationConfig[] configs = _catalog.GetAllCustomizations();
 
             foreach (var config in configs)
             {
                 var customization = config.InstantiateCustomization(monoCustomizable);
-                _customizations.Add(customization);
+                _customizations.Add(customization.Id, customization);
             }
 
             UpdateCustoms();
@@ -35,7 +35,7 @@ namespace ForeverVillage.Scripts
         public void SelectCustom(ICustomization customization)
         {
             _currentCustomization = (Customization)customization;
-            _currentCustomization.ApplyCustom(_currentCustomization.CurrentIndex);
+            _currentCustomization.ApplyCustom();
         }
 
         public void NextCurrent()
@@ -48,19 +48,24 @@ namespace ForeverVillage.Scripts
             _currentCustomization?.Previous();
         }
 
+        public ICustomization GetCustomization(string guid)
+        {
+            return _customizations[guid];
+        }
+
         public ICustomization[] GetAllCustomizations()
         {
             if (_customizations == null)
                 return null;
 
-            return _customizations.ToArray();
+            return _customizations.Values.ToArray();
         }
 
-        private void UpdateCustoms()
+        public void UpdateCustoms()
         {
-            foreach (var customization in _customizations)
+            foreach (var customization in _customizations.Values)
             {
-                customization.ApplyCustom(_startIndex);
+                customization.ApplyCustom();
             }
         }
     }
