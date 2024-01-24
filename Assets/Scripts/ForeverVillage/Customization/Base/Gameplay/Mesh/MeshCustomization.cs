@@ -7,6 +7,7 @@ namespace ForeverVillage.Scripts
         private readonly MeshCustomizationConfig _config;
 
         protected MeshFilter _meshFilter;
+        protected bool _saveMaterial = false;
 
         public override Object[] Customs => _config.Customs;
 
@@ -22,6 +23,9 @@ namespace ForeverVillage.Scripts
 
             MeshFilter meshFilter = (MeshFilter)Customs[Index];
             _meshFilter.sharedMesh = meshFilter.sharedMesh;
+
+            if (_saveMaterial)
+                _meshFilter.GetComponent<MeshRenderer>().sharedMaterial = meshFilter.GetComponent<MeshRenderer>().sharedMaterial;
         }
     }
 }

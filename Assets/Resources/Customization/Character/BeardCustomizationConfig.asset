@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59a27f8e063d67489f9e33dd938727b, type: 3}
+  m_Name: BeardCustomizationConfig
+  m_EditorClassIdentifier: 
+  _id: BeardCustomization
+  _metadata:
+    Title: Beard
+    Icon: {fileID: 21300000, guid: 2799c9c57a987cd448334e467eb028d1, type: 3}
+  _meshes:
+  - {fileID: 3381568, guid: d7b4a2b144622de479bc40ccbeafcd14, type: 3}
+  - {fileID: 3381568, guid: 1175d135a4790394985f672bc652c39e, type: 3}
+  - {fileID: 3366482, guid: ed6778075afcd0843befcfb084a5fca3, type: 3}
+  - {fileID: 3386658, guid: a99cf741ea94a2647b092168c5941c30, type: 3}
+  - {fileID: 3302772, guid: ebf4e9f3e1e870e4bb7f57df12fa3d7d, type: 3}
+  - {fileID: 3308604, guid: 13fb4a9893cff414ab572580d54e2f46, type: 3}
+  - {fileID: 3340152, guid: a918a2897411b094eace13e62d11493d, type: 3}

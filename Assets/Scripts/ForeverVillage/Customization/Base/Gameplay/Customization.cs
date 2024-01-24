@@ -24,7 +24,7 @@ namespace ForeverVillage.Scripts
 
         public void Setup(int index)
         {
-            if (index <= 0 || index >= Customs.Count())
+            if (index < 0 || index >= Customs.Count())
             {
                 throw new ArgumentException($"Index {index} for customization {Title} is invalid. Max allowable index - {Customs.Count()}");
             }

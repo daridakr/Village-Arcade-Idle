@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1923045e5746204695dd27bbcd58057, type: 3}
+  m_Name: HairCustomizationConfig
+  m_EditorClassIdentifier: 
+  _id: HairCustomization
+  _metadata:
+    Title: Hair
+    Icon: {fileID: 21300000, guid: 98e8c7a9f5656c54086346d71eb93c06, type: 3}
+  _meshes:
+  - {fileID: 3330054, guid: 308905115317ac34ab09a8569289ea23, type: 3}
+  - {fileID: 3337012, guid: 3d42956bc6b908c46a0b3408eac25411, type: 3}
+  - {fileID: 3316842, guid: bf9ca856c06af1242a9a8a1ac0eefd76, type: 3}
+  - {fileID: 3306310, guid: 5fee12d791e783948af7ca89fcbd7254, type: 3}
+  - {fileID: 3374444, guid: 7ecdfecaae2c0e94daac87bf87195951, type: 3}
+  - {fileID: 3395090, guid: ace1011ea0ed82b4ba90adbf1c8d73f3, type: 3}
+  - {fileID: 3366914, guid: 8290067664c14604ab6d264cb041eb5e, type: 3}
+  - {fileID: 3370338, guid: cf493ebf54ca662419802a7382e782ad, type: 3}
+  - {fileID: 3367222, guid: 1ba623904b8840548845a71a3ffed86a, type: 3}
+  - {fileID: 3311286, guid: 0431cda7457e8914195f19e9fc4e1664, type: 3}
+  - {fileID: 3311628, guid: d35ede4a3ad951c43b2bc6bd52af5fa3, type: 3}
+  - {fileID: 3304500, guid: fde9992a48ec8694ba95d015f4b59b8e, type: 3}
+  - {fileID: 3385478, guid: 71b0408cebeb5da4ba73b45708846728, type: 3}
+  - {fileID: 3319404, guid: ffc5b9f82e67856478472785c8a14108, type: 3}
+  - {fileID: 3328246, guid: 9f88d24031f03ee49b0ddf72315212c4, type: 3}
+  - {fileID: 3318076, guid: e1e0dab7a2c2b434d91eacfa634b816d, type: 3}
+  - {fileID: 3314240, guid: db8cb86b8e8d0f74a8b793a9dec97de3, type: 3}
+  - {fileID: 3312118, guid: 6bb8970d722d26a439c31ef326c27d50, type: 3}
+  - {fileID: 3376482, guid: 4c5ae321e16f7074db29310c57f10f25, type: 3}
+  - {fileID: 3388836, guid: 0200ca86537add9459c61ee565196758, type: 3}
+  - {fileID: 3381568, guid: d7b4a2b144622de479bc40ccbeafcd14, type: 3}

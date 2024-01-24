@@ -17,9 +17,9 @@ MonoBehaviour:
     Title: Skin Color
     Icon: {fileID: 21300000, guid: b08982ae127e5d04ebddf39c05c50698, type: 3}
   _materials:
-  - {fileID: 2100000, guid: 1b868ce102ba0994f9b0678474742dff, type: 2}
-  - {fileID: 2100000, guid: c731790df39a49844a64af0c6dbd1b5b, type: 2}
-  - {fileID: 2100000, guid: fbbcfb1f6ab728845bc0fc3153a82f8c, type: 2}
-  - {fileID: 2100000, guid: 79c3027c208956043a02998e595f6e23, type: 2}
-  - {fileID: 2100000, guid: e9835a3673eb37f4c8133e8798ba1427, type: 2}
   - {fileID: 2100000, guid: 368ca9ed159eebc4faadf55867592699, type: 2}
+  - {fileID: 2100000, guid: c731790df39a49844a64af0c6dbd1b5b, type: 2}
+  - {fileID: 2100000, guid: 1b868ce102ba0994f9b0678474742dff, type: 2}
+  - {fileID: 2100000, guid: 79c3027c208956043a02998e595f6e23, type: 2}
+  - {fileID: 2100000, guid: fbbcfb1f6ab728845bc0fc3153a82f8c, type: 2}
+  - {fileID: 2100000, guid: e9835a3673eb37f4c8133e8798ba1427, type: 2}
