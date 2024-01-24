@@ -10,7 +10,7 @@ namespace ForeverVillage.Scripts.Character
         {
             _config = config;
 
-            foreach (Renderer renderer in character.Body)
+            foreach (Renderer renderer in character.SkinRenderers)
                 _renderers.Add(renderer);
         }
     }

@@ -36,11 +36,5 @@ namespace ForeverVillage.Scripts
         {
             _wallet = GetComponent<PlayerWallet>();
         }
-
-        // or smth like 'characterModel' saved entity with prefabPath to spec
-        public void InstantiateModel(CustomizableCharacter model)
-        {
-            Instantiate(model);
-        }
     }
 }

@@ -12,7 +12,6 @@ namespace ForeverVillage.Scripts.Character
         public CustomizableCharacter Create(CustomizableCharacter prefab, Transform parent)
         {
             return _diContainer.InstantiatePrefabForComponent<CustomizableCharacter>(prefab, parent);
-            // Quaternion.Euler(_point.rotation.eulerAngles)
         }
     }
 }

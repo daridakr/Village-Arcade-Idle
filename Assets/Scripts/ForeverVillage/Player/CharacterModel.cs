@@ -25,6 +25,8 @@ namespace ForeverVillage.Scripts
 
             foreach(PlayerTimerInteractor interactor in _interactions.Interactors)
                 interactor.Setup(animation, model.HandRig);
+
+            Destroy(model);
         }
     }
 }
