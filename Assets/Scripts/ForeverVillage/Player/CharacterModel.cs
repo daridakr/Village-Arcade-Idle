@@ -1,19 +1,30 @@
+using ForeverVillage.Scripts.Character;
 using UnityEngine;
 
 namespace ForeverVillage.Scripts
 {
     public class CharacterModel : MonoBehaviour
     {
-        private string _modelPath;
+        [SerializeField] private PlayerMovement _movement;
+        [SerializeField] private PlayerTimerInteractions _interactions;
 
-        public void SetupPrefabPath(string path)
+        private CharacterLoader _loader;
+
+        private void OnEnable()
         {
-            _modelPath = path;
+            _loader = new CharacterLoader();
         }
 
-        public void InstantiateModel()
+        public void Setup(string path)
         {
+            var prefab = _loader.LoadCustomizable(path);
+            CustomizableCharacter model = Instantiate(prefab, transform);
+            PlayerAnimation animation = model.GetComponentInChildren<PlayerAnimation>();
 
+            _movement.Setup(transform, animation);
+
+            foreach(PlayerTimerInteractor interactor in _interactions.Interactors)
+                interactor.Setup(animation, model.HandRig);
         }
     }
 }

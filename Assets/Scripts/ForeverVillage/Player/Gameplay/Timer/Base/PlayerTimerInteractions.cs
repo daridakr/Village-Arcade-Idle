@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerTimerInteractor[] _interactors;
 
         private IInputService _inputService;
+
+        public IEnumerable<PlayerTimerInteractor> Interactors => _interactors;
 
         [Inject]
         public void Construct(IInputService inputService)
@@ -24,7 +27,7 @@ namespace ForeverVillage.Scripts
             }
         }
 
-        private void OnStarted()
+        private void OnStarted(PlayerTimerInteractor interactor)
         {
             _inputService.Disable();
         }

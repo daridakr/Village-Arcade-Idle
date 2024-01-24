@@ -7,9 +7,8 @@ namespace ForeverVillage.Scripts
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private Transform _playerModel;
-        [SerializeField] private PlayerAnimation _animation;
-
+        private Transform _playerModel;
+        private PlayerAnimation _animation;
         private Rigidbody _rigidbody;
         private float _speed;
         private float _speedRate = 1f;
@@ -34,6 +33,12 @@ namespace ForeverVillage.Scripts
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        public void Setup(Transform model, PlayerAnimation animation)
+        {
+            _playerModel = model;
+            _animation = animation;
         }
 
         public void SetSpeed(float value)

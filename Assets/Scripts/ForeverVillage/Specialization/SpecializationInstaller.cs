@@ -24,7 +24,7 @@ namespace ForeverVillage.Scripts
 
         public void Install(SpecializationData data)
         {
-            _characterModel.SetupPrefabPath(data.PrefabPath);
+            _characterModel.Setup(data.PrefabPath);
         }
     }
 }

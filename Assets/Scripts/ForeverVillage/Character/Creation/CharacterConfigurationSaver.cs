@@ -1,3 +1,4 @@
+using IJunior.TypedScenes;
 using UnityEngine;
 using Zenject;
 
@@ -22,12 +23,18 @@ namespace ForeverVillage.Scripts.Character
         private void OnEnable()
         {
             _specializationSaver = new SpecializationSaver(_specializationRepository, _specializationController);
-            _confirmCreationPopup.PlayButtonClicked += _specializationSaver.Save;
+            _confirmCreationPopup.PlayButtonClicked += SaveAndStartGame;
+        }
+
+        private void SaveAndStartGame()
+        {
+            _specializationSaver.Save();
+            Main.Load();
         }
 
         private void OnDisable()
         {
-            _confirmCreationPopup.PlayButtonClicked -= _specializationSaver.Save;
+            _confirmCreationPopup.PlayButtonClicked -= SaveAndStartGame;
         }
     }
 }

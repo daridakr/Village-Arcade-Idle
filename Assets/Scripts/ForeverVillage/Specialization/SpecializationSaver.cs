@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ForeverVillage.Scripts
 {
     public sealed class SpecializationSaver

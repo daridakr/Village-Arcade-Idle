@@ -15,10 +15,11 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerVillagersList _villagers;
         [SerializeField] private PlayerRegionsList _regions;
         [SerializeField] private PlayerMovement _movement;
-        [SerializeField] private Transform _model;
+        [SerializeField] private CharacterModel _model;
 
         private PlayerWallet _wallet;
 
+        public CharacterModel Model => _model;
         public PlayerMovement Movement => _movement;
         public PlayerTimerCleaner Cleaner => _cleaner;
         public PlayerTimerBuilder Builder => _builder;

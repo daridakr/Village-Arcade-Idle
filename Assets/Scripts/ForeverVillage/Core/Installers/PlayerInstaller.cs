@@ -22,13 +22,13 @@ namespace ForeverVillage.Scripts
         {
             _playerInstance = Container.InstantiatePrefabForComponent<Player>
                 (_prefab.gameObject, _prefab.Position, Quaternion.identity, null);
-            //_playerInstance.InstantiateModel();
 
             Container.Bind<Player>().FromInstance(_playerInstance).AsSingle().NonLazy();
         }
 
         private void BindComponents()
         {
+            Container.Bind<CharacterModel>().FromInstance(_playerInstance.Model).AsSingle();
             Container.Bind<PlayerMovement>().FromInstance(_playerInstance.Movement).AsSingle();
             Container.Bind<PlayerTimerCleaner>().FromInstance(_playerInstance.Cleaner).AsSingle();
             Container.Bind<PlayerTimerBuilder>().FromInstance(_playerInstance.Builder).AsSingle();
@@ -50,6 +50,9 @@ namespace ForeverVillage.Scripts
             Container.Bind<PlayerPointRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerPointSaver>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerPointSetter>().AsSingle();
+
+            Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SpecializationInstaller>().AsSingle();
         }
     }
 }
