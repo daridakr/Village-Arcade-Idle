@@ -8,7 +8,7 @@ namespace ForeverVillage.Scripts.Character
         {
             _config = config;
 
-            _meshFilter = character.Head;
+            _meshFilter = character.HeadMesh;
         }
     }
 }

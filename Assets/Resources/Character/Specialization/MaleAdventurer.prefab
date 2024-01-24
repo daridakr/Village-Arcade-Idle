@@ -170,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823205844580863516}
   - component: {fileID: 2950253890522678062}
+  - component: {fileID: 873638641475085425}
   m_Layer: 0
   m_Name: Male 01
   m_TagString: Untagged
@@ -257,6 +258,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.038238212, y: 0.030524451, z: 0.00000008940697}
     m_Extent: {x: 0.12074478, y: 0.049041744, z: 0.62893414}
   m_DirtyAABB: 0
+--- !u!114 &873638641475085425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936001406615387099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1354a7d9b7d9e4699b84f918f7e9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSkin: 1
 --- !u!1 &1456046557312630345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,6 +2253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1393580892348363900}
+  - component: {fileID: 6490212338039540986}
   m_Layer: 0
   m_Name: Dummy R Prop
   m_TagString: Untagged
@@ -2261,6 +2276,18 @@ Transform:
   m_Father: {fileID: 6835381558025544191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6490212338039540986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048825857322210017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab270b4adf8a8144b20ef79a74bbb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9129775944781089047
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,6 +2565,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441670, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}
   m_PrefabInstance: {fileID: 3046208019174487449}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3046208019174348255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 139334, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}
+  m_PrefabInstance: {fileID: 3046208019174487449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5258271403815012894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046208019174348255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881f8bc44db3f934dbb0dea99ad15eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSkin: 1
 --- !u!33 &3046208019175341439 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 3344614, guid: e429b1bb68a3b1144b0403177eba2987, type: 3}

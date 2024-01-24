@@ -5,31 +5,38 @@ namespace ForeverVillage.Scripts.Character
 {
     public class CustomizableCharacter : MonoBehaviour
     {
-        [SerializeField] private Transform _headRig;
-        [SerializeField] private Transform _handRig;
-        [SerializeField] private MeshFilter _head;
+        private CharacterBody _body;
+        private CharacterHead _head;
+        private CharacterHand _hand;
 
         private List<Renderer> _skinRenderers;
+        private MeshFilter _headMesh;
+        private Transform _headRig;
+        private Transform _handRig;
 
-        private CharacterHead _characterHead;
-        private CharacterBody _characterBody;
+        public Renderer[] SkinRenderers => _skinRenderers.ToArray();
+        public MeshFilter HeadMesh => _headMesh;
+        public Transform HeadRig => _headRig;
+        public Transform HandRig => _handRig;
 
         private void Awake()
         {
             _skinRenderers = new List<Renderer>();
 
-            _characterHead = GetComponentInChildren<CharacterHead>();
-            _characterHead.Initialize();
-            _characterBody = GetComponentInChildren<CharacterBody>();
-            _characterBody.Initialize();
+            _body = GetComponentInChildren<CharacterBody>();
+            _body.Initialize();
 
-            if (_characterHead.IsSkin) _skinRenderers.Add(_characterHead.Renderer);
-            if (_characterBody.IsSkin) _skinRenderers.Add(_characterBody.Renderer);
+            _head = GetComponentInChildren<CharacterHead>();
+            _head.Initialize();
+            _headMesh = _head.Mesh;
+            _headRig = _head.Rig;
+
+            _hand = GetComponentInChildren<CharacterHand>();
+            _hand.Initialize();
+            _handRig = _hand.Rig;
+
+            if (_head.IsSkin) _skinRenderers.Add(_head.Renderer);
+            if (_body.IsSkin) _skinRenderers.Add(_body.Renderer);
         }
-
-        public Renderer[] SkinRenderers => _skinRenderers.ToArray();
-        public Transform HeadRig => _headRig;
-        public Transform HandRig => _handRig;
-        public MeshFilter Head => _head;
     }
 }
