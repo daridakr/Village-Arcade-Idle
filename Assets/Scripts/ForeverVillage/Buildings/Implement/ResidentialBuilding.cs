@@ -102,7 +102,7 @@ namespace ForeverVillage.Scripts
 
         // Populate(Villager newVillager);
 
-        private void OnPlayerTriggerEnter(Player player)
+        private void OnPlayerTriggerEnter(PlayerInstanceInfo player)
         {
             if (_currentGemProgress > 0.99f)
             {

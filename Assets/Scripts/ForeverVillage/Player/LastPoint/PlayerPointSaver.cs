@@ -6,10 +6,10 @@ namespace ForeverVillage.Scripts
         IGameSaveDataListener
     {
         private PlayerPointRepository _repository;
-        private Player _player;
+        private PlayerInstanceInfo _player;
 
         [Inject]
-        public void Construct(PlayerPointRepository repository, Player player)
+        public void Construct(PlayerPointRepository repository, PlayerInstanceInfo player)
         {
             _repository = repository;
             _player = player;

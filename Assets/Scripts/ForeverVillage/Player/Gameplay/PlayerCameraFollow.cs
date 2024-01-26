@@ -8,10 +8,10 @@ namespace ForeverVillage.Scripts
     {
         [SerializeField] private CinemachineStateDrivenCamera _cmCamera;
 
-        private Player _player;
+        private PlayerInstanceInfo _player;
 
         [Inject]
-        public void Construct(Player player)
+        public void Construct(PlayerInstanceInfo player)
         {
             _player = player;
         }

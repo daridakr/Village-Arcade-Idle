@@ -1,6 +1,6 @@
 namespace ForeverVillage.Scripts
 {
-    public class PlayerTrigger : Trigger<Player>
+    public class PlayerTrigger : Trigger<PlayerInstanceInfo>
     {
 
     }

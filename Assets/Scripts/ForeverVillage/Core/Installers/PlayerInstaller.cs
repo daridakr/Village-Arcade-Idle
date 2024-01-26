@@ -5,9 +5,9 @@ namespace ForeverVillage.Scripts
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Player _prefab;
+        [SerializeField] private PlayerInstanceInfo _prefab;
 
-        private Player _playerInstance;
+        private PlayerInstanceInfo _playerInstance;
 
         public override void InstallBindings()
         {
@@ -20,30 +20,30 @@ namespace ForeverVillage.Scripts
 
         private void SpawnAndBindPlayer()
         {
-            _playerInstance = Container.InstantiatePrefabForComponent<Player>
+            _playerInstance = Container.InstantiatePrefabForComponent<PlayerInstanceInfo>
                 (_prefab.gameObject, _prefab.Position, Quaternion.identity, null);
 
-            Container.Bind<Player>().FromInstance(_playerInstance).AsSingle().NonLazy();
+            Container.Bind<PlayerInstanceInfo>().FromInstance(_playerInstance).AsSingle().NonLazy();
         }
 
         private void BindComponents()
         {
-            Container.Bind<PlayerCharacterModel>().FromInstance(_playerInstance.Model).AsSingle();
-            Container.Bind<PlayerName>().FromInstance(_playerInstance.Name).AsSingle();
-            Container.Bind<PlayerMovement>().FromInstance(_playerInstance.Movement).AsSingle();
-            Container.Bind<PlayerTimerCleaner>().FromInstance(_playerInstance.Cleaner).AsSingle();
-            Container.Bind<PlayerTimerBuilder>().FromInstance(_playerInstance.Builder).AsSingle();
-            Container.Bind<PlayerWallet>().FromInstance(_playerInstance.Wallet).AsSingle();
-            Container.Bind<PlayerBuildingsList>().FromInstance(_playerInstance.Buildings).AsSingle();
-            Container.Bind<PlayerVillagersList>().FromInstance(_playerInstance.Villagers).AsSingle();
-            Container.Bind<PlayerRegionsList>().FromInstance(_playerInstance.Regions).AsSingle();
+            Container.Bind<PlayerMovement>().FromComponentOn(_playerInstance.gameObject).AsSingle();
+            Container.Bind<PlayerWallet>().FromComponentOn(_playerInstance.gameObject).AsSingle();
+            Container.Bind<PlayerCharacterModel>().FromComponentOn(_playerInstance.Model).AsSingle();
+            Container.Bind<PlayerName>().FromComponentOn(_playerInstance.Data).AsSingle();
+            Container.Bind<PlayerBuildingsList>().FromComponentOn(_playerInstance.Data).AsSingle();
+            Container.Bind<PlayerVillagersList>().FromComponentOn(_playerInstance.Data).AsSingle();
+            Container.Bind<PlayerRegionsList>().FromComponentOn(_playerInstance.Data).AsSingle();
+            Container.Bind<PlayerTimerCleaner>().FromComponentOn(_playerInstance.Interactors).AsSingle();
+            Container.Bind<PlayerTimerBuilder>().FromComponentOn(_playerInstance.Interactors).AsSingle();
         }
 
         private void BindDisplayData()
         {
-            Container.BindInterfacesAndSelfTo<PlayerLevel>().FromInstance(_playerInstance.Level).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<PlayerCoins>().FromInstance(_playerInstance.Coins).AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerGems>().FromInstance(_playerInstance.Gems).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerLevel>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerCoins>().FromComponentOn(_playerInstance.Data).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerGems>().FromComponentOn(_playerInstance.Data).AsSingle();
         }
 
         private void BindRepository()
