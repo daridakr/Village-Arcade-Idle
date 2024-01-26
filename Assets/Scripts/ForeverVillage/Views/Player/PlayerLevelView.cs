@@ -13,7 +13,7 @@ namespace ForeverVillage.Scripts
         private PlayerLevel _playerLevel;
 
         [Inject]
-        public void Construct(PlayerLevel playerLevel)
+        private void Construct(PlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
         }

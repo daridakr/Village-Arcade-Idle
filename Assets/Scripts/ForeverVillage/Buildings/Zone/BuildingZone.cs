@@ -36,7 +36,7 @@ namespace ForeverVillage.Scripts
         public event Action Builded;
 
         [Inject]
-        public void Construct(IBuildingFactory buildingFactory, PlayerTimerCleaner cleaner, PlayerTimerBuilder builder)
+        private void Construct(IBuildingFactory buildingFactory, PlayerTimerCleaner cleaner, PlayerTimerBuilder builder)
         {
             _buildingFactory = buildingFactory;
             _cleaner = cleaner;

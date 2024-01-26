@@ -17,7 +17,7 @@ public class JoystickInputControl : MonoBehaviour, IInputService, IInputState, I
     public event Action OnStand;
 
     [Inject]
-    public void Construct(Joystick joystick)
+    private void Construct(Joystick joystick)
     {
         _joystick = joystick;
     }

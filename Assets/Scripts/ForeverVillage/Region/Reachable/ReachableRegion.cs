@@ -16,7 +16,7 @@ namespace ForeverVillage.Scripts
         }
 
         //[Inject]
-        //public void Construct(IRegionReachCondition condition)
+        //private void Construct(IRegionReachCondition condition)
         //{
         //    _reachCondition = condition;
         //}

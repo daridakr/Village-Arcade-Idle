@@ -9,7 +9,7 @@ namespace ForeverVillage.Scripts
         private PlayerWallet _wallet;
 
         [Inject]
-        public void Construct(PlayerWallet wallet, PlayerLevel playerLevel)
+        private void Construct(PlayerWallet wallet, PlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
             _wallet = wallet;

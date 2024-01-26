@@ -11,7 +11,7 @@ namespace ForeverVillage.Scripts
         private T _playerMoney;
 
         [Inject]
-        public virtual void Construct(T playerMoney)
+        protected virtual void Construct(T playerMoney)
         {
             _playerMoney = playerMoney;
         }

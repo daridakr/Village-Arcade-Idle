@@ -6,7 +6,7 @@ namespace ForeverVillage.Scripts
 {
     // maybe should also define separate base class for reach conditions
     [RequireComponent(typeof(ReachableRegion))]
-    public class RegionReachLevelCondition : MonoBehaviour, IRegionReachCondition
+    public sealed class RegionReachLevelCondition : MonoBehaviour, IRegionReachCondition
     {
         [SerializeField] private int _requiredLevel;
 
@@ -19,7 +19,7 @@ namespace ForeverVillage.Scripts
         public event Action Completed;
 
         [Inject]
-        public virtual void Construct(PlayerLevel playerLevel)
+        private void Construct(PlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
         }

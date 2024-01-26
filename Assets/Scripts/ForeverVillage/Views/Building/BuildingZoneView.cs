@@ -16,7 +16,7 @@ namespace ForeverVillage.Scripts
         public event Action<Building> CanBuild;
 
         [Inject]
-        public void Construct(BuildingsStoreDisplay buildingsStore)
+        private void Construct(BuildingsStoreDisplay buildingsStore)
         {
             _buildingsStoreDisplay = buildingsStore;
         }

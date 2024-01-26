@@ -32,7 +32,7 @@ namespace ForeverVillage.Scripts
         public event Action<int, int> VillagersUpdated; // temp name?
 
         [Inject]
-        public void Construct(VillagersStoreDisplay villagersStore)
+        private void Construct(VillagersStoreDisplay villagersStore)
         {
             _view.Init(this, villagersStore);
             _view.VillagerSummoned += OnVilalgerSummoned;

@@ -9,7 +9,7 @@ namespace ForeverVillage.Scripts
         private PlayerInstanceInfo _player;
 
         [Inject]
-        public void Construct(PlayerPointRepository repository, PlayerInstanceInfo player)
+        private void Construct(PlayerPointRepository repository, PlayerInstanceInfo player)
         {
             _repository = repository;
             _player = player;

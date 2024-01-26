@@ -11,7 +11,7 @@ namespace ForeverVillage.Scripts
         protected override DataList<Building> DataList => _buildingList;
 
         [Inject]
-        public void Construct(PlayerBuildingsList buildingList)
+        private void Construct(PlayerBuildingsList buildingList)
         {
             _buildingList = buildingList;
         }

@@ -1,21 +1,30 @@
+using ForeverVillage.Scripts.Player;
 using UnityEngine;
 using Zenject;
 
 namespace ForeverVillage.Scripts
 {
-    public class PlayerInstaller : MonoInstaller
+    public sealed class PlayerInstaller : MonoInstaller
     {
         [SerializeField] private PlayerInstanceInfo _prefab;
+        [SerializeField] private MovementConfig _movementConfig;
+        [SerializeField] private ItemsMagnitConfig _itemsMagnitConfig;
 
         private PlayerInstanceInfo _playerInstance;
 
         public override void InstallBindings()
         {
+            BindConfigs();
             SpawnAndBindPlayer();
-
             BindComponents();
             BindDisplayData();
             BindRepository();
+        }
+
+        private void BindConfigs()
+        {
+            Container.Bind<MovementConfig>().FromInstance(_movementConfig).AsSingle().NonLazy();
+            Container.Bind<ItemsMagnitConfig>().FromInstance(_itemsMagnitConfig).AsSingle().NonLazy();
         }
 
         private void SpawnAndBindPlayer()

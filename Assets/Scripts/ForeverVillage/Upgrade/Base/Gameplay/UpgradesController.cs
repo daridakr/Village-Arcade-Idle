@@ -16,7 +16,7 @@ namespace ForeverVillage.Scripts
         private PlayerWallet _playerWallet;
 
         [Inject]
-        public void Construct(PlayerWallet wallet)
+        private void Construct(PlayerWallet wallet)
         {
             _playerWallet = wallet;
         }

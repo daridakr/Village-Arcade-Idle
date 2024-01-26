@@ -166,13 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d28146b409b9932499ccf4fc213307b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attractDuration: 0.5
-  _speed: 10
-  _followOffsetDistance: 5
-  _shakeScalingDuration: 0.2
-  _shakeScalingValue: 3
-  _scaleReduceDuration: 0.5
-  _scaleReduceMoveSpeed: 5
 --- !u!1 &3658684461110236774
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +742,7 @@ MonoBehaviour:
   _dataComponents: {fileID: 4167383146005416371}
   _interactorComponents: {fileID: 303985324554126095}
   _modelContainer: {fileID: 4900625909790700236}
+  _movement: {fileID: 4362179068316805910}
 --- !u!114 &4362179068316805910
 MonoBehaviour:
   m_ObjectHideFlags: 0

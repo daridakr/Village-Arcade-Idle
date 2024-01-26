@@ -13,7 +13,7 @@ namespace ForeverVillage.Scripts
         public IEnumerable<PlayerTimerInteractor> Interactors => _interactors;
 
         [Inject]
-        public void Construct(IInputService inputService)
+        private void Construct(IInputService inputService)
         {
             _inputService = inputService;
         }

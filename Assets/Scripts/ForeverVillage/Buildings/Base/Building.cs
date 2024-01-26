@@ -38,7 +38,7 @@ namespace ForeverVillage.Scripts
         public bool CanUpgrade => _levelNumber + 1 < _maxLevel;
 
         [Inject]
-        public void Construct(UpgradeBuildingPanel upgradePanel)
+        private void Construct(UpgradeBuildingPanel upgradePanel)
         {
             _commonView.Init(this, upgradePanel);
         }

@@ -19,7 +19,7 @@ namespace ForeverVillage.Scripts
         private CustomizationButtonView _selected;
 
         [Inject]
-        public void Construct(ICustomizationsController controller) => _controller = controller;
+        private void Construct(ICustomizationsController controller) => _controller = controller;
 
         private void OnEnable()
         {

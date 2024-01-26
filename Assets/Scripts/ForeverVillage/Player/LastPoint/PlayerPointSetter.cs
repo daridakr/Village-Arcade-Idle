@@ -11,7 +11,7 @@ public class PlayerPointSetter :
     private const float _y = 0.5f;
 
     [Inject]
-    public void Construct(PlayerPointRepository repository, PlayerMovement movement)
+    private void Construct(PlayerPointRepository repository, PlayerMovement movement)
     {
         _repository = repository;
         _movement = movement;

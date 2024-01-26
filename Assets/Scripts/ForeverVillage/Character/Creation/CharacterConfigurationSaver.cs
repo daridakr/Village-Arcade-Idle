@@ -17,7 +17,7 @@ namespace ForeverVillage.Scripts.Character
         private CustomizationsSaver _customizationsSaver;
 
         [Inject]
-        public void Construct(
+        private void Construct(
             ISpecializationRepository specializationRepository,
             ISpecializationsController specializationsController,
             ICustomizationsRepository customizationsRepository,

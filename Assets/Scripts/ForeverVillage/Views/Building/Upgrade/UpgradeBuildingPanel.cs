@@ -16,7 +16,7 @@ namespace ForeverVillage.Scripts
         public event Action Upgraded;
 
         [Inject]
-        public void Construct(PlayerWallet playerWallet)
+        private void Construct(PlayerWallet playerWallet)
         {
             _playerWallet = playerWallet;
         }

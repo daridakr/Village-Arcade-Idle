@@ -1,20 +1,33 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
-    public class ItemsMagnit : MonoBehaviour
+    public sealed class ItemsMagnit : MonoBehaviour
     {
-        [SerializeField] private float _attractDuration = 1f;
-        [SerializeField] private float _speed = 5;
-        [SerializeField] private float _followOffsetDistance = 5f;
-        [SerializeField] private float _shakeScalingDuration = 0.2f;
-        [SerializeField] private float _shakeScalingValue = 3f;
-        [SerializeField] private float _scaleReduceDuration = 0.5f;
-        [SerializeField] private float _scaleReduceMoveSpeed = 5;
+        private float _attractDuration;
+        private float _speed;
+        private float _followOffsetDistance;
+        private float _shakeScalingDuration;
+        private float _shakeScalingValue;
+        private float _scaleReduceDuration;
+        private float _scaleReduceMoveSpeed;
 
         private float _followRange => _followOffsetDistance * _followOffsetDistance;
+
+        [Inject]
+        private void Construct(ItemsMagnitConfig config)
+        {
+            _attractDuration = config.AttractDuration;
+            _speed = config.Speed;
+            _followOffsetDistance = config.FollowOffsetDistance;
+            _shakeScalingDuration = config.ShakeScalingDuration;
+            _shakeScalingValue = config.ShakeScalingValue;
+            _scaleReduceDuration = config.ScaleReduceDuration;
+            _scaleReduceMoveSpeed = config.ScaleReduceMoveSpeed;
+        }
 
         public void Attract(Item item)
         {

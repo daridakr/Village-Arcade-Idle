@@ -11,7 +11,7 @@ namespace ForeverVillage.Scripts
         private PlayerName _playerName;
 
         [Inject]
-        public virtual void Construct(PlayerName playerName)
+        private void Construct(PlayerName playerName)
         {
             _playerName = playerName;
         }

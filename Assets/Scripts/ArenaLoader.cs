@@ -10,7 +10,7 @@ public class ArenaLoader : MonoBehaviour
     private ButtonDisplay _loadButton;
 
     [Inject]
-    public void Construct(PlayerWallet wallet)
+    private void Construct(PlayerWallet wallet)
     {
         _playerWallet = wallet;
     }

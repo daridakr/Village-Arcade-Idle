@@ -10,7 +10,7 @@ namespace ForeverVillage.Scripts
         private PlayerName _playerName;
 
         [Inject]
-        public void Construct(PlayerName name)
+        private void Construct(PlayerName name)
         {
             _playerName = name;
         }

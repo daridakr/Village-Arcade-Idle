@@ -11,7 +11,7 @@ namespace ForeverVillage.Scripts
         private PlayerRegionsList _playerRegionsList;
 
         [Inject]
-        public void Construct(PlayerRegionsList regions)
+        private void Construct(PlayerRegionsList regions)
         {
             _playerRegionsList = regions;
         }

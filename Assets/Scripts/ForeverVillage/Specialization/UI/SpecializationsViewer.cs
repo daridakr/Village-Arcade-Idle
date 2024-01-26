@@ -18,7 +18,7 @@ namespace ForeverVillage.Scripts
         private SpecializationButtonView _selected;
 
         [Inject]
-        public void Construct(ISpecializationsController controller, ICustomizationsController customizationsController)
+        private void Construct(ISpecializationsController controller, ICustomizationsController customizationsController)
         {
             _controller = controller;
             _customizationsController = customizationsController;

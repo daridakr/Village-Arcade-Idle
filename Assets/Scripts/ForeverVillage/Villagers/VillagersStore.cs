@@ -9,7 +9,7 @@ namespace ForeverVillage.Scripts
         protected override DataList<Villager> DataList => _villagersList;
 
         [Inject]
-        public void Construct(PlayerVillagersList villagersList)
+        private void Construct(PlayerVillagersList villagersList)
         {
             _villagersList = villagersList;
         }

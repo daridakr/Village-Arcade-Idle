@@ -23,7 +23,7 @@ namespace ForeverVillage.Scripts
         public event Action<string> PlayerNamed;
 
         [Inject]
-        public void Construct(PlayerBuildingsList buildings, PlayerVillagersList villagers, PlayerRegionsList regions)
+        private void Construct(PlayerBuildingsList buildings, PlayerVillagersList villagers, PlayerRegionsList regions)
         {
             _buildingList = buildings;
             _villagersList = villagers;

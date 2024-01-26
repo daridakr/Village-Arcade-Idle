@@ -18,7 +18,7 @@ namespace ForeverVillage.Scripts.Character
         private ISpecializationsController _specializationsController;
 
         [Inject]
-        public void Construct(ISpecializationsController controller) => _specializationsController = controller;
+        private void Construct(ISpecializationsController controller) => _specializationsController = controller;
 
         private void OnEnable()
         {

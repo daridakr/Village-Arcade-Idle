@@ -7,7 +7,7 @@ namespace ForeverVillage.Scripts
         private IInputState _inputReady;
 
         [Inject]
-        public void Construct(IInputState inputReady)
+        private void Construct(IInputState inputReady)
         {
             _inputReady = inputReady;
 
