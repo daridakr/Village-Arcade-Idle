@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace ForeverVillage.Scripts
 {
@@ -10,10 +10,16 @@ namespace ForeverVillage.Scripts
         IUpgradesController
     {
         [SerializeField][FormerlySerializedAs("assets")] private UpgradeCatalog _catalog;
-        [SerializeField] private PlayerWallet _playerWallet;
         
         private Dictionary<string, Upgrade> _upgrades;
         private UpgradeBuyer _buyer;
+        private PlayerWallet _playerWallet;
+
+        [Inject]
+        public void Construct(PlayerWallet wallet)
+        {
+            _playerWallet = wallet;
+        }
 
         private void Awake()
         {

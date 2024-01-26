@@ -9,22 +9,22 @@ namespace ForeverVillage.Scripts
         [SerializeField] private PlayerTimerInteractions _interactions;
 
         private CharacterLoader _loader;
-        private CustomizableCharacter _customizable;
+        private CustomizableCharacter _instance;
 
-        public CustomizableCharacter Customizable => _customizable;
+        public CustomizableCharacter Customizable => _instance;
 
         private void OnEnable() => _loader = new CharacterLoader();
 
         public void Setup(string path)
         {
-            var prefab = _loader.LoadCustomizable(path);
-            _customizable = Instantiate(prefab, transform);
-            PlayerAnimation animation = _customizable.GetComponentInChildren<PlayerAnimation>();
+            CustomizableCharacter prefab = _loader.LoadCustomizable(path);
+            _instance = Instantiate(prefab, transform);
+            PlayerAnimation animation = _instance.GetComponentInChildren<PlayerAnimation>();
 
             _movement.Setup(transform, animation);
 
             foreach(PlayerTimerInteractor interactor in _interactions.Interactors)
-                interactor.Setup(animation, _customizable.HandRig);
+                interactor.Setup(animation, _instance.HandRig);
         }
     }
 }

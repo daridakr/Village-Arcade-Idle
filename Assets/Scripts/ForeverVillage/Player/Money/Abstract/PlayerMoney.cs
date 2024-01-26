@@ -10,7 +10,7 @@ namespace ForeverVillage.Scripts
         private string _saveKey;
 
         public int Balance => _balance.Value;
-        public bool IsEmpty => _balance.Value > 0;
+        public bool IsEmpty => _balance.Value <= 0;
 
         public event UnityAction<int> BalanceChanged;
 

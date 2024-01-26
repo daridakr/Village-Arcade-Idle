@@ -9,7 +9,9 @@ namespace ForeverVillage.Scripts
 
         public int Coins => _playerCoins.Balance;
         public int Gems => _playerGems.Balance;
-        public bool IsEmpty => _playerCoins.IsEmpty && _playerGems.IsEmpty;
+        public bool IsEmpty => IsCoinsEmpty && IsGemsEmpty;
+        public bool IsCoinsEmpty => _playerCoins.IsEmpty;
+        public bool IsGemsEmpty => _playerGems.IsEmpty;
 
         public void SpendCoins(int value) => _playerCoins.Spend(value);
         public void SpendGems(int value) => _playerGems.Spend(value);

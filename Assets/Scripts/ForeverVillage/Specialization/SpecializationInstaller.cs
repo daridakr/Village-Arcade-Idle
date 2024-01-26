@@ -8,6 +8,8 @@ namespace ForeverVillage.Scripts
         private readonly ISpecializationRepository _repository;
         private readonly PlayerCharacterModel _characterModel;
 
+        private const string _defaultSpec = ResourcesParams.Character.Specialization.MaleKnight;
+
         public SpecializationInstaller(ISpecializationRepository repository, PlayerCharacterModel characterModel)
         {
             _repository = repository;
@@ -17,9 +19,9 @@ namespace ForeverVillage.Scripts
         public void Initialize()
         {
             if (_repository.Load(out SpecializationData specialization))
-            {
                 Install(specialization);
-            }
+            else
+                _characterModel.Setup(_defaultSpec);
         }
 
         private void Install(SpecializationData data)
