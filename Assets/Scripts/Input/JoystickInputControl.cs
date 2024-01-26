@@ -2,7 +2,9 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class JoystickInputControl : MonoBehaviour, IInputService, IInputState, IControlService
+public sealed class JoystickInputControl : 
+    IInputService, IInputState, IControlService,
+    IInitializable, ITickable, IDisposable
 {
     private Joystick _joystick;
 
@@ -17,17 +19,14 @@ public class JoystickInputControl : MonoBehaviour, IInputService, IInputState, I
     public event Action OnStand;
 
     [Inject]
-    private void Construct(Joystick joystick)
-    {
-        _joystick = joystick;
-    }
+    private void Construct(Joystick joystick) => _joystick = joystick;
 
-    private void Start()
+    public void Initialize()
     {
         Enable();
     }
 
-    public void FixedUpdate()
+    public void Tick()
     {
         if (IsEnable)
         {
@@ -62,7 +61,7 @@ public class JoystickInputControl : MonoBehaviour, IInputService, IInputState, I
         OnStand?.Invoke();
     }
 
-    private void OnDisable()
+    public void Dispose()
     {
         Disable();
     }
