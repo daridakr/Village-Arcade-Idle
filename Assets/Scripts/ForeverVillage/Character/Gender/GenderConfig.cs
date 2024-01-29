@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "NewGenderConfig", menuName = "Character/Creation/Gender")]
     public sealed class GenderConfig : ScriptableObject

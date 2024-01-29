@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class PlayerMoney : MonoBehaviour,
         IGameSaveDataListener

@@ -1,6 +1,6 @@
 using System;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerName : StringSavedValue
     {

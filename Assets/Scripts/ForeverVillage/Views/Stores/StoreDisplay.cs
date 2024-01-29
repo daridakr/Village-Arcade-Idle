@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class StoreDisplay<T> : CanvasAnimatedView where T : IStorableObject
     {

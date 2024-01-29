@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [Serializable]
     public sealed class UpgradeMetadata

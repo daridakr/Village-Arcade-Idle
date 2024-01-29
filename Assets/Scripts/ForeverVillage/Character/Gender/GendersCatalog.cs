@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "NewGendersCatalog", menuName = "Character/Creation/GenderCatalog")]
     public sealed class GendersCatalog : ScriptableObject

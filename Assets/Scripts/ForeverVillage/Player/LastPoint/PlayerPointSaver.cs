@@ -1,21 +1,23 @@
+using System;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerPointSaver :
-        IGameSaveDataListener
+        IGameSaveDataListener,
+        IDisposable
     {
         private PlayerPointRepository _repository;
-        private PlayerInstanceInfo _player;
+        private global::PlayerReference _player;
 
         [Inject]
-        private void Construct(PlayerPointRepository repository, PlayerInstanceInfo player)
+        public void Construct(PlayerPointRepository repository, global::PlayerReference player)
         {
             _repository = repository;
             _player = player;
         }
 
-        public void OnSaveData(GameSaveReason reason)
+        public void Dispose()
         {
             var playerPointData = new PlayerPointData
             {
@@ -24,6 +26,11 @@ namespace ForeverVillage.Scripts
             };
 
             _repository.Save(playerPointData);
+        }
+
+        public void OnSaveData(GameSaveReason reason)
+        {
+            
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [Serializable]
     public class RegionZoneData : KeySavedObject<RegionZoneData>

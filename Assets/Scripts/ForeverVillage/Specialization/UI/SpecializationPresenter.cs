@@ -1,8 +1,7 @@
-using ForeverVillage.Scripts.Character;
 using System;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class SpecializationPresenter
     {

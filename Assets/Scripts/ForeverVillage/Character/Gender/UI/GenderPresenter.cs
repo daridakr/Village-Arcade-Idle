@@ -1,6 +1,6 @@
 using System;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     public sealed class GenderPresenter
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "RogueSpecializationConfig", menuName = "Specialization/Character/Rogue")]
     public class RogueSpecializationConfig : CharacterSpecializationConfig

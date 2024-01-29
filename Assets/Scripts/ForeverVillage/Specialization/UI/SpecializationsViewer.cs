@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class SpecializationsViewer : MonoBehaviour
     {

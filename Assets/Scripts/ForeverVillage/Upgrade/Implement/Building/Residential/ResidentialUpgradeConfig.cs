@@ -1,7 +1,6 @@
-using ForeverVillage.Scripts.Upgrades.Player;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Upgrades.Building
+namespace Village.Upgrades.Building
 {
     [CreateAssetMenu(fileName = "ResidentialUpgradeConfig", menuName = "Upgrades/Building/Residential")]
     public sealed class ResidentialUpgradeConfig : UpgradeConfig

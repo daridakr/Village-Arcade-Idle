@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(ButtonDisplay))]
     public sealed class GenderButtonView : MonoBehaviour

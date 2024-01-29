@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Upgrades.Player
+namespace Village.Upgrades.Player
 {
     [CreateAssetMenu(fileName = "MovementSpeedUpgradeConfig", menuName = "Upgrades/Player/MovementSpeed")]
     public sealed class MovementSpeedUpgradeConfig : UpgradeConfig

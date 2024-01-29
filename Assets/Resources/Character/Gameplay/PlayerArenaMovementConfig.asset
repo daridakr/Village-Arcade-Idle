@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc88269c42d74a04cadeb4199e6e5baa, type: 3}
-  m_Name: PlayerMovementConfig
+  m_Name: PlayerArenaMovementConfig
   m_EditorClassIdentifier: 
   _speedRate: 1
   _flySpeedRate: 1

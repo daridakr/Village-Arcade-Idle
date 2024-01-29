@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [CreateAssetMenu(fileName = "ItemsMagnitConfig", menuName = "Items/Items Magnit Config")]
     public sealed class ItemsMagnitConfig : ScriptableObject

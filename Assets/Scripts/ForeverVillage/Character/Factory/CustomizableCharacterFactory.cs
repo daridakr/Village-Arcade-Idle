@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     public sealed class CustomizableCharacterFactory : ICustomizableCharacterFactory
     {

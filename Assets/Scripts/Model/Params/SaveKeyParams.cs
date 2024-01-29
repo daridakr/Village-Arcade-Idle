@@ -12,5 +12,6 @@ public static class SaveKeyParams
         public const string CoinsBalance = nameof(CoinsBalance);
         public const string GemsBalance = nameof(GemsBalance);
         public const string ExperienceLevel = nameof(ExperienceLevel);
+        public const string ArenaLevel = nameof(ArenaLevel);
     }
 }

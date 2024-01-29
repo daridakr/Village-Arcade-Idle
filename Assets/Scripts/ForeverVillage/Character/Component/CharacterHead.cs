@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [RequireComponent(typeof(Renderer))]
     [RequireComponent(typeof(MeshFilter))]

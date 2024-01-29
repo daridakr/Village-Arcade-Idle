@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Player
+namespace Village.Player
 {
     [CreateAssetMenu(fileName = "MovementConfig", menuName = "Gameplay/Movement Config")]
     public sealed class MovementConfig : ScriptableObject

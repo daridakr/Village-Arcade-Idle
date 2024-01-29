@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
     public class RegionDisplayer : MonoBehaviour

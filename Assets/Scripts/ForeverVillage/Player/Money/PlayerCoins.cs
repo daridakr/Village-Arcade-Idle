@@ -1,6 +1,6 @@
 using IJunior.TypedScenes;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerCoins : PlayerMoney, ISceneLoadHandler<int>
     {

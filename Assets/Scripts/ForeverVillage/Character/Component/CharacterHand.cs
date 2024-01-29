@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [RequireComponent(typeof(Transform))]
     public sealed class CharacterHand : MonoBehaviour

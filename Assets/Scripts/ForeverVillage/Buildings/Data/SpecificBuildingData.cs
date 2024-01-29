@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     // Unique data specific to a particular of building.
     [CreateAssetMenu(fileName = "SpecificBuilding", menuName = "Buildings/Specific Building", order = 51)]

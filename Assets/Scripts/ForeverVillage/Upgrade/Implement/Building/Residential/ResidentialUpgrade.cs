@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace ForeverVillage.Scripts.Upgrades.Building
+namespace Village.Upgrades.Building
 {
     public sealed class ResidentialUpgrade : Upgrade,
         IInitializable

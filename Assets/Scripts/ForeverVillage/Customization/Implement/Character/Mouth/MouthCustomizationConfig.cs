@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "MouthCustomizationConfig", menuName = "Customization/Character/Mouth")]
     public class MouthCustomizationConfig : MeshCustomizationConfig

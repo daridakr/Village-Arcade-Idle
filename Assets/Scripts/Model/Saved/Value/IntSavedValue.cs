@@ -1,4 +1,3 @@
-using ForeverVillage.Scripts;
 using UnityEngine;
 
 public abstract class IntSavedValue : SavedValue<int>

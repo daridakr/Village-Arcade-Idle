@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerItemCaptor : MonoBehaviour
     {
         [SerializeField] private ItemsCollector _itemsCollector;
-        [SerializeField] private PlayerLevel _playerLevel;
+        [SerializeField] private global::PlayerLevel _playerLevel;
         [SerializeField] private PlayerGems _playerGems;
 
         private void OnEnable()

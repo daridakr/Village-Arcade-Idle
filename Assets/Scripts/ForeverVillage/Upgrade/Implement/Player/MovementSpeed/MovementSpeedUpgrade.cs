@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace ForeverVillage.Scripts.Upgrades.Player
+namespace Village.Upgrades.Player
 {
     public sealed class MovementSpeedUpgrade : Upgrade,
         IInitializable

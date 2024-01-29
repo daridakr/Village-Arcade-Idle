@@ -1,6 +1,6 @@
-using ForeverVillage.Scripts;
 using IJunior.TypedScenes;
 using UnityEngine;
+using Village;
 using Zenject;
 
 [RequireComponent (typeof(ButtonDisplay))]

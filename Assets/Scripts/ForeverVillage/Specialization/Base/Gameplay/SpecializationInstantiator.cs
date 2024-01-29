@@ -1,7 +1,7 @@
-using ForeverVillage.Scripts.Character;
 using UnityEngine;
+using Village.Character;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class SpecializationInstantiator
     {

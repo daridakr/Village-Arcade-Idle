@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class VillagersStore : Store<Villager>
     {

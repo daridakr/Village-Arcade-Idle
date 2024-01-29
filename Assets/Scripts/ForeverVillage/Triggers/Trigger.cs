@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(Collider))]
     public abstract class Trigger<T> : MonoBehaviour where T : MonoBehaviour

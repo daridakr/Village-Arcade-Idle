@@ -1,4 +1,4 @@
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class UpgradePresenter
     {

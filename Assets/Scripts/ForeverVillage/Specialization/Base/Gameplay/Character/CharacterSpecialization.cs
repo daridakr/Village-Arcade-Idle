@@ -1,6 +1,6 @@
-using ForeverVillage.Scripts.Character;
+using Village.Character;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class CharacterSpecialization : Specialization
     {

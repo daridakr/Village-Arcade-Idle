@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Upgrades.Player
+namespace Village.Upgrades.Player
 {
     [Serializable]
     public sealed class MovementSpeedUpgradeTable

@@ -1,6 +1,6 @@
-namespace ForeverVillage.Scripts
+namespace Village
 {
-    public class PlayerMovementTrigger : Trigger<PlayerMovement>
+    public class PlayerMovementTrigger : Trigger<UpgradablePlayerMovement>
     {
 
     }

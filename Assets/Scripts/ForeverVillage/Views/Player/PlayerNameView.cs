@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerNameView : MonoBehaviour
     {

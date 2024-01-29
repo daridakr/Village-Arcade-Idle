@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "HairsColorCustomizationConfig", menuName = "Customization/Character/HairsColor")]
     public class HairsColorCustomizationConfig : MaterialCustomizationConfig

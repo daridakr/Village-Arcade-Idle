@@ -1,6 +1,6 @@
 using System;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class CustomizationPresenter
     {

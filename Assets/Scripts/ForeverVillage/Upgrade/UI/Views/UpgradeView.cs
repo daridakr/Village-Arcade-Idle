@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class UpgradeView : MonoBehaviour
     {

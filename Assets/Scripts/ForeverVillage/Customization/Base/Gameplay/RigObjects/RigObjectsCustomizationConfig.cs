@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class RigObjectsCustomizationConfig : CustomizationConfig
     {

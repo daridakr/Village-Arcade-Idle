@@ -1,15 +1,15 @@
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class Test : MonoBehaviour
     {
-        private PlayerLevel _playerLevel;
+        private SavedPlayerLevel _playerLevel;
         private PlayerWallet _wallet;
 
         [Inject]
-        private void Construct(PlayerWallet wallet, PlayerLevel playerLevel)
+        private void Construct(PlayerWallet wallet, SavedPlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
             _wallet = wallet;

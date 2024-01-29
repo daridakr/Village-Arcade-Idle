@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace ForeverVillage.Scripts.Upgrades.Player
+namespace Village.Upgrades.Player
 {
     public sealed class EnergyCapacityUpgrade : Upgrade
     {

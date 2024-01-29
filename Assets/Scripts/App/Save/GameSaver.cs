@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using Zenject;
 
 public sealed class GameSaver :
@@ -13,7 +12,7 @@ public sealed class GameSaver :
     private const float SAVE_PERIOD_IN_SECONDS = 30;
 
     [Inject]
-    private void Construct(ApplicationStatus status, IGameSaveDataListener[] listeners)
+    public void Construct(ApplicationStatus status, IGameSaveDataListener[] listeners)
     {
         _appStatus = status;
         _listeners = listeners;

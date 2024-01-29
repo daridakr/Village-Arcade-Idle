@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimation : MonoBehaviour

@@ -1,4 +1,3 @@
-using ForeverVillage.Scripts;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]

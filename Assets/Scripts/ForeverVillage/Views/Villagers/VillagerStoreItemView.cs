@@ -1,4 +1,4 @@
-using ForeverVillage.Scripts;
+using Village;
 
 public class VillagerStoreItemView : StoreItemView<Villager>
 {

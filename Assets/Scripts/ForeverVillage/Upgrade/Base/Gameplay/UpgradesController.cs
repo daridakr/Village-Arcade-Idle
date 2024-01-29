@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class UpgradesController : MonoBehaviour,
         IUpgradesController

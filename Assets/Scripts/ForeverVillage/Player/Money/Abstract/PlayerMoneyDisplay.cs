@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class PlayerMoneyDisplay<T> : MonoBehaviour where T : PlayerMoney
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
     public class RegionZone : MonoBehaviour
@@ -78,7 +78,7 @@ namespace ForeverVillage.Scripts
 
             bool delayed = false;
 
-            var playerMovement = wallet.GetComponent<PlayerMovement>();
+            var playerMovement = wallet.GetComponent<UpgradablePlayerMovement>();
 
             while (true)
             {

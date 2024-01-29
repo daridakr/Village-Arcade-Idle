@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [CreateAssetMenu(fileName = "NewVillager", menuName = "Villagers/Villager", order = 51)]
     public class Villager : ScriptableObject, IStorableObject

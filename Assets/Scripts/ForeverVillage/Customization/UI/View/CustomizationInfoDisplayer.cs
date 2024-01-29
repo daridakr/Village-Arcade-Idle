@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class CustomizationInfoDisplayer : MonoBehaviour
     {

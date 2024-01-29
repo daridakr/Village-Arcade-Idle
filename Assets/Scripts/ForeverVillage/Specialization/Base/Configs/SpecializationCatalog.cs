@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [CreateAssetMenu(fileName = "NewSpecializationCatalog", menuName = "Character/Specialization Catalog")]
     public sealed class SpecializationCatalog : ScriptableObject

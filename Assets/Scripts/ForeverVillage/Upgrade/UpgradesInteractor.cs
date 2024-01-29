@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class UpgradesInteractor : 
         IInitializable,

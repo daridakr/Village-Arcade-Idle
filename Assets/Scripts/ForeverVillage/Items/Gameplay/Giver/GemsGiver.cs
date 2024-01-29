@@ -1,8 +1,7 @@
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class GemsGiver : ItemsGiver<DroppableGem>
     {
 
     }
-
 }

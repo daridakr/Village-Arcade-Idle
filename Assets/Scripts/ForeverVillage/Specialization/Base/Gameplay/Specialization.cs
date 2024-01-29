@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class Specialization : ISpecialization
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class BuildingsStoreDisplay : StoreDisplay<Building>
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [CreateAssetMenu(fileName = "NewUpgradeCatalog", menuName = "Upgrades/Upgrade Catalog")]
     public sealed class UpgradeCatalog : ScriptableObject

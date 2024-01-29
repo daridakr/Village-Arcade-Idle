@@ -1,30 +1,31 @@
-using ForeverVillage.Scripts;
 using UnityEngine;
 using Zenject;
 
-public class PlayerPointSetter :
-    IInitializable
+namespace Village
 {
-    private PlayerPointRepository _repository;
-    private PlayerMovement _movement;
-
-    private const float _y = 0.5f;
-
-    [Inject]
-    private void Construct(PlayerPointRepository repository, PlayerMovement movement)
+    public class PlayerPointSetter :
+        IInitializable
     {
-        _repository = repository;
-        _movement = movement;
-    }
+        private PlayerPointRepository _repository;
+        private UpgradablePlayerMovement _movement;
 
-    public void Initialize()
-    {
-        if (_repository.Load(out PlayerPointData playerPointData))
+        private const float _y = 0.5f;
+
+        public PlayerPointSetter(PlayerPointRepository repository, UpgradablePlayerMovement movement)
         {
-            Transform point = _movement.transform;
-            point.position = new Vector3(playerPointData.X, _y, playerPointData.Z);
+            _repository = repository;
+            _movement = movement;
+        }
 
-            _movement.MoveToTarget(point);
+        public void Initialize()
+        {
+            if (_repository.Load(out PlayerPointData playerPointData))
+            {
+                Transform point = _movement.transform;
+                point.position = new Vector3(playerPointData.X, _y, playerPointData.Z);
+
+                _movement.MoveToTarget(point);
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(Collider))]
     public class KickPlayer : MonoBehaviour
@@ -14,14 +14,14 @@ namespace ForeverVillage.Scripts
             _playerTrigger.Enter += OnPlayerTriggerEnter;
         }
 
-        private void OnPlayerTriggerStay(PlayerMovement playerMovement)
+        private void OnPlayerTriggerStay(UpgradablePlayerMovement playerMovement)
         {
             playerMovement.MoveToTarget(_pointToKick);
             _playerTrigger.Stay -= OnPlayerTriggerStay;
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
         }
 
-        private void OnPlayerTriggerEnter(PlayerMovement playerMovement)
+        private void OnPlayerTriggerEnter(UpgradablePlayerMovement playerMovement)
         {
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
             _playerTrigger.Stay -= OnPlayerTriggerStay;

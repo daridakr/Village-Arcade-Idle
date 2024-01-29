@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class CustomizationsController : MonoBehaviour,
         ICustomizationsController

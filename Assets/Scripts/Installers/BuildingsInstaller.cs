@@ -1,5 +1,5 @@
-using ForeverVillage.Scripts;
 using UnityEngine;
+using Village;
 using Zenject;
 
 public class BuildingsInstaller : MonoInstaller

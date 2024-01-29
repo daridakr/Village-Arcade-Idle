@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
     public abstract class Building : MonoBehaviour, IStorableObject

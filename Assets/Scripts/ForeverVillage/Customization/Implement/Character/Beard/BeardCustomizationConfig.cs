@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [CreateAssetMenu(fileName = "BeardCustomizationConfig", menuName = "Customization/Character/Beard")]
     public class BeardCustomizationConfig : MeshCustomizationConfig

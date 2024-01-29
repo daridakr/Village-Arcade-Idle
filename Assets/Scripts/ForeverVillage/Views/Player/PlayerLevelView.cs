@@ -3,17 +3,17 @@ using UnityEngine.UI;
 using TMPro;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class PlayerLevelView : MonoBehaviour
     {
         [SerializeField] private Slider _levelProgressSlider;
         [SerializeField] private TMP_Text _levelTextDisplay;
         
-        private PlayerLevel _playerLevel;
+        private SavedPlayerLevel _playerLevel;
 
         [Inject]
-        private void Construct(PlayerLevel playerLevel)
+        private void Construct(SavedPlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
         }

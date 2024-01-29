@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(GemsGiver))]
     public class ResidentialBuilding : Building
@@ -102,7 +102,7 @@ namespace ForeverVillage.Scripts
 
         // Populate(Villager newVillager);
 
-        private void OnPlayerTriggerEnter(PlayerInstanceInfo player)
+        private void OnPlayerTriggerEnter(PlayerReference player)
         {
             if (_currentGemProgress > 0.99f)
             {

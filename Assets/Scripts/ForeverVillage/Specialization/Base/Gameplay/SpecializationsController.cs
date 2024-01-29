@@ -1,12 +1,12 @@
-using ForeverVillage.Scripts.Character;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Village.Character;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public sealed class SpecializationsController : MonoBehaviour,
         ISpecializationsController

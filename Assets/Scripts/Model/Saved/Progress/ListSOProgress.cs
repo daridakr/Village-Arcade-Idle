@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using ForeverVillage.Scripts;
 
 [CreateAssetMenu(fileName = "SOListProgressData", menuName = "ProgressData/SOListProgressData", order = 51)]
 public class ListSOProgress : ProgressData

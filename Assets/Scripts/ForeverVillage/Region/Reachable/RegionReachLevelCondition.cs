@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     // maybe should also define separate base class for reach conditions
     [RequireComponent(typeof(ReachableRegion))]
@@ -11,7 +11,7 @@ namespace ForeverVillage.Scripts
         [SerializeField] private int _requiredLevel;
 
         private ReachableRegion _reachable;
-        private PlayerLevel _playerLevel;
+        private SavedPlayerLevel _playerLevel;
 
         public int Condition => _requiredLevel;
         public bool IsCompleted { get; private set; }
@@ -19,7 +19,7 @@ namespace ForeverVillage.Scripts
         public event Action Completed;
 
         [Inject]
-        private void Construct(PlayerLevel playerLevel)
+        private void Construct(SavedPlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
         }

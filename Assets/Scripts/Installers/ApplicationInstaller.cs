@@ -5,6 +5,8 @@ public class ApplicationInstaller : MonoInstaller
 {
     [SerializeField] private ApplicationStatus _appStatus;
 
+    private IGameSaveDataListener[] _listeners;
+
     public override void InstallBindings()
     {
         BindGameSaver();
@@ -13,6 +15,6 @@ public class ApplicationInstaller : MonoInstaller
     private void BindGameSaver()
     {
         Container.Bind<ApplicationStatus>().FromInstance(_appStatus).AsSingle();
-        Container.BindInterfacesAndSelfTo<GameSaver>().AsSingle();
+        Container.BindInterfacesTo<GameSaver>().AsSingle();
     }
 }

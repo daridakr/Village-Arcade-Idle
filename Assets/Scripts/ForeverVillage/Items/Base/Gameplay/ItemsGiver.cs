@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class ItemsGiver<T> : MonoBehaviour where T : DroppableItem
     {

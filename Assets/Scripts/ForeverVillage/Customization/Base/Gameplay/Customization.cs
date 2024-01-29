@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public abstract class Customization :
         ICustomization

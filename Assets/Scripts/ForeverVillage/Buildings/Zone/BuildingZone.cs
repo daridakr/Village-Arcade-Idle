@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
     [RequireComponent(typeof(ExperiencePointGiver))]

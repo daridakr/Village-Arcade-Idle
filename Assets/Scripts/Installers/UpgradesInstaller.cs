@@ -1,6 +1,6 @@
-using ForeverVillage.Scripts;
-using ForeverVillage.Scripts.Upgrades.Player;
 using UnityEngine;
+using Village;
+using Village.Upgrades.Player;
 using Zenject;
 
 public class UpgradesInstaller : MonoInstaller

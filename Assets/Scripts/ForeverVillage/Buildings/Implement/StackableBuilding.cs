@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class StackableBuilding : Building
     {

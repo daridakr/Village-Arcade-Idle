@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts
+namespace Village
 {
     public class ResidentialView : MonoBehaviour
     {

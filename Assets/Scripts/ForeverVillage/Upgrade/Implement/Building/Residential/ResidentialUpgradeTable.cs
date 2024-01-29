@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Upgrades.Building
+namespace Village.Upgrades.Building
 {
     [Serializable]
     public sealed class ResidentialUpgradeTable

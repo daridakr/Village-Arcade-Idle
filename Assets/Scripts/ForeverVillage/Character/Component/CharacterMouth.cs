@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForeverVillage.Scripts.Character
+namespace Village.Character
 {
     [RequireComponent(typeof(MeshFilter))]
     public class CharacterMouth : MonoBehaviour
