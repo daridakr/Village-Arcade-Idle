@@ -7,11 +7,11 @@ namespace Village
         IInitializable
     {
         private PlayerPointRepository _repository;
-        private UpgradablePlayerMovement _movement;
+        private PlayerMovement _movement;
 
         private const float _y = 0.5f;
 
-        public PlayerPointSetter(PlayerPointRepository repository, UpgradablePlayerMovement movement)
+        public PlayerPointSetter(PlayerPointRepository repository, PlayerMovement movement)
         {
             _repository = repository;
             _movement = movement;

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Village
 {
-    public sealed class UpgradablePlayerMovement : global::PlayerMovement
+    public sealed class UpgradablePlayerMovement : PlayerMovement
     {
         private MovementSpeedUpgrade _upgrade;
 
@@ -27,14 +27,6 @@ namespace Village
             _speed = value;
         }
 
-        public void MoveToTarget(Transform target)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
-        }
-
-        private void OnDestroy()
-        {
-            _upgrade.Updated -= SetSpeed;
-        }
+        protected override void OnDestroyed() => _upgrade.Updated -= SetSpeed;
     }
 }

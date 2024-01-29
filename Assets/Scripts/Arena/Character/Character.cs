@@ -8,6 +8,7 @@ namespace Vampire
 {
     public class Character : IDamageable, ISpatialHashGridClient
     {
+
         [Header("Dependencies")]
         [SerializeField] protected Transform centerTransform;
         [SerializeField] protected Transform lookIndicator;
@@ -21,7 +22,7 @@ namespace Vampire
         [SerializeField] protected ParticleSystem dustParticles;
         [SerializeField] protected Material defaultMaterial, hitMaterial, deathMaterial;
         [SerializeField] protected ParticleSystem deathParticles;
-        protected CharacterBlueprint characterBlueprint;
+        [SerializeField] protected CharacterBlueprint characterBlueprint;
         protected UpgradeableMovementSpeed movementSpeed;
         protected UpgradeableArmor armor;
         protected bool alive = true;
@@ -70,7 +71,7 @@ namespace Vampire
             zPositioner = gameObject.AddComponent<ZPositioner>();
             spriteAnimator = GetComponentInChildren<SpriteAnimator>();
             spriteRenderer = spriteAnimator.GetComponent<SpriteRenderer>();
-            characterBlueprint = CrossSceneData.CharacterBlueprint;
+            //characterBlueprint = CrossSceneData.CharacterBlueprint;
         }
 
         public virtual void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)

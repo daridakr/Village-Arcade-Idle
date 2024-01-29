@@ -10,7 +10,6 @@ namespace Vampire
         [SerializeField] private EntityManager entityManager;
         [SerializeField] private AbilityManager abilityManager;
         [SerializeField] private AbilitySelectionDialog abilitySelectionDialog;
-        [SerializeField] private InfiniteBackground infiniteBackground;
         [SerializeField] private Inventory inventory;
         [SerializeField] private StatsManager statsManager;
         [SerializeField] private GameOverDialog gameOverDialog;
@@ -27,7 +26,7 @@ namespace Vampire
             levelTime = 0;
             
             // Initialize the entity manager
-            entityManager.Init(this.levelBlueprint, playerCharacter, inventory, statsManager, infiniteBackground, abilitySelectionDialog);
+            entityManager.Init(this.levelBlueprint, playerCharacter, inventory, statsManager, abilitySelectionDialog);
             // Initialize the ability manager
             abilityManager.Init(this.levelBlueprint, entityManager, playerCharacter, abilityManager);
             abilitySelectionDialog.Init(abilityManager, entityManager, playerCharacter);
@@ -39,7 +38,6 @@ namespace Vampire
             // Spawn a singular chest
             entityManager.SpawnChest(levelBlueprint.chestBlueprint);
             // Initialize the infinite background
-            infiniteBackground.Init(this.levelBlueprint.backgroundTexture, playerCharacter.transform);
             // Initialize inventory
             inventory.Init();
         }

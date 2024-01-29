@@ -20,6 +20,7 @@ public class PlayerCharacterModel : MonoBehaviour
         _instance = Instantiate(prefab, transform);
         _animation = _instance.GetComponentInChildren<PlayerAnimation>();
 
+        //Debug.Log(transform);
         _movement.Setup(transform, _animation);
     }
 }

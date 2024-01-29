@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         _controlService.OnMove += Move;
         _controlService.OnStand += Stop;
 
+        _speed = config.Speed;
         _speedRate = config.SpeedRate;
         _flySpeedRate = config.FlySpeedRate;
     }
@@ -49,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
         IsMoving = true;
     }
 
+    public void MoveToTarget(Transform target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
+    }
+
     public void Stop()
     {
         if (IsMoving)
@@ -67,5 +73,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _controlService.OnMove -= Move;
         _controlService.OnStand -= Stop;
+
+        OnDestroyed();
     }
+
+    protected virtual void OnDestroyed() { }
 }
