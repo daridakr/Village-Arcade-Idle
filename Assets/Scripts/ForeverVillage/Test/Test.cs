@@ -5,11 +5,11 @@ namespace Village
 {
     public class Test : MonoBehaviour
     {
-        private SavedPlayerLevel _playerLevel;
+        private StorablePlayerLevel _playerLevel;
         private PlayerWallet _wallet;
 
         [Inject]
-        private void Construct(PlayerWallet wallet, SavedPlayerLevel playerLevel)
+        private void Construct(PlayerWallet wallet, StorablePlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
             _wallet = wallet;

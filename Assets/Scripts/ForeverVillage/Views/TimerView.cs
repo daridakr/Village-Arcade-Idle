@@ -10,11 +10,6 @@ namespace Village
         private ITimer _timer;
         private float _fullTime;
 
-        private void OnEnable()
-        {
-            Hide();
-        }
-
         public void Init(ITimer timer)
         {
             //if (_timer != null)

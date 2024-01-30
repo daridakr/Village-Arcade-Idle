@@ -32,7 +32,7 @@ namespace Village
         {
             base.BindDisplayData();
 
-            Container.BindInterfacesAndSelfTo<SavedPlayerLevel>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<StorablePlayerLevel>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
         }
 
         protected override void BindRepository()

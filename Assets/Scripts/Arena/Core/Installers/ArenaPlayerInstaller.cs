@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace Vampire
 {
-    public sealed class ArenaPlayerInstaller : global::PlayerInstaller
+    public sealed class ArenaPlayerInstaller : PlayerInstaller
     {
+        [SerializeField] private HealthConfig _healthConfig;
         [SerializeField] private PlayerReference _playerReference;
         [SerializeField] private Transform _spawnPoint;
 
@@ -19,6 +20,13 @@ namespace Vampire
         {
             _playerInstance = Container.InstantiatePrefabForComponent<PlayerReference>
                 (Reference.gameObject, SpawnPosition, Quaternion.identity, null);
+        }
+
+        protected override void BindConfigs()
+        {
+            base.BindConfigs();
+
+            Container.Bind<HealthConfig>().FromInstance(_healthConfig).AsSingle().NonLazy();
         }
 
         protected override void BindDisplayData()

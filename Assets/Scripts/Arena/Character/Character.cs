@@ -8,15 +8,13 @@ namespace Vampire
 {
     public class Character : IDamageable, ISpatialHashGridClient
     {
-
         [Header("Dependencies")]
         [SerializeField] protected Transform centerTransform;
         [SerializeField] protected Transform lookIndicator;
         [SerializeField] protected float lookIndicatorRadius;
         [SerializeField] protected TextMeshProUGUI levelText;
         [SerializeField] protected AbilitySelectionDialog abilitySelectionDialog;
-        [SerializeField] protected PointBar healthBar;  // 血量條
-        [SerializeField] protected PointBar expBar;  // 經驗條
+        [SerializeField] protected HealthPoints expBar;  // 經驗條
         [SerializeField] protected Collider2D collectableCollider;
         [SerializeField] protected Collider2D meleeHitboxCollider;
         [SerializeField] protected ParticleSystem dustParticles;
@@ -24,13 +22,10 @@ namespace Vampire
         [SerializeField] protected ParticleSystem deathParticles;
         [SerializeField] protected CharacterBlueprint characterBlueprint;
         protected UpgradeableMovementSpeed movementSpeed;
-        protected UpgradeableArmor armor;
-        protected bool alive = true;
         protected int currentLevel = 1;
         protected float currentExp = 0;
         protected float nextLevelExp = 5;
         protected float expToNextLevel = 5;
-        protected float currentHealth;
         protected SpriteRenderer spriteRenderer;
         protected SpriteAnimator spriteAnimator;
         protected AbilityManager abilityManager;
@@ -85,10 +80,9 @@ namespace Vampire
             // Initialize the coroutine queue
             coroutineQueue = new CoroutineQueue(this);
             coroutineQueue.StartLoop();
-            // Initialize starting health and exp
-            currentHealth = characterBlueprint.hp;
-            healthBar.Setup(currentHealth, 0, characterBlueprint.hp);
-            expBar.Setup(currentExp, 0, nextLevelExp);
+
+            //expBar.Setup(currentExp, 0, nextLevelExp);
+
             currentLevel = 1;
             UpdateLevelDisplay();
             // Initialize animations
@@ -99,9 +93,9 @@ namespace Vampire
             abilityManager.RegisterUpgradeableValue(movementSpeed, true);
             UpdateMoveSpeed();
             // Initialize upgradeable armor
-            armor = new UpgradeableArmor();
-            armor.Value = characterBlueprint.armor;
-            abilityManager.RegisterUpgradeableValue(armor, true);
+           
+            //abilityManager.RegisterUpgradeableValue(armor, true);
+
             zPositioner.Init(transform);
         }
 
@@ -118,57 +112,62 @@ namespace Vampire
                 lookDirection = moveDirection;
             else
                 StopWalkAnimation();
-            if (alive)
-                rb.velocity += moveDirection * characterBlueprint.acceleration * Time.deltaTime;
+
+            //if (alive)
+            //    rb.velocity += moveDirection * characterBlueprint.acceleration * Time.deltaTime;
         }
 
         public void GainExp(float exp)
         {
-            if (alive)
-                coroutineQueue.EnqueueCoroutine(GainExpCoroutine(exp));
+            //if (alive)
+            //    coroutineQueue.EnqueueCoroutine(GainExpCoroutine(exp));
         }
 
         private IEnumerator GainExpCoroutine(float exp)
         {
-            if (alive)
-            {
-                // Level up as many times as possible with the exp given
-                while (currentExp + exp >= nextLevelExp)
-                {
-                    // Use only as much exp as brings us up to the next level
-                    float expDiff = nextLevelExp - currentExp;
-                    currentExp += expDiff;
-                    exp -= expDiff;
-                    expBar.Setup(currentExp, 0, nextLevelExp);  // Temp make the exp bar appear to be full
-                    // Wait until the player has finished leveling up
-                    yield return LevelUpCoroutine();
-                    // Update the exp bar to show the progress to the next level
-                    float prevLevelExp = nextLevelExp;
-                    expToNextLevel += characterBlueprint.LevelToExpIncrease(currentLevel);
-                    nextLevelExp += expToNextLevel;
-                    expBar.Setup(currentExp, prevLevelExp, nextLevelExp);
-                }
-                // Add remaining exp
-                currentExp += exp;
-                expBar.AddPoints(exp);
-            }
+            //if (alive)
+            //{
+            //    // Level up as many times as possible with the exp given
+            //    while (currentExp + exp >= nextLevelExp)
+            //    {
+            //        // Use only as much exp as brings us up to the next level
+            //        float expDiff = nextLevelExp - currentExp;
+            //        currentExp += expDiff;
+            //        exp -= expDiff;
+            //        expBar.Setup(currentExp, 0, nextLevelExp);  // Temp make the exp bar appear to be full
+            //        // Wait until the player has finished leveling up
+            //        yield return LevelUpCoroutine();
+            //        // Update the exp bar to show the progress to the next level
+            //        float prevLevelExp = nextLevelExp;
+            //        expToNextLevel += characterBlueprint.LevelToExpIncrease(currentLevel);
+            //        nextLevelExp += expToNextLevel;
+            //        expBar.Setup(currentExp, prevLevelExp, nextLevelExp);
+            //    }
+            //    // Add remaining exp
+            //    currentExp += exp;
+            //    expBar.AddPoints(exp);
+            //}
+
+            yield return LevelUpCoroutine();
         }
 
         private IEnumerator LevelUpCoroutine()
         {
-            if (alive)
-            {
-                // Level up
-                currentLevel++;
-                UpdateLevelDisplay();
-                // Open the level up dialog menu
-                abilitySelectionDialog.Open();
-                // Wait for the menu to be closed
-                while (abilitySelectionDialog.MenuOpen)
-                {
-                    yield return null;
-                }
-            }
+            //if (alive)
+            //{
+            //    // Level up
+            //    currentLevel++;
+            //    UpdateLevelDisplay();
+            //    // Open the level up dialog menu
+            //    abilitySelectionDialog.Open();
+            //    // Wait for the menu to be closed
+            //    while (abilitySelectionDialog.MenuOpen)
+            //    {
+            //        yield return null;
+            //    }
+            //}
+
+            yield return null;
         }
 
         private void UpdateLevelDisplay()
@@ -176,36 +175,27 @@ namespace Vampire
             levelText.text = "LV " + currentLevel;
         }
 
-        public override void Knockback(Vector2 knockback)
+        public override void TakeDamage(float damage, Vector3 knockback = default)
         {
-            rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+            //if (alive)
+            //{
+            //    rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+            //    statsManager.IncreaseDamageTaken(damage);
+            //    if (currentHealth <= 0)
+            //    {
+            //        StartCoroutine(DeathAnimation());
+            //    }
+            //    else
+            //    {
+            //        if (hitAnimationCoroutine != null) StopCoroutine(hitAnimationCoroutine);
+            //        hitAnimationCoroutine = StartCoroutine(HitAnimation());
+            //    }
+            //}
         }
 
-        public override void TakeDamage(float damage, Vector2 knockback = default(Vector2))
+        public override void Knockback(Vector3 knockback)
         {
-            if (alive)
-            {
-                // Apply armor
-                if (armor.Value >= damage)
-                    damage = damage < 1 ? damage : 1;
-                else
-                    damage -= armor.Value;
-                // Decrease health
-                healthBar.SubtractPoints(damage);
-                currentHealth -= damage;
-                // Knockback
-                rb.velocity += knockback * Mathf.Sqrt(rb.drag);
-                statsManager.IncreaseDamageTaken(damage);
-                if (currentHealth <= 0)
-                {
-                    StartCoroutine(DeathAnimation());
-                }
-                else
-                {
-                    if (hitAnimationCoroutine != null) StopCoroutine(hitAnimationCoroutine);
-                    hitAnimationCoroutine = StartCoroutine(HitAnimation());
-                }
-            }
+
         }
 
         private IEnumerator HitAnimation()
@@ -217,7 +207,7 @@ namespace Vampire
 
         private IEnumerator DeathAnimation()
         {
-            alive = false;
+            //alive = false;
             spriteRenderer.sharedMaterial = deathMaterial;
 
             abilityManager.DestroyActiveAbilities();
@@ -243,10 +233,10 @@ namespace Vampire
 
         public void GainHealth(float health)
         {
-            healthBar.AddPoints(health);
-            currentHealth += health;
-            if (currentHealth > characterBlueprint.hp)
-                currentHealth = characterBlueprint.hp;
+            //healthBar.AddPoints(health);
+            //currentHealth += health;
+            //if (currentHealth > characterBlueprint.hp)
+            //    currentHealth = characterBlueprint.hp;
         }
 
         //public void SetLookDirecton(InputAction.CallbackContext context)
@@ -266,8 +256,8 @@ namespace Vampire
 
         public void StartWalkAnimation()
         {
-            if (alive)
-                spriteAnimator.StartAnimating();
+            //if (alive)
+            //    spriteAnimator.StartAnimating();
             //dustParticles.Play();
         }
 

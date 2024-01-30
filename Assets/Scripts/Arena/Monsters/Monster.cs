@@ -97,23 +97,23 @@ namespace Vampire
 
         }
 
-        public override void Knockback(Vector2 knockback)
+        public override void Knockback(Vector3 knockback)
         {
-            rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+            //rb.velocity += knockback * Mathf.Sqrt(rb.drag);
         }
 
-        public override void TakeDamage(float damage, Vector2 knockback = default(Vector2))
+        public override void TakeDamage(float damage, Vector3 knockback = default)
         {
             if (alive)
             {
                 entityManager.SpawnDamageText(monsterHitbox.transform.position, damage);
                 currentHealth -= damage;
                 if (hitAnimationCoroutine != null) StopCoroutine(hitAnimationCoroutine);
-                if (knockback != default(Vector2))
-                {
-                    rb.velocity += knockback * Mathf.Sqrt(rb.drag);
-                    knockedBack = true;
-                }
+                //if (knockback != default(Vector2))
+                //{
+                //    rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+                //    knockedBack = true;
+                //}
                 if (currentHealth > 0)
                     hitAnimationCoroutine = StartCoroutine(HitAnimation());
                 else

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Village
 {
     [Serializable]
-    public class ExperienceLevel : KeySavedObject<ExperienceLevel>
+    public sealed class ExperienceLevel : KeySavedObject<ExperienceLevel>
     {
         [SerializeField] private int _value;
         [SerializeField] private int _experience;

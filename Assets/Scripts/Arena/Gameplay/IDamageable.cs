@@ -4,7 +4,7 @@ namespace Vampire
 {
     public abstract class IDamageable : MonoBehaviour
     {
-        public abstract void TakeDamage(float damage, Vector2 knockback = default(Vector2));
-        public abstract void Knockback(Vector2 knockback);
+        public abstract void TakeDamage(float damage, Vector3 knockback = default);
+        public abstract void Knockback(Vector3 knockback);
     }
 }

@@ -21,7 +21,7 @@ public abstract class PlayerInstaller : MonoInstaller
         BindRepository();
     }
 
-    private void BindConfigs()
+    protected virtual void BindConfigs()
     {
         Container.Bind<MovementConfig>().FromInstance(_movementConfig).AsSingle().NonLazy();
         Container.Bind<ItemsMagnitConfig>().FromInstance(_itemsMagnitConfig).AsSingle().NonLazy();
