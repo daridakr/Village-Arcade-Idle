@@ -97,10 +97,10 @@ namespace Vampire
             for (int i = 0; i < levelBlueprint.monsters.Length; i++)
             {
                 monsterPools[i] = monsterPoolParent.AddComponent<MonsterPool>();
-                monsterPools[i].Init(this, _playerModel.gameObject, levelBlueprint.monsters[i].monstersPrefab);
+                monsterPools[i].Init(this, levelBlueprint.monsters[i].monstersPrefab);
             }
             monsterPools[monsterPools.Length-1] = monsterPoolParent.AddComponent<MonsterPool>();
-            monsterPools[monsterPools.Length-1].Init(this, _playerModel.gameObject, levelBlueprint.finalBoss.bossPrefab);
+            monsterPools[monsterPools.Length-1].Init(this, levelBlueprint.finalBoss.bossPrefab);
             // Initialize a projectile pool for each ranged projectile type
             projectileIndexByPrefab = new Dictionary<GameObject, int>();
             projectilePools = new List<ProjectilePool>();
@@ -111,10 +111,10 @@ namespace Vampire
             boomerangIndexByPrefab = new Dictionary<GameObject, int>();
             boomerangPools = new List<BoomerangPool>();
             // Initialize remaining one-off object pools
-            expGemPool.Init(this, _playerModel.gameObject, expGemPrefab);
-            coinPool.Init(this, _playerModel.gameObject, coinPrefab);
-            chestPool.Init(this, _playerModel.gameObject, chestPrefab);
-            textPool.Init(this, _playerModel.gameObject, textPrefab);
+            expGemPool.Init(this, expGemPrefab);
+            coinPool.Init(this, coinPrefab);
+            chestPool.Init(this, chestPrefab);
+            textPool.Init(this, textPrefab);
 
             // Init spatial hash grid
             Vector2[] bounds = new Vector2[] { (Vector2)_playerModel.transform.position - gridSize/2, (Vector2)_playerModel.transform.position + gridSize/2 };
@@ -404,7 +404,7 @@ namespace Vampire
             {
                 projectileIndexByPrefab[projectilePrefab] = projectilePools.Count;
                 ProjectilePool projectilePool = projectilePoolParent.AddComponent<ProjectilePool>();
-                projectilePool.Init(this, _playerModel.gameObject, projectilePrefab);
+                projectilePool.Init(this, projectilePrefab);
                 projectilePools.Add(projectilePool);
                 return projectilePools.Count - 1;
             }
@@ -432,7 +432,7 @@ namespace Vampire
             {
                 throwableIndexByPrefab[throwablePrefab] = throwablePools.Count;
                 ThrowablePool throwablePool = throwablePoolParent.AddComponent<ThrowablePool>();
-                throwablePool.Init(this, _playerModel.gameObject, throwablePrefab);
+                throwablePool.Init(this, throwablePrefab);
                 throwablePools.Add(throwablePool);
                 return throwablePools.Count - 1;
             }
@@ -460,7 +460,7 @@ namespace Vampire
             {
                 boomerangIndexByPrefab[boomerangPrefab] = boomerangPools.Count;
                 BoomerangPool boomerangPool = boomerangPoolParent.AddComponent<BoomerangPool>();
-                boomerangPool.Init(this, _playerModel.gameObject, boomerangPrefab);
+                boomerangPool.Init(this, boomerangPrefab);
                 boomerangPools.Add(boomerangPool);
                 return boomerangPools.Count - 1;
             }

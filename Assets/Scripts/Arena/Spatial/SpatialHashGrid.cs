@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface ISpatialHashGridClient
 {
-    Vector2 Position { get; }
-    Vector2 Size { get; }
+    Vector3 Position { get; }
+    Vector3 Size { get; }
     Dictionary<int, int> ListIndexByCellIndex { get; set; }
     int QueryID { get; set; }
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 
 namespace Vampire
 {
@@ -37,19 +36,10 @@ namespace Vampire
         public UnityEvent<Monster> OnKilled { get; } = new UnityEvent<Monster>();
         public float HP => currentHealth;
         // Spatial Hash Grid Client Interface
-        public Vector2 Position => transform.position;
-        public Vector2 Size => monsterLegsCollider.bounds.size;
+        public Vector3 Position => transform.position;
+        public Vector3 Size => monsterLegsCollider.bounds.size;
         public Dictionary<int, int> ListIndexByCellIndex { get; set; }
         public int QueryID { get; set; } = -1;
-
-        [Inject]
-        private void Construct(
-            ArenaPlayerCharacterModel playerModel,
-            ArenaPlayerMovement playerMovement)
-        {
-            _playerModel = playerModel;
-            _playerMovement = playerMovement;
-        }
 
         protected virtual void Awake()
         {
@@ -64,8 +54,11 @@ namespace Vampire
             _playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
         }
 
-        public virtual void Init(EntityManager entityManager)
+        public virtual void Init(EntityManager entityManager, ArenaPlayerCharacterModel playerModel, ArenaPlayerMovement playerMovement)
         {
+            _playerModel = playerModel;
+            _playerMovement = playerMovement;
+
             this.entityManager = entityManager;
             zPositioner.Init(_playerModel.transform);
         }

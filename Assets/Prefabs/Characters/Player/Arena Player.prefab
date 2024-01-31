@@ -336,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 7121155364999617204}
   _centerTransform: {fileID: 7145205538985927475}
+  meleeHitboxCollider: {fileID: 7970839916266409323}
 --- !u!1 &6561836900302757462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4167383146005416371, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}
@@ -365,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53b5aa01d0eccc4e92190d6dbade87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _luck: 0
 --- !u!1 &6794882633121152241 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4362179068316805908, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}
@@ -385,7 +387,6 @@ MonoBehaviour:
   _dataComponents: {fileID: 6561836900302757462}
   _modelContainer: {fileID: 2794292587998258473}
   startingAbilities: []
-  luck: 0
   collectableCollider: {fileID: 0}
 --- !u!114 &7121155364999617204
 MonoBehaviour:
@@ -402,5 +403,10 @@ MonoBehaviour:
 --- !u!4 &7145205538985927475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 138777701730890966, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}
+  m_PrefabInstance: {fileID: 7117331186229368805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &7970839916266409323 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 890529295671401102, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}
   m_PrefabInstance: {fileID: 7117331186229368805}
   m_PrefabAsset: {fileID: 0}

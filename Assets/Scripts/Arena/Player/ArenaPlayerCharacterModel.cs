@@ -7,6 +7,7 @@ namespace Vampire
         ISpatialHashGridClient
     {
         [SerializeField] private Transform _centerTransform; // center of the character, model
+        [SerializeField] private Collider meleeHitboxCollider;
 
         private Vector3 _lookDirection = Vector3.right;
 
@@ -21,11 +22,9 @@ namespace Vampire
             }
         }
 
-        public Vector2 Position => throw new System.NotImplementedException();
-
-        public Vector2 Size => throw new System.NotImplementedException();
-
-        public Dictionary<int, int> ListIndexByCellIndex { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public int QueryID { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public Vector3 Position => transform.position;
+        public Vector3 Size => meleeHitboxCollider.bounds.size;
+        public Dictionary<int, int> ListIndexByCellIndex { get; set; }
+        public int QueryID { get; set; } = -1;
     }
 }

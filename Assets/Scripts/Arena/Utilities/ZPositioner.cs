@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vampire
@@ -18,9 +16,9 @@ namespace Vampire
 
         void LateUpdate()
         {
-            Vector3 temp = transform.position;
-            temp.z = scale*((manuallySetZ ? manualY : temp.y)-playerTransform.position.y);
-            transform.position = temp;
+            //Vector3 temp = transform.position;
+            //temp.z = scale * ((manuallySetZ ? manualY : temp.y) - playerTransform.position.y);
+            //transform.position = temp;
         }
 
         public void ManuallySetZByY(float y)

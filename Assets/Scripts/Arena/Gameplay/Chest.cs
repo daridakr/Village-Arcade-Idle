@@ -1,30 +1,26 @@
 using UnityEngine;
 using System.Collections;
-using Zenject;
 
 namespace Vampire
 {
     public class Chest : MonoBehaviour
     {
         protected ChestBlueprint chestBlueprint; 
-        protected EntityManager entityManager;
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected EntityManager _entityManager;
         protected ZPositioner zPositioner;
-        protected Transform chestItemsParent;
+        protected Transform _chestItemsParent;
         protected SpriteRenderer spriteRenderer;
         protected bool opened = false;
 
-        [Inject]
-        private void Construct(ArenaPlayerCharacterModel playerModel)
-        {
-            _playerModel = playerModel;
-        }
+        private ArenaPlayerCharacterModel _playerModel;
 
-        public void Init(EntityManager entityManager, Transform chestItemsParent)
+        public void Init(EntityManager entityManager, Transform chestItemsParent, ArenaPlayerCharacterModel playerModel)
         {
-            this.entityManager = entityManager;
-            this.chestItemsParent = chestItemsParent;
-            (zPositioner = gameObject.AddComponent<ZPositioner>()).Init(_playerModel.transform);
+            _entityManager = entityManager;
+            _chestItemsParent = chestItemsParent;
+            _playerModel = playerModel;
+
+            (zPositioner = gameObject.AddComponent<ZPositioner>()).Init(playerModel.transform);
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
@@ -39,11 +35,11 @@ namespace Vampire
 
         private void SpawnLoot(Loot<GameObject> loot, bool openedByPlayer = true)
         {
-            GameObject item = Instantiate(loot.item, chestItemsParent);
+            GameObject item = Instantiate(loot.item, _chestItemsParent);
             item.transform.position = transform.position;
             transform.position += Vector3.back*0.001f;  // Nudge the collectable in front of the chest
             Collectable collectable = item.GetComponent<Collectable>();
-            collectable.Init(entityManager, _playerModel);
+            collectable.Init(_entityManager, _playerModel);
             Coin coin = collectable as Coin;
             if (coin != null)
                 coin.Setup(transform.position, loot.coinType, true, true);
@@ -67,13 +63,13 @@ namespace Vampire
         private IEnumerator Open(bool openedByPlayer = true)
         {
             spriteRenderer.sprite = chestBlueprint.openingChest;
-            bool spawnLoot = !chestBlueprint.abilityChest || !entityManager.AbilitySelectionDialog.HasAvailableAbilities();
+            bool spawnLoot = !chestBlueprint.abilityChest || !_entityManager.AbilitySelectionDialog.HasAvailableAbilities();
             if (spawnLoot)
                 SpawnLoot(chestBlueprint.lootTable.DropLootObject(), openedByPlayer);
             yield return new WaitForSeconds(0.1f);
             spriteRenderer.sprite = chestBlueprint.openChest;
             if (!spawnLoot)
-                entityManager.AbilitySelectionDialog.Open(false);
+                _entityManager.AbilitySelectionDialog.Open(false);
             yield return new WaitForSeconds(0.15f);
             float t = 0;
             while (t < 1.0f)
@@ -82,7 +78,7 @@ namespace Vampire
                 t += Time.deltaTime*2;
                 yield return null;
             }
-            entityManager.DespawnChest(this);
+            _entityManager.DespawnChest(this);
         }
 
         private IEnumerator Appear()

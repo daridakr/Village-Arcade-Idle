@@ -5,8 +5,9 @@ namespace Vampire
 {
     public class Pool : MonoBehaviour
     {
-        protected EntityManager entityManager;
         protected ArenaPlayerCharacterModel _playerModel;
+
+        protected EntityManager entityManager;
         protected GameObject prefab;
         protected bool collectionCheck = true;
         protected int defaultCapacity = 10;

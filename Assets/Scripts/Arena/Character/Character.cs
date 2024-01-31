@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using TMPro;
 using System.Collections.Generic;
 
 namespace Vampire
 {
-    public class Character : IDamageable, ISpatialHashGridClient
+    public class Character : IDamageable
     {
         [Header("Dependencies")]
         [SerializeField] protected Transform lookIndicator;

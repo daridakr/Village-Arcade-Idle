@@ -44,9 +44,9 @@ namespace Vampire
         {
             ISpatialHashGridClient targetEntity = entityManager.Grid.FindClosestInRadius(bazookaGun.transform.position, targetRadius);
             
-            Vector2 launchDirection = targetEntity == null ? Random.insideUnitCircle.normalized : (targetEntity.Position - (Vector2)bazookaGun.transform.position).normalized;
+            Vector3 launchDirection = targetEntity == null ? Random.insideUnitCircle.normalized : (targetEntity.Position - bazookaGun.transform.position).normalized;
 
-            float targetTheta = Vector2.SignedAngle(Vector2.right, launchDirection);
+            float targetTheta = Vector2.SignedAngle(Vector3.right, launchDirection);
             float initialTheta = theta;
 
             float t = 0;
@@ -56,8 +56,8 @@ namespace Vampire
                 float tScaled = t / tMax;
                 if (targetEntity != null)
                 {
-                    launchDirection = (targetEntity.Position - (Vector2)bazookaGun.transform.position).normalized;
-                    targetTheta = Vector2.SignedAngle(Vector2.right, launchDirection);
+                    launchDirection = (targetEntity.Position - (Vector3)bazookaGun.transform.position).normalized;
+                    targetTheta = Vector2.SignedAngle(Vector3.right, launchDirection);
                 }
                 theta = Mathf.Lerp(initialTheta, targetTheta, EasingUtils.EaseOutBack(t));
                 bazookaGun.transform.rotation = Quaternion.Euler(0, 0, theta);
@@ -71,8 +71,8 @@ namespace Vampire
                 while (t < tMax)
                 {
                     float tScaled = t / tMax;
-                    launchDirection = (targetEntity.Position - (Vector2)bazookaGun.transform.position).normalized;
-                    targetTheta = Vector2.SignedAngle(Vector2.right, launchDirection);
+                    launchDirection = (targetEntity.Position - bazookaGun.transform.position).normalized;
+                    targetTheta = Vector2.SignedAngle(Vector3.right, launchDirection);
                     bazookaGun.transform.rotation = Quaternion.Euler(0, 0, targetTheta);
                     //bazookaGun.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, initialTheta), Quaternion.Euler(0, 0, targetTheta), EasingUtils.EaseOutBack(t));
                     t += Time.deltaTime;

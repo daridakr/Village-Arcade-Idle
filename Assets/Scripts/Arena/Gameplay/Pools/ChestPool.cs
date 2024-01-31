@@ -26,7 +26,7 @@ namespace Vampire
         protected Chest CreatePooledItem()
         {
             Chest chest = Instantiate(prefab, transform).GetComponent<Chest>();
-            chest.Init(entityManager, transform);
+            chest.Init(entityManager, transform, _playerModel);
             return chest;
         }
 

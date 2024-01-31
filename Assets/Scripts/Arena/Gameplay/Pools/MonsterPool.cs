@@ -1,11 +1,19 @@
 using UnityEngine.Pool;
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
     public class MonsterPool : Pool
     {
         protected ObjectPool<Monster> pool;
+        protected ArenaPlayerMovement _playerMovement;
+
+        [Inject]
+        private void Construct(ArenaPlayerMovement movement)
+        {
+            _playerMovement = movement;
+        }
 
         public override void Init(EntityManager entityManager, GameObject prefab, bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000)
         {
@@ -26,7 +34,7 @@ namespace Vampire
         protected Monster CreatePooledItem()
         {
             Monster monster = Instantiate(prefab, transform).GetComponent<Monster>();
-            monster.Init(entityManager);
+            monster.Init(entityManager, _playerModel, _playerMovement);
             return monster;
         }
 
