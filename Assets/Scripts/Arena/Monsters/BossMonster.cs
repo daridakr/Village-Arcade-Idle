@@ -10,10 +10,10 @@ namespace Vampire
         protected BossAbility[] abilities;
         protected Coroutine act = null;
         public Rigidbody Rigidbody { get => _body; }
-        public SpriteAnimator Animator { get => monsterSpriteAnimator; }
+        public Animator Animator { get => _animator; }
         protected float timeSinceLastMeleeAttack;
 
-        public override void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public override void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (BossMonsterBlueprint) monsterBlueprint;

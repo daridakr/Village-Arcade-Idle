@@ -7,7 +7,7 @@ namespace Vampire
         protected new MeleeMonsterBlueprint monsterBlueprint;
         protected float timeSinceLastAttack;
 
-        public override void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public override void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (MeleeMonsterBlueprint) monsterBlueprint;

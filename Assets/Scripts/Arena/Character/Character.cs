@@ -27,7 +27,6 @@ namespace Vampire
         protected AbilityManager abilityManager;
         protected EntityManager entityManager;
         protected StatsManager statsManager;
-        protected ZPositioner zPositioner;
         protected CoroutineQueue coroutineQueue;
         protected Coroutine hitAnimationCoroutine = null;
         protected Vector3 moveDirection;
@@ -41,7 +40,6 @@ namespace Vampire
         void Awake()
         {
             //_body = GetComponent<Rigidbody>();
-            zPositioner = gameObject.AddComponent<ZPositioner>();
             spriteAnimator = GetComponentInChildren<SpriteAnimator>();
             spriteRenderer = spriteAnimator.GetComponent<SpriteRenderer>();
             //characterBlueprint = CrossSceneData.CharacterBlueprint;
@@ -70,7 +68,6 @@ namespace Vampire
             //armor = new UpgradeableArmor();
             //armor.Value = characterBlueprint.armor;
             //abilityManager.RegisterUpgradeableValue(armor, true);
-            //zPositioner.Init(transform);
         }
 
         protected virtual void Update()

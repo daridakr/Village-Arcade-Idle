@@ -61,14 +61,14 @@ namespace Vampire
         {
             if (_current >= _max)
             {
-                OnFull.Invoke();
+                OnFull?.Invoke();
 
                 if (_isClamp)
                     _current = _max;
             }
             else if (_current <= _min)
             {
-                OnEmpty.Invoke();
+                OnEmpty?.Invoke();
 
                 if (_isClamp)
                     _current = _min;

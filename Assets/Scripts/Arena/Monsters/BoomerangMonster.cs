@@ -11,7 +11,7 @@ namespace Vampire
         protected float outOfRangeTime;
         protected int boomerangIndex;
 
-        public override void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public override void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (BoomerangMonsterBlueprint) monsterBlueprint;

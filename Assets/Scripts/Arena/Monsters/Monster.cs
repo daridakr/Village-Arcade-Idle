@@ -5,25 +5,22 @@ using UnityEngine.Events;
 
 namespace Vampire
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody))]
     public abstract class Monster : IDamageable, ISpatialHashGridClient
     {
         [SerializeField] protected Material defaultMaterial, whiteMaterial, dissolveMaterial;
         [SerializeField] protected ParticleSystem deathParticles;
-        [SerializeField] protected GameObject shadow;
         [SerializeField] private PlayerHealthTrigger _playerHealthTrigger;
+        [SerializeField] private Renderer _renderer;
+        [SerializeField] protected Animator _animator;
+        [SerializeField] protected Collider _monsterLegsCollider;
 
-        protected BoxCollider2D monsterHitbox;
-        protected CircleCollider2D monsterLegsCollider;
-        protected int monsterIndex;
-        protected MonsterBlueprint monsterBlueprint;
-        protected SpriteAnimator monsterSpriteAnimator;
-        protected SpriteRenderer monsterSpriteRenderer;
-        protected ZPositioner zPositioner;
-        protected float currentHealth;  // 血量
-        protected EntityManager entityManager;  // 怪物池
+        protected int _monsterIndex;
+        protected MonsterBlueprint _monsterBlueprint;
+        protected float currentHealth;
+        protected EntityManager entityManager;  // monster pools
 
-        protected ArenaPlayerCharacterModel _playerModel;  // 角色
+        protected ArenaPlayerCharacterModel _playerModel;
         protected ArenaPlayerMovement _playerMovement;
 
         protected Rigidbody _body;
@@ -35,21 +32,17 @@ namespace Vampire
         public Transform CenterTransform { get => centerTransform; }
         public UnityEvent<Monster> OnKilled { get; } = new UnityEvent<Monster>();
         public float HP => currentHealth;
+
         // Spatial Hash Grid Client Interface
         public Vector3 Position => transform.position;
-        public Vector3 Size => monsterLegsCollider.bounds.size;
+        public Vector3 Size => _monsterLegsCollider.bounds.size;
         public Dictionary<int, int> ListIndexByCellIndex { get; set; }
         public int QueryID { get; set; } = -1;
 
         protected virtual void Awake()
         {
             _body = GetComponent<Rigidbody>();
-            monsterLegsCollider = GetComponent<CircleCollider2D>();
-            monsterSpriteAnimator = GetComponentInChildren<SpriteAnimator>();
-            monsterSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            zPositioner = gameObject.AddComponent<ZPositioner>();
-            monsterHitbox = monsterSpriteRenderer.gameObject.AddComponent<BoxCollider2D>();
-            monsterHitbox.isTrigger = true;
+            //zPositioner = gameObject.AddComponent<ZPositioner>();
 
             _playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
         }
@@ -60,33 +53,49 @@ namespace Vampire
             _playerMovement = playerMovement;
 
             this.entityManager = entityManager;
-            zPositioner.Init(_playerModel.transform);
         }
 
-        public virtual void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public virtual void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
-            this.monsterIndex = monsterIndex;
-            this.monsterBlueprint = monsterBlueprint;
+            _monsterIndex = monsterIndex;
+            _monsterBlueprint = monsterBlueprint;
             _body.position = position;
             transform.position = position;
+
             // Reset health to max
             currentHealth = monsterBlueprint.hp + hpBuff;
+
             // Toggle alive flag on
             alive = true;
+
             // Add to list of living monsters
             entityManager.LivingMonsters.Add(this);
+
             // Initialize the animator
-            monsterSpriteAnimator.Init(monsterBlueprint.walkSpriteSequence, monsterBlueprint.walkFrameTime, true);
+            //monsterSpriteAnimator.Init(monsterBlueprint.walkSpriteSequence, monsterBlueprint.walkFrameTime, true);
             // Start and reset animation
-            monsterSpriteAnimator.StartAnimating(true);
+            //monsterSpriteAnimator.StartAnimating(true);
+
+            //CapsuleCollider legsCollider = gameObject.AddComponent<CapsuleCollider>();
+            //legsCollider.center = new Vector3(0f, 0.5f, 0f);  // Подбирается в зависимости от геометрии вашего монстра
+            //legsCollider.height = 1.0f;  // Подбирается в зависимости от геометрии вашего монстра
+            //legsCollider.radius = 0.3f;  // Подбирается в зависимости от геометрии вашего монстра
+            //_monsterLegsCollider = legsCollider;
+
+            //_monsterHitbox.enabled = true;
+            //// Настройка размеров и положения коллайдера в соответствии с геометрией монстра
+            //_monsterHitbox.size = new Vector3(1.0f, 1.0f, 1.0f);  // Подбирается в зависимости от геометрии вашего монстра
+            //_monsterHitbox.center = new Vector3(0f, 0.5f, 0f);  // Подбирается в зависимости от геометрии вашего монстра
+
             // Ensure colliders are enabled and sized correctly
-            monsterHitbox.enabled = true;
-            monsterHitbox.size = monsterSpriteRenderer.bounds.size;
-            monsterHitbox.offset = Vector2.up * monsterHitbox.size.y/2;
-            monsterLegsCollider.radius = monsterHitbox.size.x/2.5f;
-            centerTransform = (new GameObject("Center Transform")).transform;
-            centerTransform.SetParent(transform);
-            centerTransform.position = transform.position + (Vector3)monsterHitbox.offset;
+            //monsterHitbox.enabled = true;
+            //monsterHitbox.size = monsterSpriteRenderer.bounds.size;
+            //monsterHitbox.offset = Vector3.up * monsterHitbox.size.y / 2;
+            //_monsterLegsCollider.radius = monsterHitbox.size.x / 2.5f;
+            //centerTransform = (new GameObject("Center Transform")).transform;
+            //centerTransform.SetParent(transform);
+            //centerTransform.position = transform.position + (Vector3)monsterHitbox.offset;
+
             // Set the drag based on acceleration and movespeed
             float spd = Random.Range(monsterBlueprint.movespeed-0.1f, monsterBlueprint.movespeed+0.1f);
             _body.drag = monsterBlueprint.acceleration / (spd * spd);
@@ -119,7 +128,8 @@ namespace Vampire
         {
             if (alive)
             {
-                entityManager.SpawnDamageText(monsterHitbox.transform.position, damage);
+                //entityManager.SpawnDamageText(_monsterHitbox.transform.position, damage);
+                entityManager.SpawnDamageText(transform.position, damage);
                 currentHealth -= damage;
                 if (hitAnimationCoroutine != null) StopCoroutine(hitAnimationCoroutine);
                 //if (knockback != default(Vector2))
@@ -136,9 +146,9 @@ namespace Vampire
 
         protected IEnumerator HitAnimation()
         {
-            monsterSpriteRenderer.sharedMaterial = whiteMaterial;
+            _renderer.sharedMaterial = whiteMaterial;
             yield return new WaitForSeconds(0.15f);
-            monsterSpriteRenderer.sharedMaterial = defaultMaterial;
+            _renderer.sharedMaterial = defaultMaterial;
             knockedBack = false;
         }
 
@@ -146,7 +156,7 @@ namespace Vampire
         {
             // Toggle alive flag off and disable hitbox
             alive = false;
-            monsterHitbox.enabled = false;
+            //_monsterHitbox.enabled = false;
             // Remove from list of living monsters
             entityManager.LivingMonsters.Remove(this);
             // Drop loot
@@ -162,11 +172,9 @@ namespace Vampire
 
             if (deathParticles != null)
             {
-                monsterSpriteRenderer.enabled = false;
-                shadow.SetActive(false);
+                _renderer.enabled = false;
                 yield return new WaitForSeconds(deathParticles.main.duration - 0.15f);
-                monsterSpriteRenderer.enabled = true;
-                shadow.SetActive(true);
+                _renderer.enabled = true;
             }
             // monsterSpriteRenderer.material = dissolveMaterial;
             // float t = 0;
@@ -182,18 +190,18 @@ namespace Vampire
             // Invoke monster killed callback and remove all listeners
             OnKilled.Invoke(this);
             OnKilled.RemoveAllListeners();
-            entityManager.DespawnMonster(monsterIndex, this, true);
+            entityManager.DespawnMonster(_monsterIndex, this, true);
         }
 
         protected virtual void DropLoot()
         {
-            if (monsterBlueprint.gemLootTable.TryDropLoot(out GemType gemType))
+            if (_monsterBlueprint.gemLootTable.TryDropLoot(out GemType gemType))
                 entityManager.SpawnExpGem((Vector2)transform.position, gemType);
-            if (monsterBlueprint.coinLootTable.TryDropLoot(out CoinType coinType))
+            if (_monsterBlueprint.coinLootTable.TryDropLoot(out CoinType coinType))
                 entityManager.SpawnCoin((Vector2)transform.position, coinType);
         }
 
-        private void OnDisable() => _playerHealthTrigger.Enter -= OnPlayerHealthTriggerStay;
+        private void OnDisable() => _playerHealthTrigger.Stay -= OnPlayerHealthTriggerStay;
 
         protected abstract void OnPlayerHealthTriggerStay(PlayerHealth playerHealth);
     }

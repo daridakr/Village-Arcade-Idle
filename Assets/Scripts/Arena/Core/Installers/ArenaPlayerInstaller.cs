@@ -34,7 +34,7 @@ namespace Vampire
         {
             base.BindComponents();
 
-            Container.Bind<PlayerHealth>().FromComponentOn(Instance.Data).AsSingle();
+            Container.Bind<PlayerHealth>().FromComponentOn(Instance.gameObject).AsSingle();
             Container.Bind<ArenaPlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
             Container.Bind<ArenaPlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
         }

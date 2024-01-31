@@ -1,6 +1,5 @@
 using UnityEngine.Pool;
 using UnityEngine;
-using Zenject;
 
 namespace Vampire
 {
@@ -9,16 +8,17 @@ namespace Vampire
         protected ObjectPool<Monster> pool;
         protected ArenaPlayerMovement _playerMovement;
 
-        [Inject]
-        private void Construct(ArenaPlayerMovement movement)
-        {
-            _playerMovement = movement;
-        }
-
         public override void Init(EntityManager entityManager, GameObject prefab, bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000)
         {
             base.Init(entityManager, prefab, collectionCheck, defaultCapacity, maxSize);
+
             pool = new ObjectPool<Monster>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPooledItem, collectionCheck, defaultCapacity, maxSize);
+        }
+
+        public void InitPlayer(ArenaPlayerCharacterModel model, ArenaPlayerMovement movement)
+        {
+            _playerModel = model;
+            _playerMovement = movement;
         }
 
         public Monster Get()

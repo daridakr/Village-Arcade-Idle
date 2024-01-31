@@ -17,7 +17,7 @@ namespace Vampire
         protected float outOfRangeTime;
         protected int projectileIndex;
 
-        public override void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public override void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (RangedMonsterBlueprint) monsterBlueprint;
@@ -41,7 +41,7 @@ namespace Vampire
                         if (distance <= monsterBlueprint.range)
                         {
                             state = State.Shooting;
-                            monsterSpriteAnimator.StopAnimating();
+                            _animator.enabled = false;
                             //rb.bodyType = RigidbodyType2D.Static;
                             //rb.mass = 9999;
                         }
@@ -62,7 +62,7 @@ namespace Vampire
                         if (outOfRangeTime > monsterBlueprint.timeAllowedOutsideRange)
                         {
                             state = State.Walking;
-                            monsterSpriteAnimator.StartAnimating();
+                            _animator.enabled = true;
                             //rb.bodyType = RigidbodyType2D.Dynamic;
                             //rb.mass = 1;
                         }

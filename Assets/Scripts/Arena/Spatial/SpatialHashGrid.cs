@@ -12,11 +12,11 @@ public interface ISpatialHashGridClient
 public class SpatialHashGrid
 {
     protected List<ISpatialHashGridClient>[] cells;
-    protected Vector2[] bounds;
+    protected Vector3[] bounds;
     protected Vector2Int dimensions;
     protected int queryIds;
 
-    public SpatialHashGrid(Vector2[] bounds, Vector2Int dimensions)
+    public SpatialHashGrid(Vector3[] bounds, Vector2Int dimensions)
     {
         this.bounds = bounds;
         this.dimensions = dimensions;
@@ -29,10 +29,10 @@ public class SpatialHashGrid
     public void Rebuild(Vector2 position)
     {
         Vector2 size = bounds[1] - bounds[0];
-        Rebuild(new Vector2[] { position - size/2, position + size/2 }, dimensions);
+        Rebuild(new Vector3[] { position - size/2, position + size/2 }, dimensions);
     }
 
-    public void Rebuild(Vector2[] bounds, Vector2Int dimensions)
+    public void Rebuild(Vector3[] bounds, Vector2Int dimensions)
     {
         // Extract all old clients
         HashSet<ISpatialHashGridClient> oldClients = new HashSet<ISpatialHashGridClient>();

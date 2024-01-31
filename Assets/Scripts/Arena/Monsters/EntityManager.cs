@@ -53,11 +53,15 @@ namespace Vampire
         public FastList<Chest> chests; 
         private float timeSinceLastMonsterSpawned;
         private float timeSinceLastChestSpawned;
-        private float screenWidthWorldSpace, screenHeightWorldSpace, screenDiagonalWorldSpace;
+        private float screenWidthWorldSpace, screenHeightWorldSpace, screenDiagonalWorldSpace, screenDepthWorldSpace;
         private float minSpawnDistance;
         private Coroutine flashCoroutine;
         private Coroutine shockwave;
         private SpatialHashGrid grid;
+
+        [SerializeField] private Vector2 _xLimits;
+        [SerializeField] private Vector2 _zLimits;
+
         public FastList<Monster> LivingMonsters { get => livingMonsters; }
         public FastList<Collectable> MagneticCollectables { get => magneticCollectables; }
         public Inventory Inventory { get => inventory; }
@@ -80,12 +84,15 @@ namespace Vampire
             AbilitySelectionDialog = abilitySelectionDialog;
 
             // Determine the screen size in world space so that we can spawn enemies outside of it
-            Vector2 bottomLeft = playerCamera.ViewportToWorldPoint(new Vector3(0, 0, playerCamera.nearClipPlane));
-            Vector2 topRight = playerCamera.ViewportToWorldPoint(new Vector3(1, 1, playerCamera.nearClipPlane));
-            screenWidthWorldSpace = topRight.x - bottomLeft.x;
-            screenHeightWorldSpace = topRight.y - bottomLeft.y;
-            screenDiagonalWorldSpace = (topRight - bottomLeft).magnitude;
-            minSpawnDistance = screenDiagonalWorldSpace/2;
+            Vector3 bottomLeftNear = playerCamera.ViewportToWorldPoint(new Vector3(0, 0, playerCamera.nearClipPlane));
+            Vector3 topRightNear = playerCamera.ViewportToWorldPoint(new Vector3(1, 1, playerCamera.nearClipPlane));
+            Vector3 topRightFar = playerCamera.ViewportToWorldPoint(new Vector3(1, 1, playerCamera.farClipPlane));
+
+            screenWidthWorldSpace = topRightNear.x - bottomLeftNear.x;
+            screenHeightWorldSpace = topRightNear.y - bottomLeftNear.y;
+            screenDepthWorldSpace = topRightFar.z - bottomLeftNear.z; // Определение глубины экрана в трехмерном пространстве
+            screenDiagonalWorldSpace = (topRightNear - bottomLeftNear).magnitude;
+            minSpawnDistance = screenDiagonalWorldSpace / 2;
 
             // Init fast lists
             livingMonsters = new FastList<Monster>();
@@ -97,10 +104,12 @@ namespace Vampire
             for (int i = 0; i < levelBlueprint.monsters.Length; i++)
             {
                 monsterPools[i] = monsterPoolParent.AddComponent<MonsterPool>();
+                monsterPools[i].InitPlayer(_playerModel, _playerMovement);
                 monsterPools[i].Init(this, levelBlueprint.monsters[i].monstersPrefab);
             }
             monsterPools[monsterPools.Length-1] = monsterPoolParent.AddComponent<MonsterPool>();
             monsterPools[monsterPools.Length-1].Init(this, levelBlueprint.finalBoss.bossPrefab);
+
             // Initialize a projectile pool for each ranged projectile type
             projectileIndexByPrefab = new Dictionary<GameObject, int>();
             projectilePools = new List<ProjectilePool>();
@@ -117,7 +126,7 @@ namespace Vampire
             textPool.Init(this, textPrefab);
 
             // Init spatial hash grid
-            Vector2[] bounds = new Vector2[] { (Vector2)_playerModel.transform.position - gridSize/2, (Vector2)_playerModel.transform.position + gridSize/2 };
+            Vector3[] bounds = new Vector3[] { (Vector2)_playerModel.transform.position - gridSize/2, (Vector2)_playerModel.transform.position + gridSize/2 };
             grid = new SpatialHashGrid(bounds, gridDimensions);
         }
 
@@ -194,14 +203,18 @@ namespace Vampire
             // Find a random position offscreen
 
 
-            Vector2 spawnPosition = (_playerMovement.Velocity != Vector3.zero) ? GetRandomMonsterSpawnPositionPlayerVelocity() : GetRandomMonsterSpawnPosition();
+            //Vector3 spawnPosition = (_playerMovement.Velocity != Vector3.zero) ? GetRandomMonsterSpawnPositionPlayerVelocity() : GetRandomMonsterSpawnPosition();
+
+            Vector3 spawnPosition = GetRandomMonsterSpawnPosition();
+
             // Vector2 spawnDirection = Random.insideUnitCircle.normalized;
             // Vector2 spawnPosition = (Vector2)playerCharacter.transform.position + spawnDirection * (minSpawnDistance + monsterSpawnBufferDistance);
+
             // Spawn the monster
             return SpawnMonster(monsterPoolIndex, spawnPosition, monsterBlueprint, hpBuff);
         }
 
-        public Monster SpawnMonster(int monsterPoolIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
+        public Monster SpawnMonster(int monsterPoolIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             Monster newMonster = monsterPools[monsterPoolIndex].Get();
             newMonster.Setup(monsterPoolIndex, position, monsterBlueprint, hpBuff);
@@ -219,45 +232,73 @@ namespace Vampire
             monsterPools[monsterPoolIndex].Release(monster);
         }
 
-        private Vector2 GetRandomMonsterSpawnPosition()
+        private Vector3 GetRandomMonsterSpawnPosition()
         {
-            Vector2[] sideDirections = new Vector2[] { Vector2.left, Vector2.up, Vector2.right, Vector2.down };
-            int sideIndex = Random.Range(0,4);
-            Vector2 spawnPosition;
-            if (sideIndex % 2 == 0)
-            {
-                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
-            }
-            else
-            {
-                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
-            }
+            Vector3 spawnPosition = new Vector3(
+                Random.Range(_xLimits.x, _xLimits.y), // случайная координата x в заданных пределах
+                4f,
+                Random.Range(_zLimits.x, _zLimits.y)  // случайная координата z в заданных пределах
+            );
+
             return spawnPosition;
         }
 
-        private Vector2 GetRandomMonsterSpawnPositionPlayerVelocity()
+        //private Vector3 GetRandomMonsterSpawnPosition()
+        //{
+        //    Vector3[] sideDirections = new Vector3[] { Vector3.left, Vector3.up, Vector3.right, Vector3.down, Vector3.forward, Vector3.back }; // Добавляем направления вперед и назад для трехмерного пространства
+        //    int sideIndex = Random.Range(0, 5);
+        //    Vector3 spawnPosition;
+
+        //    float halfScreenWidth = screenWidthWorldSpace / 2;
+        //    float halfScreenHeight = screenHeightWorldSpace / 2;
+        //    float halfScreenDepth = screenDepthWorldSpace / 2; // Добавляем глубину экрана в трехмерном пространстве
+
+        //    if (sideIndex % 2 == 0)
+        //    {
+        //        spawnPosition = _playerModel.transform.position +
+        //            sideDirections[sideIndex] * (halfScreenWidth + monsterSpawnBufferDistance) +
+        //            Vector3.up * Random.Range(-halfScreenHeight - monsterSpawnBufferDistance, halfScreenHeight + monsterSpawnBufferDistance) +
+        //            Vector3.forward * Random.Range(-halfScreenDepth - monsterSpawnBufferDistance, halfScreenDepth + monsterSpawnBufferDistance); // Добавляем случайную глубину спавна в трехмерном пространстве
+        //    }
+        //    else
+        //    {
+        //        spawnPosition = _playerModel.transform.position +
+        //            sideDirections[sideIndex] * (halfScreenHeight + monsterSpawnBufferDistance) +
+        //            Vector3.right * Random.Range(-halfScreenWidth - monsterSpawnBufferDistance, halfScreenWidth + monsterSpawnBufferDistance) +
+        //            Vector3.forward * Random.Range(-halfScreenDepth - monsterSpawnBufferDistance, halfScreenDepth + monsterSpawnBufferDistance); // Добавляем случайную глубину спавна в трехмерном пространстве
+        //    }
+
+        //    return spawnPosition;
+        //}
+
+        private Vector3 GetRandomMonsterSpawnPositionPlayerVelocity()
         {
-            Vector2[] sideDirections = new Vector2[] { Vector2.left, Vector2.up, Vector2.right, Vector2.down };
+            Vector3[] sideDirections = new Vector3[] { Vector3.left, Vector3.up, Vector3.right, Vector3.down, Vector3.forward, Vector3.back }; // Добавляем направления вперед и назад для трехмерного пространства
 
             float[] sideWeights = new float[]
             {
-                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[0]),
-                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[1]),
-                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[2]),
-                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[3])
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[0]),
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[1]),
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[2]),
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[3]),
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[4]),
+                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[5])
             };
-            float extraWeight = sideWeights.Sum()/playerDirectionSpawnWeight;
-            int badSideCount = sideWeights.Where(x => x <= 0).Count();
+
+            float extraWeight = sideWeights.Sum() / playerDirectionSpawnWeight;
+            int badSideCount = sideWeights.Count(x => x <= 0);
+
             for (int i = 0; i < sideWeights.Length; i++)
             {
                 if (sideWeights[i] <= 0)
-                    sideWeights[i] = extraWeight / badSideCount; 
+                    sideWeights[i] = extraWeight / badSideCount;
             }
-            float totalSideWeight = sideWeights.Sum();
 
+            float totalSideWeight = sideWeights.Sum();
             float rand = Random.Range(0f, totalSideWeight);
             float cumulative = 0;
             int sideIndex = -1;
+
             for (int i = 0; i < sideWeights.Length; i++)
             {
                 cumulative += sideWeights[i];
@@ -268,15 +309,27 @@ namespace Vampire
                 }
             }
 
-            Vector2 spawnPosition;
+            Vector3 spawnPosition;
+
+            float halfScreenWidth = screenWidthWorldSpace / 2;
+            float halfScreenHeight = screenHeightWorldSpace / 2;
+            float halfScreenDepth = screenDepthWorldSpace / 2; // Добавляем переменную для половины глубины пространства
+
             if (sideIndex % 2 == 0)
             {
-                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = _playerModel.transform.position +
+                    sideDirections[sideIndex] * (halfScreenWidth + monsterSpawnBufferDistance) +
+                    Vector3.up * Random.Range(-halfScreenHeight - monsterSpawnBufferDistance, halfScreenHeight + monsterSpawnBufferDistance) +
+                    Vector3.forward * Random.Range(-halfScreenDepth - monsterSpawnBufferDistance, halfScreenDepth + monsterSpawnBufferDistance); // Учитываем глубину при создании точки спавна
             }
             else
             {
-                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = _playerModel.transform.position +
+                    sideDirections[sideIndex] * (halfScreenHeight + monsterSpawnBufferDistance) +
+                    Vector3.right * Random.Range(-halfScreenWidth - monsterSpawnBufferDistance, halfScreenWidth + monsterSpawnBufferDistance) +
+                    Vector3.forward * Random.Range(-halfScreenDepth - monsterSpawnBufferDistance, halfScreenDepth + monsterSpawnBufferDistance); // Учитываем глубину при создании точки спавна
             }
+
             return spawnPosition;
         }
 
