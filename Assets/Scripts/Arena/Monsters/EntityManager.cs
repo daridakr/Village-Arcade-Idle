@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.Pool;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Vampire
 {
@@ -42,7 +42,10 @@ namespace Vampire
         [Header("Dependencies")]
         [SerializeField] private SpriteRenderer flashSpriteRenderer;
         [SerializeField] private Camera playerCamera;  // 攝像頭
-        private Character playerCharacter;  // 玩家的角色
+
+        private ArenaPlayerCharacterModel _playerModel;  // 玩家的角色
+        private ArenaPlayerMovement _playerMovement;
+
         private StatsManager statsManager;
         private Inventory inventory;
         private FastList<Monster> livingMonsters;
@@ -61,9 +64,17 @@ namespace Vampire
         public AbilitySelectionDialog AbilitySelectionDialog { get; private set; }
         public SpatialHashGrid Grid { get => grid; }
 
-        public void Init(LevelBlueprint levelBlueprint, Character character, Inventory inventory, StatsManager statsManager, AbilitySelectionDialog abilitySelectionDialog)
+        [Inject]
+        private void Construct(
+            ArenaPlayerCharacterModel playerModel,
+            ArenaPlayerMovement playerMovement)
         {
-            this.playerCharacter = character;
+            _playerModel = playerModel;
+            _playerMovement = playerMovement;
+        }
+
+        public void Init(LevelBlueprint levelBlueprint, Inventory inventory, StatsManager statsManager, AbilitySelectionDialog abilitySelectionDialog)
+        {
             this.inventory = inventory;
             this.statsManager = statsManager;
             AbilitySelectionDialog = abilitySelectionDialog;
@@ -86,10 +97,10 @@ namespace Vampire
             for (int i = 0; i < levelBlueprint.monsters.Length; i++)
             {
                 monsterPools[i] = monsterPoolParent.AddComponent<MonsterPool>();
-                monsterPools[i].Init(this, playerCharacter, levelBlueprint.monsters[i].monstersPrefab);
+                monsterPools[i].Init(this, _playerModel.gameObject, levelBlueprint.monsters[i].monstersPrefab);
             }
             monsterPools[monsterPools.Length-1] = monsterPoolParent.AddComponent<MonsterPool>();
-            monsterPools[monsterPools.Length-1].Init(this, playerCharacter, levelBlueprint.finalBoss.bossPrefab);
+            monsterPools[monsterPools.Length-1].Init(this, _playerModel.gameObject, levelBlueprint.finalBoss.bossPrefab);
             // Initialize a projectile pool for each ranged projectile type
             projectileIndexByPrefab = new Dictionary<GameObject, int>();
             projectilePools = new List<ProjectilePool>();
@@ -100,22 +111,22 @@ namespace Vampire
             boomerangIndexByPrefab = new Dictionary<GameObject, int>();
             boomerangPools = new List<BoomerangPool>();
             // Initialize remaining one-off object pools
-            expGemPool.Init(this, playerCharacter, expGemPrefab);
-            coinPool.Init(this, playerCharacter, coinPrefab);
-            chestPool.Init(this, playerCharacter, chestPrefab);
-            textPool.Init(this, playerCharacter, textPrefab);
+            expGemPool.Init(this, _playerModel.gameObject, expGemPrefab);
+            coinPool.Init(this, _playerModel.gameObject, coinPrefab);
+            chestPool.Init(this, _playerModel.gameObject, chestPrefab);
+            textPool.Init(this, _playerModel.gameObject, textPrefab);
 
             // Init spatial hash grid
-            Vector2[] bounds = new Vector2[] { (Vector2)playerCharacter.transform.position - gridSize/2, (Vector2)playerCharacter.transform.position + gridSize/2 };
+            Vector2[] bounds = new Vector2[] { (Vector2)_playerModel.transform.position - gridSize/2, (Vector2)_playerModel.transform.position + gridSize/2 };
             grid = new SpatialHashGrid(bounds, gridDimensions);
         }
 
         void Update()
         {
             // Rebuild the grid if the player gets close to the edge
-            if (grid.CloseToEdge(playerCharacter))
+            if (grid.CloseToEdge(_playerModel))
             {
-                grid.Rebuild(playerCharacter.transform.position);
+                grid.Rebuild(_playerModel.transform.position);
             }
         }
 
@@ -168,10 +179,10 @@ namespace Vampire
         public bool TransformOnScreen(Transform transform, Vector2 buffer = default(Vector2))
         {
             return (
-                transform.position.x > playerCharacter.transform.position.x - screenWidthWorldSpace/2 - buffer.x &&
-                transform.position.x < playerCharacter.transform.position.x + screenWidthWorldSpace/2 + buffer.x &&
-                transform.position.y > playerCharacter.transform.position.y - screenHeightWorldSpace/2 - buffer.y &&
-                transform.position.y < playerCharacter.transform.position.y + screenHeightWorldSpace/2 + buffer.y
+                transform.position.x > _playerModel.transform.position.x - screenWidthWorldSpace/2 - buffer.x &&
+                transform.position.x < _playerModel.transform.position.x + screenWidthWorldSpace/2 + buffer.x &&
+                transform.position.y > _playerModel.transform.position.y - screenHeightWorldSpace/2 - buffer.y &&
+                transform.position.y < _playerModel.transform.position.y + screenHeightWorldSpace/2 + buffer.y
             );
         }
 
@@ -183,7 +194,7 @@ namespace Vampire
             // Find a random position offscreen
 
 
-            Vector2 spawnPosition = (playerCharacter.Velocity != Vector2.zero) ? GetRandomMonsterSpawnPositionPlayerVelocity() : GetRandomMonsterSpawnPosition();
+            Vector2 spawnPosition = (_playerMovement.Velocity != Vector3.zero) ? GetRandomMonsterSpawnPositionPlayerVelocity() : GetRandomMonsterSpawnPosition();
             // Vector2 spawnDirection = Random.insideUnitCircle.normalized;
             // Vector2 spawnPosition = (Vector2)playerCharacter.transform.position + spawnDirection * (minSpawnDistance + monsterSpawnBufferDistance);
             // Spawn the monster
@@ -215,11 +226,11 @@ namespace Vampire
             Vector2 spawnPosition;
             if (sideIndex % 2 == 0)
             {
-                spawnPosition = (Vector2)playerCharacter.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
             }
             else
             {
-                spawnPosition = (Vector2)playerCharacter.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
             }
             return spawnPosition;
         }
@@ -230,10 +241,10 @@ namespace Vampire
 
             float[] sideWeights = new float[]
             {
-                Vector2.Dot(playerCharacter.Velocity.normalized, sideDirections[0]),
-                Vector2.Dot(playerCharacter.Velocity.normalized, sideDirections[1]),
-                Vector2.Dot(playerCharacter.Velocity.normalized, sideDirections[2]),
-                Vector2.Dot(playerCharacter.Velocity.normalized, sideDirections[3])
+                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[0]),
+                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[1]),
+                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[2]),
+                Vector2.Dot(_playerMovement.Velocity.normalized, sideDirections[3])
             };
             float extraWeight = sideWeights.Sum()/playerDirectionSpawnWeight;
             int badSideCount = sideWeights.Where(x => x <= 0).Count();
@@ -260,11 +271,11 @@ namespace Vampire
             Vector2 spawnPosition;
             if (sideIndex % 2 == 0)
             {
-                spawnPosition = (Vector2)playerCharacter.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenWidthWorldSpace/2+monsterSpawnBufferDistance) + Vector2.up * Random.Range(-screenHeightWorldSpace/2-monsterSpawnBufferDistance, screenHeightWorldSpace/2+monsterSpawnBufferDistance);
             }
             else
             {
-                spawnPosition = (Vector2)playerCharacter.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
+                spawnPosition = (Vector2)_playerModel.transform.position + sideDirections[sideIndex] * (screenHeightWorldSpace/2+monsterSpawnBufferDistance) + Vector2.right * Random.Range(-screenWidthWorldSpace/2-monsterSpawnBufferDistance, screenWidthWorldSpace/2+monsterSpawnBufferDistance);
             }
             return spawnPosition;
         }
@@ -289,7 +300,7 @@ namespace Vampire
             for (int i = 0; i < gemCount; i++)
             {
                 Vector2 spawnDirection = Random.insideUnitCircle.normalized;
-                Vector2 spawnPosition = (Vector2)playerCharacter.transform.position + spawnDirection * Mathf.Sqrt(Random.Range(1, Mathf.Pow(minSpawnDistance, 2)));
+                Vector2 spawnPosition = (Vector2)_playerModel.transform.position + spawnDirection * Mathf.Sqrt(Random.Range(1, Mathf.Pow(minSpawnDistance, 2)));
                 SpawnExpGem(spawnPosition, gemType, false);
             }
         }
@@ -326,7 +337,7 @@ namespace Vampire
             do
             {
                 Vector2 spawnDirection = Random.insideUnitCircle.normalized;
-                Vector2 spawnPosition = (Vector2)playerCharacter.transform.position + spawnDirection * (minSpawnDistance + monsterSpawnBufferDistance + Random.Range(0, chestSpawnRange));
+                Vector2 spawnPosition = (Vector2)_playerModel.transform.position + spawnDirection * (minSpawnDistance + monsterSpawnBufferDistance + Random.Range(0, chestSpawnRange));
                 newChest.transform.position = spawnPosition;
                 overlapsOtherChest = false;
                 foreach (Chest chest in chests)
@@ -393,7 +404,7 @@ namespace Vampire
             {
                 projectileIndexByPrefab[projectilePrefab] = projectilePools.Count;
                 ProjectilePool projectilePool = projectilePoolParent.AddComponent<ProjectilePool>();
-                projectilePool.Init(this, playerCharacter, projectilePrefab);
+                projectilePool.Init(this, _playerModel.gameObject, projectilePrefab);
                 projectilePools.Add(projectilePool);
                 return projectilePools.Count - 1;
             }
@@ -421,7 +432,7 @@ namespace Vampire
             {
                 throwableIndexByPrefab[throwablePrefab] = throwablePools.Count;
                 ThrowablePool throwablePool = throwablePoolParent.AddComponent<ThrowablePool>();
-                throwablePool.Init(this, playerCharacter, throwablePrefab);
+                throwablePool.Init(this, _playerModel.gameObject, throwablePrefab);
                 throwablePools.Add(throwablePool);
                 return throwablePools.Count - 1;
             }
@@ -449,7 +460,7 @@ namespace Vampire
             {
                 boomerangIndexByPrefab[boomerangPrefab] = boomerangPools.Count;
                 BoomerangPool boomerangPool = boomerangPoolParent.AddComponent<BoomerangPool>();
-                boomerangPool.Init(this, playerCharacter, boomerangPrefab);
+                boomerangPool.Init(this, _playerModel.gameObject, boomerangPrefab);
                 boomerangPools.Add(boomerangPool);
                 return boomerangPools.Count - 1;
             }

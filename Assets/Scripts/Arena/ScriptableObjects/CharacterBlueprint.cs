@@ -14,11 +14,9 @@ namespace Vampire
         public int armor;  // 裝甲減傷
         public float movespeed;  // 移動速度
         public float atkspeed;  // 攻擊速度
-        public float luck;  // 運氣
         public float acceleration;
         public Sprite[] walkSpriteSequence;
         public float walkFrameTime;
-        public GameObject[] startingAbilities;
 
         public float LevelToExpIncrease(int level)
         {

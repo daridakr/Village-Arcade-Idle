@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -26,14 +25,14 @@ namespace Vampire
 
             float theta = Time.time*rotationSpeed.Value;
             gunDirection = new Vector3(Mathf.Cos(theta), Mathf.Sin(theta), 0);
-            machineGun.transform.position = playerCharacter.CenterTransform.position + gunDirection * gunRadius;
+            machineGun.transform.position = _playerModel.CenterTransform.position + gunDirection * gunRadius;
             machineGun.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * theta - reloadRotation);
         }
 
         protected override void LaunchProjectile()
         {
             Projectile projectile = entityManager.SpawnProjectile(projectileIndex, launchTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
-            projectile.OnHitDamageable.AddListener(playerCharacter.OnDealDamage.Invoke);
+            projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
             projectile.Launch(gunDirection);
         }
     }

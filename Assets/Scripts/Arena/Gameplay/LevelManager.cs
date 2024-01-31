@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Vampire
 {
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private LevelBlueprint levelBlueprint;
-        [SerializeField] private Character playerCharacter;
         [SerializeField] private EntityManager entityManager;
         [SerializeField] private AbilityManager abilityManager;
         [SerializeField] private AbilitySelectionDialog abilitySelectionDialog;
@@ -14,11 +14,27 @@ namespace Vampire
         [SerializeField] private StatsManager statsManager;
         [SerializeField] private GameOverDialog gameOverDialog;
         [SerializeField] private GameTimer gameTimer;
+
+        private PlayerHealth _playerHealth;
+        private PlayerLevel _playerLevel;
+        private ArenaPlayerCharacterModel _playerModel;
+
         private float levelTime = 0;
         private float timeSinceLastMonsterSpawned;
         private float timeSinceLastChestSpawned;
         private bool miniBossSpawned = false;
         private bool finalBossSpawned = false;
+
+        [Inject]
+        private void Construct(
+            PlayerHealth playerHealth,
+            PlayerLevel playerLevel,
+            ArenaPlayerCharacterModel playerModel)
+        {
+            _playerHealth = playerHealth;
+            _playerLevel = playerLevel;
+            _playerModel = playerModel;
+        }
 
         public void Init(LevelBlueprint levelBlueprint)
         {
@@ -26,13 +42,13 @@ namespace Vampire
             levelTime = 0;
             
             // Initialize the entity manager
-            entityManager.Init(this.levelBlueprint, playerCharacter, inventory, statsManager, abilitySelectionDialog);
+            entityManager.Init(this.levelBlueprint, inventory, statsManager, abilitySelectionDialog);
             // Initialize the ability manager
-            abilityManager.Init(this.levelBlueprint, entityManager, playerCharacter, abilityManager);
-            abilitySelectionDialog.Init(abilityManager, entityManager, playerCharacter);
+            abilityManager.Init(this.levelBlueprint, entityManager, _playerLevel, abilityManager);
+            abilitySelectionDialog.Init(abilityManager, entityManager, _playerModel);
             // Initialize the character
-            playerCharacter.Init(entityManager, abilityManager, statsManager);
-            playerCharacter.OnDeath.AddListener(GameOver);
+            _playerHealth.Init(entityManager, abilityManager, statsManager);
+            _playerHealth.OnDeath.AddListener(GameOver);
             // Spawn initial gems
             entityManager.SpawnGemsAroundPlayer(this.levelBlueprint.initialExpGemCount, this.levelBlueprint.initialExpGemType);
             // Spawn a singular chest

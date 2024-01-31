@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Vampire
 {
@@ -19,7 +20,7 @@ namespace Vampire
         protected float damage;
         protected float knockback;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+        protected PlayerHealth _playerHealth;
         protected Collider2D col;
         protected ZPositioner zPositioner;
         protected int throwableIndex;
@@ -28,17 +29,22 @@ namespace Vampire
         public float ThrowTime { get => throwTime; }
         public float Range => maxDistance;
 
+        [Inject]
+        private void Construct(PlayerHealth playerHealth)
+        {
+            _playerHealth = playerHealth;
+        }
+
         protected virtual void Awake()
         {
             col = GetComponent<Collider2D>();
             zPositioner = gameObject.AddComponent<ZPositioner>();
         }
 
-        public virtual void Init(EntityManager entityManager, Character playerCharacter)
+        public virtual void Init(EntityManager entityManager)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
-            zPositioner.Init(playerCharacter.transform);
+            //zPositioner.Init(playerCharacter.transform);
         }
         
         public virtual void Setup(int throwableIndex, Vector2 position, float damage, float knockback, float timeInAir, LayerMask targetLayer)

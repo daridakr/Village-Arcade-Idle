@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -12,6 +11,7 @@ namespace Vampire
         [SerializeField] protected UpgradeableProjectileSpeed speed;
         [SerializeField] protected UpgradeableKnockback knockback;
         [SerializeField] protected UpgradeableWeaponCooldown cooldown;
+
         protected float timeSinceLastAttack;
         protected int projectileIndex;
 
@@ -40,9 +40,9 @@ namespace Vampire
 
         protected virtual void LaunchProjectile()
         {
-            Projectile projectile = entityManager.SpawnProjectile(projectileIndex, playerCharacter.CenterTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
-            projectile.OnHitDamageable.AddListener(playerCharacter.OnDealDamage.Invoke);
-            projectile.Launch(playerCharacter.LookDirection);
+            Projectile projectile = entityManager.SpawnProjectile(projectileIndex, _playerModel.CenterTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
+            projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
+            projectile.Launch(_playerModel.LookDirection);
         }
     }
 }

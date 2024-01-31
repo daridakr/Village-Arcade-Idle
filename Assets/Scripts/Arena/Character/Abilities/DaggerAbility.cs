@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vampire
@@ -11,7 +10,7 @@ namespace Vampire
         [SerializeField] protected UpgradeableBleedRate bleedRate;
         [SerializeField] protected UpgradeableBleedDuration bleedDuration;
 
-        protected override void DamageMonster(Monster monster, float damage, Vector2 knockback)
+        protected override void DamageMonster(Monster monster, float damage, Vector3 knockback)
         {
             base.DamageMonster(monster, damage, knockback);
             Coroutine monsterBleed = StartCoroutine(BleedMonster(monster));
@@ -26,7 +25,7 @@ namespace Vampire
             {
                 yield return new WaitForSeconds(bleedDelay);
                 monster.TakeDamage(bleedDamage.Value);
-                playerCharacter.OnDealDamage.Invoke(bleedDamage.Value);
+                _playerHealth.OnDealDamage.Invoke(bleedDamage.Value);
                 if (monster.HP <= 0)
                     break;
             }

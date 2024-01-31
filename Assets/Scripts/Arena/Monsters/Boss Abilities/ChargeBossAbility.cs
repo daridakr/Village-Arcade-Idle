@@ -20,9 +20,9 @@ namespace Vampire
         protected float radius;
         protected bool charging = false;
 
-        public override void Init(BossMonster monster, EntityManager entityManager, Character playerCharacter)
+        public override void Init(BossMonster monster, EntityManager entityManager)
         {
-            base.Init(monster, entityManager, playerCharacter);
+            base.Init(monster, entityManager);
             CircleCollider2D bossCollider = monster.GetComponent<CircleCollider2D>();
             radius = bossCollider.radius;
         }
@@ -44,7 +44,7 @@ namespace Vampire
         {
             if (active && !charging)
             {
-                Vector2 moveDirection = (playerCharacter.transform.position - monster.transform.position).normalized;
+                Vector2 moveDirection = (_playerModel.transform.position - monster.transform.position).normalized;
                 monster.Move(moveDirection, Time.fixedDeltaTime);
                 entityManager.Grid.UpdateClient(monster);
             }
@@ -58,10 +58,10 @@ namespace Vampire
             float t = 0;
             chargeIndicator.color = defaultColor;
             chargeIndicator.enabled = true;
-            Vector2 direction = playerCharacter.transform.position - monster.transform.position;
+            Vector2 direction = _playerModel.transform.position - monster.transform.position;
             while (t < chargeUpTime)
             {
-                direction = playerCharacter.transform.position - monster.transform.position;
+                direction = _playerModel.transform.position - monster.transform.position;
                 float length = t/chargeUpTime * chargeDistance;
 
                 chargeIndicator.transform.localScale = new Vector3(length, chargeIndicator.transform.localScale.y, 1);
@@ -119,7 +119,7 @@ namespace Vampire
             // float exp = -Mathf.Pow(x-u, 2)/(2*o*o);
             // float score = Mathf.Exp(exp);
             // return score;
-            float distance = Vector2.Distance(monster.transform.position, playerCharacter.transform.position);
+            float distance = Vector2.Distance(monster.transform.position, _playerModel.transform.position);
             return distance / (distance + 1);
         }
     }

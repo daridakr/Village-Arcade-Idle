@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -11,6 +10,7 @@ namespace Vampire
         [SerializeField] protected UpgradeableAOE radius;
         [SerializeField] protected UpgradeableDamageRate damageRate;
         [SerializeField] protected UpgradeableKnockback knockback;
+
         private float timeSinceLastAttack;
         private FastList<GameObject> hitMonsters;
         private CircleCollider2D damageCollider;
@@ -22,10 +22,10 @@ namespace Vampire
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
-        public override void Init(AbilityManager abilityManager, EntityManager entityManager, Character playerCharacter)
+        public override void Init(AbilityManager abilityManager, EntityManager entityManager)
         {
-            base.Init(abilityManager, entityManager, playerCharacter);
-            transform.SetParent(playerCharacter.transform);
+            base.Init(abilityManager, entityManager);
+            //transform.SetParent(playerReference.transform);
             transform.localPosition = Vector3.zero;
         }
 
@@ -63,7 +63,7 @@ namespace Vampire
         {
             Vector2 knockbackDirection = (damageable.transform.position - transform.position).normalized;
             damageable.TakeDamage(damage.Value, knockback.Value * knockbackDirection);
-            playerCharacter.OnDealDamage.Invoke(damage.Value);
+            _playerHealth.OnDealDamage.Invoke(damage.Value);
         }
 
         private void DeregisterMonster(Monster monster)

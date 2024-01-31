@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Vampire
 {
@@ -41,7 +40,7 @@ namespace Vampire
         {
             Vector2 knockbackDirection = (damageable.transform.position - transform.position).normalized;
             damageable.TakeDamage(damage, knockback * knockbackDirection);
-            playerCharacter.OnDealDamage.Invoke(damage);
+            _playerHealth.OnDealDamage.Invoke(damage);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
@@ -8,15 +9,26 @@ namespace Vampire
         [Header("Ability Details")]
         protected BossMonster monster;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+
+        protected ArenaPlayerCharacterModel _playerModel;
+        protected ArenaPlayerMovement _playerMovement;
+
         protected bool active = false;
         protected float useTime;
 
-        public virtual void Init(BossMonster monster, EntityManager entityManager, Character playerCharacter)
+        [Inject]
+        private void Construct(
+            ArenaPlayerCharacterModel playerModel,
+            ArenaPlayerMovement playerMovement)
+        {
+            _playerModel = playerModel;
+            _playerMovement = playerMovement;
+        }
+
+        public virtual void Init(BossMonster monster, EntityManager entityManager)
         {
             this.monster = monster;
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
         }
 
         public abstract IEnumerator Activate();

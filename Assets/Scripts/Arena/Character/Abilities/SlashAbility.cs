@@ -10,8 +10,8 @@ namespace Vampire
         [SerializeField] protected float slashOffset; 
         [SerializeField] protected float slashTime;
         [SerializeField] protected float scaleInTime = 0.1f;
-        protected Vector2 weaponSize;
-        protected Vector2 initialWeaponScale;
+        protected Vector3 weaponSize;
+        protected Vector3 initialWeaponScale;
         private FastList<GameObject> hitMonsters;
 
         protected override void Use()
@@ -33,32 +33,32 @@ namespace Vampire
             timeSinceLastAttack -= slashTime;
             float t = 0;
             weaponSpriteRenderer.enabled = true;
-            Vector2 initialDir = playerCharacter.LookDirection;
+            Vector3 initialDir = _playerModel.LookDirection;
             while (t < slashTime)
             {
                 float scaleMultiplier = GetScaleMultiplier(t);
                 float theta = slashAngle * (slashTime/2 - t) / slashTime;
-                Vector2 dir = new Vector2(
+                Vector3 dir = new Vector3(
                     initialDir.x * Mathf.Cos(Mathf.Deg2Rad * theta) - initialDir.y * Mathf.Sin(Mathf.Deg2Rad * theta),
                     initialDir.x * Mathf.Sin(Mathf.Deg2Rad * theta) + initialDir.y * Mathf.Cos(Mathf.Deg2Rad * theta)
                 );
-                Vector2 attackBoxPosition = (Vector2)playerCharacter.CenterTransform.position + dir * (scaleMultiplier*weaponSize.x/2 + slashOffset);
-                Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackBoxPosition, scaleMultiplier*weaponSize, Vector2.SignedAngle(Vector2.right, dir), targetLayer);
+                Vector3 attackBoxPosition = _playerModel.CenterTransform.position + dir * (scaleMultiplier*weaponSize.x/2 + slashOffset);
+                //Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackBoxPosition, scaleMultiplier*weaponSize, Vector3.SignedAngle(Vector3.right, dir), targetLayer);
                 
                 weaponSpriteRenderer.transform.position = attackBoxPosition;
-                weaponSpriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, dir));
+                //weaponSpriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, dir));
                 weaponSpriteRenderer.transform.localScale = initialWeaponScale * scaleMultiplier;
 
-                foreach (Collider2D collider in hitColliders)
-                {
-                    if (!hitMonsters.Contains(collider.gameObject))
-                    {
-                        hitMonsters.Add(collider.gameObject);
-                        Monster monster = collider.gameObject.GetComponentInParent<Monster>();
-                        monster.TakeDamage(damage.Value, dir * knockback.Value);
-                        playerCharacter.OnDealDamage.Invoke(damage.Value);
-                    }
-                }
+                //foreach (Collider2D collider in hitColliders)
+                //{
+                //    if (!hitMonsters.Contains(collider.gameObject))
+                //    {
+                //        hitMonsters.Add(collider.gameObject);
+                //        Monster monster = collider.gameObject.GetComponentInParent<Monster>();
+                //        monster.TakeDamage(damage.Value, dir * knockback.Value);
+                //        _playerHealth.OnDealDamage.Invoke(damage.Value);
+                //    }
+                //}
 
                 t += Time.deltaTime;
                 yield return null;

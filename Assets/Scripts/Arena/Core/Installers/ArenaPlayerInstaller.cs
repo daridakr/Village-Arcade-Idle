@@ -1,4 +1,5 @@
 using UnityEngine;
+using Village;
 
 namespace Vampire
 {
@@ -27,6 +28,15 @@ namespace Vampire
             base.BindConfigs();
 
             Container.Bind<HealthConfig>().FromInstance(_healthConfig).AsSingle().NonLazy();
+        }
+
+        protected override void BindComponents()
+        {
+            base.BindComponents();
+
+            Container.Bind<PlayerHealth>().FromComponentOn(Instance.Data).AsSingle();
+            Container.Bind<ArenaPlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
+            Container.Bind<ArenaPlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
         }
 
         protected override void BindDisplayData()

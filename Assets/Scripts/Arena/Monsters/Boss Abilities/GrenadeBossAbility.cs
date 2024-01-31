@@ -15,9 +15,9 @@ namespace Vampire
         protected float timeSinceLastAttack;
         protected int throwableIndex = -1;
 
-        public override void Init(BossMonster monster, EntityManager entityManager, Character playerCharacter)
+        public override void Init(BossMonster monster, EntityManager entityManager)
         {
-            base.Init(monster, entityManager, playerCharacter);
+            base.Init(monster, entityManager);
             throwableIndex = entityManager.AddPoolForThrowable(grenadePrefab);
         }
 
@@ -38,7 +38,7 @@ namespace Vampire
         {
             if (active)
             {
-                Vector2 moveDirection = (playerCharacter.transform.position - monster.transform.position).normalized;
+                Vector3 moveDirection = (_playerModel.transform.position - monster.transform.position).normalized;
                 monster.Move(moveDirection, Time.fixedDeltaTime);
                 entityManager.Grid.UpdateClient(monster);
             }
@@ -46,10 +46,10 @@ namespace Vampire
 
         protected void LaunchGrenade()
         {
-            Vector2 initialDir = (playerCharacter.transform.position - monster.transform.position).normalized;
+            Vector3 initialDir = (_playerModel.transform.position - monster.transform.position).normalized;
             Throwable throwable = entityManager.SpawnThrowable(throwableIndex, monster.CenterTransform.position, damage, knockback, timeInAir, targetLayer);
-            Vector2 targetPosition = playerCharacter.transform.position;
-            targetPosition += playerCharacter.Velocity * throwable.ThrowTime;
+            Vector3 targetPosition = _playerModel.transform.position;
+            targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
             throwable.Throw(targetPosition);
         }
 
@@ -67,7 +67,7 @@ namespace Vampire
 
         public override float Score()
         {
-            float distance = Vector2.Distance(monster.transform.position, playerCharacter.transform.position);
+            float distance = Vector2.Distance(monster.transform.position, _playerModel.transform.position);
             float score = distance / (distance + 2);
             return score;
         }

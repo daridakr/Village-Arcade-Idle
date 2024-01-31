@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -23,23 +22,23 @@ namespace Vampire
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            Vector2 toPlayer = (playerCharacter.transform.position - transform.position);
+            Vector3 toPlayer = (_playerModel.transform.position - transform.position);
             float distance = toPlayer.magnitude;
-            Vector2 dirToPlayer = toPlayer/distance;
+            Vector3 dirToPlayer = toPlayer/distance;
             entityManager.Grid.UpdateClient(this);
             timeSinceLastBoomerangAttack += Time.fixedDeltaTime;
             if (distance <= monsterBlueprint.range)
             {
-                rb.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime / 2;
+                _body.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime / 2;
                 if (timeSinceLastBoomerangAttack >= 1.0f/monsterBlueprint.boomerangAttackSpeed)
                 {
-                    ThrowBoomerang(playerCharacter.transform.position);
+                    ThrowBoomerang(_playerModel.transform.position);
                     timeSinceLastBoomerangAttack = 0;
                 }
             }
             else
             {
-                rb.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+                _body.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
             }
         }
 
@@ -49,11 +48,11 @@ namespace Vampire
             boomerang.Throw(boomerangSpawnPosition, targetPosition);
         }
 
-        void OnCollisionStay2D(Collision2D col)
+        protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)
         {
-            if (((monsterBlueprint.targetLayer & (1 << col.collider.gameObject.layer)) != 0) && timeSinceLastMeleeAttack >= 1.0f/monsterBlueprint.atkspeed)
+            if (((monsterBlueprint.targetLayer & (1 << playerHealth.gameObject.layer)) != 0) && timeSinceLastMeleeAttack >= 1.0f / monsterBlueprint.atkspeed)
             {
-                playerCharacter.TakeDamage(monsterBlueprint.atk);
+                playerHealth.TakeDamage(monsterBlueprint.atk);
                 timeSinceLastMeleeAttack = 0;
             }
         }

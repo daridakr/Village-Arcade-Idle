@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Vampire
 {
@@ -19,13 +20,19 @@ namespace Vampire
         protected float damage;
         protected float knockback;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+        protected ArenaPlayerCharacterModel _playerModel;
         protected ZPositioner zPositioner;
         protected int boomerangIndex;
         protected TrailRenderer trailRenderer = null;
         public UnityEvent<float> OnHitDamageable { get; private set; }
         public float Range => maxDistance;
-        
+
+
+        [Inject]
+        private void Construct(ArenaPlayerCharacterModel playerModel)
+        {
+            _playerModel = playerModel;
+        }
 
         protected virtual void Awake()
         {
@@ -35,11 +42,10 @@ namespace Vampire
             TryGetComponent<TrailRenderer>(out trailRenderer);
         }
 
-        public virtual void Init(EntityManager entityManager, Character playerCharacter)
+        public virtual void Init(EntityManager entityManager)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
-            zPositioner.Init(playerCharacter.transform);
+            zPositioner.Init(_playerModel.transform);
         }
         
         public virtual void Setup(int boomerangIndex, Vector2 position, float damage, float knockback, float throwDistance, float throwTime, LayerMask targetLayer)

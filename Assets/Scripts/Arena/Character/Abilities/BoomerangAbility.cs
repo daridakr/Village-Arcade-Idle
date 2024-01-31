@@ -16,6 +16,7 @@ namespace Vampire
         [SerializeField] protected UpgradeableKnockback knockback;
         [SerializeField] protected UpgradeableWeaponCooldown cooldown;
         [SerializeField] protected UpgradeableProjectileCount boomerangCount;
+
         protected float timeSinceLastAttack;
         protected int boomerangIndex;
 
@@ -30,6 +31,7 @@ namespace Vampire
         void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
+
             if (timeSinceLastAttack >= cooldown.Value)
             {
                 timeSinceLastAttack = Mathf.Repeat(timeSinceLastAttack, cooldown.Value);
@@ -40,6 +42,7 @@ namespace Vampire
         protected virtual IEnumerator Attack()
         {
             timeSinceLastAttack -= boomerangCount.Value/throwRate.Value;
+
             for (int i = 0; i < boomerangCount.Value; i++)
             {
                 ThrowBoomerang();
@@ -49,16 +52,16 @@ namespace Vampire
 
         protected virtual void ThrowBoomerang()
         {
-            Boomerang boomerang = entityManager.SpawnBoomerang(boomerangIndex, playerCharacter.CenterTransform.position, damage.Value, knockback.Value, throwRadius, throwTime, monsterLayer);
-            Vector2 throwPosition;
+            Boomerang boomerang = entityManager.SpawnBoomerang(boomerangIndex, _playerModel.CenterTransform.position, damage.Value, knockback.Value, throwRadius, throwTime, monsterLayer);
+            Vector3 throwPosition;
             // Throw randomly at nearby enemies
-            List<ISpatialHashGridClient> nearbyEnemies = entityManager.Grid.FindNearbyInRadius(playerCharacter.transform.position, throwRadius);
+            List<ISpatialHashGridClient> nearbyEnemies = entityManager.Grid.FindNearbyInRadius(_playerHealth.transform.position, throwRadius);
             if (nearbyEnemies.Count > 0)
                 throwPosition = nearbyEnemies[Random.Range(0, nearbyEnemies.Count)].Position;
             else
-                throwPosition = (Vector2)playerCharacter.transform.position + Random.insideUnitCircle.normalized * throwRadius;
-            boomerang.Throw(playerCharacter.transform, throwPosition);
-            boomerang.OnHitDamageable.AddListener(playerCharacter.OnDealDamage.Invoke);
+                throwPosition = (Vector2)_playerHealth.transform.position + Random.insideUnitCircle.normalized * throwRadius;
+            boomerang.Throw(_playerHealth.transform, throwPosition);
+            boomerang.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
         }
     }
 }

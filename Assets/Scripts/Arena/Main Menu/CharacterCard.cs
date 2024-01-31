@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -46,12 +45,12 @@ namespace Vampire
             buttonText.text = characterBlueprint.owned ? "選擇" : "$" + characterBlueprint.cost;
             buttonImage.color = characterBlueprint.owned ? selectColor : buyColor;
 
-            for (int i = 0; i < characterBlueprint.startingAbilities.Length; i++)
-            {
-                abilities.text += characterBlueprint.startingAbilities[i].GetComponent<Ability>().Name;
-                if (i < characterBlueprint.startingAbilities.Length - 1)
-                    abilities.text += "，";
-            }
+            //for (int i = 0; i < characterBlueprint.startingAbilities.Length; i++)
+            //{
+            //    abilities.text += characterBlueprint.startingAbilities[i].GetComponent<Ability>().Name;
+            //    if (i < characterBlueprint.startingAbilities.Length - 1)
+            //        abilities.text += "，";
+            //}
         }
 
         public void Selected()

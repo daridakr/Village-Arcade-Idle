@@ -44,7 +44,7 @@ namespace Vampire
         protected override void OnCollected()
         {
             spriteRenderer.enabled = false;
-            playerCharacter.GainExp((float)gemType);
+            //_playerReference.GainExp((float)gemType);
             entityManager.DespawnGem(this);
             spriteRenderer.enabled = true;
         }

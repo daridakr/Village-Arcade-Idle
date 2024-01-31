@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Zenject;
 
 namespace Vampire
 {
@@ -7,18 +8,23 @@ namespace Vampire
     {
         protected ChestBlueprint chestBlueprint; 
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+        protected ArenaPlayerCharacterModel _playerModel;
         protected ZPositioner zPositioner;
         protected Transform chestItemsParent;
         protected SpriteRenderer spriteRenderer;
         protected bool opened = false;
 
-        public void Init(EntityManager entityManager, Character playerCharacter, Transform chestItemsParent)
+        [Inject]
+        private void Construct(ArenaPlayerCharacterModel playerModel)
+        {
+            _playerModel = playerModel;
+        }
+
+        public void Init(EntityManager entityManager, Transform chestItemsParent)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
             this.chestItemsParent = chestItemsParent;
-            (zPositioner = gameObject.AddComponent<ZPositioner>()).Init(playerCharacter.transform);
+            (zPositioner = gameObject.AddComponent<ZPositioner>()).Init(_playerModel.transform);
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
@@ -37,7 +43,7 @@ namespace Vampire
             item.transform.position = transform.position;
             transform.position += Vector3.back*0.001f;  // Nudge the collectable in front of the chest
             Collectable collectable = item.GetComponent<Collectable>();
-            collectable.Init(entityManager, playerCharacter);
+            collectable.Init(entityManager, _playerModel);
             Coin coin = collectable as Coin;
             if (coin != null)
                 coin.Setup(transform.position, loot.coinType, true, true);
@@ -95,7 +101,7 @@ namespace Vampire
 
         void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.collider.gameObject == playerCharacter.gameObject)
+            if (col.collider.gameObject == _playerModel.gameObject)
             {
                 OpenChest();
             }

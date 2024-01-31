@@ -2,13 +2,14 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
     public class AbilityManager : MonoBehaviour
     {
         private LevelBlueprint levelBlueprint;
-        private Character playerCharacter;
+        private PlayerLevel _playerLevel;
         private WeightedAbilities newAbilities;
         private WeightedAbilities ownedAbilities;
         private FastList<IUpgradeableValue> registeredUpgradeableValues;
@@ -30,10 +31,16 @@ namespace Vampire
         public int DurationUpgradeablesCount { get; set; } = 0;
         public int RotationSpeedUpgradeablesCount { get; set; } = 0;
 
-        public void Init(LevelBlueprint levelBlueprint, EntityManager entityManager, Character playerCharacter, AbilityManager abilityManager)
+        [Inject]
+        private void Construct()
+        {
+
+        }
+
+        public void Init(LevelBlueprint levelBlueprint, EntityManager entityManager, PlayerLevel playerCharacter, AbilityManager abilityManager)
         {
             this.levelBlueprint = levelBlueprint;
-            this.playerCharacter = playerCharacter;
+            _playerLevel = playerCharacter;
 
             registeredUpgradeableValues = new FastList<IUpgradeableValue>();
 
@@ -41,18 +48,18 @@ namespace Vampire
             foreach (GameObject abilityPrefab in levelBlueprint.abilityPrefabs)
             {
                 Ability ability = Instantiate(abilityPrefab, transform).GetComponent<Ability>();
-                ability.Init(abilityManager, entityManager, playerCharacter);
+                ability.Init(abilityManager, entityManager);
                 newAbilities.Add(ability);
             }
 
             ownedAbilities = new WeightedAbilities();
-            foreach (GameObject abilityPrefab in playerCharacter.Blueprint.startingAbilities)
-            {
-                Ability ability = Instantiate(abilityPrefab, transform).GetComponent<Ability>();
-                ability.Init(abilityManager, entityManager, playerCharacter);
-                ability.Select();
-                ownedAbilities.Add(ability);
-            }
+            //foreach (GameObject abilityPrefab in playerCharacter.startingAbilities)
+            //{
+            //    Ability ability = Instantiate(abilityPrefab, transform).GetComponent<Ability>();
+            //    ability.Init(abilityManager, entityManager);
+            //    ability.Select();
+            //    ownedAbilities.Add(ability);
+            //}
             
         }
 
@@ -201,8 +208,8 @@ namespace Vampire
         /// </summary>
         private float OwnedChance()
         {
-            float x = playerCharacter.CurrentLevel % 2 == 0 ? 2 : 1;
-            return 1 + 0.3f*x - 1/playerCharacter.Luck;
+            float x = _playerLevel.Level % 2 == 0 ? 2 : 1;
+            return 1 + 0.3f * x - 1 / _playerLevel.Luck;
         }
 
         /// <summary>
@@ -210,7 +217,7 @@ namespace Vampire
         /// </summary>
         private float FourthChance()
         {
-            return 1 - 1/playerCharacter.Luck;
+            return 1 - 1 / _playerLevel.Luck;
         }
 
         /// <summary>

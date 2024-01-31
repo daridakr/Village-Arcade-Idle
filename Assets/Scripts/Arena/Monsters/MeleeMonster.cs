@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -24,8 +23,8 @@ namespace Vampire
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            Vector2 moveDirection = (playerCharacter.transform.position - transform.position).normalized;
-            rb.velocity += moveDirection * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+            Vector3 moveDirection = (_playerModel.transform.position - transform.position).normalized;
+            _body.velocity += moveDirection * monsterBlueprint.acceleration * Time.fixedDeltaTime;
             entityManager.Grid.UpdateClient(this);
 
             // Vector2 f = Vector2.zero;
@@ -48,12 +47,12 @@ namespace Vampire
             //      rb.velocity = rb.velocity.normalized * monsterBlueprint.movespeed;
         }
 
-        void OnCollisionStay2D(Collision2D col)
+        protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)
         {
-            if (alive && ((monsterBlueprint.meleeLayer & (1 << col.collider.gameObject.layer)) != 0) && timeSinceLastAttack >= 1.0f/monsterBlueprint.atkspeed)
+            if (alive && ((monsterBlueprint.meleeLayer & (1 << playerHealth.gameObject.layer)) != 0) && timeSinceLastAttack >= 1.0f / monsterBlueprint.atkspeed)
             {
-                playerCharacter.TakeDamage(monsterBlueprint.atk);
-                timeSinceLastAttack = Mathf.Repeat(timeSinceLastAttack, 1.0f/monsterBlueprint.atkspeed);
+                playerHealth.TakeDamage(monsterBlueprint.atk);
+                timeSinceLastAttack = Mathf.Repeat(timeSinceLastAttack, 1.0f / monsterBlueprint.atkspeed);
             }
         }
     }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -13,7 +12,8 @@ namespace Vampire
         protected override void Use()
         {
             base.Use();
-            playerCharacter.OnDealDamage.AddListener(PlayerDealtDamage);
+
+            _playerHealth.OnDealDamage.AddListener(PlayerDealtDamage);
             gameObject.SetActive(true);
         }
 
@@ -21,7 +21,7 @@ namespace Vampire
         {
             if (Random.Range(0.0f, 1.0f) < recoveryChance.Value)
             {
-                playerCharacter.GainHealth(recovery.Value);
+                _playerHealth.GainHealth(recovery.Value);
             }
         }
     }

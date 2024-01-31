@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
@@ -7,6 +8,14 @@ namespace Vampire
     {
         [SerializeField] protected float healAmount = 50;
         [SerializeField] protected float healTime = 30;
+
+        private PlayerHealth _playerHealth;
+
+        [Inject]
+        private void Construct(PlayerHealth playerHealth)
+        {
+            _playerHealth = playerHealth;
+        }
 
         protected override void OnCollected()
         {
@@ -21,9 +30,10 @@ namespace Vampire
             while (t < healTime)
             {
                 t += Time.deltaTime;
-                playerCharacter.GainHealth(Time.deltaTime * healAmount / healTime);
+                _playerHealth.GainHealth(Time.deltaTime * healAmount / healTime);
                 yield return null;
             }
+
             Destroy(gameObject);
         }
     }

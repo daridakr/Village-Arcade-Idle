@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vampire
@@ -11,10 +10,11 @@ namespace Vampire
         [SerializeField] protected Transform launchTransform;
         [SerializeField] protected ParticleSystem launchParticles;
         [SerializeField] protected UpgradeableAOE explosionAOE;
-        [SerializeField] protected Vector2 hoverOffset;
+        [SerializeField] protected Vector3 hoverOffset;
         [SerializeField] protected float targetRadius = 5;
-        protected Vector2 currHoverOffset;
-        protected Vector3 gunDirection = Vector2.right;
+
+        protected Vector3 _currentHoverOffset;
+        protected Vector3 gunDirection = Vector3.right;
         protected float theta = 0;
 
         protected override void Update()
@@ -30,8 +30,8 @@ namespace Vampire
             }
 
             //gunDirection = new Vector3(Mathf.Cos(theta), Mathf.Sin(theta), 0);
-            currHoverOffset = hoverOffset + Vector2.up * Mathf.Sin(Time.time*5)*0.1f;
-            bazookaGun.transform.position = (Vector2)playerCharacter.CenterTransform.position + currHoverOffset;
+            _currentHoverOffset = hoverOffset + Vector3.up * Mathf.Sin(Time.time*5)*0.1f;
+            bazookaGun.transform.position = _playerModel.CenterTransform.position + _currentHoverOffset;
             //bazookaGun.transform.rotation = Quaternion.Euler(0, 0, theta - reloadRotation);
         }
 
@@ -88,7 +88,7 @@ namespace Vampire
 
             ExplosiveProjectile projectile = (ExplosiveProjectile) entityManager.SpawnProjectile(projectileIndex, launchTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
             projectile.SetupExplosion(damage.Value, explosionAOE.Value, knockback.Value);
-            projectile.OnHitDamageable.AddListener(playerCharacter.OnDealDamage.Invoke);
+            projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
             projectile.Launch(launchDirection);
             launchParticles.Play();
         }

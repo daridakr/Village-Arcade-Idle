@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Vampire
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Monster : IDamageable, ISpatialHashGridClient
+    public abstract class Monster : IDamageable, ISpatialHashGridClient
     {
         [SerializeField] protected Material defaultMaterial, whiteMaterial, dissolveMaterial;
         [SerializeField] protected ParticleSystem deathParticles;
         [SerializeField] protected GameObject shadow;
+        [SerializeField] private PlayerHealthTrigger _playerHealthTrigger;
+
         protected BoxCollider2D monsterHitbox;
         protected CircleCollider2D monsterLegsCollider;
         protected int monsterIndex;
@@ -20,8 +23,11 @@ namespace Vampire
         protected ZPositioner zPositioner;
         protected float currentHealth;  // 血量
         protected EntityManager entityManager;  // 怪物池
-        protected Character playerCharacter;  // 角色
-        protected Rigidbody2D rb;
+
+        protected ArenaPlayerCharacterModel _playerModel;  // 角色
+        protected ArenaPlayerMovement _playerMovement;
+
+        protected Rigidbody _body;
         protected int currWalkSequenceFrame = 0;
         protected bool knockedBack = false;
         protected Coroutine hitAnimationCoroutine = null;
@@ -36,29 +42,39 @@ namespace Vampire
         public Dictionary<int, int> ListIndexByCellIndex { get; set; }
         public int QueryID { get; set; } = -1;
 
+        [Inject]
+        private void Construct(
+            ArenaPlayerCharacterModel playerModel,
+            ArenaPlayerMovement playerMovement)
+        {
+            _playerModel = playerModel;
+            _playerMovement = playerMovement;
+        }
+
         protected virtual void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
+            _body = GetComponent<Rigidbody>();
             monsterLegsCollider = GetComponent<CircleCollider2D>();
             monsterSpriteAnimator = GetComponentInChildren<SpriteAnimator>();
             monsterSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
             zPositioner = gameObject.AddComponent<ZPositioner>();
             monsterHitbox = monsterSpriteRenderer.gameObject.AddComponent<BoxCollider2D>();
             monsterHitbox.isTrigger = true;
+
+            _playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
         }
 
-        public virtual void Init(EntityManager entityManager, Character playerCharacter)
+        public virtual void Init(EntityManager entityManager)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
-            zPositioner.Init(playerCharacter.transform);
+            zPositioner.Init(_playerModel.transform);
         }
 
         public virtual void Setup(int monsterIndex, Vector2 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
         {
             this.monsterIndex = monsterIndex;
             this.monsterBlueprint = monsterBlueprint;
-            rb.position = position;
+            _body.position = position;
             transform.position = position;
             // Reset health to max
             currentHealth = monsterBlueprint.hp + hpBuff;
@@ -80,16 +96,20 @@ namespace Vampire
             centerTransform.position = transform.position + (Vector3)monsterHitbox.offset;
             // Set the drag based on acceleration and movespeed
             float spd = Random.Range(monsterBlueprint.movespeed-0.1f, monsterBlueprint.movespeed+0.1f);
-            rb.drag = monsterBlueprint.acceleration / (spd * spd);
+            _body.drag = monsterBlueprint.acceleration / (spd * spd);
             // Reset the velocity
-            rb.velocity = Vector2.zero;
+            _body.velocity = Vector3.zero;
             StopAllCoroutines();
         }
 
         protected virtual void Update()
         {
             // Direction
-            monsterSpriteRenderer.flipX = ((playerCharacter.transform.position.x - rb.position.x) < 0);
+            //monsterSpriteRenderer.flipX = ((_playerReference.transform.position.x - rb.position.x) < 0);
+
+            Vector3 lookAtDirection = _playerModel.transform.position - transform.position;
+            lookAtDirection.y = 0; 
+            transform.rotation = Quaternion.LookRotation(lookAtDirection);
         }
 
         protected virtual void FixedUpdate()
@@ -99,7 +119,7 @@ namespace Vampire
 
         public override void Knockback(Vector3 knockback)
         {
-            //rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+            _body.velocity += knockback * Mathf.Sqrt(_body.drag);
         }
 
         public override void TakeDamage(float damage, Vector3 knockback = default)
@@ -179,5 +199,9 @@ namespace Vampire
             if (monsterBlueprint.coinLootTable.TryDropLoot(out CoinType coinType))
                 entityManager.SpawnCoin((Vector2)transform.position, coinType);
         }
+
+        private void OnDisable() => _playerHealthTrigger.Enter -= OnPlayerHealthTriggerStay;
+
+        protected abstract void OnPlayerHealthTriggerStay(PlayerHealth playerHealth);
     }
 }

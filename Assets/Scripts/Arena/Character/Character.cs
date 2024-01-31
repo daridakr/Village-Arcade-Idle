@@ -9,20 +9,17 @@ namespace Vampire
     public class Character : IDamageable, ISpatialHashGridClient
     {
         [Header("Dependencies")]
-        [SerializeField] protected Transform centerTransform;
         [SerializeField] protected Transform lookIndicator;
         [SerializeField] protected float lookIndicatorRadius;
         [SerializeField] protected TextMeshProUGUI levelText;
         [SerializeField] protected AbilitySelectionDialog abilitySelectionDialog;
+        [SerializeField] protected HealthPoints healthBar;  // 血量條
         [SerializeField] protected HealthPoints expBar;  // 經驗條
-        [SerializeField] protected Collider2D collectableCollider;
         [SerializeField] protected Collider2D meleeHitboxCollider;
         [SerializeField] protected ParticleSystem dustParticles;
         [SerializeField] protected Material defaultMaterial, hitMaterial, deathMaterial;
         [SerializeField] protected ParticleSystem deathParticles;
-        [SerializeField] protected CharacterBlueprint characterBlueprint;
         protected UpgradeableMovementSpeed movementSpeed;
-        protected int currentLevel = 1;
         protected float currentExp = 0;
         protected float nextLevelExp = 5;
         protected float expToNextLevel = 5;
@@ -31,29 +28,11 @@ namespace Vampire
         protected AbilityManager abilityManager;
         protected EntityManager entityManager;
         protected StatsManager statsManager;
-        protected Rigidbody2D rb;
         protected ZPositioner zPositioner;
-        protected Vector2 lookDirection = Vector2.right;
         protected CoroutineQueue coroutineQueue;
         protected Coroutine hitAnimationCoroutine = null;
-        protected Vector2 moveDirection;
-        public Vector2 LookDirection 
-        { 
-            get { return lookDirection; } 
-            set 
-            {
-                if (value != Vector2.zero)
-                    lookDirection = value; 
-            }
-        }
-        public Transform CenterTransform { get => centerTransform; }
-        public Collider2D CollectableCollider { get => collectableCollider; }
-        public float Luck { get => characterBlueprint.luck; }
-        public int CurrentLevel { get => currentLevel; }
-        public UnityEvent<float> OnDealDamage { get; } = new UnityEvent<float>();
-        public UnityEvent OnDeath { get; } = new UnityEvent();
-        public CharacterBlueprint Blueprint { get => characterBlueprint; }
-        public Vector2 Velocity { get => rb.velocity; }
+        protected Vector3 moveDirection;
+
         // Spatial Hash Grid Client Interface
         public Vector2 Position => transform.position;
         public Vector2 Size => meleeHitboxCollider.bounds.size;
@@ -62,7 +41,7 @@ namespace Vampire
 
         void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
+            //_body = GetComponent<Rigidbody>();
             zPositioner = gameObject.AddComponent<ZPositioner>();
             spriteAnimator = GetComponentInChildren<SpriteAnimator>();
             spriteRenderer = spriteAnimator.GetComponent<SpriteRenderer>();
@@ -71,50 +50,45 @@ namespace Vampire
 
         public virtual void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)
         {
-            //this.characterBlueprint = characterBlueprint;
-            this.entityManager = entityManager;
-            this.abilityManager = abilityManager;
-            this.statsManager = statsManager;
-            // Add listener to increase damage dealt whenever player deals damage
-            OnDealDamage.AddListener(statsManager.IncreaseDamageDealt);
-            // Initialize the coroutine queue
-            coroutineQueue = new CoroutineQueue(this);
-            coroutineQueue.StartLoop();
-
+            //this.entityManager = entityManager;
+            //this.abilityManager = abilityManager;
+            //this.statsManager = statsManager;
+            //// Add listener to increase damage dealt whenever player deals damage
+            //// Initialize the coroutine queue
+            //coroutineQueue = new CoroutineQueue(this);
+            //coroutineQueue.StartLoop();
             //expBar.Setup(currentExp, 0, nextLevelExp);
-
-            currentLevel = 1;
-            UpdateLevelDisplay();
-            // Initialize animations
-            spriteAnimator.Init(characterBlueprint.walkSpriteSequence, characterBlueprint.walkFrameTime, false);
-            // Limit max speed using drag
-            movementSpeed = new UpgradeableMovementSpeed();
-            movementSpeed.Value = characterBlueprint.movespeed;
-            abilityManager.RegisterUpgradeableValue(movementSpeed, true);
-            UpdateMoveSpeed();
-            // Initialize upgradeable armor
-           
+            //currentLevel = 1;
+            //UpdateLevelDisplay();
+            //// Initialize animations
+            //spriteAnimator.Init(characterBlueprint.walkSpriteSequence, characterBlueprint.walkFrameTime, false);
+            //// Limit max speed using drag
+            //movementSpeed = new UpgradeableMovementSpeed();
+            //movementSpeed.Value = characterBlueprint.movespeed;
+            //abilityManager.RegisterUpgradeableValue(movementSpeed, true);
+            //UpdateMoveSpeed();
+            //// Initialize upgradeable armor
+            //armor = new UpgradeableArmor();
+            //armor.Value = characterBlueprint.armor;
             //abilityManager.RegisterUpgradeableValue(armor, true);
-
-            zPositioner.Init(transform);
+            //zPositioner.Init(transform);
         }
 
         protected virtual void Update()
         {
             // Look in movement direction
-            lookIndicator.transform.localPosition = lookDirection * lookIndicatorRadius;
-            spriteRenderer.flipX = lookDirection.x < 0;
+            //lookIndicator.transform.localPosition = lookDirection * lookIndicatorRadius;
+            //spriteRenderer.flipX = lookDirection.x < 0;
         }
 
         protected virtual void FixedUpdate()
         {
-            if (moveDirection != Vector2.zero)
-                lookDirection = moveDirection;
-            else
-                StopWalkAnimation();
-
+            //if (moveDirection != Vector3.zero)
+            //    lookDirection = moveDirection;
+            //else
+            //    StopWalkAnimation();
             //if (alive)
-            //    rb.velocity += moveDirection * characterBlueprint.acceleration * Time.deltaTime;
+            //    _body.velocity += moveDirection * characterBlueprint.acceleration * Time.deltaTime;
         }
 
         public void GainExp(float exp)
@@ -148,7 +122,7 @@ namespace Vampire
             //    expBar.AddPoints(exp);
             //}
 
-            yield return LevelUpCoroutine();
+            yield return null;
         }
 
         private IEnumerator LevelUpCoroutine()
@@ -172,14 +146,28 @@ namespace Vampire
 
         private void UpdateLevelDisplay()
         {
-            levelText.text = "LV " + currentLevel;
+            //levelText.text = "LV " + currentLevel;
+        }
+
+        public override void Knockback(Vector3 knockback)
+        {
+            //_body.velocity += knockback * Mathf.Sqrt(_body.drag);
         }
 
         public override void TakeDamage(float damage, Vector3 knockback = default)
         {
             //if (alive)
             //{
-            //    rb.velocity += knockback * Mathf.Sqrt(rb.drag);
+            //    // Apply armor
+            //    if (armor.Value >= damage)
+            //        damage = damage < 1 ? damage : 1;
+            //    else
+            //        damage -= armor.Value;
+            //    // Decrease health
+            //    healthBar.SubtractPoints(damage);
+            //    currentHealth -= damage;
+            //    // Knockback
+            //    _body.velocity += knockback * Mathf.Sqrt(_body.drag);
             //    statsManager.IncreaseDamageTaken(damage);
             //    if (currentHealth <= 0)
             //    {
@@ -191,11 +179,6 @@ namespace Vampire
             //        hitAnimationCoroutine = StartCoroutine(HitAnimation());
             //    }
             //}
-        }
-
-        public override void Knockback(Vector3 knockback)
-        {
-
         }
 
         private IEnumerator HitAnimation()
@@ -227,16 +210,8 @@ namespace Vampire
 
             yield return new WaitForSeconds(0.5f);
 
-            OnDeath.Invoke();
+            //OnDeath.Invoke();
             spriteRenderer.enabled = false;
-        }
-
-        public void GainHealth(float health)
-        {
-            //healthBar.AddPoints(health);
-            //currentHealth += health;
-            //if (currentHealth > characterBlueprint.hp)
-            //    currentHealth = characterBlueprint.hp;
         }
 
         //public void SetLookDirecton(InputAction.CallbackContext context)
@@ -244,12 +219,7 @@ namespace Vampire
         //    LookDirection = context.ReadValue<Vector2>();
         //}
 
-        public void UpdateMoveSpeed()
-        {
-            rb.drag = characterBlueprint.acceleration / (movementSpeed.Value * movementSpeed.Value);
-        }
-
-        public void Move(Vector2 moveDirection)
+        public void Move(Vector3 moveDirection)
         {
             this.moveDirection = moveDirection;
         }

@@ -31,13 +31,13 @@ namespace Vampire
             base.FixedUpdate();
             if (alive)
             {
-                Vector2 toPlayer = (playerCharacter.transform.position - transform.position);
+                Vector3 toPlayer = (_playerModel.transform.position - transform.position);
                 float distance = toPlayer.magnitude;
-                Vector2 dirToPlayer = toPlayer/distance;
+                Vector3 dirToPlayer = toPlayer/distance;
                 switch (state)
                 {
                     case State.Walking:
-                        rb.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+                        _body.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
                         if (distance <= monsterBlueprint.range)
                         {
                             state = State.Shooting;
@@ -52,7 +52,7 @@ namespace Vampire
                         // rb.velocity *= 0.95f;
                         if (timeSinceLastAttack >= 1.0f/monsterBlueprint.atkspeed)
                         {
-                            LaunchThrowable(playerCharacter.transform.position);
+                            LaunchThrowable(_playerModel.transform.position);
                             timeSinceLastAttack = 0;
                         }
                         if (distance <= monsterBlueprint.range)
@@ -73,10 +73,10 @@ namespace Vampire
             }
         }
 
-        protected void LaunchThrowable(Vector2 targetPosition)
+        protected void LaunchThrowable(Vector3 targetPosition)
         {
             Throwable throwable = entityManager.SpawnThrowable(throwableIndex, throwableSpawnPosition.position, monsterBlueprint.atk, 0, -909, monsterBlueprint.targetLayer);
-            targetPosition += playerCharacter.Velocity * throwable.ThrowTime;
+            targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
             throwable.Throw(targetPosition);
         }
 
@@ -84,6 +84,11 @@ namespace Vampire
         {
             LaunchThrowable(transform.position);
             yield return base.Killed(killedByPlayer);
+        }
+
+        protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)
+        {
+
         }
     }
 }

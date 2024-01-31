@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -21,7 +20,7 @@ namespace Vampire
             timeSinceLastHealed += Time.deltaTime;
             if (timeSinceLastHealed >= cooldown.Value)
             {
-                playerCharacter.GainHealth(recovery.Value);
+                _playerHealth.GainHealth(recovery.Value);
                 timeSinceLastHealed = Mathf.Repeat(timeSinceLastHealed, cooldown.Value);
             }
         }

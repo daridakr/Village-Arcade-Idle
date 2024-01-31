@@ -9,7 +9,7 @@ namespace Vampire
         protected new BossMonsterBlueprint monsterBlueprint;
         protected BossAbility[] abilities;
         protected Coroutine act = null;
-        public Rigidbody2D Rigidbody { get => rb; }
+        public Rigidbody Rigidbody { get => _body; }
         public SpriteAnimator Animator { get => monsterSpriteAnimator; }
         protected float timeSinceLastMeleeAttack;
 
@@ -21,7 +21,7 @@ namespace Vampire
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i] = Instantiate(this.monsterBlueprint.abilityPrefabs[i], transform).GetComponent<BossAbility>();
-                abilities[i].Init(this, entityManager, playerCharacter);
+                abilities[i].Init(this, entityManager);
             }
             act = StartCoroutine(Act());
         }
@@ -38,14 +38,14 @@ namespace Vampire
         //     // rb.velocity += moveDirection * monsterBlueprint.acceleration * Time.fixedDeltaTime;
         // }
 
-        public void Move(Vector2 direction, float deltaTime)
+        public void Move(Vector3 direction, float deltaTime)
         {
-            rb.velocity += direction * monsterBlueprint.acceleration * deltaTime;
+            _body.velocity += direction * monsterBlueprint.acceleration * deltaTime;
         }
 
         public void Freeze()
         {
-            rb.velocity = Vector2.zero;
+            _body.velocity = Vector2.zero;
         }
 
         private IEnumerator Act()
@@ -89,11 +89,11 @@ namespace Vampire
             yield return base.Killed(killedByPlayer);
         }
 
-        void OnCollisionEnter2D(Collision2D col)
+        protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)
         {
-            if (((monsterBlueprint.meleeLayer & (1 << col.collider.gameObject.layer)) != 0))
+            if (((monsterBlueprint.meleeLayer & (1 << playerHealth.gameObject.layer)) != 0))
             {
-                IDamageable damageable = col.collider.GetComponentInParent<IDamageable>();
+                IDamageable damageable = playerHealth.GetComponentInParent<IDamageable>();
                 Vector2 knockbackDirection = (damageable.transform.position - transform.position).normalized;
                 if (timeSinceLastMeleeAttack > monsterBlueprint.meleeAttackDelay)
                 {
@@ -106,7 +106,7 @@ namespace Vampire
                 }
             }
 
-            if (col.gameObject.TryGetComponent<Chest>(out Chest chest))
+            if (playerHealth.gameObject.TryGetComponent(out Chest chest))
             {
                 chest.OpenChest(false);
             }

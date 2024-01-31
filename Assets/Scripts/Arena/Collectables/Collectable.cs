@@ -17,7 +17,9 @@ namespace Vampire
         [Header("Attributes")]
         [SerializeField] protected bool magnetic = false;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+
+        protected ArenaPlayerCharacterModel _playerModel;
+
         protected ZPositioner zPositioner;
         protected Collider2D col;
         protected bool beingCollected = false;
@@ -28,11 +30,11 @@ namespace Vampire
             zPositioner = gameObject.AddComponent<ZPositioner>();
         }
 
-        public virtual void Init(EntityManager entityManager, Character playerCharacter)
+        public virtual void Init(EntityManager entityManager, ArenaPlayerCharacterModel playerModel)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
-            zPositioner.Init(playerCharacter.transform);
+            _playerModel = playerModel;
+            zPositioner.Init(_playerModel.transform);
         }
 
         public virtual void Setup(bool spawnAnimation = true, bool collectableDuringSpawn = true) {
@@ -85,7 +87,7 @@ namespace Vampire
                 zPositioner.enabled = true;
             }
 
-            float distance = Vector2.Distance(transform.position, playerCharacter.CenterTransform.position);
+            float distance = Vector2.Distance(transform.position, _playerModel.CenterTransform.position);
             if (distance == 0.0f) distance = Mathf.Epsilon;
             float c = juiciness / distance;
             float timeScale = 1.0f/(lerpTime*Mathf.Sqrt(distance));
@@ -96,10 +98,10 @@ namespace Vampire
                 t += Time.deltaTime*timeScale;
                 float lerpT = EasingUtils.EaseInBack(t, c);
                 if (lerpT >= 1) break;
-                transform.position = Vector3.LerpUnclamped(pickupPos, playerCharacter.CenterTransform.position, lerpT);
+                transform.position = Vector3.LerpUnclamped(pickupPos, _playerModel.CenterTransform.position, lerpT);
                 yield return null;
             }
-            transform.position = playerCharacter.CenterTransform.position;
+            transform.position = _playerModel.CenterTransform.position;
             yield return null;
             OnCollected();
         }
@@ -161,12 +163,12 @@ namespace Vampire
             }
         }
 
-        void OnTriggerStay2D(Collider2D collider)
+        void OnTriggerStay2D(Collider collider)
         {
-            if (collider == playerCharacter.CollectableCollider)
-            {
-                Collect();
-            }
+            //if (collider == _playerModel.CollectableCollider)
+            //{
+            //    Collect();
+            //}
         }
 
         public enum CollectionMode

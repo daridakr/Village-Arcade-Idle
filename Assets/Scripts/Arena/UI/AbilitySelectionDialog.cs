@@ -14,17 +14,17 @@ namespace Vampire
         [SerializeField] private float cardPopupDelay = 0.1f;
         private AbilityManager abilityManager;
         private EntityManager entityManager;
-        private Character playerCharacter;
+        private ArenaPlayerCharacterModel _playerModel;
         private List<AbilityCard> abilityCards;
         private List<Ability> displayedAbilities;
         private bool menuOpen = false;
         public bool MenuOpen { get => menuOpen; }
 
-        public void Init(AbilityManager abilityManager, EntityManager entityManager, Character playerCharacter)
+        public void Init(AbilityManager abilityManager, EntityManager entityManager, ArenaPlayerCharacterModel playerModel)
         {
             this.abilityManager = abilityManager;
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
+            this._playerModel = playerModel;
         }
 
         public void Open(bool failsafe = true)
@@ -45,7 +45,7 @@ namespace Vampire
             else
             {
                 if (failsafe)
-                    entityManager.SpawnChest(failsafeChestBlueprint, (Vector2)playerCharacter.transform.position + Vector2.up);
+                    entityManager.SpawnChest(failsafeChestBlueprint, (Vector2)_playerModel.transform.position + Vector2.up);
                 Close();
             }
         }

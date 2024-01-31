@@ -13,7 +13,7 @@ namespace Vampire
         {
             if (active)
             {
-                Vector2 moveDirection = (playerCharacter.transform.position - monster.transform.position).normalized;
+                Vector2 moveDirection = (_playerModel.transform.position - monster.transform.position).normalized;
                 monster.Move(moveDirection, Time.fixedDeltaTime);
                 entityManager.Grid.UpdateClient(monster);
             }

@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Vampire
 {
@@ -11,9 +9,9 @@ namespace Vampire
         [SerializeField] protected int fragmentCount;
         protected int projectileIndex = -1;
 
-        public override void Init(EntityManager entityManager, Character playerCharacter)
+        public override void Init(EntityManager entityManager)
         {
-            base.Init(entityManager, playerCharacter);
+            base.Init(entityManager);
             projectileIndex = entityManager.AddPoolForProjectile(fragmentPrefab);
         }
 

@@ -7,7 +7,8 @@ using Zenject;
 namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
-    public abstract class Building : MonoBehaviour, IStorableObject
+    public abstract class Building : MonoBehaviour,
+        IStorableObject
     {
         [SerializeField] private SpecificBuildingData _specificData;
         [SerializeField] private BuildingTypeData _typeData;

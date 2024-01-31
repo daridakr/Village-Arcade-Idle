@@ -45,9 +45,9 @@ namespace Vampire
 
         public void Damage(IDamageable damageable)
         {
-            Vector2 knockbackDirection = (damageable.transform.position - playerCharacter.transform.position).normalized;
+            Vector2 knockbackDirection = (damageable.transform.position - _playerHealth.transform.position).normalized;
             damageable.TakeDamage(damage.Value, knockback.Value * knockbackDirection);
-            playerCharacter.OnDealDamage.Invoke(damage.Value);
+            _playerHealth.OnDealDamage.Invoke(damage.Value);
         }
 
         private void RefreshBooks()
@@ -58,7 +58,7 @@ namespace Vampire
 
         private void AddBook()
         {
-            Book book = Instantiate(bookPrefab, playerCharacter.transform).GetComponent<Book>();
+            Book book = Instantiate(bookPrefab, _playerHealth.transform).GetComponent<Book>();
             book.Init(this, monsterLayer);
             books.Add(book);
         }

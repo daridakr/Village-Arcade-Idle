@@ -7,9 +7,9 @@ namespace Vampire
     {
         protected ObjectPool<GravityProjectile> pool;
 
-        public override void Init(EntityManager entityManager, Character playerCharacter, GameObject prefab, bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000)
+        public override void Init(EntityManager entityManager, GameObject prefab, bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000)
         {
-            base.Init(entityManager, playerCharacter, prefab, collectionCheck, defaultCapacity, maxSize);
+            base.Init(entityManager, prefab, collectionCheck, defaultCapacity, maxSize);
             pool = new ObjectPool<GravityProjectile>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPooledItem, collectionCheck, defaultCapacity, maxSize);
         }
 
@@ -26,7 +26,7 @@ namespace Vampire
         protected GravityProjectile CreatePooledItem()
         {
             GravityProjectile projectile = Instantiate(prefab, transform).GetComponent<GravityProjectile>();
-            projectile.Init(entityManager, playerCharacter);
+            projectile.Init(entityManager);
             return projectile;
         }
 

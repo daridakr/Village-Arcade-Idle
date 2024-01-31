@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Vampire
@@ -31,13 +30,13 @@ namespace Vampire
             base.FixedUpdate();
             if (alive)
             {
-                Vector2 toPlayer = (playerCharacter.transform.position - transform.position);
+                Vector3 toPlayer = (_playerModel.transform.position - transform.position);
                 float distance = toPlayer.magnitude;
-                Vector2 dirToPlayer = toPlayer/distance;
+                Vector3 dirToPlayer = toPlayer/distance;
                 switch (state)
                 {
                     case State.Walking:
-                        rb.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+                        _body.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
                         entityManager.Grid.UpdateClient(this);
                         if (distance <= monsterBlueprint.range)
                         {
@@ -78,6 +77,11 @@ namespace Vampire
         {
             Projectile projectile = entityManager.SpawnProjectile(projectileIndex, projectileSpawnPosition.position, monsterBlueprint.atk, 0, monsterBlueprint.projectileSpeed, monsterBlueprint.targetLayer);
             projectile.Launch(direction);
+        }
+
+        protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)
+        {
+
         }
     }
 }

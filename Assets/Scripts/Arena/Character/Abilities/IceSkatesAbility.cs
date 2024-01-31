@@ -5,7 +5,7 @@ namespace Vampire
         public override void Select()
         {
             base.Select();
-            playerCharacter.UpdateMoveSpeed();
+            //_playerHealth.UpdateMoveSpeed(); - PlayerMovement
         }
 
         public override bool RequirementsMet()

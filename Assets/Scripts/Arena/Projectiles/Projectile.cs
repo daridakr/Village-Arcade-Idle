@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Vampire
 {
@@ -11,13 +12,14 @@ namespace Vampire
         [SerializeField] protected float rotationSpeed = 0;
         [SerializeField] protected float airResistance = 0;
         [SerializeField] protected ParticleSystem destructionParticleSystem;
+
         protected float despawnTime = 1;  // How long before this will be despawned once it has left the screen
         protected LayerMask targetLayer;
         protected float speed;
         protected float damage;
         protected float knockback;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
+        protected ArenaPlayerCharacterModel _playerModel;
         protected Collider2D col;
         protected ZPositioner zPositioner;
         protected Coroutine moveCoroutine;
@@ -26,6 +28,12 @@ namespace Vampire
         protected TrailRenderer trailRenderer = null;
         public UnityEvent<float> OnHitDamageable { get; private set; }
 
+        [Inject]
+        private void Construct(ArenaPlayerCharacterModel playerModel)
+        {
+            _playerModel = playerModel;
+        }
+
         protected virtual void Awake()
         {
             col = GetComponent<Collider2D>();
@@ -33,11 +41,10 @@ namespace Vampire
             TryGetComponent<TrailRenderer>(out trailRenderer);
         }
 
-        public virtual void Init(EntityManager entityManager, Character playerCharacter)
+        public virtual void Init(EntityManager entityManager)
         {
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
-            zPositioner.Init(playerCharacter.transform);
+            zPositioner.Init(_playerModel.transform);
         }
         
         public virtual void Setup(int projectileIndex, Vector2 position, float damage, float knockback, float speed, LayerMask targetLayer)

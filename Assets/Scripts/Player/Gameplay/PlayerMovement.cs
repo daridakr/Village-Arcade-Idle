@@ -8,13 +8,13 @@ public class PlayerMovement : MonoBehaviour
 {
     private IControlService _controlService;
 
+    protected Rigidbody _rigidbody;
     protected float _speed;
+
     private float _speedRate;
     private float _flySpeedRate;
-
     private Transform _playerModel;
     private PlayerAnimation _animation;
-    private Rigidbody _rigidbody;
 
     public bool IsMoving { get; private set; }
 

@@ -13,6 +13,8 @@ namespace Vampire
         public float ValueNormalazed => _points.Current / _points.Max;
 
         public event UnityAction<float> Changed;
+        public UnityEvent<float> OnDealDamage { get; } = new UnityEvent<float>();
+        public UnityEvent OnDeath { get; } = new UnityEvent();
 
         [Inject]
         private void Construct(HealthConfig config)
@@ -24,10 +26,20 @@ namespace Vampire
             _armor = new UpgradeableArmor();
             //_armor.Value = config.Armor;
 
-            TakeDamage(50);
+        }
+
+        public void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)
+        {
+            OnDealDamage.AddListener(statsManager.IncreaseDamageDealt);
+
         }
 
         private void OnHealthChanged() => Changed?.Invoke(ValueNormalazed);
+
+        public void GainHealth(float health)
+        {
+            _points.AddPoints(health);
+        }
 
         public override void TakeDamage(float damage, Vector3 knockback = default)
         {

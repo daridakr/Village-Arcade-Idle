@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
@@ -6,9 +7,17 @@ namespace Vampire
     {
         [SerializeField] protected float healAmount = 30;
 
+        private PlayerHealth _playerHealth;
+
+        [Inject]
+        private void Construct(PlayerHealth playerHealth)
+        {
+            _playerHealth = playerHealth;
+        }
+
         protected override void OnCollected()
         {
-            playerCharacter.GainHealth(healAmount);
+            _playerHealth.GainHealth(healAmount);
             Destroy(gameObject);
         }
     }

@@ -16,9 +16,9 @@ namespace Vampire
         protected float timeSinceLastAttack;
         protected int projectileIndex = -1;
 
-        public override void Init(BossMonster monster, EntityManager entityManager, Character playerCharacter)
+        public override void Init(BossMonster monster, EntityManager entityManager)
         {
-            base.Init(monster, entityManager, playerCharacter);
+            base.Init(monster, entityManager);
             projectileIndex = entityManager.AddPoolForProjectile(bulletPrefab);
         }
 
@@ -39,7 +39,7 @@ namespace Vampire
         {
             if (active)
             {
-                Vector2 moveDirection = (playerCharacter.transform.position - monster.transform.position).normalized;
+                Vector2 moveDirection = (_playerModel.transform.position - monster.transform.position).normalized;
                 monster.Move(moveDirection, Time.fixedDeltaTime);
             }
         }

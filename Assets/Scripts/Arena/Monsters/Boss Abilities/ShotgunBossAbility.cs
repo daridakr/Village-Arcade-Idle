@@ -15,12 +15,13 @@ namespace Vampire
         [SerializeField] protected float fireRate;
         [SerializeField] protected float bulletCount;
         [SerializeField] protected float spreadAngle;
+
         protected float timeSinceLastAttack;
         protected int projectileIndex = -1;
 
-        public override void Init(BossMonster monster, EntityManager entityManager, Character playerCharacter)
+        public override void Init(BossMonster monster, EntityManager entityManager)
         {
-            base.Init(monster, entityManager, playerCharacter);
+            base.Init(monster, entityManager);
             projectileIndex = entityManager.AddPoolForProjectile(bulletPrefab);
         }
 
@@ -41,7 +42,7 @@ namespace Vampire
         {
             if (active)
             {
-                Vector2 moveDirection = (playerCharacter.transform.position - monster.transform.position).normalized;
+                Vector2 moveDirection = (_playerModel.transform.position - monster.transform.position).normalized;
                 monster.Move(moveDirection, Time.fixedDeltaTime);
                 entityManager.Grid.UpdateClient(monster);
             }
@@ -49,7 +50,7 @@ namespace Vampire
 
         protected void LaunchBullets()
         {
-            Vector2 initialDir = (playerCharacter.transform.position - monster.transform.position).normalized;
+            Vector2 initialDir = (_playerModel.transform.position - monster.transform.position).normalized;
             for (int i = 0; i < bulletCount; i++)
             {
                 float theta = (spreadAngle * i) / bulletCount - spreadAngle/2;
@@ -79,7 +80,7 @@ namespace Vampire
 
         public override float Score()
         {
-            float distance = Vector2.Distance(monster.transform.position, playerCharacter.transform.position);
+            float distance = Vector2.Distance(monster.transform.position, _playerModel.transform.position);
             float x = distance / 6;
             float u = 0.65f;
             float o = 0.25f;

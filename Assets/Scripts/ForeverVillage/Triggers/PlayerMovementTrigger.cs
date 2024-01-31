@@ -1,6 +1,6 @@
 namespace Village
 {
-    public class PlayerMovementTrigger : Trigger<UpgradablePlayerMovement>
+    public sealed class PlayerMovementTrigger : Trigger<UpgradablePlayerMovement>
     {
 
     }

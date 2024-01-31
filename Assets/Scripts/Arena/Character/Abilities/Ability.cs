@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Vampire
 {
@@ -14,9 +15,11 @@ namespace Vampire
         [SerializeField] protected string description;
         [SerializeField] protected Rarity rarity = Rarity.Common;
 
+        protected PlayerHealth _playerHealth;
+        protected ArenaPlayerCharacterModel _playerModel;
+
         protected AbilityManager abilityManager;
         protected EntityManager entityManager;
-        protected Character playerCharacter;
         protected List<IUpgradeableValue> upgradeableValues;
         protected int level = 0;
         protected int maxLevel;
@@ -36,11 +39,17 @@ namespace Vampire
             } 
         }
 
-        public virtual void Init(AbilityManager abilityManager, EntityManager entityManager, Character playerCharacter)
+        [Inject]
+        private void Construct(PlayerHealth playerHealth, ArenaPlayerCharacterModel playerModel)
+        {
+            _playerHealth = playerHealth;
+            _playerModel = playerModel;
+        }
+
+        public virtual void Init(AbilityManager abilityManager, EntityManager entityManager)
         {
             this.abilityManager = abilityManager;
             this.entityManager = entityManager;
-            this.playerCharacter = playerCharacter;
             // Register any upgradeable fields attached to this object
             upgradeableValues = this.GetType()
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public)

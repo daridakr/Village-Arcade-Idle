@@ -3329,19 +3329,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c6426ee23684b4694c5c60558c97a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerTransform: {fileID: 2099243771}
   lookIndicator: {fileID: 154289835}
   lookIndicatorRadius: 0.5
   levelText: {fileID: 1747308521}
   abilitySelectionDialog: {fileID: 1276250152}
-  collectableCollider: {fileID: 856782960}
   meleeHitboxCollider: {fileID: 856782956}
   dustParticles: {fileID: 1678354794}
-  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 3}
   hitMaterial: {fileID: 2100000, guid: 82ebeb73078cc4145aa889870d58ae0a, type: 2}
   deathMaterial: {fileID: 2100000, guid: a3417b1068f7c4e129b88a8aa9254c5b, type: 2}
   deathParticles: {fileID: 869581549}
-  characterBlueprint: {fileID: 11400000, guid: 138b085873865480984b6ebcd8312fae, type: 2}
+--- !u!4 &862543648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5725111021238296663, guid: 5525f0cad42469b478ff08cb453c5926, type: 3}
+  m_PrefabInstance: {fileID: 1139572363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &869581548
 GameObject:
   m_ObjectHideFlags: 0
@@ -14586,11 +14588,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 862543648}
     m_Modifications:
     - target: {fileID: 5858842037858913089, guid: c98a876068802db4db5cc24be3aaa5d2, type: 3}
       propertyPath: m_Name
       value: FPS
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858842037858913089, guid: c98a876068802db4db5cc24be3aaa5d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5858842037858913098, guid: c98a876068802db4db5cc24be3aaa5d2, type: 3}
       propertyPath: m_Pivot.x
@@ -14602,7 +14608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5858842037858913098, guid: c98a876068802db4db5cc24be3aaa5d2, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5858842037858913098, guid: c98a876068802db4db5cc24be3aaa5d2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -20586,7 +20592,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBlueprint: {fileID: 11400000, guid: ace7cd4ef65de4d9787fe14e2a0f8c92, type: 2}
-  playerCharacter: {fileID: 856782961}
   entityManager: {fileID: 1547352219}
   abilityManager: {fileID: 1727210731}
   abilitySelectionDialog: {fileID: 1276250152}
