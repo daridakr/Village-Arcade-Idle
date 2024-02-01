@@ -42,6 +42,8 @@ namespace Vampire
         [Header("Dependencies")]
         [SerializeField] private SpriteRenderer flashSpriteRenderer;
         [SerializeField] private Camera playerCamera;  // 攝像頭
+        [SerializeField] private Vector2 _xLimits;
+        [SerializeField] private Vector2 _zLimits;
 
         private ArenaPlayerCharacterModel _playerModel;  // 玩家的角色
         private ArenaPlayerMovement _playerMovement;
@@ -58,9 +60,6 @@ namespace Vampire
         private Coroutine flashCoroutine;
         private Coroutine shockwave;
         private SpatialHashGrid grid;
-
-        [SerializeField] private Vector2 _xLimits;
-        [SerializeField] private Vector2 _zLimits;
 
         public FastList<Monster> LivingMonsters { get => livingMonsters; }
         public FastList<Collectable> MagneticCollectables { get => magneticCollectables; }

@@ -15,7 +15,7 @@ namespace Vampire
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (BoomerangMonsterBlueprint) monsterBlueprint;
-            boomerangIndex = entityManager.AddPoolForBoomerang(this.monsterBlueprint.boomerangPrefab);
+            boomerangIndex = _entityManager.AddPoolForBoomerang(this.monsterBlueprint.boomerangPrefab);
             outOfRangeTime = 0;
         }
 
@@ -25,7 +25,7 @@ namespace Vampire
             Vector3 toPlayer = (_playerModel.transform.position - transform.position);
             float distance = toPlayer.magnitude;
             Vector3 dirToPlayer = toPlayer/distance;
-            entityManager.Grid.UpdateClient(this);
+            _entityManager.Grid.UpdateClient(this);
             timeSinceLastBoomerangAttack += Time.fixedDeltaTime;
             if (distance <= monsterBlueprint.range)
             {
@@ -44,7 +44,7 @@ namespace Vampire
 
         protected void ThrowBoomerang(Vector2 targetPosition)
         {
-            Boomerang boomerang = entityManager.SpawnBoomerang(boomerangIndex, boomerangSpawnPosition.position, monsterBlueprint.boomerangDamage, 0, monsterBlueprint.throwRange, monsterBlueprint.throwTime, monsterBlueprint.targetLayer);
+            Boomerang boomerang = _entityManager.SpawnBoomerang(boomerangIndex, boomerangSpawnPosition.position, monsterBlueprint.boomerangDamage, 0, monsterBlueprint.throwRange, monsterBlueprint.throwTime, monsterBlueprint.targetLayer);
             boomerang.Throw(boomerangSpawnPosition, targetPosition);
         }
 

@@ -21,7 +21,7 @@ namespace Vampire
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i] = Instantiate(this.monsterBlueprint.abilityPrefabs[i], transform).GetComponent<BossAbility>();
-                abilities[i].Init(this, entityManager);
+                abilities[i].Init(this, _entityManager);
             }
             act = StartCoroutine(Act());
         }
@@ -78,7 +78,7 @@ namespace Vampire
         {
             base.DropLoot();
             if (monsterBlueprint.chestBlueprint != null)
-                entityManager.SpawnChest(monsterBlueprint.chestBlueprint, transform.position);
+                _entityManager.SpawnChest(monsterBlueprint.chestBlueprint, transform.position);
         }
 
         public override IEnumerator Killed(bool killedByPlayer = true)

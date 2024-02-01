@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 namespace Vampire
@@ -23,28 +24,34 @@ namespace Vampire
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            Vector3 moveDirection = (_playerModel.transform.position - transform.position).normalized;
-            _body.velocity += moveDirection * monsterBlueprint.acceleration * Time.fixedDeltaTime;
-            entityManager.Grid.UpdateClient(this);
 
-            // Vector2 f = Vector2.zero;
-            // int count = 0;
-            // foreach (ISpatialHashGridClient client in entityManager.Grid.FindNearbyInRadius(Position, 2))
-            // {
-            //     if (client != (ISpatialHashGridClient)this)
-            //     {
-            //         Vector2 diff = Position - client.Position;
-            //         float dist = diff.magnitude;
-            //         diff /= dist;
-            //         f += diff / dist;
-            //         count++;
-            //     }
-            // }
-            // if (count > 0)
-            //     f /= count;
-            // rb.velocity += f * 0.1f * monsterBlueprint.acceleration * Time.fixedDeltaTime;
-            // if (!knockedBack && rb.velocity.magnitude > monsterBlueprint.movespeed)
-            //      rb.velocity = rb.velocity.normalized * monsterBlueprint.movespeed;
+            Vector3 moveDirection = (_playerModel.transform.position - transform.position).normalized;
+            transform.position += moveDirection * monsterBlueprint.movespeed * Time.deltaTime;
+
+            //Vector3 moveDirection = (_playerModel.transform.position - transform.position).normalized;
+            //_body.velocity += moveDirection * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+            //_entityManager.Grid.UpdateClient(this);
+
+            //Vector3 f = Vector3.zero;
+            //int count = 0;
+            //foreach (ISpatialHashGridClient client in _entityManager.Grid.FindNearbyInRadius(Position, 2))
+            //{
+            //    if (client != (ISpatialHashGridClient)this)
+            //    {
+            //        Vector3 diff = Position - client.Position;
+            //        float dist = diff.magnitude;
+            //        diff /= dist;
+            //        f += diff / dist;
+            //        count++;
+            //    }
+            //}
+            //if (count > 0)
+            //    f /= count;
+            //_body.velocity += f * 0.1f * monsterBlueprint.acceleration * Time.fixedDeltaTime;
+            //if (!knockedBack && _body.velocity.magnitude > monsterBlueprint.movespeed)
+            //    _body.velocity = _body.velocity.normalized * monsterBlueprint.movespeed;
+
+            //Debug.Log("move");
         }
 
         protected override void OnPlayerHealthTriggerStay(PlayerHealth playerHealth)

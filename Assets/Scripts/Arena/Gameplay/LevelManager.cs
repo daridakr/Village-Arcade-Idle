@@ -75,7 +75,7 @@ namespace Vampire
             {
                 timeSinceLastMonsterSpawned += Time.deltaTime;
                 float spawnRate = levelBlueprint.monsterSpawnTable.GetSpawnRate(levelTime/levelBlueprint.levelTime);
-                float monsterSpawnDelay = spawnRate > 0 ? 1.0f/spawnRate : float.PositiveInfinity;
+                float monsterSpawnDelay = spawnRate > 0 ? 1.0f / spawnRate : float.PositiveInfinity;
                 if (timeSinceLastMonsterSpawned >= monsterSpawnDelay)
                 {
                     (int monsterIndex, float hpMultiplier) = levelBlueprint.monsterSpawnTable.SelectMonsterWithHPMultiplier(levelTime/levelBlueprint.levelTime);

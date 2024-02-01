@@ -22,7 +22,7 @@ namespace Vampire
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (ThrowingMonsterBlueprint) monsterBlueprint;
-            throwableIndex = entityManager.AddPoolForThrowable(this.monsterBlueprint.throwablePrefab);
+            throwableIndex = _entityManager.AddPoolForThrowable(this.monsterBlueprint.throwablePrefab);
             outOfRangeTime = 0;
         }
 
@@ -75,7 +75,7 @@ namespace Vampire
 
         protected void LaunchThrowable(Vector3 targetPosition)
         {
-            Throwable throwable = entityManager.SpawnThrowable(throwableIndex, throwableSpawnPosition.position, monsterBlueprint.atk, 0, -909, monsterBlueprint.targetLayer);
+            Throwable throwable = _entityManager.SpawnThrowable(throwableIndex, throwableSpawnPosition.position, monsterBlueprint.atk, 0, -909, monsterBlueprint.targetLayer);
             targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
             throwable.Throw(targetPosition);
         }

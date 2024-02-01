@@ -21,7 +21,7 @@ namespace Vampire
         {
             base.Setup(monsterIndex, position, monsterBlueprint, hpBuff);
             this.monsterBlueprint = (RangedMonsterBlueprint) monsterBlueprint;
-            projectileIndex = entityManager.AddPoolForProjectile(this.monsterBlueprint.projectilePrefab);
+            projectileIndex = _entityManager.AddPoolForProjectile(this.monsterBlueprint.projectilePrefab);
             outOfRangeTime = 0;
         }
 
@@ -37,7 +37,7 @@ namespace Vampire
                 {
                     case State.Walking:
                         _body.velocity += dirToPlayer * monsterBlueprint.acceleration * Time.fixedDeltaTime;
-                        entityManager.Grid.UpdateClient(this);
+                        _entityManager.Grid.UpdateClient(this);
                         if (distance <= monsterBlueprint.range)
                         {
                             state = State.Shooting;
@@ -75,7 +75,7 @@ namespace Vampire
 
         protected void LaunchProjectile(Vector2 direction)
         {
-            Projectile projectile = entityManager.SpawnProjectile(projectileIndex, projectileSpawnPosition.position, monsterBlueprint.atk, 0, monsterBlueprint.projectileSpeed, monsterBlueprint.targetLayer);
+            Projectile projectile = _entityManager.SpawnProjectile(projectileIndex, projectileSpawnPosition.position, monsterBlueprint.atk, 0, monsterBlueprint.projectileSpeed, monsterBlueprint.targetLayer);
             projectile.Launch(direction);
         }
 

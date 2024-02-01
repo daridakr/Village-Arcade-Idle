@@ -17,8 +17,8 @@ namespace Vampire
 
         protected int _monsterIndex;
         protected MonsterBlueprint _monsterBlueprint;
+        protected EntityManager _entityManager;  // monster pools
         protected float currentHealth;
-        protected EntityManager entityManager;  // monster pools
 
         protected ArenaPlayerCharacterModel _playerModel;
         protected ArenaPlayerMovement _playerMovement;
@@ -42,7 +42,6 @@ namespace Vampire
         protected virtual void Awake()
         {
             _body = GetComponent<Rigidbody>();
-            //zPositioner = gameObject.AddComponent<ZPositioner>();
 
             _playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
         }
@@ -51,8 +50,7 @@ namespace Vampire
         {
             _playerModel = playerModel;
             _playerMovement = playerMovement;
-
-            this.entityManager = entityManager;
+            _entityManager = entityManager;
         }
 
         public virtual void Setup(int monsterIndex, Vector3 position, MonsterBlueprint monsterBlueprint, float hpBuff = 0)
@@ -69,31 +67,11 @@ namespace Vampire
             alive = true;
 
             // Add to list of living monsters
-            entityManager.LivingMonsters.Add(this);
+            _entityManager.LivingMonsters.Add(this);
+            _animator.enabled = true;
 
-            // Initialize the animator
-            //monsterSpriteAnimator.Init(monsterBlueprint.walkSpriteSequence, monsterBlueprint.walkFrameTime, true);
-            // Start and reset animation
-            //monsterSpriteAnimator.StartAnimating(true);
-
-            //CapsuleCollider legsCollider = gameObject.AddComponent<CapsuleCollider>();
-            //legsCollider.center = new Vector3(0f, 0.5f, 0f);  // Подбирается в зависимости от геометрии вашего монстра
-            //legsCollider.height = 1.0f;  // Подбирается в зависимости от геометрии вашего монстра
-            //legsCollider.radius = 0.3f;  // Подбирается в зависимости от геометрии вашего монстра
-            //_monsterLegsCollider = legsCollider;
-
-            //_monsterHitbox.enabled = true;
-            //// Настройка размеров и положения коллайдера в соответствии с геометрией монстра
-            //_monsterHitbox.size = new Vector3(1.0f, 1.0f, 1.0f);  // Подбирается в зависимости от геометрии вашего монстра
-            //_monsterHitbox.center = new Vector3(0f, 0.5f, 0f);  // Подбирается в зависимости от геометрии вашего монстра
-
-            // Ensure colliders are enabled and sized correctly
-            //monsterHitbox.enabled = true;
-            //monsterHitbox.size = monsterSpriteRenderer.bounds.size;
-            //monsterHitbox.offset = Vector3.up * monsterHitbox.size.y / 2;
-            //_monsterLegsCollider.radius = monsterHitbox.size.x / 2.5f;
-            //centerTransform = (new GameObject("Center Transform")).transform;
-            //centerTransform.SetParent(transform);
+            centerTransform = (new GameObject("Center Transform")).transform;
+            centerTransform.SetParent(transform);
             //centerTransform.position = transform.position + (Vector3)monsterHitbox.offset;
 
             // Set the drag based on acceleration and movespeed
@@ -129,7 +107,7 @@ namespace Vampire
             if (alive)
             {
                 //entityManager.SpawnDamageText(_monsterHitbox.transform.position, damage);
-                entityManager.SpawnDamageText(transform.position, damage);
+                _entityManager.SpawnDamageText(transform.position, damage);
                 currentHealth -= damage;
                 if (hitAnimationCoroutine != null) StopCoroutine(hitAnimationCoroutine);
                 //if (knockback != default(Vector2))
@@ -158,7 +136,7 @@ namespace Vampire
             alive = false;
             //_monsterHitbox.enabled = false;
             // Remove from list of living monsters
-            entityManager.LivingMonsters.Remove(this);
+            _entityManager.LivingMonsters.Remove(this);
             // Drop loot
             if (killedByPlayer)
                 DropLoot();
@@ -190,15 +168,15 @@ namespace Vampire
             // Invoke monster killed callback and remove all listeners
             OnKilled.Invoke(this);
             OnKilled.RemoveAllListeners();
-            entityManager.DespawnMonster(_monsterIndex, this, true);
+            _entityManager.DespawnMonster(_monsterIndex, this, true);
         }
 
         protected virtual void DropLoot()
         {
             if (_monsterBlueprint.gemLootTable.TryDropLoot(out GemType gemType))
-                entityManager.SpawnExpGem((Vector2)transform.position, gemType);
+                _entityManager.SpawnExpGem((Vector2)transform.position, gemType);
             if (_monsterBlueprint.coinLootTable.TryDropLoot(out CoinType coinType))
-                entityManager.SpawnCoin((Vector2)transform.position, coinType);
+                _entityManager.SpawnCoin((Vector2)transform.position, coinType);
         }
 
         private void OnDisable() => _playerHealthTrigger.Stay -= OnPlayerHealthTriggerStay;
