@@ -4,7 +4,7 @@ using Zenject;
 
 public class PlayerCameraFollow : MonoBehaviour
 {
-    [SerializeField] private CinemachineStateDrivenCamera _cmCamera;
+    [SerializeField] private CinemachineVirtualCamera _cmCamera;
 
     private PlayerReference _player;
 

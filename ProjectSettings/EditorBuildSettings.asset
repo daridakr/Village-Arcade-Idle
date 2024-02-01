@@ -59,4 +59,33 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave03/MaskTintCharactersPA02.unity
     guid: b4638bf9b5b14d588f413f66e90c7d1c
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/VillageAssets/EPIC Fantasy Town - Low Poly 3D Art/Scenes/EPIC_Fantasy_Town_BG_Scene_Day.unity
+    guid: ac35f97a91909924096fc58014364a5d
+  - enabled: 1
+    path: Assets/SimpleToon/Demo/Scene/Demo.unity
+    guid: bdc110ad16276b94dae798cb9b0d9c98
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/4 Stylized Character
+      Ellen/Ellen.unity
+    guid: 4bed84ae0ecd91b409cd04569bd51117
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/5 Stylized Character
+      UnityChan/UnityChanToonShadingDemo.unity
+    guid: 1e162e7bc1a8b434ab36d95536cd5289
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_3_Haftone.unity
+    guid: da0e931a49b2eea4eb1089ce672d2ad0
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_4_HaftoneShadow.unity
+    guid: e9591806316fd48458bacebae18f89d1
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_1_Lighting.unity
+    guid: d615c6d393a27f5459e9c18b9bd30739
+  - enabled: 1
+    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_6_OverrideShadowColorWithColorRampMode.unity
+    guid: 5c040967f7053d2439644841e99f1789
   m_configObjects: {}

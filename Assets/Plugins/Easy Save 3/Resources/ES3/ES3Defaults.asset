@@ -31,14 +31,19 @@ MonoBehaviour:
     assemblyNames:
     - Zenject
     - Assembly-CSharp-firstpass
-    - Zenject-IntegrationTests
     - Assembly-CSharp
+    - Zenject-IntegrationTests
     - Cinemachine
+    - NaughtyAttributes.Core
     - Purchasing.Common
     - Sirenix.OdinInspector.CompatibilityLayer
+    - OtoonShader
+    - NaughtyAttributes.Editor
+    - PPv2URPConverters
     - Zenject-TestFramework
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
+    - OtoonEditor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
