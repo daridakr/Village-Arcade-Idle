@@ -25,7 +25,6 @@ namespace Vampire
             // separate to other class
             _armor = new UpgradeableArmor();
             //_armor.Value = config.Armor;
-
         }
 
         public void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)

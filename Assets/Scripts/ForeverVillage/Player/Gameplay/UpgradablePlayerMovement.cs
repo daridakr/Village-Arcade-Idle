@@ -1,4 +1,3 @@
-using UnityEngine;
 using Village.Upgrades.Player;
 using Zenject;
 
@@ -7,8 +6,6 @@ namespace Village
     public sealed class UpgradablePlayerMovement : PlayerMovement
     {
         private MovementSpeedUpgrade _upgrade;
-
-        public Vector3 CurrentPosition => transform.position;
 
         [Inject]
         private void Construct(MovementSpeedUpgrade upgrade)

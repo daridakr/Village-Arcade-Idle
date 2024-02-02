@@ -20,7 +20,7 @@ public class AIIdle : AIState
 		stateMachine.transform.rotation = Quaternion.Slerp(
 			stateMachine.transform.rotation,
 			Quaternion.LookRotation(
-				Player.Instance.transform.position - stateMachine.transform.position,
+                _target.CurrentPosition - stateMachine.transform.position,
 				stateMachine.transform.up),
 			RotationSpeed * Time.deltaTime);
 	}

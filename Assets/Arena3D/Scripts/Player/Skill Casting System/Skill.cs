@@ -12,8 +12,9 @@ public abstract class Skill : ScriptableObject
 	private (float cooldownStartTimeStamp, float cooldownEndTimeStamp)[] chargeUsableTimes;
 
 	private void OnEnable() => chargeUsableTimes = new (float cooldownStartTimeStamp, float cooldownEndTimeStamp)[MaxCharges];
+    protected GameObject _target;
 
-	public abstract (float normalizedDelay, UnityAction<ICaster, Vector3> action)[] SkillCastCallbacks { get; }
+    public abstract (float normalizedDelay, UnityAction<ICaster, Vector3> action)[] SkillCastCallbacks { get; }
 
 	public bool CanCast(ICaster caster) => HasAvailableCharge() && HasEnoughMana(caster);
 	public abstract bool CanAICast(ICaster caster);
@@ -21,6 +22,7 @@ public abstract class Skill : ScriptableObject
 	public virtual void PreCast(ICaster caster) { }
 
 	public bool HasAvailableCharge() => chargeUsableTimes.Any(chargeTime => chargeTime.cooldownEndTimeStamp <= Time.time);
+
 	private bool HasEnoughMana(ICaster caster)
 	{
 		float manaCost = caster.StatsHandler.GetStat<Stat>(StatID._Mana_Cost).GetValue(ManaCost);
@@ -66,4 +68,9 @@ public abstract class Skill : ScriptableObject
 			damageable.TakeDamage(damageSource, damage);
 		}
 	}
+
+	public void InstantiateTarget(GameObject target)
+	{
+		_target = target;
+    }
 }

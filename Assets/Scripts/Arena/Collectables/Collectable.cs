@@ -163,14 +163,6 @@ namespace Vampire
             }
         }
 
-        void OnTriggerStay2D(Collider collider)
-        {
-            //if (collider == _playerModel.CollectableCollider)
-            //{
-            //    Collect();
-            //}
-        }
-
         public enum CollectionMode
         {
             FromGround,

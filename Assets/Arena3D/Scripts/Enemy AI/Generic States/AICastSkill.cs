@@ -9,14 +9,15 @@ public class AICastSkill : AIState
 	private ICaster caster;
 	private readonly List<Coroutine> CurrentCastingCoroutines = new();
 
-	protected override void Awake()
+    protected override void Awake()
 	{
 		base.Awake();
 		caster = GetComponent<ICaster>();
 		Skill = Skill.Clone();
+        Skill.InstantiateTarget(_target.gameObject);
 	}
 
-	public override float GetWeight() => Weight;
+    public override float GetWeight() => Weight;
 
 	public override bool CanEnterState() => !IsCurrentlyCasting() && Skill.CanCast(caster) && Skill.CanAICast(caster);
 	public override bool CanExitState() => !IsCurrentlyCasting();
@@ -31,7 +32,7 @@ public class AICastSkill : AIState
 		float castDuration = 1f / caster.StatsHandler.GetStat<Stat>(StatID._Casting_Speed).GetValue(1f / Skill.CastDuration);
 		foreach (var (normalizedDelay, action) in Skill.SkillCastCallbacks)
 		{
-			CurrentCastingCoroutines.Add(this.DelayedCallBack(() => action.Invoke(caster, Player.Instance.transform.position), normalizedDelay * castDuration));
+			CurrentCastingCoroutines.Add(this.DelayedCallBack(() => action.Invoke(caster, _target.CurrentPosition), normalizedDelay * castDuration));
 		}
 
 		CurrentCastingCoroutines.Add(this.DelayedCallBack(ResetSelfAndExitState, castDuration));

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Vampire;
+using Zenject;
 
 public class AIChasePlayer : AIState
 {
@@ -7,6 +9,13 @@ public class AIChasePlayer : AIState
 	[SerializeField, Min(0f)] private float PathUpdateTickTime = 0.25f;
 
 	private NavMeshAgent navMeshAgent;
+	private ArenaPlayerMovement _movingPlayer;
+
+	[Inject]
+	private void Construct(ArenaPlayerMovement movingPlayer)
+	{
+        _movingPlayer = movingPlayer;
+    }
 
 	protected override void Awake()
 	{
@@ -16,7 +25,7 @@ public class AIChasePlayer : AIState
 
 	public override float GetWeight() => 100f * base.GetWeight();
 
-	public override bool CanEnterState() => Vector3.Distance(stateMachine.transform.position, Player.Instance.transform.position) > ChaseStopDistance;
+	public override bool CanEnterState() => Vector3.Distance(stateMachine.transform.position, _movingPlayer.CurrentPosition) > ChaseStopDistance;
 	public override bool CanExitState() => true;
 
 	public override void OnEnterState(AIState previousState)
@@ -28,13 +37,13 @@ public class AIChasePlayer : AIState
 
 	private void UpdatePathToPlayer()
 	{
-		if (Vector3.Distance(stateMachine.transform.position, Player.Instance.transform.position) <= ChaseStopDistance)
+		if (Vector3.Distance(stateMachine.transform.position, _movingPlayer.CurrentPosition) <= ChaseStopDistance)
 		{
 			stateMachine.TransitionTo(stateMachine.GetValidNextState(this));
 			return;
 		}
 
-		navMeshAgent.SetDestination(Player.Instance.transform.position);
+		navMeshAgent.SetDestination(_movingPlayer.CurrentPosition);
 	}
 
 	public override void OnExitState(AIState nextState)

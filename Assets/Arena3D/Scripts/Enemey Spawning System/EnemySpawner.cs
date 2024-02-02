@@ -2,6 +2,9 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Vampire;
+using Village;
+using Zenject;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -19,6 +22,15 @@ public class EnemySpawner : MonoBehaviour
 	[ShowNativeProperty] private float currentThreatLevel => GetCurrentTotalThreatLevel();
 
 	private readonly Queue<ISpawnableEnemy> EnemySpawnQueue = new();
+	private ArenaPlayerMovement _player;
+    private IEnemyFactory _enemyFactory;
+
+    [Inject]
+	private void Construct(ArenaPlayerMovement player, IEnemyFactory factory)
+	{
+		_player = player;
+		_enemyFactory = factory;
+    }
 
 	private void Awake()
 	{
@@ -74,12 +86,14 @@ public class EnemySpawner : MonoBehaviour
 			return;
 		}
 
-		Transform newEnemy = Instantiate(enemy as Component).transform;
-		newEnemy.name = (enemy as Component).name;
+        Transform newEnemy = _enemyFactory.Create(enemy as NPC).transform;
 
-		Vector2 randomPositionOffset = Random.insideUnitCircle.normalized * SpawnRadius;
+        //Transform newEnemy = Instantiate(enemy as Component).transform;
+		newEnemy.name = (enemy as NPC).name;
+
+        Vector2 randomPositionOffset = Random.insideUnitCircle.normalized * SpawnRadius;
 		newEnemy.position = transform.position + new Vector3(randomPositionOffset.x, 0f, randomPositionOffset.y);
-		newEnemy.LookAt(Player.Instance.transform);
+		newEnemy.LookAt(_player.transform);
 	}
 
 
