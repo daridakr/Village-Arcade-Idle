@@ -29022,6 +29022,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6189783918961375707, guid: 6000adde202bab940a09101427936fd0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8149493419408161465, guid: 6000adde202bab940a09101427936fd0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -29138,6 +29143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942947475729541048, guid: 2f174d4805397d349a3f86f55791734b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3942947475729541051, guid: 2f174d4805397d349a3f86f55791734b,
         type: 3}

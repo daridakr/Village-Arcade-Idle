@@ -36,14 +36,14 @@ MonoBehaviour:
     - Cinemachine
     - NaughtyAttributes.Core
     - Purchasing.Common
-    - Sirenix.OdinInspector.CompatibilityLayer
     - OtoonShader
+    - Sirenix.OdinInspector.CompatibilityLayer
     - NaughtyAttributes.Editor
     - PPv2URPConverters
     - Zenject-TestFramework
+    - OtoonEditor
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
-    - OtoonEditor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

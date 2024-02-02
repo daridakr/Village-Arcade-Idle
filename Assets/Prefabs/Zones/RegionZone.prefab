@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 3018896907294041519}
   - component: {fileID: 3018896907294041512}
   - component: {fileID: 3018896907294041513}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LockCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
