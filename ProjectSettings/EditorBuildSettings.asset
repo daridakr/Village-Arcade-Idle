@@ -88,4 +88,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_6_OverrideShadowColorWithColorRampMode.unity
     guid: 5c040967f7053d2439644841e99f1789
+  - enabled: 1
+    path: Assets/VillageAssets/EPIC Fantasy Village- Low Poly 3D Art/Scenes/EPIC_Fantasy_Village_BG_Day_1.unity
+    guid: f7dc5f390eac16d4cb7a2aa40b26859f
   m_configObjects: {}
