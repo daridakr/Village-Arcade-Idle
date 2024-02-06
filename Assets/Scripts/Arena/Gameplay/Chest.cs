@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Arena;
 
 namespace Vampire
 {
@@ -12,9 +13,9 @@ namespace Vampire
         protected SpriteRenderer spriteRenderer;
         protected bool opened = false;
 
-        private ArenaPlayerCharacterModel _playerModel;
+        private PlayerCharacterModelArena _playerModel;
 
-        public void Init(EntityManager entityManager, Transform chestItemsParent, ArenaPlayerCharacterModel playerModel)
+        public void Init(EntityManager entityManager, Transform chestItemsParent, PlayerCharacterModelArena playerModel)
         {
             _entityManager = entityManager;
             _chestItemsParent = chestItemsParent;

@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,8 +21,8 @@ namespace Vampire
         protected EntityManager _entityManager;  // monster pools
         protected float currentHealth;
 
-        protected ArenaPlayerCharacterModel _playerModel;
-        protected ArenaPlayerMovement _playerMovement;
+        protected PlayerCharacterModelArena _playerModel;
+        protected PlayerMovementArena _playerMovement;
 
         protected Rigidbody _body;
         protected int currWalkSequenceFrame = 0;
@@ -43,10 +44,10 @@ namespace Vampire
         {
             _body = GetComponent<Rigidbody>();
 
-            _playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
+            //_playerHealthTrigger.Stay += OnPlayerHealthTriggerStay;
         }
 
-        public virtual void Init(EntityManager entityManager, ArenaPlayerCharacterModel playerModel, ArenaPlayerMovement playerMovement)
+        public virtual void Init(EntityManager entityManager, PlayerCharacterModelArena playerModel, PlayerMovementArena playerMovement)
         {
             _playerModel = playerModel;
             _playerMovement = playerMovement;
@@ -77,6 +78,7 @@ namespace Vampire
             // Set the drag based on acceleration and movespeed
             float spd = Random.Range(monsterBlueprint.movespeed-0.1f, monsterBlueprint.movespeed+0.1f);
             _body.drag = monsterBlueprint.acceleration / (spd * spd);
+
             // Reset the velocity
             _body.velocity = Vector3.zero;
             StopAllCoroutines();
@@ -179,7 +181,7 @@ namespace Vampire
                 _entityManager.SpawnCoin((Vector2)transform.position, coinType);
         }
 
-        private void OnDisable() => _playerHealthTrigger.Stay -= OnPlayerHealthTriggerStay;
+        //private void OnDisable() => _playerHealthTrigger.Stay -= OnPlayerHealthTriggerStay;
 
         protected abstract void OnPlayerHealthTriggerStay(PlayerHealth playerHealth);
     }

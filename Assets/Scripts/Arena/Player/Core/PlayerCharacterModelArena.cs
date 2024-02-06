@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vampire
+namespace Arena
 {
-    public sealed class ArenaPlayerCharacterModel : PlayerCharacterModel,
+    public sealed class PlayerCharacterModelArena : PlayerCharacterModel,
         ISpatialHashGridClient
     {
         [SerializeField] private Transform _centerTransform; // center of the character, model

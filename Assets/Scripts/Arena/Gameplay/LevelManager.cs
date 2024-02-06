@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -16,8 +17,8 @@ namespace Vampire
         [SerializeField] private GameTimer gameTimer;
 
         private PlayerHealth _playerHealth;
-        private PlayerLevel _playerLevel;
-        private ArenaPlayerCharacterModel _playerModel;
+        private Arena.PlayerLevel _playerLevel;
+        private PlayerCharacterModelArena _playerModel;
 
         private float levelTime = 0;
         private float timeSinceLastMonsterSpawned;
@@ -28,8 +29,8 @@ namespace Vampire
         [Inject]
         private void Construct(
             PlayerHealth playerHealth,
-            PlayerLevel playerLevel,
-            ArenaPlayerCharacterModel playerModel)
+            Arena.PlayerLevel playerLevel,
+            PlayerCharacterModelArena playerModel)
         {
             _playerHealth = playerHealth;
             _playerLevel = playerLevel;
@@ -45,10 +46,10 @@ namespace Vampire
             entityManager.Init(this.levelBlueprint, inventory, statsManager, abilitySelectionDialog);
             // Initialize the ability manager
             abilityManager.Init(this.levelBlueprint, entityManager, _playerLevel, abilityManager);
-            abilitySelectionDialog.Init(abilityManager, entityManager, _playerModel);
+            //abilitySelectionDialog.Init(abilityManager, entityManager, _playerModel);
             // Initialize the character
-            _playerHealth.Init(entityManager, abilityManager, statsManager);
-            _playerHealth.OnDeath.AddListener(GameOver);
+           // _playerHealth.Init(entityManager, abilityManager, statsManager);
+            //_playerHealth.OnDeath.AddListener(GameOver);
             // Spawn initial gems
             entityManager.SpawnGemsAroundPlayer(this.levelBlueprint.initialExpGemCount, this.levelBlueprint.initialExpGemType);
             // Spawn a singular chest

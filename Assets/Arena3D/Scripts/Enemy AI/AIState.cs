@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 using Vampire;
 using Zenject;
@@ -6,12 +7,12 @@ using Zenject;
 public abstract class AIState : MonoBehaviour
 {
 	protected AIStateMachine stateMachine;
-    protected ArenaPlayerMovement _target;
+    protected PlayerMovementArena _target;
 
     protected virtual void Awake() => stateMachine = GetComponent<AIStateMachine>();
 
 	[Inject]
-    private void Construct(ArenaPlayerMovement target)
+    private void Construct(PlayerMovementArena target)
 	{
         _target = target;
     }

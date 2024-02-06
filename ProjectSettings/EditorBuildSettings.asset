@@ -130,4 +130,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave02/PAMaskTint01.unity
     guid: 49ddb9be7afb20c46860e5e1dd55d896
+  - enabled: 1
+    path: Assets/Scenes/Test/Monsters.unity
+    guid: 78d38ef151c48d0408d8cdb95335f0c1
   m_configObjects: {}

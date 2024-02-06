@@ -20,7 +20,7 @@ namespace Vampire
             timeSinceLastHealed += Time.deltaTime;
             if (timeSinceLastHealed >= cooldown.Value)
             {
-                _playerHealth.GainHealth(recovery.Value);
+                //_playerHealth.GainHealth(recovery.Value);
                 timeSinceLastHealed = Mathf.Repeat(timeSinceLastHealed, cooldown.Value);
             }
         }

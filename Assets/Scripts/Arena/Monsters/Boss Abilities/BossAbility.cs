@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -10,16 +11,16 @@ namespace Vampire
         protected BossMonster monster;
         protected EntityManager entityManager;
 
-        protected ArenaPlayerCharacterModel _playerModel;
-        protected ArenaPlayerMovement _playerMovement;
+        protected PlayerCharacterModelArena _playerModel;
+        protected PlayerMovementArena _playerMovement;
 
         protected bool active = false;
         protected float useTime;
 
         [Inject]
         private void Construct(
-            ArenaPlayerCharacterModel playerModel,
-            ArenaPlayerMovement playerMovement)
+            PlayerCharacterModelArena playerModel,
+            PlayerMovementArena playerMovement)
         {
             _playerModel = playerModel;
             _playerMovement = playerMovement;

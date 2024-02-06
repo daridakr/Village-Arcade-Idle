@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Arena;
 
 namespace Vampire
 {
@@ -16,7 +17,7 @@ namespace Vampire
         [SerializeField] protected Rarity rarity = Rarity.Common;
 
         protected PlayerHealth _playerHealth;
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected PlayerCharacterModelArena _playerModel;
 
         protected AbilityManager abilityManager;
         protected EntityManager entityManager;
@@ -40,7 +41,7 @@ namespace Vampire
         }
 
         [Inject]
-        private void Construct(PlayerHealth playerHealth, ArenaPlayerCharacterModel playerModel)
+        private void Construct(PlayerHealth playerHealth, PlayerCharacterModelArena playerModel)
         {
             _playerHealth = playerHealth;
             _playerModel = playerModel;

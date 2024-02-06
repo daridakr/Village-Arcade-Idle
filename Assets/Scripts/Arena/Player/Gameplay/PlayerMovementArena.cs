@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Vampire
+namespace Arena
 {
-    public sealed class ArenaPlayerMovement : PlayerMovement
+    public sealed class PlayerMovementArena : PlayerMovement
     {
         public Vector3 Velocity { get => _rigidbody.velocity; }
 

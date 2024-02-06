@@ -23,7 +23,7 @@ namespace Vampire
             else
                 throwPosition = (Vector2)_playerHealth.transform.position + Random.insideUnitCircle * throwRadius;
             throwable.Throw(throwPosition);
-            throwable.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
+            //throwable.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
         }
     }
 }

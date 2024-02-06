@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Vampire
         protected float damage;
         protected float knockback;
         protected EntityManager entityManager;
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected PlayerCharacterModelArena _playerModel;
         protected ZPositioner zPositioner;
         protected int boomerangIndex;
         protected TrailRenderer trailRenderer = null;
@@ -29,7 +30,7 @@ namespace Vampire
 
 
         [Inject]
-        private void Construct(ArenaPlayerCharacterModel playerModel)
+        private void Construct(PlayerCharacterModelArena playerModel)
         {
             _playerModel = playerModel;
         }

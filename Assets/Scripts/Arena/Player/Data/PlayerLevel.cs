@@ -1,6 +1,6 @@
 using Village;
 
-namespace Vampire
+namespace Arena
 {
     public sealed class PlayerLevel : global::PlayerLevel
     {

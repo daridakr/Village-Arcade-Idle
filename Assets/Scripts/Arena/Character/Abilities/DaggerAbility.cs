@@ -25,7 +25,7 @@ namespace Vampire
             {
                 yield return new WaitForSeconds(bleedDelay);
                 monster.TakeDamage(bleedDamage.Value);
-                _playerHealth.OnDealDamage.Invoke(bleedDamage.Value);
+                //_playerHealth.OnDealDamage.Invoke(bleedDamage.Value);
                 if (monster.HP <= 0)
                     break;
             }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Vampire
+namespace Arena
 {
     public sealed class ArenaPlayerInstaller : PlayerInstaller
     {
-        [SerializeField] private HealthConfig _healthConfig;
+        [SerializeField] private PlayerHealthConfig _healthConfig;
         [SerializeField] private PlayerReference _playerReference;
         [SerializeField] private Transform _spawnPoint;
 
@@ -26,7 +26,7 @@ namespace Vampire
         {
             base.BindConfigs();
 
-            Container.Bind<HealthConfig>().FromInstance(_healthConfig).AsSingle().NonLazy();
+            Container.Bind<PlayerHealthConfig>().FromInstance(_healthConfig).AsSingle().NonLazy();
         }
 
         protected override void BindComponents()
@@ -34,8 +34,8 @@ namespace Vampire
             base.BindComponents();
 
             Container.Bind<PlayerHealth>().FromComponentOn(Instance.gameObject).AsSingle();
-            Container.Bind<ArenaPlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
-            Container.Bind<ArenaPlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
+            Container.Bind<PlayerCharacterModelArena>().FromComponentOn(Instance.Model).AsSingle();
+            Container.Bind<PlayerMovementArena>().FromComponentOn(Instance.gameObject).AsSingle();
         }
 
         protected override void BindDisplayData()

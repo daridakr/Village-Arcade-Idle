@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Vampire
         [SerializeField] protected bool magnetic = false;
         protected EntityManager entityManager;
 
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected PlayerCharacterModelArena _playerModel;
 
         protected ZPositioner zPositioner;
         protected Collider2D col;
@@ -30,7 +31,7 @@ namespace Vampire
             zPositioner = gameObject.AddComponent<ZPositioner>();
         }
 
-        public virtual void Init(EntityManager entityManager, ArenaPlayerCharacterModel playerModel)
+        public virtual void Init(EntityManager entityManager, PlayerCharacterModelArena playerModel)
         {
             this.entityManager = entityManager;
             _playerModel = playerModel;

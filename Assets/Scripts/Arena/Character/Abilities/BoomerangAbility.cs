@@ -61,7 +61,7 @@ namespace Vampire
             else
                 throwPosition = (Vector2)_playerHealth.transform.position + Random.insideUnitCircle.normalized * throwRadius;
             boomerang.Throw(_playerHealth.transform, throwPosition);
-            boomerang.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
+            //boomerang.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
         }
     }
 }

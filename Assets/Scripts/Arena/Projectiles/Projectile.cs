@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,7 +20,7 @@ namespace Vampire
         protected float damage;
         protected float knockback;
         protected EntityManager entityManager;
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected PlayerCharacterModelArena _playerModel;
         protected Collider2D col;
         protected ZPositioner zPositioner;
         protected Coroutine moveCoroutine;
@@ -29,7 +30,7 @@ namespace Vampire
         public UnityEvent<float> OnHitDamageable { get; private set; }
 
         [Inject]
-        private void Construct(ArenaPlayerCharacterModel playerModel)
+        private void Construct(PlayerCharacterModelArena playerModel)
         {
             _playerModel = playerModel;
         }

@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 
 namespace Vampire

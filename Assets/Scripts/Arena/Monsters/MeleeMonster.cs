@@ -1,4 +1,4 @@
-using DG.Tweening.Core.Easing;
+using Arena;
 using UnityEngine;
 
 namespace Vampire

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Vampire.Player
+namespace Arena.Player
 {
     public sealed class HealthHudDisplay : CanvasAnimatedView
     {
@@ -12,13 +12,13 @@ namespace Vampire.Player
         {
             Display();
 
-            _health.Changed += UpdateDisplay;
+            //_health.Changed += UpdateDisplay;
         }
 
         public void UpdateDisplay(float normalazedValue) => _healthSlider.value = normalazedValue;
 
         private void Start() => _healthSlider.value = _health.ValueNormalazed;
 
-        private void OnDisable() => _health.Changed -= UpdateDisplay;
+        //private void OnDisable() => _health.Changed -= UpdateDisplay;
     }
 }

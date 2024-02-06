@@ -1,4 +1,3 @@
-using IJunior.TypedScenes;
 using UnityEngine;
 
 namespace Vampire
@@ -21,7 +20,6 @@ namespace Vampire
         public void StartGame(CharacterBlueprint characterBlueprint)
         {
             CrossSceneData.CharacterBlueprint = characterBlueprint;
-            Arena.Load();
         }
     }
 }

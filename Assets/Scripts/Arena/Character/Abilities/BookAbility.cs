@@ -47,7 +47,7 @@ namespace Vampire
         {
             Vector2 knockbackDirection = (damageable.transform.position - _playerHealth.transform.position).normalized;
             damageable.TakeDamage(damage.Value, knockback.Value * knockbackDirection);
-            _playerHealth.OnDealDamage.Invoke(damage.Value);
+            //_playerHealth.OnDealDamage.Invoke(damage.Value);
         }
 
         private void RefreshBooks()

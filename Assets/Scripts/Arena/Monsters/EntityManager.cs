@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Zenject;
+using Arena;
 
 namespace Vampire
 {
@@ -45,8 +46,8 @@ namespace Vampire
         [SerializeField] private Vector2 _xLimits;
         [SerializeField] private Vector2 _zLimits;
 
-        private ArenaPlayerCharacterModel _playerModel;  // 玩家的角色
-        private ArenaPlayerMovement _playerMovement;
+        private PlayerCharacterModelArena _playerModel;  // 玩家的角色
+        private PlayerMovementArena _playerMovement;
 
         private StatsManager statsManager;
         private Inventory inventory;
@@ -69,8 +70,8 @@ namespace Vampire
 
         [Inject]
         private void Construct(
-            ArenaPlayerCharacterModel playerModel,
-            ArenaPlayerMovement playerMovement)
+            PlayerCharacterModelArena playerModel,
+            PlayerMovementArena playerMovement)
         {
             _playerModel = playerModel;
             _playerMovement = playerMovement;

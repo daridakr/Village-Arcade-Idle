@@ -28,7 +28,7 @@ namespace Vampire
         protected void LaunchProjectile(Vector2 direction)
         {
             Projectile projectile = entityManager.SpawnProjectile(projectileIndex, _playerModel.CenterTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
-            projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
+            //projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
             projectile.Launch(direction);
         }
     }

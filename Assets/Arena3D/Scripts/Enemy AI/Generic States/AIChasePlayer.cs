@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 using UnityEngine.AI;
 using Vampire;
@@ -9,10 +10,10 @@ public class AIChasePlayer : AIState
 	[SerializeField, Min(0f)] private float PathUpdateTickTime = 0.25f;
 
 	private NavMeshAgent navMeshAgent;
-	private ArenaPlayerMovement _movingPlayer;
+	private PlayerMovementArena _movingPlayer;
 
 	[Inject]
-	private void Construct(ArenaPlayerMovement movingPlayer)
+	private void Construct(PlayerMovementArena movingPlayer)
 	{
         _movingPlayer = movingPlayer;
     }

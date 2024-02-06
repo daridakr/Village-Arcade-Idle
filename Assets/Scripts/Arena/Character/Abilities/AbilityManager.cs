@@ -9,7 +9,7 @@ namespace Vampire
     public class AbilityManager : MonoBehaviour
     {
         private LevelBlueprint levelBlueprint;
-        private PlayerLevel _playerLevel;
+        private Arena.PlayerLevel _playerLevel;
         private WeightedAbilities newAbilities;
         private WeightedAbilities ownedAbilities;
         private FastList<IUpgradeableValue> registeredUpgradeableValues;
@@ -37,7 +37,7 @@ namespace Vampire
 
         }
 
-        public void Init(LevelBlueprint levelBlueprint, EntityManager entityManager, PlayerLevel playerCharacter, AbilityManager abilityManager)
+        public void Init(LevelBlueprint levelBlueprint, EntityManager entityManager, Arena.PlayerLevel playerCharacter, AbilityManager abilityManager)
         {
             this.levelBlueprint = levelBlueprint;
             _playerLevel = playerCharacter;

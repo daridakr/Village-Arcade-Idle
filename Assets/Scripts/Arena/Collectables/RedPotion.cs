@@ -1,3 +1,4 @@
+using Arena;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -30,7 +31,7 @@ namespace Vampire
             while (t < healTime)
             {
                 t += Time.deltaTime;
-                _playerHealth.GainHealth(Time.deltaTime * healAmount / healTime);
+                //_playerHealth.GainHealth(Time.deltaTime * healAmount / healTime);
                 yield return null;
             }
 

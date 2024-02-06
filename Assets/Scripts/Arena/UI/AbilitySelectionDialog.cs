@@ -1,4 +1,4 @@
-using System.Collections;
+using Arena;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,13 +14,13 @@ namespace Vampire
         [SerializeField] private float cardPopupDelay = 0.1f;
         private AbilityManager abilityManager;
         private EntityManager entityManager;
-        private ArenaPlayerCharacterModel _playerModel;
+        private PlayerCharacterModelArena _playerModel;
         private List<AbilityCard> abilityCards;
         private List<Ability> displayedAbilities;
         private bool menuOpen = false;
         public bool MenuOpen { get => menuOpen; }
 
-        public void Init(AbilityManager abilityManager, EntityManager entityManager, ArenaPlayerCharacterModel playerModel)
+        public void Init(AbilityManager abilityManager, EntityManager entityManager, PlayerCharacterModelArena playerModel)
         {
             this.abilityManager = abilityManager;
             this.entityManager = entityManager;

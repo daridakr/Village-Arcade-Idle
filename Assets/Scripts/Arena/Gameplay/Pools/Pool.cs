@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 using Zenject;
 
@@ -5,7 +6,7 @@ namespace Vampire
 {
     public class Pool : MonoBehaviour
     {
-        protected ArenaPlayerCharacterModel _playerModel;
+        protected PlayerCharacterModelArena _playerModel;
 
         protected EntityManager entityManager;
         protected GameObject prefab;
@@ -14,7 +15,7 @@ namespace Vampire
         protected int maxSize = 10000;
 
         [Inject]
-        private void Construct(ArenaPlayerCharacterModel player)
+        private void Construct(PlayerCharacterModelArena player)
         {
             _playerModel = player;
         }

@@ -88,7 +88,7 @@ namespace Vampire
 
             ExplosiveProjectile projectile = (ExplosiveProjectile) entityManager.SpawnProjectile(projectileIndex, launchTransform.position, damage.Value, knockback.Value, speed.Value, monsterLayer);
             projectile.SetupExplosion(damage.Value, explosionAOE.Value, knockback.Value);
-            projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
+            //projectile.OnHitDamageable.AddListener(_playerHealth.OnDealDamage.Invoke);
             projectile.Launch(launchDirection);
             launchParticles.Play();
         }

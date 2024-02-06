@@ -1,3 +1,4 @@
+using Arena;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,11 @@ public class EnemySpawner : MonoBehaviour
 	[ShowNativeProperty] private float currentThreatLevel => GetCurrentTotalThreatLevel();
 
 	private readonly Queue<ISpawnableEnemy> EnemySpawnQueue = new();
-	private ArenaPlayerMovement _player;
+	private PlayerMovementArena _player;
     private IEnemyFactory _enemyFactory;
 
     [Inject]
-	private void Construct(ArenaPlayerMovement player, IEnemyFactory factory)
+	private void Construct(PlayerMovementArena player, IEnemyFactory factory)
 	{
 		_player = player;
 		_enemyFactory = factory;

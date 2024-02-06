@@ -1,3 +1,4 @@
+using Arena;
 using UnityEngine;
 using Zenject;
 
@@ -17,7 +18,7 @@ namespace Vampire
 
         protected override void OnCollected()
         {
-            _playerHealth.GainHealth(healAmount);
+            //_playerHealth.GainHealth(healAmount);
             Destroy(gameObject);
         }
     }

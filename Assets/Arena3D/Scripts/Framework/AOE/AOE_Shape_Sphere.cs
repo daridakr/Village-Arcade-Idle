@@ -11,13 +11,12 @@ public class AOE_Shape_Sphere : AOE_Shape
 	{
 		this.center = center;
 		this.radius = radius;
-		colliders = new Collider[5];
+		colliders = new Collider[0];
 	}
 
 	public override Collider[] GetCollidersInShape(AOE aoe)
 	{
 		Physics.OverlapSphereNonAlloc(aoe.transform.TransformPoint(center), radius, colliders);
-        Debug.Log(colliders.Length);
 
         return colliders;
 	}

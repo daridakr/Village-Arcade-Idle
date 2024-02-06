@@ -1,9 +1,13 @@
+using Arena;
+using UnityEngine;
 using Zenject;
 
 namespace Vampire
 {
     public sealed class ArenaEnemyInstaller : MonoInstaller
     {
+        [SerializeField] private EnemyHealthConfig _healthConfig;
+
         public override void InstallBindings()
         {
             BindFactory();

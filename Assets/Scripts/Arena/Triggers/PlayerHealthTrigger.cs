@@ -1,4 +1,4 @@
-namespace Vampire
+namespace Arena
 {
     public sealed class PlayerHealthTrigger : Trigger<PlayerHealth>
     {

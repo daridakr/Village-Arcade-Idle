@@ -13,7 +13,7 @@ namespace Vampire
         {
             base.Use();
 
-            _playerHealth.OnDealDamage.AddListener(PlayerDealtDamage);
+            //_playerHealth.OnDealDamage.AddListener(PlayerDealtDamage);
             gameObject.SetActive(true);
         }
 
@@ -21,7 +21,7 @@ namespace Vampire
         {
             if (Random.Range(0.0f, 1.0f) < recoveryChance.Value)
             {
-                _playerHealth.GainHealth(recovery.Value);
+                //_playerHealth.GainHealth(recovery.Value);
             }
         }
     }

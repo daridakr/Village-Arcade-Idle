@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33049c3ba50a14ac2a73f663757e4fbb, type: 3}
-  m_Name: "\u5C04\u64CA\u5C0F\u5175"
+  m_Name: Ranged
   m_EditorClassIdentifier: 
   name: Ranged Monster
   hp: 25
@@ -42,7 +42,8 @@ MonoBehaviour:
   - {fileID: 628412716, guid: 02288e18bb6844bd09c390d973e71969, type: 3}
   - {fileID: 546453949, guid: 02288e18bb6844bd09c390d973e71969, type: 3}
   walkFrameTime: 0.2
-  projectilePrefab: {fileID: 7669521032070789568, guid: 05da18cc29e0549b094ccd6c62ca69e5, type: 3}
+  projectilePrefab: {fileID: 7669521032070789568, guid: 05da18cc29e0549b094ccd6c62ca69e5,
+    type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1280

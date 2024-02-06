@@ -63,7 +63,7 @@ namespace Vampire
         {
             Vector2 knockbackDirection = (damageable.transform.position - transform.position).normalized;
             damageable.TakeDamage(damage.Value, knockback.Value * knockbackDirection);
-            _playerHealth.OnDealDamage.Invoke(damage.Value);
+            //_playerHealth.OnDealDamage.Invoke(damage.Value);
         }
 
         private void DeregisterMonster(Monster monster)
