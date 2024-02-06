@@ -11,7 +11,7 @@ namespace Village
         [SerializeField] private int _requiredLevel;
 
         private ReachableRegion _reachable;
-        private StorablePlayerLevel _playerLevel;
+        private PlayerLevelStorable _playerLevel;
 
         public int Condition => _requiredLevel;
         public bool IsCompleted { get; private set; }
@@ -19,7 +19,7 @@ namespace Village
         public event Action Completed;
 
         [Inject]
-        private void Construct(StorablePlayerLevel playerLevel)
+        private void Construct(PlayerLevelStorable playerLevel)
         {
             _playerLevel = playerLevel;
         }

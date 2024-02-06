@@ -21,7 +21,7 @@ namespace Village
             }
             else if (item.TryGetComponent(out Gem gem))
             {
-                _playerGems.Get(gem.Value);
+                _playerGems.Recieve(gem.Value);
             }
         }
 

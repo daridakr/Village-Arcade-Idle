@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4704326621306502136}
   - component: {fileID: 1323351763190141540}
-  - component: {fileID: 5237666402150688851}
   - component: {fileID: 2033156818784392344}
+  - component: {fileID: 5237666402150688851}
   m_Layer: 0
   m_Name: PlayerTimerInteractors
   m_TagString: Untagged
@@ -50,6 +50,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2033156818784392344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155674155457528270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad3b09f5c89c9241a32414c8b143e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerView: {fileID: 0}
+  _interactorItem: {fileID: 7053453146546959563, guid: 7ec49d1e026ad384a92608bca6c835b2,
+    type: 3}
 --- !u!114 &5237666402150688851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,17 +79,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerView: {fileID: 0}
   _interactorItem: {fileID: 127378, guid: 726e7e2d741232c43a06ffc1d547434b, type: 3}
---- !u!114 &2033156818784392344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155674155457528270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad3b09f5c89c9241a32414c8b143e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerView: {fileID: 0}
-  _interactorItem: {fileID: 7053453146546959563, guid: 7ec49d1e026ad384a92608bca6c835b2, type: 3}

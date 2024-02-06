@@ -1,6 +1,6 @@
 namespace Village
 {
-    public class PlayerTimerBuilder : PlayerTimerInteractor
+    public class PlayerTimerBuilder : TimerInteraction
     {
         public void StartBuild(BuildingZone zone)
         {

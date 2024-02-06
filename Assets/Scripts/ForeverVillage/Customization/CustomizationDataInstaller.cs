@@ -29,7 +29,7 @@ namespace Village
 
         private void Install(CustomizationData[] data)
         {
-            _controller.SetupCustomizationsFor(_characterModel.Customizable);
+            _controller.SetupCustomizationsFor(_characterModel.Character);
 
             foreach (var customizationData in data)
             {

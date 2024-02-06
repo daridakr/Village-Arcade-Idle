@@ -30,7 +30,7 @@ namespace Village
             _balance.Save();
         }
 
-        public void Get(int value)
+        public void Recieve(int value)
         {
             _balance.Add(value);
 

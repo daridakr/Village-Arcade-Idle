@@ -78,7 +78,7 @@ namespace Village
 
             bool delayed = false;
 
-            var playerMovement = wallet.GetComponent<UpgradablePlayerMovement>();
+            var playerMovement = wallet.GetComponent<PlayerMovementUpgradable>();
 
             while (true)
             {

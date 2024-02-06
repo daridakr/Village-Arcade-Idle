@@ -58,7 +58,7 @@ namespace Vampire
         {
             if (alive && ((monsterBlueprint.meleeLayer & (1 << playerHealth.gameObject.layer)) != 0) && timeSinceLastAttack >= 1.0f / monsterBlueprint.atkspeed)
             {
-                playerHealth.TakeDamage(monsterBlueprint.atk);
+                //playerHealth.TakeDamage(monsterBlueprint.atk);
                 timeSinceLastAttack = Mathf.Repeat(timeSinceLastAttack, 1.0f / monsterBlueprint.atkspeed);
             }
         }

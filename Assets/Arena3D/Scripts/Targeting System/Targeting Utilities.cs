@@ -26,9 +26,12 @@ public static class TargetingUtilities
 		Where(targetable => targetable is not null).
 		ToArray();
 
-	public static ITargetable[] GetTargets(Collider[] colliders, params ITargetable[] IgnoredTargetable) => GetTargets(colliders).
-		Where(targetable1 => !ShouldIgnoreTarget(targetable1, IgnoredTargetable)).
-		ToArray();
+	public static ITargetable[] GetTargets(Collider[] colliders, params ITargetable[] IgnoredTargetable)
+	{
+        return GetTargets(colliders).
+        Where(targetable1 => !ShouldIgnoreTarget(targetable1, IgnoredTargetable)).
+        ToArray();
+    }
 
 	public static void ApplyHitBehavior(this ITargetable[] targets, object hitSource, UnityAction<ITargetable> onHitAction)
 	{

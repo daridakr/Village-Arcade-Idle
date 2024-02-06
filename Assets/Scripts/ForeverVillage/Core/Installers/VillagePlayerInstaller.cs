@@ -11,7 +11,7 @@ namespace Village
         #region Overrides
         protected override global::PlayerReference Reference => _playerReference;
         protected override global::PlayerReference Instance => _playerInstance;
-        protected override Vector3 SpawnPosition => _playerReference.Position;
+        protected override Vector3 SpawnPosition => _playerReference.LastPosition;
         #endregion
 
         protected override void SpawnPlayer()
@@ -32,7 +32,7 @@ namespace Village
         {
             base.BindDisplayData();
 
-            Container.BindInterfacesAndSelfTo<StorablePlayerLevel>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerLevelStorable>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
         }
 
         protected override void BindRepository()

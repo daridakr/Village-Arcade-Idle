@@ -11,13 +11,15 @@ public class AOE_Shape_Sphere : AOE_Shape
 	{
 		this.center = center;
 		this.radius = radius;
-		colliders = new Collider[0];
+		colliders = new Collider[5];
 	}
 
 	public override Collider[] GetCollidersInShape(AOE aoe)
 	{
 		Physics.OverlapSphereNonAlloc(aoe.transform.TransformPoint(center), radius, colliders);
-		return colliders;
+        Debug.Log(colliders.Length);
+
+        return colliders;
 	}
 
 	public override void DrawGizmos(AOE aoe) => Gizmos.DrawWireSphere(aoe.transform.TransformPoint(center), radius);

@@ -9,7 +9,7 @@ public class PlayerCharacterModel : MonoBehaviour
     protected PlayerAnimation _animation;
     protected CustomizableCharacter _instance;
 
-    public CustomizableCharacter Customizable => _instance;
+    public CustomizableCharacter Character => _instance;
 
     private CharacterLoader _loader;
     private void OnEnable() => _loader = new CharacterLoader();

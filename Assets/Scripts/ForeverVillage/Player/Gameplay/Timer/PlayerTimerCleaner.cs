@@ -1,6 +1,6 @@
 namespace Village
 {
-    public class PlayerTimerCleaner : PlayerTimerInteractor
+    public class PlayerTimerCleaner : TimerInteraction
     {
         public void StartClean(BuildingZone zone)
         {

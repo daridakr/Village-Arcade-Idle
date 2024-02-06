@@ -15,7 +15,7 @@ namespace Village
 
         public void SpendCoins(int value) => _playerCoins.Spend(value);
         public void SpendGems(int value) => _playerGems.Spend(value);
-        public void RecieveCoins(int value) => _playerCoins.Get(value);
-        public void RecieveGems(int value) => _playerGems.Get(value);
+        public void RecieveCoins(int value) => _playerCoins.Recieve(value);
+        public void RecieveGems(int value) => _playerGems.Recieve(value);
     }
 }
