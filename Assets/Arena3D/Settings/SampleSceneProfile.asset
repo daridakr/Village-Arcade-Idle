@@ -15,31 +15,31 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 0.5
   scatter:
-    m_OverrideState: 0
-    m_Value: 0.122
+    m_OverrideState: 1
+    m_Value: 0.7
   clamp:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 65469.75
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 0.6037736, g: 0, b: 0, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0
   skipIterations:
     m_OverrideState: 0
     m_Value: 1
   dirtTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &-7567356665887295974
 MonoBehaviour:
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {x: 0.9782366, y: 1, z: 0.9719433, w: 0.33218345}
@@ -92,16 +92,16 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.23
+    m_Value: 0.27
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.492
+    m_Value: 0.839
   rounded:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &-4174009052904127932
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb4b772797da9440885e8bd939e9560, type: 3}
   m_Name: ColorCurves
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   master:
     m_OverrideState: 1
     m_Value:
@@ -358,13 +358,13 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 2.53
   aperture:
     m_OverrideState: 1
-    m_Value: 5.6
+    m_Value: 6.1
   focalLength:
     m_OverrideState: 1
-    m_Value: 50
+    m_Value: 46
   bladeCount:
     m_OverrideState: 1
     m_Value: 5
@@ -389,13 +389,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.9842433, y: 1, z: 0.9903171, w: 0.009978684}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.0066740694}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9842427, y: 0.98604655, z: 1, w: -0.0036773162}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.088987775}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.3596875}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +416,8 @@ MonoBehaviour:
   - {fileID: -2168830884622240701}
   - {fileID: -7567356665887295974}
   - {fileID: -4174009052904127932}
+  - {fileID: 9021564049314790322}
+  - {fileID: 3211130301365611650}
 --- !u!114 &849379129802519247
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -430,5 +432,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   mode:
+    m_OverrideState: 1
+    m_Value: 2
+--- !u!114 &3211130301365611650
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: -12
+  tint:
+    m_OverrideState: 1
+    m_Value: -22
+--- !u!114 &9021564049314790322
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 1.2
+  contrast:
+    m_OverrideState: 1
+    m_Value: 0
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: 0
+  saturation:
     m_OverrideState: 1
     m_Value: 2
