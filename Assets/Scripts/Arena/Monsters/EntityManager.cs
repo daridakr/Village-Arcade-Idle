@@ -133,10 +133,10 @@ namespace Vampire
         void Update()
         {
             // Rebuild the grid if the player gets close to the edge
-            if (grid.CloseToEdge(_playerModel))
-            {
-                grid.Rebuild(_playerModel.transform.position);
-            }
+            //if (grid.CloseToEdge(_playerModel))
+            //{
+            //    grid.Rebuild(_playerModel.transform.position);
+            //}
         }
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -277,12 +277,12 @@ namespace Vampire
 
             float[] sideWeights = new float[]
             {
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[0]),
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[1]),
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[2]),
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[3]),
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[4]),
-                Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[5])
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[0]),
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[1]),
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[2]),
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[3]),
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[4]),
+                //Vector3.Dot(_playerMovement.Velocity.normalized, sideDirections[5])
             };
 
             float extraWeight = sideWeights.Sum() / playerDirectionSpawnWeight;

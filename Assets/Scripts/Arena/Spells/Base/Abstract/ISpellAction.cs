@@ -7,9 +7,4 @@ namespace Arena
         public void Cust(ITargetable target);
         public event Action Custed;
     }
-
-    public interface ITargetable
-    {
-
-    }
 }

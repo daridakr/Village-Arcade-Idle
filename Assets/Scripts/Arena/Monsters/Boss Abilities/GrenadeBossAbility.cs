@@ -49,7 +49,7 @@ namespace Vampire
             Vector3 initialDir = (_playerModel.transform.position - monster.transform.position).normalized;
             Throwable throwable = entityManager.SpawnThrowable(throwableIndex, monster.CenterTransform.position, damage, knockback, timeInAir, targetLayer);
             Vector3 targetPosition = _playerModel.transform.position;
-            targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
+            //targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
             throwable.Throw(targetPosition);
         }
 

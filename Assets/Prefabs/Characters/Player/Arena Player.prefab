@@ -440,8 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372392663f740349b0f1eff3608c689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _centerTransform: {fileID: 7145205538985927475}
-  meleeHitboxCollider: {fileID: 7970839916266409323}
 --- !u!114 &1722222429842952131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,12 +520,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6842a8fd6196542a792605425ba330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &7145205538985927475 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 138777701730890966, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7117331186229368805}
+--- !u!114 &7370398040778679765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794882633121152241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337550ac086e2fe48912b1b7a6d9acd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 1020910055672743237}
+  _targetRadius: 10
 --- !u!136 &7970839916266409323 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 890529295671401102, guid: 795ef983d927dd94d8d5098bc2a9f3c8,

@@ -7,16 +7,16 @@ namespace Village
     {
         private readonly ICustomizationsRepository _repository;
         private readonly ICustomizationsController _controller;
-        private readonly PlayerCharacterModel _characterModel;
+        private readonly ICustomizableModel _customizableModel;
 
         public CustomizationDataInstaller(
             ICustomizationsRepository repository,
             ICustomizationsController controller,
-            PlayerCharacterModel characterModel)
+            ICustomizableModel characterModel)
         {
             _repository = repository;
             _controller = controller;
-            _characterModel = characterModel;
+            _customizableModel = characterModel;
         }
 
         public void Initialize()
@@ -29,7 +29,7 @@ namespace Village
 
         private void Install(CustomizationData[] data)
         {
-            _controller.SetupCustomizationsFor(_characterModel.Character);
+            _controller.SetupCustomizationsFor(_customizableModel.Character);
 
             foreach (var customizationData in data)
             {

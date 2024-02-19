@@ -77,7 +77,7 @@ namespace Vampire
         protected void LaunchThrowable(Vector3 targetPosition)
         {
             Throwable throwable = _entityManager.SpawnThrowable(throwableIndex, throwableSpawnPosition.position, monsterBlueprint.atk, 0, -909, monsterBlueprint.targetLayer);
-            targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
+            //targetPosition += _playerMovement.Velocity * throwable.ThrowTime;
             throwable.Throw(targetPosition);
         }
 

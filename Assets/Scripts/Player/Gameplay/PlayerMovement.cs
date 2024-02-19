@@ -6,7 +6,7 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacterModel _playerModel;
+    [SerializeField] protected PlayerCharacterModel _playerModel;
 
     protected Rigidbody _rigidbody;
     protected float _speed;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Move(Vector3 direction)
+    public virtual void Move(Vector3 direction)
     {
         _playerModel?.UpdateRotation(direction);
         _rigidbody.velocity = direction * _speed * _speedRate * _flySpeedRate;

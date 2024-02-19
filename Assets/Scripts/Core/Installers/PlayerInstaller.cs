@@ -38,7 +38,7 @@ public abstract class PlayerInstaller : MonoInstaller
     {
         Container.BindInterfacesTo<PlayerAnimation>().FromComponentOn(Instance.Model).AsSingle();
 
-        Container.Bind<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
         Container.Bind<PlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
         Container.Bind<PlayerWallet>().FromComponentOn(Instance.gameObject).AsSingle();
         Container.Bind<PlayerName>().FromComponentOn(Instance.Data).AsSingle();
@@ -60,6 +60,8 @@ public abstract class PlayerInstaller : MonoInstaller
 
         Container.Bind<ICustomizationsRepository>().To<CustomizationsRepository>().AsSingle();
         Container.BindInterfacesAndSelfTo<CustomizationDataInstaller>().AsSingle();
+
+        Container.Bind<SpecializationModelSetuper>().AsSingle();
     }
 
     protected abstract void SpawnPlayer();
