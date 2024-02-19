@@ -1,33 +1,34 @@
 using UnityEngine;
+using Zenject;
 
-namespace Village
+public class PlayerAnimation : MonoBehaviour,
+    IInitializable
 {
-    [RequireComponent(typeof(Animator))]
-    public class PlayerAnimation : MonoBehaviour
+    [SerializeField] protected PlayerCharacterModel _model;
+    [SerializeField] private PlayerMovement _movement;
+
+    protected Animator _animator;
+
+    public void Initialize()
     {
-        private Animator _animator;
+        _model.Initialized += OnModelInitialized;
+        _movement.OnMove += SetSpeed;
+    }
 
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
+    public void SetSpeed(float normalizedSpeed)
+    {
+        if (_animator)
+            _animator.SetFloat(AnimationParams.Speed, normalizedSpeed);
+    }
 
-        public void SetSpeed(float normalizedSpeed)
-        {
-            if (_animator)
-            {
-                _animator.SetFloat(AnimationParams.Speed, normalizedSpeed);
-            }
-        }
+    protected virtual void OnModelInitialized()
+    {
+        _animator = _model.GetAnimator();
+    }
 
-        public void StartInteract(string animationParamName)
-        {
-            _animator.SetBool(animationParamName, true);
-        }
-
-        public void StopInteract(string animationParamName)
-        {
-            _animator.SetBool(animationParamName, false);
-        }
+    private void OnDisable()
+    {
+        _movement.OnMove -= SetSpeed;
+        _model.Initialized -= OnModelInitialized;
     }
 }

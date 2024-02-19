@@ -1,26 +1,40 @@
+using System;
 using UnityEngine;
-using Village;
 using Village.Character;
 
 public class PlayerCharacterModel : MonoBehaviour
 {
-    [SerializeField] protected PlayerMovement _movement;
-
-    protected PlayerAnimation _animation;
     protected CustomizableCharacter _instance;
 
-    public CustomizableCharacter Character => _instance;
-
     private CharacterLoader _loader;
+
+    public CustomizableCharacter Character => _instance;
+    public event Action Initialized;
+
     private void OnEnable() => _loader = new CharacterLoader();
 
-    public virtual void Setup(string path)
+    public void Setup(string path)
     {
+        if (_instance != null)
+            return;
+
         CustomizableCharacter prefab = _loader.LoadCustomizable(path);
         _instance = Instantiate(prefab, transform);
-        _animation = _instance.GetComponentInChildren<PlayerAnimation>();
 
-        //Debug.Log(transform);
-        _movement.Setup(transform, _animation);
+        OnSetuped();
+
+        Initialized?.Invoke();
     }
+
+    public Animator GetAnimator()
+    {
+        return _instance.Animator;
+    }
+
+    public virtual void UpdateRotation(Vector3 direction)
+    {
+        _instance.transform.LookAt(_instance.transform.position + direction);
+    }
+
+    protected virtual void OnSetuped() { }
 }

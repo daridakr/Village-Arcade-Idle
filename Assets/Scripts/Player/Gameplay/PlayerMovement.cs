@@ -1,23 +1,24 @@
+using System;
 using UnityEngine;
-using Village;
 using Village.Player;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    private IControlService _controlService;
+    [SerializeField] private PlayerCharacterModel _playerModel;
 
     protected Rigidbody _rigidbody;
     protected float _speed;
-
     private float _speedRate;
     private float _flySpeedRate;
-    private Transform _playerModel;
-    private PlayerAnimation _animation;
+
+    private IControlService _controlService;
 
     public bool IsMoving { get; private set; }
     public Vector3 CurrentPosition => transform.position;
+
+    public event Action<float> OnMove;
 
     [Inject]
     private void Construct(IControlService controlService, MovementConfig config)
@@ -31,12 +32,6 @@ public class PlayerMovement : MonoBehaviour
         _flySpeedRate = config.FlySpeedRate;
     }
 
-    public void Setup(Transform model, PlayerAnimation animation)
-    {
-        _playerModel = model;
-        _animation = animation;
-    }
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -44,10 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        _playerModel.LookAt(_playerModel.position + direction);
+        _playerModel?.UpdateRotation(direction);
         _rigidbody.velocity = direction * _speed * _speedRate * _flySpeedRate;
-        _animation.SetSpeed(direction.magnitude);
 
+        OnMove?.Invoke(direction.magnitude);
         IsMoving = true;
     }
 
@@ -65,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
                 _rigidbody.velocity = Vector3.zero;
             }
 
-            _animation.SetSpeed(0);
+            OnMove?.Invoke(0);
             IsMoving = false;
         }
     }

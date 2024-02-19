@@ -24,6 +24,7 @@ namespace Village.Character
         private MeshFilter _mouthMesh;
         private Transform _headRig;
         private Transform _handRig;
+        private Animator _animator;
 
         public Renderer[] SkinRenderers => _skinRenderers.ToArray();
         public Renderer[] HairRenderers => _hairsRenderers.ToArray();
@@ -35,6 +36,7 @@ namespace Village.Character
         public MeshFilter MouthMesh => _mouthMesh;
         public Transform HeadRig => _headRig;
         public Transform HandRig => _handRig;
+        public Animator Animator => _animator;
 
         private void Awake()
         {
@@ -44,6 +46,7 @@ namespace Village.Character
             InitHairs();
             InitFace();
             InitRigs();
+            InitAnimator();
         }
 
         private void InitBody()
@@ -98,6 +101,11 @@ namespace Village.Character
             _hand = GetComponentInChildren<CharacterHand>();
             _hand.Initialize();
             _handRig = _hand.Rig;
+        }
+
+        private void InitAnimator()
+        {
+            _animator = GetComponentInChildren<Animator>();
         }
     }
 }

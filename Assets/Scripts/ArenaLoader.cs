@@ -1,3 +1,4 @@
+using IJunior.TypedScenes;
 using UnityEngine;
 using Village;
 using Zenject;
@@ -22,8 +23,7 @@ public class ArenaLoader : MonoBehaviour
 
     private void OnArenaButtonClicked()
     {
-        //ArenaLobby.Load(_playerCoins);
-        IJunior.TypedScenes.Arena3D.Load();
+        ArenaLobby.Load();
     }
 
     private void OnDisable()

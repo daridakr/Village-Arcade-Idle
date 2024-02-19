@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 4362179068316805905, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
         type: 3}
       propertyPath: m_Interpolate
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4362179068316805905, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
         type: 3}
@@ -440,9 +440,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372392663f740349b0f1eff3608c689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 7121155364999617204}
   _centerTransform: {fileID: 7145205538985927475}
   meleeHitboxCollider: {fileID: 7970839916266409323}
+--- !u!114 &1722222429842952131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794292587998258473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84e56fc6b29d7448b88102d882fdcbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 1020910055672743237}
+  _movement: {fileID: 7121155364999617204}
 --- !u!1 &6561836900302757462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4167383146005416371, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
@@ -496,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fa9978725d3264e8932544e5f4570b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerModel: {fileID: 1020910055672743237}
 --- !u!114 &8130695380754771122
 MonoBehaviour:
   m_ObjectHideFlags: 0

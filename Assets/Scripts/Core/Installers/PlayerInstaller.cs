@@ -36,6 +36,8 @@ public abstract class PlayerInstaller : MonoInstaller
 
     protected virtual void BindComponents()
     {
+        Container.BindInterfacesTo<PlayerAnimation>().FromComponentOn(Instance.Model).AsSingle();
+
         Container.Bind<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
         Container.Bind<PlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
         Container.Bind<PlayerWallet>().FromComponentOn(Instance.gameObject).AsSingle();

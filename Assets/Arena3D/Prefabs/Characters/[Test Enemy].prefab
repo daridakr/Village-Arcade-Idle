@@ -470,6 +470,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Floating Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1954867471912387579, guid: ebc1539f2eab0494eab7071f6fa3fe42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2883784232746116154, guid: ebc1539f2eab0494eab7071f6fa3fe42,
         type: 3}
       propertyPath: m_Pivot.x

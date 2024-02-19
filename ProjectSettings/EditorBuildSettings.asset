@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start.unity
+    path: Assets/Scenes/Bootstrap.unity
+    guid: dc50085fe3331874fa30c1cdd71c2a5a
+  - enabled: 1
+    path: Assets/Scenes/Character.unity
     guid: a5d64ea349857ab4aaedf7d2342e7bec
   - enabled: 1
     path: Assets/Scenes/Main.unity
@@ -16,124 +19,5 @@ EditorBuildSettings:
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
     path: Assets/Scenes/Arena.unity
-    guid: 82a9208b2c3bd43a1b807307bb8c5630
-  - enabled: 1
-    path: Assets/Plugins/PolygonParticles/Scenes/Demo_01.unity
-    guid: ad343a8737470eb4cb90975973b145d2
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave01/PAMaskTint02.unity
-    guid: fc22a0cab39149c9a4a77ed31bb138ac
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave03/MaskTintCharactersPA03.unity
-    guid: a9019cbcc82d4aa59bc60291b375b826
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave01/PAMaskTint03.unity
-    guid: 5dffdb4449af4fa98f33f03d836d210a
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave01/PADefault.unity
-    guid: 0729de5830834b35b0faa21fa369a4b6
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave02/PAMaskTint03.unity
-    guid: dcad9b1b5002436290cb3391cd586de6
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/AllTogether.unity
-    guid: 6f344fc37f804474a7305b81e74d2dad
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave02/PADefault.unity
-    guid: 81e36b69ba9c4e33aa443b3596fca786
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave02/PAMaskTint01.unity
-    guid: 91cabcab66fa42568b8391562fe8a228
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave03/MaskTintCharactersPA01.unity
-    guid: 084ed2582a02472796dc6a9e6e54ed23
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave02/PAMaskTint02.unity
-    guid: 2be6d95b2bad495bbdfcfd9fa9425d83
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave01/PAMaskTint01.unity
-    guid: aeefb46746634306a993cfcc20e5c398
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave03/DefaultCharactersPA.unity
-    guid: 8442feefeee14105b76c1c09d962e2ba
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs/Scene/Wave03/MaskTintCharactersPA02.unity
-    guid: b4638bf9b5b14d588f413f66e90c7d1c
-  - enabled: 1
-    path: Assets/Scenes/Arena3D.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/VillageAssets/EPIC Fantasy Town - Low Poly 3D Art/Scenes/EPIC_Fantasy_Town_BG_Scene_Day.unity
-    guid: ac35f97a91909924096fc58014364a5d
-  - enabled: 1
-    path: Assets/SimpleToon/Demo/Scene/Demo.unity
-    guid: bdc110ad16276b94dae798cb9b0d9c98
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/4 Stylized Character
-      Ellen/Ellen.unity
-    guid: 4bed84ae0ecd91b409cd04569bd51117
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/5 Stylized Character
-      UnityChan/UnityChanToonShadingDemo.unity
-    guid: 1e162e7bc1a8b434ab36d95536cd5289
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_3_Haftone.unity
-    guid: da0e931a49b2eea4eb1089ce672d2ad0
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_4_HaftoneShadow.unity
-    guid: e9591806316fd48458bacebae18f89d1
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_1_Lighting.unity
-    guid: d615c6d393a27f5459e9c18b9bd30739
-  - enabled: 1
-    path: Assets/OToon- URP Toon Shading/Demo(Can be delete)/Scenes/1 Tutorials/_6_OverrideShadowColorWithColorRampMode.unity
-    guid: 5c040967f7053d2439644841e99f1789
-  - enabled: 1
-    path: Assets/VillageAssets/EPIC Fantasy Village- Low Poly 3D Art/Scenes/EPIC_Fantasy_Village_BG_Day_1.unity
-    guid: f7dc5f390eac16d4cb7a2aa40b26859f
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave03/MaskTintCharactersPA03.unity
-    guid: 2615ea699c637bc4298c9df747df25a8
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave02/PAMaskTint02.unity
-    guid: 54522e91252e09e469dd9c2d3bbd7888
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave01/PAMaskTint02.unity
-    guid: 135c5aa50fed427448339215d4299a51
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave02/PADefault.unity
-    guid: 1304e4355d703ed4da1f0682e5eb1a12
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave01/PADefault.unity
-    guid: f69b89a9da180a94a8a016992a32b091
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave01/PAMaskTint01.unity
-    guid: d30357ce07466444ab1281b991f6fbd7
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/AllTogether.unity
-    guid: 3da9965b33ecc3b4983a974498b6c32f
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave02/PAMaskTint03.unity
-    guid: 8884ce02e31c3474788f1b566801cd26
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave03/MaskTintCharactersPA02.unity
-    guid: 07efef3972f1e314e965b3ccdf692398
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave03/DefaultCharactersPA.unity
-    guid: dde7604f598608249afdf047778bc835
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave03/MaskTintCharactersPA01.unity
-    guid: 75d89666804a7b94da4f81a94ea6be61
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave01/PAMaskTint03.unity
-    guid: a4b0d81fd2cb8244fb19b6b7c955fa30
-  - enabled: 1
-    path: Assets/Plugins/RPGMonsterBundlePolyart/CommonStuffs 1/Scene/Wave02/PAMaskTint01.unity
-    guid: 49ddb9be7afb20c46860e5e1dd55d896
-  - enabled: 1
-    path: Assets/Scenes/Test/Monsters.unity
-    guid: 78d38ef151c48d0408d8cdb95335f0c1
-  - enabled: 1
-    path: Assets/GUI PRO Kit - Simple Casual/Scene/DemoScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
