@@ -24,7 +24,7 @@ namespace Village
                 Transform point = _movement.transform;
                 point.position = new Vector3(playerPointData.X, _y, playerPointData.Z);
 
-                _movement.MoveToTarget(point);
+                //_movement.MoveToTarget(point);
             }
         }
     }

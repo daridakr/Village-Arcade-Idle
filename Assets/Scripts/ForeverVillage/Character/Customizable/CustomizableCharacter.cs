@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Village.Character
 {
-    public class CustomizableCharacter : MonoBehaviour
+    public class CustomizableCharacter : MonoBehaviour,
+        ICustomizableCharacter
     {
         private CharacterBody _body;
         private CharacterHead _head;

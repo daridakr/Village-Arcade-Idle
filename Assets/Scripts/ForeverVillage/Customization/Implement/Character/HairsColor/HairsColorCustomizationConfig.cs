@@ -5,9 +5,9 @@ namespace Village.Character
     [CreateAssetMenu(fileName = "HairsColorCustomizationConfig", menuName = "Customization/Character/HairsColor")]
     public class HairsColorCustomizationConfig : MaterialCustomizationConfig
     {
-        public override Customization InstantiateCustomization(MonoBehaviour target)
+        public override Customization InstantiateCustomization(ICustomizableCharacter customizable)
         {
-            return new HairsColorCustomization((CustomizableCharacter)target, this);
+            return new HairsColorCustomization(customizable, this);
         }
     }
 }

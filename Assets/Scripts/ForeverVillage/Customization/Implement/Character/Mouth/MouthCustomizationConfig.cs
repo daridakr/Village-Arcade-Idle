@@ -5,9 +5,9 @@ namespace Village.Character
     [CreateAssetMenu(fileName = "MouthCustomizationConfig", menuName = "Customization/Character/Mouth")]
     public class MouthCustomizationConfig : MeshCustomizationConfig
     {
-        public override Customization InstantiateCustomization(MonoBehaviour target)
+        public override Customization InstantiateCustomization(ICustomizableCharacter customizable)
         {
-            return new MouthCustomization((CustomizableCharacter)target, this);
+            return new MouthCustomization(customizable, this);
         }
     }
 }

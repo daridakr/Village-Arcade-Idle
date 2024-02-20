@@ -4,18 +4,33 @@ using Zenject;
 public class PlayerAnimation : MonoBehaviour,
     IInitializable
 {
-    [SerializeField] protected PlayerCharacterModel _model;
     [SerializeField] private PlayerMovement _movement;
 
+    protected IAnimatedModel _model;
     protected Animator _animator;
 
-    public void Initialize()
+    private bool _isInitialized = false;
+
+    public virtual void Initialize()
     {
+        if (_isInitialized)
+            return;
+
         _model.Initialized += OnModelInitialized;
         _movement.OnMove += SetSpeed;
+
+        _isInitialized = true;
     }
 
-    public void SetSpeed(float normalizedSpeed)
+    public void InitModel(IAnimatedModel model)
+    {
+        if (_model != null)
+            return;
+
+        _model = model;
+    }
+
+    private void SetSpeed(float normalizedSpeed)
     {
         if (_animator)
             _animator.SetFloat(AnimationParams.Speed, normalizedSpeed);
@@ -23,7 +38,8 @@ public class PlayerAnimation : MonoBehaviour,
 
     protected virtual void OnModelInitialized()
     {
-        _animator = _model.GetAnimator();
+        if (_model != null)
+            _animator = _model.GetAnimator();
     }
 
     private void OnDisable()

@@ -6,8 +6,6 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] protected PlayerCharacterModel _playerModel;
-
     protected Rigidbody _rigidbody;
     protected float _speed;
     private float _speedRate;
@@ -19,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 CurrentPosition => transform.position;
 
     public event Action<float> OnMove;
+    public event Action<Vector3> DirectionUpdated;
 
     [Inject]
     private void Construct(IControlService controlService, MovementConfig config)
@@ -37,21 +36,17 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public virtual void Move(Vector3 direction)
+    protected virtual void Move(Vector3 direction)
     {
-        _playerModel?.UpdateRotation(direction);
         _rigidbody.velocity = direction * _speed * _speedRate * _flySpeedRate;
 
         OnMove?.Invoke(direction.magnitude);
+        DirectionUpdated?.Invoke(direction);
+
         IsMoving = true;
     }
 
-    public void MoveToTarget(Transform target)
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
-    }
-
-    public void Stop()
+    private void Stop()
     {
         if (IsMoving)
         {
@@ -63,6 +58,24 @@ public class PlayerMovement : MonoBehaviour
             OnMove?.Invoke(0);
             IsMoving = false;
         }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.collider != null)
+    //    {
+    //        Vector3 pushDirection = transform.position - collision.contacts[0].point;
+    //        pushDirection.Normalize();
+
+    //        float pushForce = 10f;
+
+    //        _rigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+    //    }
+    //}
+
+    private void MoveToTarget(Transform target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
     }
 
     private void OnDestroy()

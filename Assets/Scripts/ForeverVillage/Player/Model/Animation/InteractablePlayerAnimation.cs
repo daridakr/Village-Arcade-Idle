@@ -1,17 +1,31 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Village
 {
     public sealed class InteractablePlayerAnimation : PlayerAnimation
     {
+        [SerializeField] private TimerInteractionsController _interactionsController;
+
         private IEnumerable<IAnimatedInteraction> _animatedInteractions;
-
         private IAnimatedInteraction _activeAnimated;
-        private InteractablePlayerCharacterModel _interactableModel;
 
-        private void OnEnable()
+        protected override void OnModelInitialized()
         {
-            _interactableModel = _model as InteractablePlayerCharacterModel;
+            base.OnModelInitialized();
+
+            InitAnimatedInteractions();
+        }
+
+        private void InitAnimatedInteractions()
+        {
+            _animatedInteractions = _interactionsController.GetAnimatedInteractions(_model.HandRig);
+
+            foreach (IAnimatedInteraction interaction in _animatedInteractions)
+            {
+                interaction.Started += SetAnimation;
+                interaction.Stopped += StopAnimation;
+            }
         }
 
         private void SetAnimation(IAnimatedInteraction animated)
@@ -41,23 +55,6 @@ namespace Village
                 _animator.SetBool(_activeAnimated.AnimationParam, false);
         }
 
-        protected override void OnModelInitialized()
-        {
-            base.OnModelInitialized();
-
-            InitAnimatedInteractions();
-        }
-
-        private void InitAnimatedInteractions()
-        {
-            _animatedInteractions = _interactableModel.GetInteractions();
-
-            foreach (IAnimatedInteraction interaction in _animatedInteractions)
-            {
-                interaction.Started += SetAnimation;
-                interaction.Stopped += StopAnimation;
-            }
-        }
 
         private void OnDisable()
         {

@@ -4,7 +4,7 @@ namespace Village.Character
     {
         private readonly MouthCustomizationConfig _config;
 
-        public MouthCustomization(CustomizableCharacter character, MouthCustomizationConfig config) : base(config)
+        public MouthCustomization(ICustomizableMouthCharacter character, MouthCustomizationConfig config) : base(config)
         {
             _config = config;
 

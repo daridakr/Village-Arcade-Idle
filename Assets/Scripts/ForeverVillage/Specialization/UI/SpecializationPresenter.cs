@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using Village.Character;
 
 namespace Village
 {
@@ -33,7 +33,7 @@ namespace Village
 
         private void OnSpecClicked(SpecializationButtonView selected)
         {
-            MonoBehaviour instance = _controller.SelectSpecialization(_model);
+            ICustomizableCharacter instance = _controller.SelectSpecialization(_model);
             _customizationsController.SetupCustomizationsFor(instance);
 
             Clicked?.Invoke(this);

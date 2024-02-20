@@ -3,8 +3,10 @@ using UnityEngine;
 using Village.Character;
 
 public class PlayerCharacterModel : MonoBehaviour,
-    ICharacterModel, ICustomizableModel
+    ICharacterModel, ICustomizableModel, IAnimatedModel
 {
+    [SerializeField] private PlayerMovement _movement;
+
     protected CustomizableCharacter _instance;
 
     private Transform _centerTransform;
@@ -12,7 +14,9 @@ public class PlayerCharacterModel : MonoBehaviour,
 
     public Vector3 LookDirection => _lookDirection;
     public Transform CenterTransform => _centerTransform;
-    public CustomizableCharacter Character => _instance;
+    public ICustomizableCharacter Customizable => _instance;
+    public Transform HeadRig => _instance.HeadRig;
+    public Transform HandRig => _instance.HandRig;
 
     public event Action Initialized;
 
@@ -34,11 +38,19 @@ public class PlayerCharacterModel : MonoBehaviour,
         return _instance.Animator;
     }
 
-    public virtual void UpdateRotation(Vector3 direction)
+    protected virtual void UpdateRotation(Vector3 direction)
     {
         _lookDirection = _instance.transform.position + direction;
         _instance.transform.LookAt(_lookDirection);
     }
 
-    protected virtual void OnSetuped() { }
+    protected virtual void OnSetuped()
+    {
+        _movement.DirectionUpdated += UpdateRotation;
+    }
+
+    private void OnDisable()
+    {
+        _movement.DirectionUpdated -= UpdateRotation;
+    }
 }

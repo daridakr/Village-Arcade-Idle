@@ -4,7 +4,7 @@ namespace Village.Character
     {
         private readonly HeadCustomizationConfig _config;
 
-        public HeadCustomization(CustomizableCharacter character, HeadCustomizationConfig config) : base(config)
+        public HeadCustomization(ICustomizableFaceCharacter character, HeadCustomizationConfig config) : base(config)
         {
             _config = config;
 

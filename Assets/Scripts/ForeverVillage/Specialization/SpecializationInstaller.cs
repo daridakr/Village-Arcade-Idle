@@ -6,14 +6,14 @@ namespace Village
         IInitializable
     {
         private readonly ISpecializationRepository _repository;
-        private readonly SpecializationModelSetuper _modelSetuper;
+        private readonly SpecializationModelInitiator _modelInitiator;
 
         private const string _defaultSpec = ResourcesParams.Character.Specialization.MaleKnight;
 
-        public SpecializationInstaller(ISpecializationRepository repository, SpecializationModelSetuper modelSetupper)
+        public SpecializationInstaller(ISpecializationRepository repository, SpecializationModelInitiator modelSetupper)
         {
             _repository = repository;
-            _modelSetuper = modelSetupper;
+            _modelInitiator = modelSetupper;
         }
 
         public void Initialize()
@@ -21,12 +21,12 @@ namespace Village
             if (_repository.Load(out SpecializationData specialization))
                 Install(specialization);
             else
-                _modelSetuper.Setup(_defaultSpec);
+                _modelInitiator.Init(_defaultSpec);
         }
 
         private void Install(SpecializationData data)
         {
-            _modelSetuper.Setup(data.PrefabPath);
+            _modelInitiator.Init(data.PrefabPath);
         }
     }
 }

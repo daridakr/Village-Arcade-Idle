@@ -18,7 +18,7 @@ namespace Village.Character
         private void BindFactory()
         {
             Container.Bind<ICustomizableCharacterFactory>().To<CustomizableCharacterFactory>().AsSingle();
-            Container.Bind<CustomizableCharacter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CustomizableCharacter>().AsSingle();
         }
 
         private void BindControllers()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Village.Character;
 
 namespace Village
 {
@@ -16,7 +17,7 @@ namespace Village
 
         public event Action Initialized;
 
-        public void SetupCustomizationsFor(MonoBehaviour monoCustomizable)
+        public void SetupCustomizationsFor(ICustomizableCharacter customizable)
         {
             _customizations = new Dictionary<string, Customization>();
 
@@ -24,7 +25,7 @@ namespace Village
 
             foreach (var config in configs)
             {
-                var customization = config.InstantiateCustomization(monoCustomizable);
+                var customization = config.InstantiateCustomization(customizable);
                 _customizations.Add(customization.Id, customization);
             }
 

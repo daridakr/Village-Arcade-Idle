@@ -4,7 +4,7 @@ namespace Village.Character
     {
         private readonly HairCustomizationConfig _config;
 
-        public HairCustomization(CustomizableCharacter character, HairCustomizationConfig config) : base(config)
+        public HairCustomization(ICustomizableHairCharacter character, HairCustomizationConfig config) : base(config)
         {
             _config = config;
 

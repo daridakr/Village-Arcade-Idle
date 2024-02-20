@@ -39,7 +39,7 @@ namespace Village
             Initialized?.Invoke();
         }
 
-        public MonoBehaviour SelectSpecialization(ISpecialization specialization)
+        public ICustomizableCharacter SelectSpecialization(ISpecialization specialization)
         {
             _selected = (Specialization)specialization;
 

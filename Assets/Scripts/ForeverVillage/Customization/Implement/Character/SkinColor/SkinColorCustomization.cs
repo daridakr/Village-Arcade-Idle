@@ -6,7 +6,7 @@ namespace Village.Character
     {
         private readonly SkinColorCustomizationConfig _config;
 
-        public SkinColorCustomization(CustomizableCharacter character, SkinColorCustomizationConfig config) : base(config)
+        public SkinColorCustomization(ICustomizableSkinCharacter character, SkinColorCustomizationConfig config) : base(config)
         {
             _config = config;
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Village.Character;
 
 namespace Village
 {
@@ -14,6 +15,6 @@ namespace Village
         public CustomizationMetadata Meta => _metadata;
         public Customization Customization => _customization;
 
-        public abstract Customization InstantiateCustomization(MonoBehaviour target);
+        public abstract Customization InstantiateCustomization(ICustomizableCharacter customizable);
     }
 }

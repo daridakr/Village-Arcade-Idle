@@ -4,7 +4,7 @@ namespace Village.Character
     {
         private readonly EyesCustomizationConfig _config;
 
-        public EyesCustomization(CustomizableCharacter character, EyesCustomizationConfig config) : base(config)
+        public EyesCustomization(ICustomizableEyesCharacter character, EyesCustomizationConfig config) : base(config)
         {
             _config = config;
 

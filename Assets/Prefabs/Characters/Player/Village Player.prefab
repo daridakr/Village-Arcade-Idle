@@ -343,8 +343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46d732bf89733a499a7d4b6f9771272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 3479268912843222355}
   _movement: {fileID: 2343849037531739885}
+  _interactionsController: {fileID: 363266591994899753}
 --- !u!114 &3479268912843222355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e95f937c87eff845bb7573e4f5604a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionsController: {fileID: 363266591994899753}
+  _movement: {fileID: 2343849037531739885}
 --- !u!4 &3421049234743297619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7158130998631110034, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3168802de6b92ce4db9ab27d5cf8a8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerModel: {fileID: 3479268912843222355}
 --- !u!114 &3315960949033856711
 MonoBehaviour:
   m_ObjectHideFlags: 0

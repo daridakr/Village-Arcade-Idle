@@ -5,9 +5,9 @@ namespace Village.Character
     [CreateAssetMenu(fileName = "BeardCustomizationConfig", menuName = "Customization/Character/Beard")]
     public class BeardCustomizationConfig : MeshCustomizationConfig
     {
-        public override Customization InstantiateCustomization(MonoBehaviour target)
+        public override Customization InstantiateCustomization(ICustomizableCharacter customizable)
         {
-            return new BeardCustomization((CustomizableCharacter)target, this);
+            return new BeardCustomization(customizable, this);
         }
     }
 }

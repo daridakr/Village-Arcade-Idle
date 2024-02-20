@@ -4,11 +4,11 @@ namespace Village.Character
     {
         private readonly BeardCustomizationConfig _config;
 
-        public BeardCustomization(CustomizableCharacter character, BeardCustomizationConfig config) : base(config)
+        public BeardCustomization(ICustomizableBeardCharacter customizable, BeardCustomizationConfig config) : base(config)
         {
             _config = config;
 
-            _meshFilter = character.BeardMesh;
+            _meshFilter = customizable.BeardMesh;
         }
     }
 }

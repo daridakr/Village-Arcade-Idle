@@ -1,17 +1,17 @@
 using Village.Character;
 
-public sealed class SpecializationModelSetuper
+public sealed class SpecializationModelInitiator
 {
     private readonly ICustomizableModel _model;
     private readonly CharacterLoader _loader;
 
-    public SpecializationModelSetuper(ICustomizableModel model)
+    public SpecializationModelInitiator(ICustomizableModel model)
     {
         _model = model;
         _loader = new CharacterLoader();
     }
 
-    public void Setup(string path)
+    public void Init(string path)
     {
         CustomizableCharacter prefab = _loader.LoadCustomizable(path);
         _model.Create(prefab);
