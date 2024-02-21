@@ -26654,6 +26654,8 @@ GameObject:
   - component: {fileID: 8724346887543863828}
   - component: {fileID: 8724346887543863827}
   - component: {fileID: 8724346887543863826}
+  - component: {fileID: 8724346887543863830}
+  - component: {fileID: 8724346887543863829}
   m_Layer: 0
   m_Name: Button_Pause
   m_TagString: Untagged
@@ -26764,6 +26766,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8724346887543863824}
   m_CullTransparentMesh: 0
+--- !u!114 &8724346887543863829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724346887543863824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8131b538322a6fe4ebb3f35f1488bf6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8724346887543863830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724346887543863824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c78a88d0383d545b6e67691a3bf86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8724346888202890457
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,14 +6,7 @@ using Zenject;
 [RequireComponent (typeof(ButtonDisplay))]
 public class ArenaLoader : MonoBehaviour
 {
-    private PlayerWallet _playerWallet;
     private ButtonDisplay _loadButton;
-
-    [Inject]
-    private void Construct(PlayerWallet wallet)
-    {
-        _playerWallet = wallet;
-    }
 
     private void OnEnable()
     {
@@ -23,7 +16,7 @@ public class ArenaLoader : MonoBehaviour
 
     private void OnArenaButtonClicked()
     {
-        ArenaLobby.Load();
+        IJunior.TypedScenes.Arena.Load();
     }
 
     private void OnDisable()
