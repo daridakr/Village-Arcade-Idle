@@ -15,3 +15,6 @@ MonoBehaviour:
   _speed: 1
   _speedRate: 1
   _flySpeedRate: 1
+  _excludedLayers:
+    serializedVersion: 2
+    m_Bits: 8192

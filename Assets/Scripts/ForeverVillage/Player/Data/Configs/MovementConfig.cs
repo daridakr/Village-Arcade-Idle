@@ -8,7 +8,6 @@ namespace Village.Player
         [SerializeField] private float _speed = 5f;
         [SerializeField] private float _speedRate = 1f;
         [SerializeField] private float _flySpeedRate = 1f;
-
         public float Speed => _speed;
         public float SpeedRate => _speedRate;
         public float FlySpeedRate => _flySpeedRate;

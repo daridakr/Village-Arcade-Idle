@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1511443857129532952}
   - component: {fileID: 2511241647292703018}
   m_Layer: 8
-  m_Name: Collector
+  m_Name: ItemCollectorTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

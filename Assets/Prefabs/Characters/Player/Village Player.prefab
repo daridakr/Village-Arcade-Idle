@@ -397,6 +397,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3168802de6b92ce4db9ab27d5cf8a8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  _playerTrigger: {fileID: 0}
+  _pointToKick: {fileID: 0}
 --- !u!114 &3315960949033856711
 MonoBehaviour:
   m_ObjectHideFlags: 0

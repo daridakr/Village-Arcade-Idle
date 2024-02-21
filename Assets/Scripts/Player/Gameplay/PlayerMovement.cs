@@ -60,24 +60,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.collider != null)
-    //    {
-    //        Vector3 pushDirection = transform.position - collision.contacts[0].point;
-    //        pushDirection.Normalize();
-
-    //        float pushForce = 10f;
-
-    //        _rigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
-    //    }
-    //}
-
-    private void MoveToTarget(Transform target)
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
-    }
-
     private void OnDestroy()
     {
         _controlService.OnMove -= Move;
