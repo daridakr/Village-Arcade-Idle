@@ -91,7 +91,8 @@ namespace Arena
             Transform newEnemy = _enemyFactory.Create(enemy as NPC).transform;
 
             //Transform newEnemy = Instantiate(enemy as Component).transform;
-            newEnemy.name = (enemy as NPC).name;
+            int index = Random.Range(1, 100);
+            newEnemy.name = (enemy as NPC).name + index;
 
             Vector2 randomPositionOffset = Random.insideUnitCircle.normalized * SpawnRadius;
             newEnemy.position = transform.position + new Vector3(randomPositionOffset.x, 0f, randomPositionOffset.y);

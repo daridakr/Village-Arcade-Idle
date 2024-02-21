@@ -241,6 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3269334336080273325}
+  - component: {fileID: 2309898070234996080}
   - component: {fileID: 5999831477511740474}
   - component: {fileID: 1749877080479887797}
   - component: {fileID: 2736450425020454404}
@@ -249,7 +250,8 @@ GameObject:
   - component: {fileID: 5336782285018259229}
   - component: {fileID: 1205041385095879929}
   - component: {fileID: 2899140362100574188}
-  m_Layer: 6
+  - component: {fileID: 8046468875892044767}
+  m_Layer: 12
   m_Name: '[Test Enemy]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,6 +277,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2309898070234996080
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880233426290204094}
+  m_Material: {fileID: 13400000, guid: 3ba31e708eff4af47b2892effb58e466, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.58003116
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.57, z: 0.18489943}
 --- !u!195 &5999831477511740474
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -412,6 +428,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Skill: {fileID: 11400000, guid: 524e4f996e8d3eb4c929c7e918a6facf, type: 2}
   Weight: 1000
+--- !u!114 &8046468875892044767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880233426290204094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c65457419c0d5649bbd88a3adf4961f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5104847770210558167
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,8 +450,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2201230306784760211}
   - component: {fileID: 3224649389937119236}
-  m_Layer: 6
-  m_Name: Capsule
+  m_Layer: 12
+  m_Name: EnemyCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

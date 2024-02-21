@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4acc7eaf11b2dbc4ebb5574bad2fed45,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 87fe4bde12388ab46973917be0a3873c,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 0b6df8bee85520f4280ffd946bc3e014,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -19021,6 +19021,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2309898070234996080, guid: 34fd0570c4d59f540be07eb8ecd91d70,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ae3e954eb6a8c994bbbfad21a673d1bf,
+        type: 2}
     - target: {fileID: 3269334336080273325, guid: 34fd0570c4d59f540be07eb8ecd91d70,
         type: 3}
       propertyPath: m_RootOrder
@@ -19034,7 +19040,7 @@ PrefabInstance:
     - target: {fileID: 3269334336080273325, guid: 34fd0570c4d59f540be07eb8ecd91d70,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3269334336080273325, guid: 34fd0570c4d59f540be07eb8ecd91d70,
         type: 3}
@@ -19080,16 +19086,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: =[Test Enemy]
-      objectReference: {fileID: 0}
-    - target: {fileID: 4880233426290204094, guid: 34fd0570c4d59f540be07eb8ecd91d70,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5104847770210558167, guid: 34fd0570c4d59f540be07eb8ecd91d70,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7265335872709605386, guid: 34fd0570c4d59f540be07eb8ecd91d70,
         type: 3}

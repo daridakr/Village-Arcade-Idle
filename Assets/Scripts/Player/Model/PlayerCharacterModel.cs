@@ -11,6 +11,7 @@ public class PlayerCharacterModel : MonoBehaviour,
 
     private Transform _centerTransform;
     private Vector3 _lookDirection;
+    private bool _isMovementDirection;
 
     public Vector3 LookDirection => _lookDirection;
     public Transform CenterTransform => _centerTransform;
@@ -28,7 +29,7 @@ public class PlayerCharacterModel : MonoBehaviour,
         _instance = Instantiate(prefab, transform);
         _centerTransform = _instance.HeadRig;
 
-        OnSetuped();
+        StartListenMovementDirection();
 
         Initialized?.Invoke();
     }
@@ -38,19 +39,24 @@ public class PlayerCharacterModel : MonoBehaviour,
         return _instance.Animator;
     }
 
-    protected virtual void UpdateRotation(Vector3 direction)
+    protected void UpdateRotation(Vector3 direction)
     {
         _lookDirection = _instance.transform.position + direction;
         _instance.transform.LookAt(_lookDirection);
     }
 
-    protected virtual void OnSetuped()
+    protected void StartListenMovementDirection()
     {
-        _movement.DirectionUpdated += UpdateRotation;
+        if (!_isMovementDirection)
+        {
+            _movement.DirectionUpdated += UpdateRotation;
+            _isMovementDirection = true;
+        }
     }
 
-    private void OnDisable()
+    protected void StopListenMovementDirection()
     {
         _movement.DirectionUpdated -= UpdateRotation;
+        _isMovementDirection = false;
     }
 }
