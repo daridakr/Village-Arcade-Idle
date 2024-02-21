@@ -10,10 +10,12 @@ namespace Village.Upgrades.Building
         public int GetGemCapacityFor(int level) => _upgradeTable.GetGemCapacity(level);
         public float GetGemRateFor(int level) => _upgradeTable.GetGemRate(level);
 
+#if UNITY_EDITOR
         protected override void Validate()
         {
             base.Validate();
             _upgradeTable.OnValidate(MaxLevel);
         }
+#endif
     }
 }

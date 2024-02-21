@@ -1,5 +1,4 @@
 using System;
-using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +17,11 @@ public class GuidableObject : MonoBehaviour
     {
         _guid = Guid.NewGuid().ToString();
         EditorUtility.SetDirty(gameObject);
+    }
+#else
+    public void RegenerateGUID()
+    {
+        _guid = Guid.NewGuid().ToString();
     }
 #endif
 }

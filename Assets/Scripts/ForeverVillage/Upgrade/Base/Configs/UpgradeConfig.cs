@@ -19,6 +19,7 @@ namespace Village
         public UpgradePriceTable PriceTable => _priceTable;
         public Upgrade Upgrade => _upgrade;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             try
@@ -35,6 +36,7 @@ namespace Village
         {
             _priceTable.OnValidate(_maxLevel);
         }
+#endif
 
         public virtual void InstantiateUpgrade(Upgrade upgrade)
         {
