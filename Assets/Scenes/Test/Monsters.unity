@@ -416,6 +416,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FylingDemonPADefault
       objectReference: {fileID: 0}
+    - target: {fileID: 3891923349452443982, guid: 4cd41c7d55874d647931c18754617461,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3891923349452803438, guid: 4cd41c7d55874d647931c18754617461,
         type: 3}
       propertyPath: m_RootOrder
@@ -557,7 +562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &317458255
 Transform:
   m_ObjectHideFlags: 0
@@ -2159,7 +2164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1498735218
 Transform:
   m_ObjectHideFlags: 0
