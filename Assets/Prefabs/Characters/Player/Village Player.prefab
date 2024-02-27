@@ -262,6 +262,16 @@ PrefabInstance:
       propertyPath: _playerLevel
       value: 
       objectReference: {fileID: 7168843661450452819}
+    - target: {fileID: 4362179068316805905, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362179068316805905, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4362179068316805908, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
         type: 3}
       propertyPath: m_Name
@@ -397,11 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3168802de6b92ce4db9ab27d5cf8a8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  _playerTrigger: {fileID: 0}
-  _pointToKick: {fileID: 0}
+  _slider: {fileID: 5421895525884811102}
 --- !u!114 &3315960949033856711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +418,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2381755fccb6b004e8771e54de94fe3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5421895525884811102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8116993755947170005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f6b8617dd8c694b8235c2b94693286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8945229924960457064

@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Village.Player;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private SurfaceSlider _slider;
+
     protected Rigidbody _rigidbody;
     protected float _speed;
     private float _speedRate;
@@ -34,13 +37,16 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.freezeRotation = true;
     }
 
     protected virtual void Move(Vector3 direction)
     {
-        _rigidbody.velocity = direction * _speed * _speedRate * _flySpeedRate;
-
         OnMove?.Invoke(direction.magnitude);
+
+        direction *= _speed * Time.deltaTime;
+        _rigidbody.MovePosition(_rigidbody.position + direction);
+
         DirectionUpdated?.Invoke(direction);
 
         IsMoving = true;

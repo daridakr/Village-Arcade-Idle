@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Village
 {
+    [RequireComponent (typeof (Rigidbody))]
     public class BuildingLevel : MonoBehaviour, IStorableObject
     {
         [SerializeField] private int _coinsPrice;
@@ -11,9 +12,23 @@ namespace Village
         private string _levelName;
         private string _levelDescription;
         private Sprite _icon;
+        private Rigidbody _body;
         private BuildingLevelType _type;
 
+        private const float _freezeBeforeDelay = 1.5f;
         private const int _levelTypesAmount = 4; // should relocate
+
+        private void OnEnable()
+        {
+            _body = GetComponent<Rigidbody>();
+
+            Invoke(nameof(Freeze), _freezeBeforeDelay);
+        }
+
+        private void Freeze()
+        {
+            _body.isKinematic = true;
+        }
 
         public void Init(int value, Sprite icon, string buildingName = "", string description = "")
         {
