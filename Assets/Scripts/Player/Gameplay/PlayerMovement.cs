@@ -1,18 +1,13 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Village.Player;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private SurfaceSlider _slider;
-
     protected Rigidbody _rigidbody;
     protected float _speed;
-    private float _speedRate;
-    private float _flySpeedRate;
 
     private IControlService _controlService;
 
@@ -30,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         _controlService.OnStand += Stop;
 
         _speed = config.Speed;
-        _speedRate = config.SpeedRate;
-        _flySpeedRate = config.FlySpeedRate;
     }
 
     private void Awake()

@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.5196323, y: 2.7439632, z: 5.5033092}
+  m_Size: {x: 7, y: 2.7439632, z: 7}
   m_Center: {x: -0.08240843, y: 1.3615375, z: 0.22173643}
 --- !u!114 &6877448298807805934
 MonoBehaviour:
@@ -711,6 +711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b34aa5a481251c84083902d7a9820f1a,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b34aa5a481251c84083902d7a9820f1a,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -853,6 +858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House_1-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 580fe0484ddd46441b641e8b5bbe3065,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 580fe0484ddd46441b641e8b5bbe3065,
         type: 3}
@@ -1001,6 +1011,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65a7de7a24e26254483a5012a6ece21b,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 65a7de7a24e26254483a5012a6ece21b,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1146,6 +1161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b845763c0e0223c4ab6274826f470770,
         type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b845763c0e0223c4ab6274826f470770,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1288,6 +1308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House_1-5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9e99ca6d76521c7488032d07aea5ab60,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e99ca6d76521c7488032d07aea5ab60,
         type: 3}

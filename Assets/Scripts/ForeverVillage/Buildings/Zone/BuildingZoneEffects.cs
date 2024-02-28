@@ -5,7 +5,7 @@ namespace Village
     public class BuildingZoneEffects : MonoBehaviour
     {
         [SerializeField] private BuildingZone _zone;
-        [SerializeField] private SpriteRenderer _dottedSquare;
+        [SerializeField] private GameObject _ruinSquare;
         [SerializeField] private ParticleSystem _freeEffect;
         [SerializeField] private ParticleSystem _buildEffect;
 
@@ -31,7 +31,7 @@ namespace Village
         private void OnZoneBuilded()
         {
             _zone.Builded -= OnZoneBuilded;
-            _dottedSquare.enabled = false;
+            Destroy(_ruinSquare.gameObject);
             _buildEffect.Stop();
         }
     }

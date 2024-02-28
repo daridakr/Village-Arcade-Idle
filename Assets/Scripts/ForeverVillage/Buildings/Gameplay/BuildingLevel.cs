@@ -15,19 +15,17 @@ namespace Village
         private Rigidbody _body;
         private BuildingLevelType _type;
 
-        private const float _freezeBeforeDelay = 1.5f;
         private const int _levelTypesAmount = 4; // should relocate
 
         private void OnEnable()
         {
             _body = GetComponent<Rigidbody>();
-
-            Invoke(nameof(Freeze), _freezeBeforeDelay);
         }
 
-        private void Freeze()
+        private void OnCollisionEnter(Collision collision)
         {
             _body.isKinematic = true;
+            gameObject.layer = 0;
         }
 
         public void Init(int value, Sprite icon, string buildingName = "", string description = "")

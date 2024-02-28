@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Village
@@ -5,18 +6,20 @@ namespace Village
     public class RuinGenerator : MonoBehaviour
     {
         [SerializeField] private Transform _container;
+        [SerializeField] private Collider _areaBounds;
 
         [SerializeField] private GameObject _terrain;
-        [SerializeField] private Transform[] _rockPoints;
-        [SerializeField] private GameObject[] _rocks;
-        [SerializeField] private float _minRocksScale = 0.5f;
-        [SerializeField] private float _maxRocksScale = 1f;
+        [SerializeField] private RuinObject[] _objects;
 
-        [SerializeField] private Transform[] _debrisPoints;
-        [SerializeField] private GameObject[] _debris;
+        private int _currentObjectIndex = 0;
+        private float _currentObjectScale = 1f;
+
+        private UniformObjectSpawner _uniformSpawner;
 
         private void Start()
         {
+            _uniformSpawner = new UniformObjectSpawner(_areaBounds, _container);
+
             Generate();
         }
 
@@ -24,25 +27,40 @@ namespace Village
         {
             Instantiate(_terrain, _container);
 
-            int randomIndex = 0;
-            float randomScale = 0;
+            CreateObjects();
+        }
 
-            foreach (var point in _rockPoints)
+        private void CreateObjects()
+        {
+            foreach (var @object in _objects)
             {
-                randomIndex = Random.Range(0, _rocks.Length - 1);
-                randomScale = Random.Range(_minRocksScale, _maxRocksScale);
-
-                GameObject rock = Instantiate(_rocks[randomIndex], point);
-                rock.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-            }
-
-            foreach (var point in _debrisPoints)
-            {
-                randomIndex = Random.Range(0, _debris.Length - 1);
-
-                GameObject debris = Instantiate(_debris[randomIndex], point);
-                debris.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+                for (int i = 0; i < @object.Amount; i++)
+                {
+                    GenerateNew(@object);
+                    GameObject created = _uniformSpawner.SpawnObject(@object.Prefabs[_currentObjectIndex]);
+                    created.transform.localScale = new Vector3(_currentObjectScale, _currentObjectScale, _currentObjectScale);
+                }
             }
         }
+
+        private void GenerateNew(RuinObject ruinObject)
+        {
+            _currentObjectIndex = UnityEngine.Random.Range(0, ruinObject.Prefabs.Length - 1);
+            _currentObjectScale = UnityEngine.Random.Range(ruinObject.MinScale, ruinObject.MaxScale);
+        }
+    }
+
+    [Serializable]
+    public struct RuinObject
+    {
+        [SerializeField] private GameObject[] _prefabs;
+        [SerializeField] private float _minScale;
+        [SerializeField] private float _maxScale;
+        [SerializeField] private int _amount;
+
+        public GameObject[] Prefabs => _prefabs;
+        public float MinScale => _minScale;
+        public float MaxScale => _maxScale;
+        public int Amount => _amount;
     }
 }

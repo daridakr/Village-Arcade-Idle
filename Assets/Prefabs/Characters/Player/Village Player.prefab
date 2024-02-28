@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTimerInteractors
       objectReference: {fileID: 0}
+    - target: {fileID: 7155674155457528270, guid: 7ac1f0456db45d94cbd54f80e1b56b18,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ac1f0456db45d94cbd54f80e1b56b18, type: 3}
 --- !u!114 &2279580477206600690 stripped
@@ -407,7 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3168802de6b92ce4db9ab27d5cf8a8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 5421895525884811102}
 --- !u!114 &3315960949033856711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,18 +422,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2381755fccb6b004e8771e54de94fe3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5421895525884811102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8116993755947170005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18f6b8617dd8c694b8235c2b94693286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8945229924960457064
