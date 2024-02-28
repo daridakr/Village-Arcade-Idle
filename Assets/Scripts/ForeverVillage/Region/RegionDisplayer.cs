@@ -5,7 +5,7 @@ namespace Village
     [RequireComponent(typeof(GuidableObject))]
     public class RegionDisplayer : MonoBehaviour
     {
-        [SerializeField] private GameObject _data;
+        [SerializeField] private GameObject[] _dataToDisplay;
 
         private GuidableObject _guidable;
 
@@ -20,12 +20,18 @@ namespace Village
 
         public void Display()
         {
-            _data.SetActive(true);
+            foreach (var item in _dataToDisplay)
+            {
+                item.SetActive(true);
+            }
         }
 
         public void Hide()
         {
-            _data.SetActive(false);
+            foreach (var item in _dataToDisplay)
+            {
+                item.SetActive(false);
+            }
         }
     }
 }
