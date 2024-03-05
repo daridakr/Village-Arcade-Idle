@@ -50,6 +50,7 @@ namespace ForeverVillage
             Container.Bind<PlayerBuildingsList>().FromComponentOn(Instance.Data).AsSingle();
             Container.Bind<PlayerVillagersList>().FromComponentOn(Instance.Data).AsSingle();
             Container.Bind<PlayerRegionsList>().FromComponentOn(Instance.Data).AsSingle();
+            Container.Bind<PlayerInventory>().FromComponentOn(Instance.Data).AsSingle();
         }
 
         protected virtual void BindDisplayData()

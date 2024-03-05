@@ -1,7 +1,12 @@
-﻿namespace ForeverVillage
+﻿using UnityEngine;
+
+namespace ForeverVillage
 {
     public interface IItem
     {
-        public void Use();
+        public string Name { get; }
+        public string Description { get; }
+        public Sprite Icon { get; }
+        public int StackCapacity { get; }
     }
 }
