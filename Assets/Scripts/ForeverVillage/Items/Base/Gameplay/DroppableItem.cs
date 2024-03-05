@@ -1,3 +1,4 @@
+using ForeverVillage;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Village
     [RequireComponent(typeof(Collider))]
     public abstract class DroppableItem : MonoBehaviour
     {
-        [SerializeField] private Item _item;
+        [SerializeField] private Collectable _item;
         [SerializeField] private float _captureDelay;
 
         private Rigidbody _body;
@@ -39,7 +40,7 @@ namespace Village
             StartCoroutine(DisableBodyWhenStop());
         }
 
-        public virtual Item Capture()
+        public virtual Collectable Capture()
         {
             if (!CanCapture)
                 throw new InvalidOperationException();

@@ -1,3 +1,4 @@
+using ForeverVillage;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Village
     {
         [SerializeField] private int _capacity;
 
-        private List<Item> _store = new List<Item>();
+        private List<IItem> _store = new List<IItem>();
         //private RegionData _region; // one in one region
 
         //public IEnumerable<Item> Store => _store;
@@ -22,7 +23,7 @@ namespace Village
             CapacityUpdated?.Invoke(_capacity);
         }
 
-        private void Stack(Item item)
+        private void Stack(IItem item)
         {
             if (_store.Count + 1 >= _capacity)
             {
@@ -33,7 +34,7 @@ namespace Village
             StoreUpdated?.Invoke(_store.Count);
         }
 
-        private IEnumerable<Item> Get()
+        private IEnumerable<IItem> Get()
         {
             return _store;
         }

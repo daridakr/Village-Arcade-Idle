@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Village
+namespace ForeverVillage
 {
     [Serializable]
     public class MoneyBalance : KeySavedObject<MoneyBalance>

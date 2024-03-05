@@ -2,20 +2,23 @@ using Cinemachine;
 using UnityEngine;
 using Zenject;
 
-public class PlayerCameraFollow : MonoBehaviour
+namespace ForeverVillage
 {
-    [SerializeField] private CinemachineVirtualCamera _cmCamera;
-
-    private PlayerReference _player;
-
-    [Inject]
-    private void Construct(PlayerReference player)
+    public class PlayerCameraFollow : MonoBehaviour
     {
-        _player = player;
-    }
+        [SerializeField] private CinemachineVirtualCamera _cmCamera;
 
-    private void Awake()
-    {
-        _cmCamera.Follow = _player.transform;
+        private PlayerReferenceBase _player;
+
+        [Inject]
+        private void Construct(PlayerReferenceBase player)
+        {
+            _player = player;
+        }
+
+        private void Awake()
+        {
+            _cmCamera.Follow = _player.transform;
+        }
     }
 }

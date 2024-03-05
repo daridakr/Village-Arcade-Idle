@@ -102,7 +102,7 @@ namespace Village
 
         // Populate(Villager newVillager);
 
-        private void OnPlayerTriggerEnter(PlayerReference player)
+        private void OnPlayerTriggerEnter(PlayerReferenceVillage player)
         {
             if (_currentGemProgress > 0.99f)
             {

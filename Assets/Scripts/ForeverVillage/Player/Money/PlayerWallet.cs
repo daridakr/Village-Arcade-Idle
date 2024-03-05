@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Village
+namespace ForeverVillage
 {
     public class PlayerWallet : MonoBehaviour
     {

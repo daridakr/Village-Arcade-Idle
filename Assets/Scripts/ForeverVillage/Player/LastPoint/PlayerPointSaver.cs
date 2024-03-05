@@ -8,10 +8,10 @@ namespace Village
         IDisposable
     {
         private PlayerPointRepository _repository;
-        private global::PlayerReference _player;
+        private PlayerReferenceVillage _player;
 
         [Inject]
-        public void Construct(PlayerPointRepository repository, global::PlayerReference player)
+        public void Construct(PlayerPointRepository repository, PlayerReferenceVillage player)
         {
             _repository = repository;
             _player = player;

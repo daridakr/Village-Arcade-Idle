@@ -10,10 +10,10 @@ namespace Village
         [SerializeField] private Slider _levelProgressSlider;
         [SerializeField] private TMP_Text _levelTextDisplay;
         
-        private PlayerLevelStorable _playerLevel;
+        private PlayerLevelVillage _playerLevel;
 
         [Inject]
-        private void Construct(PlayerLevelStorable playerLevel)
+        private void Construct(PlayerLevelVillage playerLevel)
         {
             _playerLevel = playerLevel;
         }

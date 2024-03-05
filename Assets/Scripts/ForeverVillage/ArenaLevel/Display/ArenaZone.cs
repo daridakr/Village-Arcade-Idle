@@ -1,3 +1,4 @@
+using ForeverVillage;
 using UnityEngine;
 
 namespace Village
@@ -13,12 +14,12 @@ namespace Village
             _playerTrigger.Exit += OnPlayerTriggerExit;
         }
 
-        private void OnPlayerTriggerEnter(PlayerReference player)
+        private void OnPlayerTriggerEnter(PlayerReferenceVillage player)
         {
             _view.Display();
         }
 
-        private void OnPlayerTriggerExit(PlayerReference wallet)
+        private void OnPlayerTriggerExit(PlayerReferenceVillage wallet)
         {
             _view.Hide();
         }

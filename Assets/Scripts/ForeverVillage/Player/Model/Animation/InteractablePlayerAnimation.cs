@@ -19,7 +19,7 @@ namespace Village
 
         private void InitAnimatedInteractions()
         {
-            _animatedInteractions = _interactionsController.GetAnimatedInteractions(_model.HandRig);
+            _animatedInteractions = _interactionsController.GetAnimatedInteractions(_model.HandRigR);
 
             foreach (IAnimatedInteraction interaction in _animatedInteractions)
             {

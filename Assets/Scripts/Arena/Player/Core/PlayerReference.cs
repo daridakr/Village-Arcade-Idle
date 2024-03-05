@@ -1,8 +1,9 @@
+using ForeverVillage;
 using UnityEngine;
 
-namespace Vampire
+namespace Arena
 {
-    public sealed class PlayerReference : global::PlayerReference
+    public sealed class PlayerReference : PlayerReferenceBase
     {
         // specializations
         public GameObject[] startingAbilities;
@@ -14,9 +15,9 @@ namespace Vampire
 
         public Collider CollectableCollider { get => collectableCollider; }
 
-        public void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)
-        {
+        //public void Init(EntityManager entityManager, AbilityManager abilityManager, StatsManager statsManager)
+        //{
 
-        }
+        //}
     }
 }

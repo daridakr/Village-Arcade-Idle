@@ -1,4 +1,4 @@
-namespace Village
+namespace ForeverVillage
 {
     public class PlayerGems : PlayerMoney
     {

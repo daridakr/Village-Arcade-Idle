@@ -17,7 +17,7 @@ namespace Vampire
         [SerializeField] private GameTimer gameTimer;
 
         private PlayerHealth _playerHealth;
-        private Arena.PlayerLevel _playerLevel;
+        private Arena.PlayerLevelArena _playerLevel;
         private PlayerCharacterModelArena _playerModel;
 
         private float levelTime = 0;
@@ -29,7 +29,7 @@ namespace Vampire
         [Inject]
         private void Construct(
             PlayerHealth playerHealth,
-            Arena.PlayerLevel playerLevel,
+            Arena.PlayerLevelArena playerLevel,
             PlayerCharacterModelArena playerModel)
         {
             _playerHealth = playerHealth;

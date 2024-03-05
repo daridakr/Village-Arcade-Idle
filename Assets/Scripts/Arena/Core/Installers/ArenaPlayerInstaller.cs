@@ -1,8 +1,9 @@
+using ForeverVillage;
 using UnityEngine;
 
 namespace Arena
 {
-    public sealed class ArenaPlayerInstaller : PlayerInstaller
+    public sealed class ArenaPlayerInstaller : PlayerInstallerBase
     {
         [SerializeField] private PlayerHealthConfig _healthConfig;
         [SerializeField] private PlayerReference _playerReference;
@@ -11,8 +12,8 @@ namespace Arena
         private PlayerReference _playerInstance;
 
         #region Overrides
-        protected override global::PlayerReference Reference => _playerReference;
-        protected override global::PlayerReference Instance => _playerInstance;
+        protected override PlayerReferenceBase Reference => _playerReference;
+        protected override PlayerReferenceBase Instance => _playerInstance;
         protected override Vector3 SpawnPosition => _spawnPoint.position;
         #endregion
 
@@ -42,7 +43,7 @@ namespace Arena
         {
             base.BindDisplayData();
 
-            Container.BindInterfacesAndSelfTo<PlayerLevel>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerLevelArena>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
         }
     }
 }

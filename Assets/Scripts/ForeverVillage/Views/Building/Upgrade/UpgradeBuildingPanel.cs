@@ -1,3 +1,4 @@
+using ForeverVillage;
 using System;
 using UnityEngine;
 using Zenject;

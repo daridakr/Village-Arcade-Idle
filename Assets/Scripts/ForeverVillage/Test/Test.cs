@@ -1,3 +1,4 @@
+using ForeverVillage;
 using UnityEngine;
 using Zenject;
 
@@ -5,11 +6,11 @@ namespace Village
 {
     public class Test : MonoBehaviour
     {
-        private PlayerLevelStorable _playerLevel;
+        private PlayerLevelVillage _playerLevel;
         private PlayerWallet _wallet;
 
         [Inject]
-        private void Construct(PlayerWallet wallet, PlayerLevelStorable playerLevel)
+        private void Construct(PlayerWallet wallet, PlayerLevelVillage playerLevel)
         {
             _playerLevel = playerLevel;
             _wallet = wallet;

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f023033e4852040aa065c45a6f4065, type: 3}
+  m_Script: {fileID: 11500000, guid: a54726e5a98ff6c4fb661147049827b9, type: 3}
   m_Name: ItemsMagnitConfig
   m_EditorClassIdentifier: 
   _attractDuration: 1

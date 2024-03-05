@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Zenject;
+using ForeverVillage;
 
 namespace Village
 {

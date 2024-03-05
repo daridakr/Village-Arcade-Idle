@@ -19,7 +19,7 @@ namespace Village
             {
                 Title = specialization.Title,
                 Icon = specialization.Icon,
-                PrefabPath = specialization.GetPrefabPath()
+                PrefabPath = specialization.GetModelPath()
             };
 
             _repository.Save(saveData);

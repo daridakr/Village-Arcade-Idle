@@ -17,7 +17,7 @@ public class PlayerCharacterModel : MonoBehaviour,
     public Transform CenterTransform => _centerTransform;
     public ICustomizableCharacter Customizable => _instance;
     public Transform HeadRig => _instance.HeadRig;
-    public Transform HandRig => _instance.HandRig;
+    public Transform HandRigR => _instance.HandRig;
 
     public event Action Initialized;
 

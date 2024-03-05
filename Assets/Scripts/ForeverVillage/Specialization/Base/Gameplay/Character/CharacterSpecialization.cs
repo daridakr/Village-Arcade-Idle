@@ -13,7 +13,7 @@ namespace Village
             _config = config;
         }
 
-        public override string GetPrefabPath()
+        public override string GetModelPath()
         {
             return _gender == Gender.Male ? _config.MalePrefabPath : _config.FemalePrefabPath;
         }
