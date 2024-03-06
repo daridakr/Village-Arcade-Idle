@@ -6,7 +6,7 @@ using Zenject;
 namespace Village
 {
     [RequireComponent(typeof(GuidableObject))]
-    [RequireComponent(typeof(ExperiencePointGiver))]
+    [RequireComponent(typeof(ExperiencePointDropper))]
     public class BuildingZone : MonoBehaviour
     {
         [SerializeField] private PlayerWalletTrigger _playerWalletTrigger;
@@ -15,7 +15,7 @@ namespace Village
         [SerializeField] private GameObject _clearableTrash;
 
         #region Gameplay
-        private ExperiencePointGiver _experienceGiver;
+        private ExperiencePointDropper _experienceGiver;
         private PlayerTimerCleaner _cleaner;
         private PlayerTimerBuilder _builder;
         private GameObject _trash;
@@ -59,7 +59,7 @@ namespace Village
 
         private void Awake()
         {
-            _experienceGiver = GetComponent<ExperiencePointGiver>();
+            _experienceGiver = GetComponent<ExperiencePointDropper>();
         }
 
         private void OnDestroyedZone()

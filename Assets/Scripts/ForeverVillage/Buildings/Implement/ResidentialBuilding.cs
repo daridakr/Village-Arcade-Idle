@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Village
 {
-    [RequireComponent(typeof(GemsGiver))]
+    [RequireComponent(typeof(GemsDropper))]
     public class ResidentialBuilding : Building
     {
         // upgradable
@@ -17,7 +17,7 @@ namespace Village
         [SerializeField] private PlayerTrigger _playerTrigger;
         [SerializeField] private ResidentialView _view;
 
-        private GemsGiver _gemsGiver;
+        private GemsDropper _gemsGiver;
         private Coroutine _gemGenerationRoutine;
         private const int _gemGenerationTimeRate = 30;
         float _currentGemProgress = 0;
@@ -40,7 +40,7 @@ namespace Village
 
         private void Awake()
         {
-            _gemsGiver = GetComponent<GemsGiver>();
+            _gemsGiver = GetComponent<GemsDropper>();
 
             _playerTrigger.Enter += OnPlayerTriggerEnter;
         }

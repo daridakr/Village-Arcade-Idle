@@ -7,7 +7,7 @@ namespace ForeverVillage
     {
         [SerializeField] private TMP_Text _title;
 
-        public void Present(IStackableItem item)
+        public void Present(IItem item)
         {
 
         }

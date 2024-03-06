@@ -13,7 +13,7 @@ namespace ForeverVillage
         {
             base.Display();
 
-            foreach (IStackableItem item in _inventory.Items)
+            foreach (IItem item in _inventory.Items)
             {
                 InventoryItemView itemView = Instantiate(_itemViewPrefab, _container);
                 itemView.Present(item);
