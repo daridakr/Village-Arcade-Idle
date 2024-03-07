@@ -486,6 +486,11 @@ PrefabInstance:
       propertyPath: _playerLevel
       value: 
       objectReference: {fileID: 8530401967987696494}
+    - target: {fileID: 5651262292023935724, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+        type: 3}
+      propertyPath: _model
+      value: 
+      objectReference: {fileID: 1020910055672743237}
     m_RemovedComponents:
     - {fileID: 644421136433192238, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}
     - {fileID: 890529295671401097, guid: 795ef983d927dd94d8d5098bc2a9f3c8, type: 3}

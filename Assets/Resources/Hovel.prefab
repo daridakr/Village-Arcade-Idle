@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6163876455403630337}
   - component: {fileID: 4686369504134710640}
   - component: {fileID: 3063220499241045571}
-  - component: {fileID: 5558025658045910693}
+  - component: {fileID: 1444111268938864440}
   m_Layer: 0
   m_Name: Hovel
   m_TagString: Untagged
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: Hovel
---- !u!114 &5558025658045910693
+--- !u!114 &1444111268938864440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6827927995857663419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc298fbdc20338044b6f28f01fa0ed0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 088d68800ffb19d45afb5b36472dda6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _droppableItemTemplate: {fileID: 8289189762867894044, guid: 23de6ebb45b9a3748b5086c2723cb2c8,

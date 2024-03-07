@@ -1,28 +1,23 @@
+using UnityEngine;
+
 namespace ForeverVillage
 {
     public abstract class EquipableItem : Item,
         IEquipableItem
     {
         private EquipableItemConfig _config;
-        private bool _isEquipped;
 
         public IItemPerk[] Perks => _config.Perks;
+        public abstract Item Prefab { get; }
 
-        protected EquipableItem(EquipableItemConfig config) : base(config)
+        protected EquipableItem(EquipableItemConfig config) : base(config) => _config = config;
+
+        public Item Equip(Transform rig)
         {
-            _config = config;
-        }
+            if (Prefab == null)
+                return null;
 
-        public void Equip()
-        {
-            if (_isEquipped)
-                return;
-
-            _isEquipped = true;
-        }
-
-        public void Unequip()
-        {
+            return Instantiate(Prefab, rig);
         }
     }
 }

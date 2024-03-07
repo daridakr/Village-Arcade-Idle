@@ -19,3 +19,4 @@ MonoBehaviour:
   _stackCapacity: 1
   _perks: []
   _damage: 5
+  _prefab: {fileID: 3546472160137568172, guid: 7f6b3d9f92f75d94181a646f279a2b8f, type: 3}

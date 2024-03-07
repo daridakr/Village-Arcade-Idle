@@ -1564,7 +1564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748469967168149086}
-  - component: {fileID: 2453543082182534523}
+  - component: {fileID: 8068033796384753390}
   m_Layer: 0
   m_Name: Dummy R Prop
   m_TagString: Untagged
@@ -1587,7 +1587,7 @@ Transform:
   m_Father: {fileID: 2977512826486673844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2453543082182534523
+--- !u!114 &8068033796384753390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

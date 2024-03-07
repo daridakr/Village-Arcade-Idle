@@ -7,21 +7,12 @@ namespace Arena
     {
         [SerializeField] private PlayerCharacterModel _model;
 
-        private IWeapon _weapon;
+        private Weapon _activeWeapon;
         private IArmor[] _armor;
 
-        private Equiper _equiper;
-
-        //private IEquippable _weapon;
-
-        private void Awake()
+        public void EquipWeapon(IWeapon weapon)
         {
-            _equiper = new Equiper();
-        }
-
-        private void Equip(IEquipable equipment)
-        {
-
+            _activeWeapon = weapon.Equip(_model.HandRigR) as Weapon;
         }
 
         //private void EquipWeapon(Weapon weapon)
@@ -32,15 +23,6 @@ namespace Arena
 
         //    //weapon.Unquip();
         //    weapon.Equip(_model.HandRigR);
-        //}
-    }
-
-
-    public class Equiper
-    {
-        //public void Equip(IEquippable equippable)
-        //{
-
         //}
     }
 }

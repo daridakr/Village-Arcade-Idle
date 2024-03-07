@@ -28614,8 +28614,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8706381484431543946}
   - component: {fileID: 8706381484431543940}
-  - component: {fileID: 5003509046155598478}
   - component: {fileID: 1173775627795954257}
+  - component: {fileID: 4952986169654471709}
   m_Layer: 0
   m_Name: BuildingZone
   m_TagString: Untagged
@@ -28658,22 +28658,6 @@ MonoBehaviour:
   _view: {fileID: 8706381484507289182}
   _clearableTrash: {fileID: 371959641313743751, guid: 8c225b116bc75ea418b6730a5c16c291,
     type: 3}
---- !u!114 &5003509046155598478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8706381484431543947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98267f4a3b5836d42bae8e89730e6488, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _droppableItemTemplate: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba,
-    type: 3}
-  _spawnOffset: {x: 0, y: 5, z: 0}
-  _prePushDelay: 0
 --- !u!114 &1173775627795954257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28687,6 +28671,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 
+--- !u!114 &4952986169654471709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706381484431543947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9807cce23686a43bd6aa52877a37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _droppableItemTemplate: {fileID: 2725621036072423247, guid: 89c81ff599ba5b84b8561576602f61ba,
+    type: 3}
+  _spawnOffset: {x: 0.38, y: 2.2, z: 0}
+  _prePushDelay: 0.1
 --- !u!1 &8706381484507289181
 GameObject:
   m_ObjectHideFlags: 0

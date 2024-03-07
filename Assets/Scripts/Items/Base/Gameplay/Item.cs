@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ForeverVillage
 {
-    public abstract class Item :
+    public abstract class Item : MonoBehaviour,
         IItem
     {
         private ItemConfig _config;
