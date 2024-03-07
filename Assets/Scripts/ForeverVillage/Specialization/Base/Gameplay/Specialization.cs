@@ -10,7 +10,7 @@ namespace Village
         [ReadOnly][ShowInInspector] public string Description => _config.Meta.Description;
         [ReadOnly][PreviewField] public Sprite Icon => _config.Meta.Icon;
         public Spell[] Spells => _config.Spells;
-        public IEquippable Weapon => _config.Weapon;
+        //public IEquippable Weapon => _config.Weapon;
 
         private readonly SpecializationConfig _config;
 

@@ -7,11 +7,11 @@ namespace Village
     {
         [SerializeField] private SpecializationMetadata _metadata;
         [SerializeField] private Spell[] _spells;
-        [SerializeField] private Weapon _baseWeapon;
+        //[SerializeField] private Weapon _baseWeapon;
 
         public SpecializationMetadata Meta => _metadata;
         public Spell[] Spells => _spells;
-        public Weapon Weapon => _baseWeapon;
+        //public Weapon Weapon => _baseWeapon;
 
         public abstract Specialization InstantiateSpecialization(object condition = null);
     }
