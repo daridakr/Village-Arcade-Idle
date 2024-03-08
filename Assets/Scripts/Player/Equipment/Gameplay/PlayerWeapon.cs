@@ -56,9 +56,4 @@ namespace ForeverVillage
             Hidden?.Invoke();
         }
     }
-
-    public interface IPlayerWeaponInitializable
-    {
-        public void Init(IAvailableWeaponType[] weaponTypes);
-    }
 }

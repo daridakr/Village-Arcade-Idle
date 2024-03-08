@@ -30,9 +30,4 @@ namespace ForeverVillage
         //    weapon.Equip(_model.HandRigR);
         //}
     }
-
-    public interface IPlayerWeaponEquipment
-    {
-        public void EquipWeapon(IWeapon weapon);
-    }
 }
