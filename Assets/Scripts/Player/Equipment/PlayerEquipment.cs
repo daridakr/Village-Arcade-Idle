@@ -1,18 +1,23 @@
-using ForeverVillage;
 using UnityEngine;
 
-namespace Arena
+namespace ForeverVillage
 {
-    public class PlayerEquipment : MonoBehaviour
+    public sealed class PlayerEquipment : MonoBehaviour,
+        IPlayerWeaponEquipment
     {
         [SerializeField] private PlayerCharacterModel _model;
+        [SerializeField] private PlayerWeapon _weapon;
 
-        private Weapon _activeWeapon;
         private IArmor[] _armor;
 
         public void EquipWeapon(IWeapon weapon)
         {
-            _activeWeapon = weapon.Equip(_model.HandRigR) as Weapon;
+            Transform weaponRig =
+                weapon.BodyPart == WeaponBodyPart.RightHand ?
+                _model.HandRigRight : _model.HandRigLeft;
+
+            Weapon equipedWeapon = weapon.Equip(weaponRig) as Weapon;
+            _weapon.Assign(equipedWeapon);
         }
 
         //private void EquipWeapon(Weapon weapon)
@@ -24,5 +29,10 @@ namespace Arena
         //    //weapon.Unquip();
         //    weapon.Equip(_model.HandRigR);
         //}
+    }
+
+    public interface IPlayerWeaponEquipment
+    {
+        public void EquipWeapon(IWeapon weapon);
     }
 }

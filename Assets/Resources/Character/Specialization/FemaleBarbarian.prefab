@@ -770,6 +770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3365191595756160341}
+  - component: {fileID: 6868144014778406505}
   m_Layer: 0
   m_Name: Dummy L Prop
   m_TagString: Untagged
@@ -792,6 +793,19 @@ Transform:
   m_Father: {fileID: 8349197945884304659}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6868144014778406505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449033974812911939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab270b4adf8a8144b20ef79a74bbb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _main: 0
 --- !u!1 &2570476850287620529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab270b4adf8a8144b20ef79a74bbb8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _main: 1
 --- !u!1 &4222631107592315552
 GameObject:
   m_ObjectHideFlags: 0

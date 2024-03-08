@@ -73,9 +73,6 @@ namespace ForeverVillage
 
                 Debug.Log(itemSlot.Stack.Item.Name);
                 Debug.Log(itemSlot.Stack.Count);
-
-                if (_inventory.Items.Count() == 2)
-                    _equipment.EquipWeapon((IWeapon)itemSlot.Stack.Item);
             }
         }
 

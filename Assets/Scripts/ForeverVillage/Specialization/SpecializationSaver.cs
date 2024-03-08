@@ -19,7 +19,9 @@ namespace Village
             {
                 Title = specialization.Title,
                 Icon = specialization.Icon,
-                PrefabPath = specialization.GetModelPath()
+                PrefabPath = specialization.GetModelPath(),
+                WeaponTypes = specialization.WeaponTypes,
+                BaseWeapons = specialization.Weapons
             };
 
             _repository.Save(saveData);

@@ -4,5 +4,5 @@ public interface IAnimatedModel : IInitilizable
 {
     public Animator GetAnimator();
     public Transform HeadRig { get; }
-    public Transform HandRigR { get; }
+    public Transform HandRigLeft { get; }
 }

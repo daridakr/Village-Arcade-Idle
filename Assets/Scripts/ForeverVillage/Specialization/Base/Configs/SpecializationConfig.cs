@@ -1,4 +1,5 @@
 using Arena;
+using ForeverVillage;
 using UnityEngine;
 
 namespace Village
@@ -7,11 +8,13 @@ namespace Village
     {
         [SerializeField] private SpecializationMetadata _metadata;
         [SerializeField] private Spell[] _spells;
-        //[SerializeField] private Weapon _baseWeapon;
+        [SerializeField] private AvailableWeaponType[] _weaponTypes;
+        [SerializeField] private WeaponConfig[] _baseWeapons;
 
         public SpecializationMetadata Meta => _metadata;
         public Spell[] Spells => _spells;
-        //public Weapon Weapon => _baseWeapon;
+        public IAvailableWeaponType[] WeaponTypes => _weaponTypes;
+        public WeaponConfig[] Weapons => _baseWeapons;
 
         public abstract Specialization InstantiateSpecialization(object condition = null);
     }

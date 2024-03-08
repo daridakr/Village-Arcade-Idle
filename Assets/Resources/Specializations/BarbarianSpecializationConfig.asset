@@ -19,3 +19,4 @@ MonoBehaviour:
       over defense. They possess unique abilities such as berserker rage, allowing
       them to unleash devastating attacks while sacrificing some self-control.
     Icon: {fileID: 21300000, guid: 422036a91ac1d4bcfa04857462fd3ff9, type: 3}
+  _weaponQuantity: 1

@@ -9,6 +9,5 @@ namespace Village
         public string Description { get; }
         public Sprite Icon { get; }
         public Spell[] Spells { get; }
-        //public IEquippable Weapon { get; }
     }
 }

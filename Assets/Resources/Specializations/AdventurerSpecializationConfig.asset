@@ -20,3 +20,4 @@ MonoBehaviour:
       of weapons and have a range of abilities, making them adaptable to different
       situations.
     Icon: {fileID: 21300000, guid: 61f589943353049438562d1fb89aaf1d, type: 3}
+  _weaponQuantity: 2

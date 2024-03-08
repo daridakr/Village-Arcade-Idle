@@ -12,8 +12,8 @@ namespace ForeverVillage
 
         private void OnValidate()
         {
-            if (_damage <= 0)
-                _damage = 0.1f;
+            if (_damage < 0)
+                _damage = 0f;
         }
     }
 }

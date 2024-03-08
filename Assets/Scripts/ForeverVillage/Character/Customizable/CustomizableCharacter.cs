@@ -13,7 +13,7 @@ namespace Village.Character
         private CharacterEyebrows _brows;
         private CharacterEyes _eyes;
         private CharacterMouth _mouth;
-        private CharacterHand _hand;
+        private CharacterHand[] _hands;
 
         private List<Renderer> _skinRenderers;
         private List<Renderer> _hairsRenderers;
@@ -24,7 +24,8 @@ namespace Village.Character
         private MeshFilter _eyesMesh;
         private MeshFilter _mouthMesh;
         private Transform _headRig;
-        private Transform _handRig;
+        private Transform _handRigRight;
+        private Transform _handRigLeft;
         private Animator _animator;
 
         public Renderer[] SkinRenderers => _skinRenderers.ToArray();
@@ -36,12 +37,14 @@ namespace Village.Character
         public MeshFilter EyesMesh => _eyesMesh;
         public MeshFilter MouthMesh => _mouthMesh;
         public Transform HeadRig => _headRig;
-        public Transform HandRig => _handRig;
+        public Transform HandRigLeft => _handRigLeft;
+        public Transform HandRigRight => _handRigRight;
         public Animator Animator => _animator;
 
         private void Awake()
         {
             _skinRenderers = new List<Renderer>();
+            _hands = new CharacterHand[2];
 
             InitBody();
             InitHairs();
@@ -99,9 +102,17 @@ namespace Village.Character
 
         private void InitRigs()
         {
-            _hand = GetComponentInChildren<CharacterHand>();
-            _hand.Initialize();
-            _handRig = _hand.Rig;
+            _hands = GetComponentsInChildren<CharacterHand>();
+
+            foreach (CharacterHand hand in _hands)
+            {
+                hand.Initialize();
+
+                if (hand.IsMain)
+                    _handRigRight = hand.Rig;
+                else
+                    _handRigLeft = hand.Rig;
+            }
         }
 
         private void InitAnimator()

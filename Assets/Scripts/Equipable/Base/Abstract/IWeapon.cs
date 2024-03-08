@@ -4,5 +4,7 @@ namespace ForeverVillage
         : IEquipableItem
     {
         public float Damage { get; }
+        public WeaponType Type { get; }
+        public WeaponBodyPart BodyPart { get; }
     }
 }

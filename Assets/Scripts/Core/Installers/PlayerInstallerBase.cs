@@ -43,6 +43,8 @@ namespace ForeverVillage
 
             Container.BindInterfacesAndSelfTo<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerAnimation>().FromComponentOn(Instance.Model).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerWeapon>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerEquipment>().FromComponentOn(Instance.Data).AsSingle().NonLazy();
 
             Container.Bind<PlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
             Container.Bind<PlayerWallet>().FromComponentOn(Instance.gameObject).AsSingle();

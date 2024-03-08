@@ -19,3 +19,4 @@ MonoBehaviour:
       a distance, avoiding direct confrontation. They possess keen perception and
       may have abilities such as rapid shot or precision targeting.
     Icon: {fileID: 21300000, guid: 18d1f805a31744f76828abd9aca707f5, type: 3}
+  _weaponQuantity: 1
