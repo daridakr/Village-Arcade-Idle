@@ -21,7 +21,8 @@ namespace Village
                 Icon = specialization.Icon,
                 PrefabPath = specialization.GetModelPath(),
                 WeaponTypes = specialization.WeaponTypes,
-                BaseWeapons = specialization.Weapons
+                BaseWeapons = specialization.Weapons,
+                Spells = specialization.Spells
             };
 
             _repository.Save(saveData);

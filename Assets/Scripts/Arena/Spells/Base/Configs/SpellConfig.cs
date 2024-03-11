@@ -5,9 +5,14 @@ namespace Arena
 {
     public abstract class SpellConfig : ScriptableObject
     {
+        [SerializeField] protected SpellMetaData _metadata;
         [SerializeField][Range(0, 1)] protected float _castingTime = 1f; // how long it takes to cast
         [SerializeField][Range(-1, 1)] protected float _lifeTime; // how long the spell will keep
         [SerializeField][Min(0)] private float _cooldownTime; // spell recovery time
+
+        public string Title => _metadata.Title;
+        public string Description => _metadata.Description;
+        public Sprite Icon => _metadata.Icon;
 
         public float CastingTime => _castingTime;
         public float LifeTime => _lifeTime;
@@ -31,7 +36,9 @@ namespace Arena
 
         protected virtual void Validate()
         {
-            if (IsImmediate) _cooldownTime = 0.3f;
+            //if (IsImmediate) _cooldownTime = 0.3f;
         }
+
+        public abstract Spell InstantiateSpell();
     }
 }

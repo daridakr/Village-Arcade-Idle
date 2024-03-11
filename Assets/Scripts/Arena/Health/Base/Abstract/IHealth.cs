@@ -4,8 +4,7 @@ namespace Arena
 {
     public interface IHealth
     {
-        public event Action<float> Gained;
-        public event Action<float> Wasted;
+        public event Action<float> Changed;
         public event Action Emptied;
     }
 }

@@ -1,5 +1,6 @@
 using ForeverVillage;
 using UnityEngine;
+using Zenject;
 
 namespace Arena
 {

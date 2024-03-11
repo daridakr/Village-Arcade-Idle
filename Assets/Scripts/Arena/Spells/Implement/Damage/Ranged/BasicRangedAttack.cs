@@ -8,10 +8,5 @@ namespace Arena
         {
             _config = config;
         }
-
-        protected override void Perform(float lifeTime)
-        {
-
-        }
     }
 }

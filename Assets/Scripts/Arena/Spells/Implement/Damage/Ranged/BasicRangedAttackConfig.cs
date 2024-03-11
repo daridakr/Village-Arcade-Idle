@@ -12,5 +12,7 @@ namespace Arena
         public GameObject Projectile => _projectile;
         public int Count => _count;
         public float Speed => _speed;
+
+        public override Spell InstantiateSpell() => new BasicRangedAttack(this);
     }
 }

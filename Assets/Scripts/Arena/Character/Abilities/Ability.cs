@@ -51,12 +51,14 @@ namespace Vampire
         {
             this.abilityManager = abilityManager;
             this.entityManager = entityManager;
+
             // Register any upgradeable fields attached to this object
             upgradeableValues = this.GetType()
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public)
                 .Where(fi => typeof(IUpgradeableValue).IsAssignableFrom(fi.FieldType))
                 .Select(fi => fi.GetValue(this) as IUpgradeableValue)
                 .ToList();
+
             upgradeableValues.ForEach(x => abilityManager.RegisterUpgradeableValue(x));
             if (upgradeableValues.Count > 0)
                 maxLevel = upgradeableValues.Max(x => x.UpgradeCount) + 1;  // max level = total number upgrades + 1 for starting level

@@ -9,8 +9,7 @@ namespace Arena
     {
         private BarPoints _points;
 
-        public event Action<float> Gained;
-        public event Action<float> Wasted;
+        public event Action<float> Changed;
         public event Action Emptied;
 
         public float ValueNormalazed => _points.Current / _points.Max;
@@ -37,7 +36,8 @@ namespace Arena
             CheckForPointsInitialized();
 
             _points.SubtractPoints(damage);
-            Wasted?.Invoke(damage);
+            Debug.Log(_points.Current);
+            Changed?.Invoke(ValueNormalazed);
         }
 
         private void OnDisable()

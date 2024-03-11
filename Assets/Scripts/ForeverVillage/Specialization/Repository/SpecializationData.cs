@@ -1,3 +1,4 @@
+using Arena;
 using ForeverVillage;
 using System;
 using UnityEngine;
@@ -12,5 +13,6 @@ namespace Village
         [SerializeField] public string PrefabPath;
         [SerializeField] public IAvailableWeaponType[] WeaponTypes;
         [SerializeField] public WeaponConfig[] BaseWeapons;
+        [SerializeField] public SpellsCatalog Spells;
     }
 }

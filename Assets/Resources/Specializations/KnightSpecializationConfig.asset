@@ -28,3 +28,4 @@ MonoBehaviour:
   _baseWeapons:
   - {fileID: 11400000, guid: c09e628cc7b19694ca1fc19e5b0502a8, type: 2}
   - {fileID: 11400000, guid: bb0c7002e0e3c6d47a2b09704922a019, type: 2}
+  _spells: {fileID: 11400000, guid: 399efb9862dd8bf42b95f43680a64339, type: 2}

@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21d6510af5336d34ca8b1efa88282976, type: 3}
-  m_Name: KnightBasicMeleeAttack
+  m_Script: {fileID: 11500000, guid: 1d7c1d0507e2af74eab1935ecef979a4, type: 3}
+  m_Name: KnightSpellsCatalog
   m_EditorClassIdentifier: 
-  _castingTime: 0
-  _lifeTime: 0
-  _cooldownTime: 0.3
-  _damage: 2
-  _verticalOffset: 1.5
-  _range: 1
-  _speed: 1
+  _data:
+  - {fileID: 11400000, guid: 13062f421e8bb8d4fa33188ee3bba3b8, type: 2}

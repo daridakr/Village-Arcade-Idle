@@ -15,5 +15,7 @@ namespace Arena
         {
             _distance = Vector3.Distance(transform.position, position);
         }
+
+        protected void OnTargetDeslocated() => Deslocated?.Invoke(this);
     }
 }

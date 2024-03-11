@@ -1,45 +1,68 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Arena
 {
-    public abstract class Spell :
+    public abstract class Spell : TickableManager,
+        ISpellMeta,
         ISpellEntity,
-        ISpellAction
+        ISpellCuster,
+        ITickable
     {
+        public string Title => _config.Title;
+        public string Description => _config.Description;
+        public Sprite Icon => _config.Icon;
         public float CastingTime => _config.CastingTime;
         public float LifeTime => _config.LifeTime;
         public float Cooldown => _config.Cooldown;
 
         private readonly SpellConfig _config;
-
-        public float _cooldownStartTimeStamp; // Время начала перезарядки
-        public float _cooldownEndTimeStamp;   // Время окончания перезарядки
+        private float _lastCustTime = 0f;
 
         public event Action Custed;
 
-        public Spell(SpellConfig config) => _config = config;
+        public bool CanUseAbility() => Time.time >= _lastCustTime + Cooldown;
 
-        public bool CanCast()
+        public Spell(SpellConfig config)
         {
-            return _cooldownEndTimeStamp <= Time.time;
+            _config = config;
         }
 
-        public void Cust(ITargetable target)
+        public void StartCusting(ITargetsInfo targets)
         {
-            if (target == null)
-                throw new NullReferenceException(nameof(target));
+            if (targets == null || targets.All.Length <= 0)
+                throw new NullReferenceException(nameof(targets));
 
-            if (CanCast())
+            float currentTime = Time.time;
+
+            if (currentTime - _lastCustTime >= Cooldown)
             {
-                // start casting by casting time and when time is over invoke performSpell with life time
-
-                // reset cooldown
-                Perform(LifeTime);
-                Custed?.Invoke();
+                _lastCustTime = currentTime;
+                Cust(targets);
             }
         }
 
-        protected abstract void Perform(float lifeTime); // templtate pattern
+        private void Cust(ITargetsInfo targets)
+        {
+            // start casting by casting time and when time is over invoke performSpell with life time
+            // reset cooldown
+            Perform(targets);
+            Custed?.Invoke();
+        }
+
+        public void Tick()
+        {
+            //_timeSinceLastCast += Time.deltaTime;
+
+            //if (_timeSinceLastCast >= Cooldown && !_canCast)
+            //{
+            //    _timeSinceLastCast = Mathf.Repeat(_timeSinceLastCast, Cooldown);
+            //    _canCast = true;
+            //}
+        }
+
+        //protected abstract void Perform();
+        protected abstract void Perform(ITargetsInfo targetInfo); // templtate pattern
     }
 }

@@ -5,15 +5,19 @@ using UnityEngine;
 namespace Arena
 {
     [RequireComponent(typeof(Collider))]
-    public class TargetDetector : MonoBehaviour
+    public class TargetDetector : MonoBehaviour,
+        ITargetsInfo
     {
         [SerializeField] private TargetTrigger _trigger;
 
         private List<Target> _targets;
 
+        public ITargetable[] All => _targets.ToArray();
         public Target Nearest => _targets[0];
+
         public bool IsTargetDetected => _targets.Count > 0;
 
+        public event Action Changed;
         public event Action OnNoneTarget;
 
         private void OnEnable()
@@ -67,6 +71,8 @@ namespace Arena
             _targets.Add(target);
             target.Deslocated += RemoveTarget;
             SortTargetsByDistance();
+
+            Changed?.Invoke();
         }
 
         private void RemoveTarget(Target target)
@@ -78,6 +84,8 @@ namespace Arena
                 SortTargetsByDistance();
             else
                 OnNoneTarget?.Invoke();
+
+            Changed?.Invoke();
         }
 
         private void SortTargetsByDistance() => _targets.Sort((t1, t2) => t1.Distance.CompareTo(t2.Distance));
