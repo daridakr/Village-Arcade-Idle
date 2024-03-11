@@ -20506,8 +20506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953c6109e90a8b3458863f006e20e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultSpecialization: {fileID: 11400000, guid: 3ca9abccc25d5c94c9c8b96963056cc1,
+    type: 2}
   _movementConfig: {fileID: 11400000, guid: 76ae7edd063abef498cba0a9e212d267, type: 2}
-  _itemsMagnitConfig: {fileID: 11400000, guid: 628436614eed6ed438bd2943cca313a0, type: 2}
+  _itemsMagnitConfig: {fileID: 11400000, guid: 048a57ade673c4c4c80096685c62af76, type: 2}
   _healthConfig: {fileID: 11400000, guid: 9bbd932addba60348819e18d8e917734, type: 2}
   _playerReference: {fileID: 1325599364678354953, guid: 41c667fca4b89974fb11e5b9eb296a67,
     type: 3}

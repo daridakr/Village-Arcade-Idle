@@ -1,5 +1,7 @@
 using ForeverVillage;
 using UnityEngine;
+using Village.Character;
+using Village.Player;
 
 namespace Village
 {
@@ -25,6 +27,8 @@ namespace Village
         {
             base.BindComponents();
 
+            Container.BindInterfacesAndSelfTo<TimerInteractionsController>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
+
             Container.Bind<PlayerReferenceVillage>().FromInstance(_playerInstance).AsSingle().NonLazy();
             Container.Bind<PlayerTimerCleaner>().FromComponentOn(_playerInstance.Interactors).AsSingle();
             Container.Bind<PlayerTimerBuilder>().FromComponentOn(_playerInstance.Interactors).AsSingle();
@@ -44,6 +48,8 @@ namespace Village
             Container.Bind<PlayerPointRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerPointSaver>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerPointSetter>().AsSingle();
+
+            Container.BindInterfacesTo<PlayerWeaponStateControl>().AsSingle();
         }
     }
 }

@@ -2,11 +2,13 @@ using UnityEngine;
 using Village.Player;
 using Village;
 using Zenject;
+using Village.Character;
 
 namespace ForeverVillage
 {
     public abstract class PlayerInstallerBase : MonoInstaller
     {
+        [SerializeField] private KnightSpecializationConfig _defaultSpecialization; // for testing
         [SerializeField] private MovementConfig _movementConfig;
         [SerializeField] private CollectableMagnitConfig _itemsMagnitConfig;
 
@@ -41,9 +43,9 @@ namespace ForeverVillage
             Container.Bind<SpecializationModelInitiator>().AsSingle();
             Container.BindInterfacesTo<AnimatedModelSetuper>().AsSingle();
 
+            Container.BindInterfacesAndSelfTo<PlayerWeapon>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerAnimation>().FromComponentOn(Instance.Model).AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerWeapon>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerEquipment>().FromComponentOn(Instance.Data).AsSingle().NonLazy();
 
             Container.Bind<PlayerMovement>().FromComponentOn(Instance.gameObject).AsSingle();
@@ -63,6 +65,8 @@ namespace ForeverVillage
 
         protected virtual void BindRepository()
         {
+            Container.Bind<KnightSpecializationConfig>().FromInstance(_defaultSpecialization).AsSingle().NonLazy();
+
             Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<SpecializationInstaller>().AsSingle();
 

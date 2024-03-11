@@ -1,21 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Village
 {
-    public class TimerInteractionsController : MonoBehaviour
+    public class TimerInteractionsController : MonoBehaviour,
+        ITimerInteractionsController
     {
         [SerializeField] private AnimatedTimerInteraction[] _interactors;
 
         private List<IAnimatedInteraction> _animatedInteractions;
         private IInputService _inputService;
 
+        public event Action OnInteract;
+        public event Action OnFinished;
+
         [Inject]
-        private void Construct(IInputService inputService)
-        {
-            _inputService = inputService;
-        }
+        private void Construct(IInputService inputService) => _inputService = inputService;
 
         public IEnumerable<IAnimatedInteraction> GetAnimatedInteractions(Transform rigForItem = null)
         {
@@ -42,11 +44,15 @@ namespace Village
         private void OnStarted()
         {
             _inputService.Disable();
+
+            OnInteract?.Invoke();
         }
 
         private void OnStopped()
         {
             _inputService.Enable();
+
+            OnFinished?.Invoke();
         }
 
         private void OnDisable()

@@ -1,4 +1,5 @@
 using ForeverVillage;
+using Village.Character;
 using Zenject;
 
 namespace Village
@@ -11,18 +12,29 @@ namespace Village
         private readonly IPlayerWeaponInitializable _playerWeapon;
         private readonly IPlayerWeaponEquipment _playerWeaponEquipment;
 
-        private const string _defaultSpec = ResourcesParams.Character.Specialization.MaleKnight;
+        //private const string _defaultSpec = ResourcesParams.Character.Specialization.MaleKnight;
+        private SpecializationData _defaultSpecialization;
 
         public SpecializationInstaller(
             ISpecializationRepository repository,
             SpecializationModelInitiator modelSetupper,
             IPlayerWeaponInitializable playerWeapon,
-            IPlayerWeaponEquipment playerWeaponEquipment)
+            IPlayerWeaponEquipment playerWeaponEquipment,
+            KnightSpecializationConfig defaultSpecialization)
         {
             _repository = repository;
             _modelInitiator = modelSetupper;
             _playerWeapon = playerWeapon;
             _playerWeaponEquipment = playerWeaponEquipment;
+
+            _defaultSpecialization = new SpecializationData
+            {
+                BaseWeapons = defaultSpecialization.Weapons,
+                Icon = defaultSpecialization.Meta.Icon,
+                PrefabPath = defaultSpecialization.MalePrefabPath,
+                Title = defaultSpecialization.Meta.Title,
+                WeaponTypes = defaultSpecialization.WeaponTypes
+            };
         }
 
         public void Initialize()
@@ -30,7 +42,7 @@ namespace Village
             if (_repository.Load(out SpecializationData specialization))
                 Install(specialization);
             else
-                _modelInitiator.Init(_defaultSpec);
+                Install(_defaultSpecialization);
         }
 
         private void Install(SpecializationData data)

@@ -6,7 +6,8 @@ using UnityEngine;
 namespace ForeverVillage
 {
     public class PlayerWeapon : MonoBehaviour,
-        IPlayerWeaponInitializable
+        IPlayerWeaponInitializable,
+        IPlayerWeaponControl
     {
         private List<Weapon> _weapons;
         private IAvailableWeaponType[] _availibaleTypes;
