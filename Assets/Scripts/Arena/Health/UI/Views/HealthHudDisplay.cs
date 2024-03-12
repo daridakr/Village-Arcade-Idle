@@ -17,7 +17,7 @@ namespace Arena.Player
 
         public void UpdateDisplay(float normalazedValue) => _healthSlider.value = normalazedValue;
 
-        private void Start() => _healthSlider.value = _health.ValueNormalazed;
+        //private void Start() => _healthSlider.value = _health.ValueNormalazed;
 
         private void OnDisable() => _health.Changed -= UpdateDisplay;
     }

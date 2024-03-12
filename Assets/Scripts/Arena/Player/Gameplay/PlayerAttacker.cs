@@ -9,7 +9,7 @@ namespace Arena
         [SerializeField] private PlayerSpells _spells;
         [SerializeField] private PlayerWeapon _weapon;
 
-        private ITargetsInfo _targetsInfo;
+        private float _totalDamage;
 
         private void OnEnable()
         {

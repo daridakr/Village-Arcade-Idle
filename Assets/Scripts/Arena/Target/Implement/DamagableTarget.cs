@@ -4,16 +4,16 @@ namespace Arena
 {
     public class DamagableTarget : Target
     {
-        [SerializeField] private Health _helath;
+        [SerializeField] private Health _health;
 
         private void OnEnable()
         {
-            _helath.Emptied += OnTargetDeslocated;
+            _health.Emptied += OnTargetDeslocated;
         }
 
         private void OnDisable()
         {
-            _helath.Emptied -= OnTargetDeslocated;
+            _health.Emptied -= OnTargetDeslocated;
         }
     }
 }

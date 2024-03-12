@@ -11,42 +11,40 @@ namespace Arena
 
         public event Action<float> Changed;
         public event Action Emptied;
-
-        public float ValueNormalazed => _points.Current / _points.Max;
+        public event Action<float> Damaged;
 
         protected void InitPoints(HealthConfig config)
         {
             _points = new BarPoints(config.Min, config.Max);
+
             _points.OnEmpty += () => Emptied?.Invoke();
-            //_points.Changed += OnHealthChanged;
+            _points.Changed += (float value) => Changed?.Invoke(value);
+
+            Changed?.Invoke(_points.ValueNormalazed);
         }
 
-        //private void OnHealthChanged() => Changed?.Invoke(ValueNormalazed);
+        public void GainHealth(float value)
+        {
+            CheckForInitialized();
 
-        //public void GainHealth(float value)
-        //{
-        //    CheckForPointsInitialized();
-
-        //    _points.AddPoints(value);
-        //    Gained?.Invoke(value);
-        //}
+            _points.AddPoints(value);
+        }
 
         public virtual void TakeDamage(float damage)
         {
-            CheckForPointsInitialized();
+            CheckForInitialized();
 
             _points.SubtractPoints(damage);
-            Debug.Log(_points.Current);
-            Changed?.Invoke(ValueNormalazed);
+            Damaged?.Invoke(damage);
         }
 
         private void OnDisable()
         {
             _points.OnEmpty -= () => Emptied?.Invoke();
-            //_points.Changed -= OnHealthChanged;
+            _points.Changed -= (float value) => Changed?.Invoke(value);
         }
 
-        private void CheckForPointsInitialized()
+        private void CheckForInitialized()
         {
             if (_points == null)
                 throw new NullReferenceException(nameof(BarPoints));

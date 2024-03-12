@@ -10,9 +10,10 @@ namespace Vampire
         private bool _isClamp;
 
         public float Current => _current;
+        public float ValueNormalazed => Current / Max;
         public float Max => _max;
 
-        public event Action Changed;
+        public event Action<float> Changed;
         public event Action OnEmpty;
         public event Action OnFull;
 
@@ -32,7 +33,7 @@ namespace Vampire
             _current += amount;
 
             CheckPoints();
-            Changed?.Invoke();
+            Changed?.Invoke(ValueNormalazed);
         }
 
         public void SubtractPoints(float amount)
@@ -43,7 +44,7 @@ namespace Vampire
             _current -= amount;
 
             CheckPoints();
-            Changed?.Invoke();
+            Changed?.Invoke(ValueNormalazed);
         }
 
         public void SetPoints(float amount)
@@ -54,7 +55,7 @@ namespace Vampire
             _current = amount;
 
             CheckPoints();
-            Changed?.Invoke();
+            Changed?.Invoke(ValueNormalazed);
         }
 
         private void CheckPoints()

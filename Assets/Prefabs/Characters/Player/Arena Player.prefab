@@ -44,7 +44,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 6
+  m_Radius: 5
   m_Height: 1
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -357,6 +357,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3796660687002633296, guid: b8265c8091e39b341b2ab745fbd852ba,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7401578257759524109, guid: b8265c8091e39b341b2ab745fbd852ba,
         type: 3}
       propertyPath: m_Name
@@ -633,7 +638,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataComponents: {fileID: 6561836900302757462}
   _modelContainer: {fileID: 2794292587998258473}
-  startingAbilities: []
   collectableCollider: {fileID: 4815041553131997809}
 --- !u!114 &7121155364999617204
 MonoBehaviour:

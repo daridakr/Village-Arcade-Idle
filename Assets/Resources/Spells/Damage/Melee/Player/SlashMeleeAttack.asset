@@ -18,7 +18,7 @@ MonoBehaviour:
     Icon: {fileID: 0}
   _castingTime: 0
   _lifeTime: 0
-  _cooldownTime: 1.5
+  _cooldownTime: 1
   _damage: 10
   _verticalOffset: 1.5
   _range: 1
