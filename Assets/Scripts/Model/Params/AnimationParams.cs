@@ -10,4 +10,9 @@ public static class AnimationParams
         public static readonly string IsClean = nameof(IsClean);
         public static readonly string IsBuild = nameof(IsBuild);
     }
+
+    public static class Monster
+    {
+        public static readonly string IsWalking = nameof(IsWalking);
+    }
 }

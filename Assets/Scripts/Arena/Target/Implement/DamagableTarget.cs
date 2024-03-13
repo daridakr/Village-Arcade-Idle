@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Arena
@@ -6,14 +7,18 @@ namespace Arena
     {
         [SerializeField] private Health _health;
 
+        public override event Action<Target> Deslocated;
+
         private void OnEnable()
         {
-            _health.Emptied += OnTargetDeslocated;
+            _health.Emptied += OnTargetDead;
         }
 
-        private void OnDisable()
+        private void OnTargetDead()
         {
-            _health.Emptied -= OnTargetDeslocated;
+            _health.Emptied -= OnTargetDead;
+
+            Deslocated?.Invoke(this);
         }
     }
 }

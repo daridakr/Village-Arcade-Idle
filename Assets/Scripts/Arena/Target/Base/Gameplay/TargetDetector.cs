@@ -43,6 +43,7 @@ namespace Arena
         {
             foreach (var target in _targets)
             {
+                if (target == null) _targets.Remove(target);
                 target.SetDistanceTo(transform.position);
             }
         }

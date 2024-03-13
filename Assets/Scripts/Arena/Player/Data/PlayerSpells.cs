@@ -11,6 +11,9 @@ namespace Arena
 
         private Spell[] _activeSpells;
 
+        //DamageSpell _damagableSpells;   foreach-> damageSpell.Cast(IWeapon);
+        //BuffSpells _buffs;    foreach-> buff.StartCasting();
+
         public event Action Initialized;
 
         [Inject]

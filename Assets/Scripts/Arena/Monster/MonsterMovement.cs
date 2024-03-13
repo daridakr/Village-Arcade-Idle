@@ -1,0 +1,178 @@
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
+
+namespace Arena
+{
+    [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+    public class MonsterMovement : MonoBehaviour,
+        IKnockbackable
+    {
+        [SerializeField] private float _stillDelay = 1f;
+        [Range(0.001f, 0.1f)][SerializeField] private float _stillThreshold = 0.05f;
+        [SerializeField] private float _maxKnockbackTime = 0.5f;
+        [SerializeField] private MonsterPlayerSensor _sensor;
+
+        private NavMeshAgent _agent;
+        private Rigidbody _body;
+        private float _baseSpeed;
+        private Transform _playerPosition;
+
+        private Coroutine _moveCoroutine;
+        private Coroutine _slowCoroutine;
+
+        private static NavMeshTriangulation _triangulation;
+
+        public event Action<bool> OnMove;
+
+        private void OnEnable()
+        {
+            _sensor.OnPlayerEnter += OnSeePlayer;
+            _sensor.OnPlayerExit += OnLosePlayer;
+        }
+
+        private void Awake()
+        {
+            _agent = GetComponent<NavMeshAgent>();
+            _body = GetComponent<Rigidbody>();
+
+            if (_triangulation.vertices == null || _triangulation.vertices.Length == 0)
+                _triangulation = NavMesh.CalculateTriangulation();
+
+            _baseSpeed = _agent.speed;
+        }
+
+        private void Start()
+        {
+            _moveCoroutine = StartCoroutine(Roam());
+            _baseSpeed = _agent.speed;
+        }
+
+        private void Update() => OnMove?.Invoke(_agent.velocity.magnitude > 0.01f);
+
+        private IEnumerator Roam()
+        {
+            WaitForSeconds wait = new WaitForSeconds(_stillDelay);
+
+            while (enabled)
+            {
+                int index = UnityEngine.Random.Range(1, _triangulation.vertices.Length);
+
+                _agent.SetDestination(
+                    Vector3.Lerp(
+                        _triangulation.vertices[index - 1],
+                        _triangulation.vertices[index],
+                        UnityEngine.Random.value
+                    )
+                );
+
+                yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
+                yield return wait;
+            }
+        }
+
+        public void StopMoving()
+        {
+            if (_moveCoroutine != null)
+                StopCoroutine(_moveCoroutine);
+
+            _agent.isStopped = true;
+            _agent.enabled = false;
+        }
+
+        //public void Slow(AnimationCurve slowCurve)
+        //{
+        //    if (_slowCoroutine != null)
+        //        StopCoroutine(_slowCoroutine);
+
+        //    _slowCoroutine = StartCoroutine(SlowDown(slowCurve));
+        //}
+
+        //private IEnumerator SlowDown(AnimationCurve slowCurve)
+        //{
+        //    float time = 0;
+
+        //    while (time < slowCurve.keys[^1].time)
+        //    {
+        //        _agent.speed = _baseSpeed * slowCurve.Evaluate(time);
+        //        time += Time.deltaTime;
+
+        //        yield return null;
+        //    }
+
+        //    _agent.speed = _baseSpeed;
+        //}
+
+        public void OnSeePlayer(Transform playerTransform)
+        {
+            if (_agent.enabled)
+            {
+                StopCoroutine(_moveCoroutine);
+                _playerPosition = playerTransform;
+                _moveCoroutine = StartCoroutine(ChasePlayer(playerTransform));
+            }
+        }
+
+        public void OnLosePlayer()
+        {
+            if (_agent.enabled)
+            {
+                StopCoroutine(_moveCoroutine);
+                _playerPosition = null;
+                _moveCoroutine = StartCoroutine(Roam());
+            }
+        }
+
+        private IEnumerator ChasePlayer(Transform player)
+        {
+            while (true)
+            {
+                if (_agent.enabled)
+                {
+                    _agent.SetDestination(player.position);
+                }
+
+                yield return new WaitForSeconds(0.125f);
+            }
+        }
+
+        public void Knockback(Vector3 force)
+        {
+            StopCoroutine(_moveCoroutine);
+            _moveCoroutine = StartCoroutine(ApplyKnockback(force));
+        }
+
+        private IEnumerator ApplyKnockback(Vector3 force)
+        {
+            yield return null;
+            _agent.enabled = false;
+            _body.useGravity = true;
+            _body.isKinematic = false;
+            _body.AddForce(force);
+
+            yield return new WaitForFixedUpdate();
+            float knockbackTime = Time.time;
+
+            yield return new WaitUntil(
+                () => _body.velocity.magnitude < _stillThreshold || Time.time > knockbackTime + _maxKnockbackTime
+            );
+
+            yield return new WaitForSeconds(0.25f);
+
+            _body.velocity = Vector3.zero;
+            _body.angularVelocity = Vector3.zero;
+            _body.useGravity = false;
+            _body.isKinematic = true;
+            _agent.Warp(transform.position);
+            _agent.enabled = true;
+
+            yield return null;
+
+            if (_playerPosition != null)
+                _moveCoroutine = StartCoroutine(ChasePlayer(_playerPosition));
+            else
+                _moveCoroutine = StartCoroutine(Roam());
+        }
+    }
+}

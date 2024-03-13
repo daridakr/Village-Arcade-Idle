@@ -3,6 +3,7 @@ namespace Arena
     public abstract class DamageSpell : Spell
     {
         private readonly DamageSpellConfig _config;
+        protected Target _target;
 
         public float Damage => _config.Damage;
         public float VOffset => _config.VerticalOffset;
@@ -12,11 +13,11 @@ namespace Arena
             _config = config;
         }
 
-        protected override void Perform(ITargetsInfo targetsInfo)
+        protected override void Perform(ITargetsInfo targetsInfo) // melee
         {
-            Target nearest = targetsInfo.Nearest;
+            _target = targetsInfo.Nearest;
 
-            if (nearest.TryGetComponent(out IDamagable damagable))
+            if (_target.TryGetComponent(out IDamagable damagable))
                 damagable.TakeDamage(Damage);
         }
     }

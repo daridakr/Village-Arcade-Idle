@@ -7,11 +7,13 @@ namespace Arena
         [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private float _rotationSpeed = 5f;
 
+        private Target _currentTarget;
         private Vector3 _currentDirection;
 
         private void OnEnable()
         {
-            _targetDetector.OnNoneTarget += StartListenMovementDirection;
+            _targetDetector.OnNoneTarget += OnNoneTarget;
+            //_targetDetector.Changed += LookAtTarget;
         }
 
         private void Update()
@@ -21,14 +23,16 @@ namespace Arena
                 if (_targetDetector.IsTargetDetected)
                 {
                     StopListenMovementDirection();
-                    LookAtTarget();
+                    UpdateLookDirection();
                 }
             }
         }
 
-        private void LookAtTarget()
+        private void UpdateLookDirection()
         {
-            Vector3 targetPosition = _targetDetector.Nearest.transform.position;
+            _currentTarget = _targetDetector.Nearest;
+
+            Vector3 targetPosition = _currentTarget.transform.position;
             Vector3 directionToTarget = (targetPosition - transform.position).normalized;
             directionToTarget.y = 0f;
 
@@ -36,9 +40,17 @@ namespace Arena
             UpdateRotation(_currentDirection);
         }
 
+        private void OnNoneTarget()
+        {
+            _currentTarget = null;
+
+            StartListenMovementDirection();
+        }
+
         private void OnDisable()
         {
-            _targetDetector.OnNoneTarget -= StartListenMovementDirection;
+            _targetDetector.OnNoneTarget -= OnNoneTarget;
+            //_targetDetector.Changed -= LookAtTarget;
         }
     }
 }

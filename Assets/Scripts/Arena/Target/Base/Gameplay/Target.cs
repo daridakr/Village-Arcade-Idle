@@ -9,13 +9,11 @@ namespace Arena
         private float _distance;
 
         public float Distance => _distance;
-        public event Action<Target> Deslocated;
+        public abstract event Action<Target> Deslocated;
 
         public void SetDistanceTo(Vector3 position)
         {
             _distance = Vector3.Distance(transform.position, position);
         }
-
-        protected void OnTargetDeslocated() => Deslocated?.Invoke(this);
     }
 }

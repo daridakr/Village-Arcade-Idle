@@ -9,6 +9,7 @@ namespace Arena
         public float SlashTime => _config.SlashTime;
 
         private readonly SlashSpellConfig _config;
+        private KnockbackConfig _knockbackConfig => _config.KnockbackConfig;
 
         public SlashSpell(SlashSpellConfig config) : base(config)
         {
@@ -19,6 +20,11 @@ namespace Arena
         {
             base.Perform(targetsInfo);
 
+            if (_target.TryGetComponent(out IKnockbackable knockbackable))
+            {
+                //Vector3 force = _knockbackConfig.GetKnockbackStrength(-HitNormal, DistanceTraveled);
+                knockbackable.Knockback(Vector3.back);
+            }
         }
     }
 }

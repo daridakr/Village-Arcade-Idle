@@ -47,8 +47,9 @@ namespace Arena
         {
             // start casting by casting time and when time is over invoke performSpell with life time
             // reset cooldown
-            Perform(targets);
+
             Custed?.Invoke();
+            Perform(targets);
         }
 
         public void Tick()

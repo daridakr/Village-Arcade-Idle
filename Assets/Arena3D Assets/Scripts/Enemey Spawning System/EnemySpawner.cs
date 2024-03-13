@@ -67,8 +67,10 @@ namespace Arena
         private ISpawnableEnemy GetSpawnableEnemyUnderThreatLevel(float threatLevel)
         {
             ISpawnableEnemy[] validEnemies = SpawnableEnemyPrefabs.Where(E => 0f < E.ThreatLevel && E.ThreatLevel <= threatLevel).ToArray();
+
             float totalWeight = validEnemies.Sum(E => E.SpawnWeight);
             float randomWeight = Random.Range(0f, totalWeight);
+
             foreach (var item in validEnemies)
             {
                 randomWeight -= item.SpawnWeight;

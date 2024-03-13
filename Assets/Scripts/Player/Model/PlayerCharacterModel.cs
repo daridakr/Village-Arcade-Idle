@@ -14,6 +14,7 @@ public class PlayerCharacterModel : MonoBehaviour,
     private bool _isMovementDirection;
 
     public Vector3 LookDirection => _lookDirection;
+    public Vector3 Position => transform.position;
     public Transform CenterTransform => _centerTransform;
     public ICustomizableCharacter Customizable => _instance;
     public Transform HeadRig => _instance.HeadRig;

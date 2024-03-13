@@ -3,8 +3,14 @@ using UnityEngine;
 using Village.Player;
 using Zenject;
 
+public interface IPlayerPosition
+{
+    public Vector3 CurrentPosition { get; }
+}
+
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour,
+    IPlayerPosition
 {
     protected Rigidbody _rigidbody;
     protected float _speed;

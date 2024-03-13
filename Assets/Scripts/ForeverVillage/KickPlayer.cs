@@ -14,14 +14,14 @@ namespace Village
             _playerTrigger.Enter += OnPlayerTriggerEnter;
         }
 
-        private void OnPlayerTriggerStay(PlayerMovementUpgradable playerMovement)
+        private void OnPlayerTriggerStay(PlayerMovement playerMovement)
         {
             //playerMovement.MoveToTarget(_pointToKick);
             _playerTrigger.Stay -= OnPlayerTriggerStay;
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
         }
 
-        private void OnPlayerTriggerEnter(PlayerMovementUpgradable playerMovement)
+        private void OnPlayerTriggerEnter(PlayerMovement playerMovement)
         {
             _playerTrigger.Enter -= OnPlayerTriggerEnter;
             _playerTrigger.Stay -= OnPlayerTriggerStay;
