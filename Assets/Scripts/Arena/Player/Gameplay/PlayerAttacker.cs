@@ -21,6 +21,7 @@ namespace Arena
         {
             if (_targetDetector.IsTargetDetected)
             {
+                // в общий дамаг плюсуется дамаг от оружия с дамагом главного спелла 
                 _spells.Activate(_targetDetector);
                 //_weapon.CauseDamage(_targetDetector);
                 Attack();
