@@ -13,7 +13,6 @@ namespace Arena
         public SlashSpell(SlashSpellConfig config) : base(config)
         {
             _config = config;
-            Debug.Log("Instantiate slash spell");
         }
 
         protected override void Perform(ITargetsInfo targetsInfo)

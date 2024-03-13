@@ -44,7 +44,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 5
+  m_Radius: 6
   m_Height: 1
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -554,6 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 7121155364999617204}
+  _attacker: {fileID: 400365557679049072}
 --- !u!136 &4815041553131997809 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 2312494819297942932, guid: 795ef983d927dd94d8d5098bc2a9f3c8,

@@ -3,6 +3,7 @@ public static class AnimationParams
     public static readonly string Speed = nameof(Speed);
     public static readonly string Idle = nameof(Idle);
     public static readonly string Flying = nameof(Flying);
+    public static readonly string Attack = nameof(Attack);
 
     public static class Interactions
     {

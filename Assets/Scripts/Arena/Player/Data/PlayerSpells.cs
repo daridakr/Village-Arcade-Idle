@@ -1,27 +1,34 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Arena
 {
-    public sealed class PlayerSpells : MonoBehaviour
+    public sealed class PlayerSpells : MonoBehaviour,
+        IInitilizable
     {
         private ISpellsController _spellsController;
 
         private Spell[] _activeSpells;
 
+        public event Action Initialized;
+
         [Inject]
         private void Construct(ISpellsController spellsController) => 
             _spellsController = spellsController;
 
-        private void OnEnable()
-        {
-            _spellsController.Initialized += OnSpellsInitialized;
-        }
+        public Spell GetMain() => _activeSpells[0];
+
+        private void OnEnable() => _spellsController.Initialized += OnSpellsInitialized;
 
         private void OnSpellsInitialized()
         {
+            _spellsController.Initialized -= OnSpellsInitialized;
+
             _spellsController.ActivateSpellAtIndex(0);
             _activeSpells = _spellsController.GetAllActiveSpells();
+
+            Initialized?.Invoke();
         }
 
         public float GetSpellsDamage()
@@ -39,17 +46,10 @@ namespace Arena
             return damage;
         }
 
-        public void Activate(ITargetsInfo targetsInfo)
+        public void StartCusting(ITargetsInfo targetsInfo)
         {
             foreach (Spell spell in _activeSpells)
-            {
                 spell.StartCusting(targetsInfo);
-            }
-        }
-
-        private void OnDisable()
-        {
-            _spellsController.Initialized -= OnSpellsInitialized;
         }
     }
 }
