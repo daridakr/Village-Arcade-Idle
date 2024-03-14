@@ -12,9 +12,9 @@ namespace Arena
 
         private void OnMonsterDie()
         {
-            _health.Emptied -= OnMonsterDie;
-
             _movement.StopMoving();
+
+            _health.Emptied -= OnMonsterDie;
             Destroy(gameObject, _destroyTime);
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Arena
 {
-    [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+    [RequireComponent(typeof(MonsterPhysicStateControl))]
     public class MonsterMovement : MonoBehaviour,
         IKnockbackable
     {
@@ -14,9 +14,7 @@ namespace Arena
         [SerializeField] private float _maxKnockbackTime = 0.5f;
         [SerializeField] private MonsterPlayerSensor _sensor;
 
-        private NavMeshAgent _agent;
-        private Rigidbody _body;
-        private float _baseSpeed;
+        private MonsterPhysicStateControl _physicsControl;
         private Transform _playerPosition;
 
         private Coroutine _moveCoroutine;
@@ -34,22 +32,16 @@ namespace Arena
 
         private void Awake()
         {
-            _agent = GetComponent<NavMeshAgent>();
-            _body = GetComponent<Rigidbody>();
+            _physicsControl = GetComponent<MonsterPhysicStateControl>();
+            _physicsControl.Initialize();
 
             if (_triangulation.vertices == null || _triangulation.vertices.Length == 0)
                 _triangulation = NavMesh.CalculateTriangulation();
 
-            _baseSpeed = _agent.speed;
-        }
-
-        private void Start()
-        {
             _moveCoroutine = StartCoroutine(Roam());
-            _baseSpeed = _agent.speed;
         }
 
-        private void Update() => OnMove?.Invoke(_agent.velocity.magnitude > 0.01f);
+        private void Update() => OnMove?.Invoke(_physicsControl.AgentVelocityMagnitude > 0.01f);
 
         private IEnumerator Roam()
         {
@@ -59,7 +51,7 @@ namespace Arena
             {
                 int index = UnityEngine.Random.Range(1, _triangulation.vertices.Length);
 
-                _agent.SetDestination(
+                _physicsControl.SetAgentDestination(
                     Vector3.Lerp(
                         _triangulation.vertices[index - 1],
                         _triangulation.vertices[index],
@@ -67,7 +59,7 @@ namespace Arena
                     )
                 );
 
-                yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
+                yield return new WaitUntil(() => _physicsControl.RemainingDistance <= _physicsControl.StoppingDistance);
                 yield return wait;
             }
         }
@@ -77,8 +69,8 @@ namespace Arena
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
 
-            _agent.isStopped = true;
-            _agent.enabled = false;
+            _physicsControl.StopAgent();
+            _physicsControl.DisablePhysics();
         }
 
         //public void Slow(AnimationCurve slowCurve)
@@ -106,7 +98,7 @@ namespace Arena
 
         public void OnSeePlayer(Transform playerTransform)
         {
-            if (_agent.enabled)
+            if (_physicsControl.IsAgentEnabled)
             {
                 StopCoroutine(_moveCoroutine);
                 _playerPosition = playerTransform;
@@ -116,7 +108,7 @@ namespace Arena
 
         public void OnLosePlayer()
         {
-            if (_agent.enabled)
+            if (_physicsControl.IsAgentEnabled)
             {
                 StopCoroutine(_moveCoroutine);
                 _playerPosition = null;
@@ -128,10 +120,8 @@ namespace Arena
         {
             while (true)
             {
-                if (_agent.enabled)
-                {
-                    _agent.SetDestination(player.position);
-                }
+                if (_physicsControl.IsAgentEnabled)
+                    _physicsControl.SetAgentDestination(player.position);
 
                 yield return new WaitForSeconds(0.125f);
             }
@@ -139,33 +129,33 @@ namespace Arena
 
         public void Knockback(Vector3 force)
         {
-            StopCoroutine(_moveCoroutine);
-            _moveCoroutine = StartCoroutine(ApplyKnockback(force));
+            if (_physicsControl.IsAgentEnabled)
+            {
+                StopCoroutine(_moveCoroutine);
+                _moveCoroutine = StartCoroutine(ApplyKnockback(force));
+            }
         }
 
         private IEnumerator ApplyKnockback(Vector3 force)
         {
             yield return null;
-            _agent.enabled = false;
-            _body.useGravity = true;
-            _body.isKinematic = false;
-            _body.AddForce(force);
+
+            _physicsControl.DisableAgent();
+            _physicsControl.EnableBody();
+            _physicsControl.AddBodyForce(force);
 
             yield return new WaitForFixedUpdate();
             float knockbackTime = Time.time;
 
             yield return new WaitUntil(
-                () => _body.velocity.magnitude < _stillThreshold || Time.time > knockbackTime + _maxKnockbackTime
+                () => _physicsControl.BodyVelocityMagnitude < _stillThreshold || Time.time > knockbackTime + _maxKnockbackTime
             );
 
             yield return new WaitForSeconds(0.25f);
 
-            _body.velocity = Vector3.zero;
-            _body.angularVelocity = Vector3.zero;
-            _body.useGravity = false;
-            _body.isKinematic = true;
-            _agent.Warp(transform.position);
-            _agent.enabled = true;
+            _physicsControl.DisableBody();
+            _physicsControl.EnableAgent();
+            _physicsControl.AgentWarp(transform.position);
 
             yield return null;
 

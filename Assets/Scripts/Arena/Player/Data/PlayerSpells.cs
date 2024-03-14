@@ -5,11 +5,12 @@ using Zenject;
 namespace Arena
 {
     public sealed class PlayerSpells : MonoBehaviour,
-        IInitilizable
+        IInitilizable, ICuster
     {
         private ISpellsController _spellsController;
-
         private Spell[] _activeSpells;
+
+        public Transform Transform => transform;
 
         //DamageSpell _damagableSpells;   foreach-> damageSpell.Cast(IWeapon);
         //BuffSpells _buffs;    foreach-> buff.StartCasting();
@@ -49,10 +50,10 @@ namespace Arena
             return damage;
         }
 
-        public void StartCusting(ITargetsInfo targetsInfo)
+        public void Cust(ITargetsInfo targetsInfo)
         {
             foreach (Spell spell in _activeSpells)
-                spell.StartCusting(targetsInfo);
+                spell.StartCusting(this, targetsInfo);
         }
     }
 }

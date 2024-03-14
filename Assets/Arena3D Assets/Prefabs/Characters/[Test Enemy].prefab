@@ -421,7 +421,8 @@ GameObject:
   - component: {fileID: 662529860213722402}
   - component: {fileID: 5266109283738829080}
   - component: {fileID: 4523717828584662789}
-  - component: {fileID: 3367835414871354052}
+  - component: {fileID: 3176122472486118593}
+  - component: {fileID: 4328217227314341648}
   m_Layer: 12
   m_Name: '[Test Enemy]'
   m_TagString: Untagged
@@ -582,7 +583,19 @@ MonoBehaviour:
   <ThreatLevel>k__BackingField: 1
   <SpawnWeight>k__BackingField: 100
   <EXPReward>k__BackingField: 100
---- !u!114 &3367835414871354052
+--- !u!114 &3176122472486118593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880233426290204094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310731ceeec80684cb4db34eebc20fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4328217227314341648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -22,8 +22,8 @@ namespace Arena
 
             if (_target.TryGetComponent(out IKnockbackable knockbackable))
             {
-                //Vector3 force = _knockbackConfig.GetKnockbackStrength(-HitNormal, DistanceTraveled);
-                knockbackable.Knockback(Vector3.back);
+                Vector3 knockbackForce = (_target.transform.position - _custer.Transform.position).normalized * 50000f;
+                knockbackable.Knockback(knockbackForce);
             }
         }
     }

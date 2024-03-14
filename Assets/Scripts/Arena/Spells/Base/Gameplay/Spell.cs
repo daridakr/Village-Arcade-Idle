@@ -7,8 +7,7 @@ namespace Arena
     public abstract class Spell : TickableManager,
         ISpellMeta,
         ISpellEntity,
-        ISpellCuster,
-        ITickable
+        ICustedSpell
     {
         public string Title => _config.Title;
         public string Description => _config.Description;
@@ -16,6 +15,8 @@ namespace Arena
         public float CastingTime => _config.CastingTime;
         public float LifeTime => _config.LifeTime;
         public float Cooldown => _config.Cooldown;
+
+        protected ICusterPosition _custer;
 
         private readonly SpellConfig _config;
         private float _lastCustTime = 0f;
@@ -29,11 +30,12 @@ namespace Arena
             _config = config;
         }
 
-        public void StartCusting(ITargetsInfo targets)
+        public void StartCusting(ICusterPosition custer, ITargetsInfo targets)
         {
             if (targets == null || targets.All.Length <= 0)
                 throw new NullReferenceException(nameof(targets));
 
+            _custer = custer;
             float currentTime = Time.time;
 
             if (currentTime - _lastCustTime >= Cooldown)
@@ -50,17 +52,6 @@ namespace Arena
 
             Custed?.Invoke();
             Perform(targets);
-        }
-
-        public void Tick()
-        {
-            //_timeSinceLastCast += Time.deltaTime;
-
-            //if (_timeSinceLastCast >= Cooldown && !_canCast)
-            //{
-            //    _timeSinceLastCast = Mathf.Repeat(_timeSinceLastCast, Cooldown);
-            //    _canCast = true;
-            //}
         }
 
         //protected abstract void Perform();
