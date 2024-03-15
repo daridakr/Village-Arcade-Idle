@@ -36,12 +36,12 @@ namespace Village
         {
             ClearContent();
 
-            ISpecialization[] specializations = _controller.GetAllSpecializations();
+            ICharacterSpecialization[] specializations = _controller.GetAllSpecializations();
 
             foreach (var model in specializations)
             {
                 SpecializationButtonView view = Instantiate(_buttonPrefab, _buttonsContent);
-                view.name = model.Title;
+                view.name = model.Data.Meta.Title;
                 _buttonsViews.Add(view);
 
                 var presenter = new SpecializationPresenter(model, view);
@@ -61,7 +61,7 @@ namespace Village
             clicked.Button.SetClicked();
             _selected = clicked.Button;
 
-            _infoDisplayer.Display(clicked.Model);
+            _infoDisplayer.Display(clicked.Meta);
         }
 
         private void ClearContent()

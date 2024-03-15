@@ -17,6 +17,6 @@ namespace Arena
             _specInstaller = specializationInstaller;
         }
 
-        public void Initialize() => _spellsSetupper.Setup(_specInstaller.Data.Spells);
+        public void Initialize() => _spellsSetupper.Setup(_specInstaller.Specialization.Data.Spells);
     }
 }

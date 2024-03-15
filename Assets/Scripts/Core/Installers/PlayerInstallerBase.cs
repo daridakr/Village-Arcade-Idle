@@ -8,8 +8,8 @@ namespace ForeverVillage
 {
     public abstract class PlayerInstallerBase : MonoInstaller
     {
-        [SerializeField] private KnightSpecializationConfig _defaultSpecialization; // for testing
         [SerializeField] private MovementConfig _movementConfig;
+        [SerializeField] private SpecializationsController _specializations;
         [SerializeField] private CollectableMagnitConfig _itemsMagnitConfig;
 
         protected abstract PlayerReferenceBase Reference { get; }
@@ -27,6 +27,10 @@ namespace ForeverVillage
 
         protected virtual void BindConfigs()
         {
+            Container.Bind<ICustomizableCharacterFactory>().To<CustomizableCharacterFactory>().AsSingle();
+            Container.Bind<SpecializationInstantiator>().AsSingle();
+            Container.Bind<ISpecializationGetter>().To<SpecializationsController>().FromInstance(_specializations).AsSingle();
+
             Container.Bind<MovementConfig>().FromInstance(_movementConfig).AsSingle().NonLazy();
             Container.Bind<CollectableMagnitConfig>().FromInstance(_itemsMagnitConfig).AsSingle().NonLazy();
         }
@@ -65,8 +69,6 @@ namespace ForeverVillage
 
         protected virtual void BindRepository()
         {
-            Container.Bind<KnightSpecializationConfig>().FromInstance(_defaultSpecialization).AsSingle().NonLazy();
-
             Container.Bind<ISpecializationRepository>().To<SpecializationRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<SpecializationInstaller>().AsSingle();
 

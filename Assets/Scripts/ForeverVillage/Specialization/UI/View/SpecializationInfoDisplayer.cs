@@ -8,7 +8,7 @@ namespace Village
         [SerializeField] private TMP_Text _titleText;
         [SerializeField] private TMP_Text _descriptionText;
 
-        public void Display(ISpecialization specialization)
+        public void Display(SpecializationMetadata specialization)
         {
             _titleText.text = specialization.Title;
             _descriptionText.text = specialization.Description;

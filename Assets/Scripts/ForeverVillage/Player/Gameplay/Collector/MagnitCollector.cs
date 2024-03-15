@@ -9,10 +9,7 @@ namespace ForeverVillage
         [SerializeField] protected DroppableTrigger<D> _trigger;
         [SerializeField] protected CollectableMagnit _magnit;
 
-        private void OnEnable()
-        {
-            _trigger.Stay += OnStay;
-        }
+        private void OnEnable() => _trigger.Stay += OnStay;
 
         private void OnStay(D droppable)
         {
@@ -26,9 +23,6 @@ namespace ForeverVillage
 
         protected abstract void OnCollected(C collectable);
 
-        private void OnDisable()
-        {
-            _trigger.Stay -= OnStay;
-        }
+        private void OnDisable() => _trigger.Stay -= OnStay;
     }
 }

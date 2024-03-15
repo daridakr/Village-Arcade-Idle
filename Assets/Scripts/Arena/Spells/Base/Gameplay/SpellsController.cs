@@ -17,9 +17,6 @@ namespace Arena
         {
             _configs = spellCatalog.GetAllSpells();
 
-            //foreach (var config in _configs)
-            //    config.Init(_factory);
-
             _activeSpells = new List<Spell>();
 
             Initialized?.Invoke();

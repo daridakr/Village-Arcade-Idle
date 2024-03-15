@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,15 +10,19 @@ using Zenject;
 namespace Village
 {
     public sealed class SpecializationsController : MonoBehaviour,
-        ISpecializationsController
+        ISpecializationsController,
+        ISpecializationGetter
     {
         [SerializeField][FormerlySerializedAs("assets")] private SpecializationCatalog _catalog;
         [SerializeField] private Transform _characterPoint;
 
-        private List<Specialization> _specializations;
-        private Specialization _selected;
+        private List<ICharacterSpecialization> _specializations;
+        private ICharacterSpecialization _selected;
+
         private CustomizableCharacter _characterInstance;
         private SpecializationInstantiator _instantiator;
+
+        public ICharacterSpecialization Selected => _selected;
 
         public event Action Initialized;
 
@@ -26,40 +31,45 @@ namespace Village
 
         public void SetupSpecializationsFor(object condition = null)
         {
-            _specializations = new List<Specialization>();
+            _specializations = new List<ICharacterSpecialization>();
 
             SpecializationConfig[] configs = _catalog.GetAllSpecs();
 
             foreach (var config in configs)
             {
-                var specialization = config.InstantiateSpecialization(condition);
-                _specializations.Add(specialization);
+                ICharacterSpecialization characterSpecialization = config.InstantiateSpecialization(condition) as ICharacterSpecialization;
+                _specializations.Add(characterSpecialization);
             }
 
             Initialized?.Invoke();
         }
 
-        public ICustomizableCharacter SelectSpecialization(ISpecialization specialization)
+        public ICustomizableCharacter SelectSpecialization(ICharacterSpecialization specialization)
         {
-            _selected = (Specialization)specialization;
+            _selected = specialization;
 
             if (_characterInstance != null)
                 Destroy(_characterInstance.gameObject);
 
-            _characterInstance = _instantiator.Instantiate(_selected, _characterPoint);
+            _characterInstance = _instantiator.Instantiate(specialization, _characterPoint);
             _characterInstance.AddComponent<CharacterTouchRotator>();
 
             return _characterInstance;
         }
 
-        public ISpecialization[] GetAllSpecializations()
-        {
-            return _specializations.ToArray();
-        }
+        public ICharacterSpecialization[] GetAllSpecializations() => _specializations.ToArray();
 
-        public ISpecialization GetSelectedSpecialization()
+        public ICharacterSpecialization GetSpecialization(string guid)
         {
-            return _selected;
+            SpecializationConfig[] configs = _catalog.GetAllSpecs();
+
+            foreach (var config in configs)
+            {
+                if (config.Id == guid)
+                    return (ICharacterSpecialization)config.InstantiateSpecialization();
+            }
+
+            return null;
         }
     }
 }

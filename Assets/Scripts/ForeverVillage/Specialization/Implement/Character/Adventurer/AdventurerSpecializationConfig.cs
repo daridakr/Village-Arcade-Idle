@@ -11,9 +11,14 @@ namespace Village.Character
         public override Specialization InstantiateSpecialization(object condition = null)
         {
             if (condition == null)
-                return null;
+                return new AdventurerSpecialization(Gender.Male, this);
 
             return new AdventurerSpecialization((Gender)condition, this);
+        }
+
+        private void OnValidate()
+        {
+            _id = nameof(AdventurerSpecialization);
         }
     }
 }

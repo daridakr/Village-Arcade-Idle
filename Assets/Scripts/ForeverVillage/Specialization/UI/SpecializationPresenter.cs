@@ -5,20 +5,20 @@ namespace Village
 {
     public sealed class SpecializationPresenter
     {
-        private readonly ISpecialization _model;
+        private readonly ICharacterSpecialization _model;
         private readonly SpecializationButtonView _view;
 
         private ISpecializationsController _controller;
         private ICustomizationsController _customizationsController;
 
-        public ISpecialization Model => _model;
+        public SpecializationMetadata Meta => _model.Data.Meta;
         public SpecializationButtonView Button => _view;
 
         public event Action<SpecializationPresenter> Clicked;
 
-        public SpecializationPresenter(ISpecialization specialization, SpecializationButtonView buttonView)
+        public SpecializationPresenter(ICharacterSpecialization model, SpecializationButtonView buttonView)
         {
-            _model = specialization;
+            _model = model;
             _view = buttonView;
         }
 
@@ -27,7 +27,7 @@ namespace Village
             _controller = specializationsController;
             _customizationsController = customizationsController;
 
-            _view.SetIcon(_model.Icon);
+            _view.SetIcon(Meta.Icon);
             _view.Selected += OnSpecClicked;
         }
 

@@ -15,7 +15,7 @@ namespace Village
             _loader = new CharacterLoader();
         }
 
-        public CustomizableCharacter Instantiate(Specialization specialization, Transform point)
+        public CustomizableCharacter Instantiate(ICharacterSpecialization specialization, Transform point)
         {
             CustomizableCharacter customizationPrefab = _loader.LoadCustomizable(specialization.GetModelPath());
 

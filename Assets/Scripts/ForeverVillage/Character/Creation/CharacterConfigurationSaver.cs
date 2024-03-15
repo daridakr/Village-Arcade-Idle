@@ -13,7 +13,7 @@ namespace Village.Character
         private ICustomizationsRepository _customizationsRepository;
         private ICustomizationsController _customizationsController;
 
-        private SpecializationSaver _specializationSaver;
+        private SpecializationDataSaver _specializationSaver;
         private CustomizationsSaver _customizationsSaver;
 
         [Inject]
@@ -31,7 +31,7 @@ namespace Village.Character
 
         private void OnEnable()
         {
-            _specializationSaver = new SpecializationSaver(_specializationRepository, _specializationController);
+            _specializationSaver = new SpecializationDataSaver(_specializationRepository, _specializationController);
             _customizationsSaver = new CustomizationsSaver(_customizationsRepository, _customizationsController);
 
             _confirmCreationPopup.PlayButtonClicked += SaveAndStartGame;

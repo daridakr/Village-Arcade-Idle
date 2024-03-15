@@ -1,17 +1,25 @@
+using IJunior.TypedScenes;
 using UnityEngine;
 
 namespace Village
 {
-    public class PlayerSpecialization : MonoBehaviour
+    public class PlayerSpecialization : MonoBehaviour,
+        ISceneLoadHandler<ICharacterSpecialization>
     {
-        private Specialization _specialization;
+        private SpecializationConfig _data;
+        private string _prefabPath;
 
-        public void Setup(Specialization specialization)
+        public bool IsSettuped { get; private set; } // for testing
+
+        public void OnSceneLoaded(ICharacterSpecialization argument)
         {
-            if (specialization == null)
-                return;
-            
-            _specialization = specialization;
+            if (argument != null)
+            {
+                _data = argument.Data;
+                _prefabPath = argument.GetModelPath();
+
+                IsSettuped = true;
+            }
         }
     }
 }
