@@ -1,14 +1,14 @@
 using ForeverVillage;
 using UnityEngine;
-using Zenject;
 
 namespace Arena
 {
     public sealed class ArenaPlayerInstaller : PlayerInstallerBase
     {
-        [SerializeField] private PlayerHealthConfig _healthConfig;
         [SerializeField] private PlayerReference _playerReference;
         [SerializeField] private Transform _spawnPoint;
+        [SerializeField] private PlayerHealthConfig _healthConfig;
+        [SerializeField] private SpellsController _spellsController;
 
         private PlayerReference _playerInstance;
 
@@ -20,6 +20,8 @@ namespace Arena
 
         protected override void SpawnPlayer()
         {
+            Container.BindInterfacesAndSelfTo<SpellsController>().FromInstance(_spellsController).AsSingle();
+
             _playerInstance = Container.InstantiatePrefabForComponent<PlayerReference>
                 (Reference.gameObject, SpawnPosition, Quaternion.identity, null);
         }
@@ -45,6 +47,13 @@ namespace Arena
             base.BindDisplayData();
 
             Container.BindInterfacesAndSelfTo<PlayerLevelArena>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
+        }
+
+        protected override void BindRepository()
+        {
+            base.BindRepository();
+
+            Container.BindInterfacesAndSelfTo<SpecializationSpellsInstaller>().AsSingle();
         }
     }
 }

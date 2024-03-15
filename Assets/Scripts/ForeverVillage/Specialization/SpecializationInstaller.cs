@@ -1,5 +1,5 @@
-using Arena;
 using ForeverVillage;
+using System;
 using Village.Character;
 using Zenject;
 
@@ -14,24 +14,23 @@ namespace Village
         private readonly IPlayerWeaponInitializable _playerWeapon;
         private readonly IPlayerWeaponEquipment _playerWeaponEquipment;
 
-        private readonly ISpellsSetupper _spellsSetupper;
-
-        //private const string _defaultSpec = ResourcesParams.Character.Specialization.MaleKnight;
+        private SpecializationData _specialization;
         private SpecializationData _defaultSpecialization;
+
+        public SpecializationData Data => _specialization;
+        public event Action Initialized;
 
         public SpecializationInstaller(
             ISpecializationRepository repository,
             SpecializationModelInitiator modelSetupper,
             IPlayerWeaponInitializable playerWeapon,
             IPlayerWeaponEquipment playerWeaponEquipment,
-            ISpellsSetupper spellsSetupper,
             KnightSpecializationConfig defaultSpecialization)
         {
             _repository = repository;
             _modelInitiator = modelSetupper;
             _playerWeapon = playerWeapon;
             _playerWeaponEquipment = playerWeaponEquipment;
-            _spellsSetupper = spellsSetupper;
 
             _defaultSpecialization = new SpecializationData
             {
@@ -47,9 +46,11 @@ namespace Village
         public void Initialize()
         {
             if (_repository.Load(out SpecializationData specialization))
-                Install(specialization);
+                _specialization = specialization;
             else
-                Install(_defaultSpecialization);
+                _specialization = _defaultSpecialization;
+
+            Install(_specialization);
         }
 
         private void Install(SpecializationData data)
@@ -58,7 +59,8 @@ namespace Village
 
             _playerWeapon.Init(data.WeaponTypes);
             AssingWeaponsFor(data);
-            AssignSpellsFor(data);
+
+            Initialized?.Invoke();
         }
 
         private void AssingWeaponsFor(SpecializationData specialization)
@@ -68,11 +70,6 @@ namespace Village
                 Weapon weapon = config.InstantiateItem() as Weapon;
                 _playerWeaponEquipment.EquipWeapon(weapon);
             }
-        }
-
-        private void AssignSpellsFor(SpecializationData data)
-        {
-            _spellsSetupper.Setup(data.Spells);
         }
     }
 }

@@ -1,7 +1,5 @@
 using ForeverVillage;
 using UnityEngine;
-using Village.Character;
-using Village.Player;
 
 namespace Village
 {
