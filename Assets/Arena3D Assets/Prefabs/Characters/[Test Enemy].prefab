@@ -1792,6 +1792,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 662529860213722402}
+  _enemyHealth: {fileID: 2196124211581409640}
+  _attackState: {fileID: 8241479571752574944}
+  _attackAnimationLayerIndex: 1
 --- !u!1001 &6257973804192139186
 PrefabInstance:
   m_ObjectHideFlags: 0

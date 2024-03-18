@@ -6,27 +6,29 @@ namespace Arena
     public class MonsterAnimator : MonoBehaviour
     {
         [SerializeField] private MonsterMovement _movement;
+        [SerializeField] private EnemyHealth _enemyHealth;
+        [SerializeField] private AttackAIState _attackState;
 
         private Animator _animator;
 
         private void OnEnable()
         {
-            _movement.OnMove += SetMovement;
+            _movement.OnMove += OnMoveAnimation;
+            _enemyHealth.Emptied += SetTriggerDeathAnimation;
+            _attackState.Attacked += StartBasicAttackAnimation;
         }
 
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
+        private void Awake() => _animator = GetComponent<Animator>();
 
-        private void SetMovement(bool value)
-        {
-            _animator.SetBool(AnimationParams.Monster.IsWalking, value);
-        }
+        private void OnMoveAnimation(float velocity) => _animator.SetFloat(AnimationParams.Speed, velocity);
+        private void SetTriggerDeathAnimation() => _animator.SetTrigger(AnimationParams.Death);
+        private void StartBasicAttackAnimation() => _animator.SetTrigger(AnimationParams.Attack);
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _movement.OnMove -= SetMovement;
+            _movement.OnMove -= OnMoveAnimation;
+            _enemyHealth.Emptied -= SetTriggerDeathAnimation;
+            _attackState.Attacked -= StartBasicAttackAnimation;
         }
     }
 }

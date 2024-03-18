@@ -13,6 +13,7 @@ namespace Arena
         private readonly List<Coroutine> CurrentCastingCoroutines = new();
 
         public override event Action<AIState[]> CanTransit;
+        public event Action Attacked;
 
         private void Awake()
         {
@@ -29,6 +30,7 @@ namespace Arena
         private void Attack()
         {
             Debug.Log("Attack");
+            Attacked?.Invoke();
 
             //Spell.PreCast(caster);
 

@@ -13,7 +13,7 @@ namespace Arena
 
         private NavMeshAgent _meshAgent;
 
-        public event Action<bool> OnMove;
+        public event Action<float> OnMove;
 
         private void OnEnable()
         {
@@ -24,18 +24,11 @@ namespace Arena
             _chaseState.OnExit += OnChaseStateExit;
         }
 
+        private void Update() => OnMove?.Invoke(_meshAgent.velocity.magnitude);
+
         private void OnChaseStateEnter(float stoppingDistance) => _meshAgent.stoppingDistance = stoppingDistance;
         private void UpdateDestination(Vector3 target) => _meshAgent.SetDestination(target);
         private void OnChaseStateExit() => _meshAgent.ResetPath();
- 
-        public void StopMoving()
-        {
-            //if (_moveCoroutine != null)
-            //    StopCoroutine(_moveCoroutine);
-
-            //_physicsControl.StopAgent();
-            //_physicsControl.DisablePhysics();
-        }
 
         public void Knockback(Vector3 force)
         {
