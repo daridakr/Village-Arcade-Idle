@@ -39,17 +39,20 @@ namespace Arena
 
         public AIState GetValidNextState(params AIState[] ignoredStates)
         {
-            (AIState state, float weight)[] validStatesWithWeights = _states.Except(ignoredStates).
-                Where(state => state.CanEnterState()).
-                Select(state => (state, weight: state.GetWeight())).
-                Where(State_Weight_Pair => State_Weight_Pair.weight > 0f).ToArray();
+            var validStatesWithWeights = _states
+                .Except(ignoredStates)
+                .Where(state => state.CanEnterState())
+                .Select(state => (state, weight: state.GetWeight()))
+                .Where(pair => pair.weight > 0f)
+                .ToArray();
 
-            float totalWeight = validStatesWithWeights.Sum(State_Weight_Pair => State_Weight_Pair.weight);
+            float totalWeight = validStatesWithWeights.Sum(pair => pair.weight);
             float randomWeight = UnityEngine.Random.Range(0f, totalWeight);
 
             foreach (var (state, weight) in validStatesWithWeights)
             {
                 randomWeight -= weight;
+
                 if (randomWeight <= 0f)
                 {
                     return state;

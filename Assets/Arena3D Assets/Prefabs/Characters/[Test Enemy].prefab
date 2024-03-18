@@ -546,9 +546,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb3266137bc99546b81a8e80f4f024d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyTime: 3
   _health: {fileID: 2196124211581409640}
-  _movement: {fileID: 662529860213722402}
+  _gameObjectsToDisable:
+  - {fileID: 4274703537815231774}
+  _componentsToDisable:
+  - {fileID: 5999831477511740474}
+  _componentsDestroy:
+  - {fileID: 7560743169900399695}
+  - {fileID: 2774042720928713106}
+  - {fileID: 8241479571752574944}
+  - {fileID: 444575681632673032}
+  - {fileID: 5324577476604841991}
+  - {fileID: 3176122472486118593}
+  - {fileID: 2309898070234996080}
 --- !u!114 &4523717828584662789
 MonoBehaviour:
   m_ObjectHideFlags: 0
