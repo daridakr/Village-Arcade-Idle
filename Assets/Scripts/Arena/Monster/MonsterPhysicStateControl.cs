@@ -56,6 +56,8 @@ namespace Arena
         public void StopAgent() => _agent.isStopped = true;
 
         public bool SetAgentDestination(Vector3 target) => _agent.SetDestination(target);
+        public void SetAgentStoppingDistance(float distance) => _agent.stoppingDistance = distance;
+        public void ResetAgentPath() => _agent.ResetPath();
         public void AgentWarp(Vector3 newPosition) => _agent.Warp(newPosition);
         public void AddBodyForce(Vector3 force) => _body.AddForce(force);
     }
