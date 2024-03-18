@@ -140,7 +140,6 @@ namespace Arena
         {
             yield return null;
 
-            _physicsControl.DisableAgent();
             _physicsControl.EnableBody();
             _physicsControl.AddBodyForce(force);
 
@@ -154,7 +153,6 @@ namespace Arena
             yield return new WaitForSeconds(0.25f);
 
             _physicsControl.DisableBody();
-            _physicsControl.EnableAgent();
             _physicsControl.AgentWarp(transform.position);
 
             yield return null;
