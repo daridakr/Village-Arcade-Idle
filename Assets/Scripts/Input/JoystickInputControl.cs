@@ -2,9 +2,8 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public sealed class JoystickInputControl : 
-    IInputService, IInputState, IControlService,
-    IInitializable, ITickable, IDisposable
+public sealed class JoystickInputControl : MonoBehaviour,
+    IInputService, IInputState, IControlService
 {
     private Joystick _joystick;
 
@@ -21,17 +20,12 @@ public sealed class JoystickInputControl :
     [Inject]
     private void Construct(Joystick joystick) => _joystick = joystick;
 
-    public void Initialize()
-    {
-        Enable();
-    }
+    private void Start() => Enable();
 
-    public void Tick()
+    private void FixedUpdate()
     {
         if (IsEnable)
-        {
             HandleInputToMove();
-        }
     }
 
     private void HandleInputToMove()
@@ -61,8 +55,5 @@ public sealed class JoystickInputControl :
         OnStand?.Invoke();
     }
 
-    public void Dispose()
-    {
-        Disable();
-    }
+    private void OnDisable() => Disable();
 }

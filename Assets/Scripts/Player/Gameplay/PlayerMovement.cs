@@ -1,16 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Village.Player;
 using Zenject;
-
-public interface IPlayerPosition
-{
-    public Vector3 CurrentPosition { get; }
-}
+using static Cinemachine.CinemachineOrbitalTransposer;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour,
-    IPlayerPosition
+public class PlayerMovement : MonoBehaviour
 {
     protected Rigidbody _rigidbody;
     protected float _speed;
@@ -21,7 +17,6 @@ public class PlayerMovement : MonoBehaviour,
     public Vector3 CurrentPosition => transform.position;
 
     public event Action<float> OnMove;
-    public event Action<Vector3> DirectionUpdated;
 
     [Inject]
     private void Construct(IControlService controlService, MovementConfig config)
@@ -33,20 +28,26 @@ public class PlayerMovement : MonoBehaviour,
         _speed = config.Speed;
     }
 
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.freezeRotation = true;
-    }
+    private void Awake() => _rigidbody = GetComponent<Rigidbody>();
+
+    [SerializeField] private float maxRotationSpeed = 360f;
 
     protected virtual void Move(Vector3 direction)
     {
         OnMove?.Invoke(direction.magnitude);
 
-        direction *= _speed * Time.deltaTime;
-        _rigidbody.MovePosition(_rigidbody.position + direction);
+        if (direction != Vector3.zero)
+        {
+            Vector3 velocity = direction * _speed * Time.fixedDeltaTime;
+            _rigidbody.velocity = velocity;
 
-        DirectionUpdated?.Invoke(direction);
+            float currentHeading = _rigidbody.rotation.eulerAngles.y * Mathf.Deg2Rad;
+            float targetHeading = Mathf.Atan2(direction.normalized.x, direction.normalized.z);
+            float deltaHeading = Mathf.DeltaAngle(currentHeading * Mathf.Rad2Deg, targetHeading * Mathf.Rad2Deg) * Mathf.Deg2Rad;
+
+            float angularVelocityMagnitude = Mathf.Clamp(deltaHeading / Time.fixedDeltaTime, -maxRotationSpeed, maxRotationSpeed);
+            _rigidbody.angularVelocity = new Vector3(0, angularVelocityMagnitude, 0);
+        }
 
         IsMoving = true;
     }
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour,
             if (_rigidbody != null)
             {
                 _rigidbody.velocity = Vector3.zero;
+                _rigidbody.angularVelocity = Vector3.zero;
             }
 
             OnMove?.Invoke(0);

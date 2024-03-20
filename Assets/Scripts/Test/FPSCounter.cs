@@ -7,11 +7,7 @@ public class FPSCounter : MonoBehaviour
 
     private float _deltaTime = 0.0f;
 
-    private void Start()
-    {
-        Application.targetFrameRate = 1000;
-    }
-
+    private void Start() => Application.targetFrameRate = 60;
     private void Update()
     {
         _deltaTime += (Time.deltaTime - _deltaTime) * 0.1f;
