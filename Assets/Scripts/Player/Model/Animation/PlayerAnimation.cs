@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour,
             return;
 
         _model.Initialized += OnModelInitialized;
-        _movement.OnMove += SetSpeed;
+        _movement.Moving += SetSpeed;
 
         _isInitialized = true;
     }
@@ -44,7 +44,7 @@ public class PlayerAnimation : MonoBehaviour,
 
     private void OnDisable()
     {
-        _movement.OnMove -= SetSpeed;
+        _movement.Moving -= SetSpeed;
         _model.Initialized -= OnModelInitialized;
     }
 }

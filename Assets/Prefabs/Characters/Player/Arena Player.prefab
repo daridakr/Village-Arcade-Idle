@@ -538,8 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372392663f740349b0f1eff3608c689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 7121155364999617204}
-  _targetDetector: {fileID: 637798425555357161}
   _rotationSpeed: 5
 --- !u!114 &1722222429842952131
 MonoBehaviour:
@@ -652,6 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fa9978725d3264e8932544e5f4570b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetDetector: {fileID: 637798425555357161}
 --- !u!114 &8130695380754771122
 MonoBehaviour:
   m_ObjectHideFlags: 0

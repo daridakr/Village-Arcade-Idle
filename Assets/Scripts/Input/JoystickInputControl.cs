@@ -14,8 +14,8 @@ public sealed class JoystickInputControl : MonoBehaviour,
 
     public bool InControl => _joystick.Direction != Vector2.zero;
 
-    public event Action<Vector3> OnMove;
-    public event Action OnStand;
+    public event Action<Vector3> OnControl;
+    public event Action OnExit;
 
     [Inject]
     private void Construct(Joystick joystick) => _joystick = joystick;
@@ -33,11 +33,11 @@ public sealed class JoystickInputControl : MonoBehaviour,
         if (InControl)
         {
             Vector3 rawDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
-            OnMove?.Invoke(rawDirection);
+            OnControl?.Invoke(rawDirection);
         }
         else
         {
-            OnStand?.Invoke();
+            OnExit?.Invoke();
             return;
         }
     }
@@ -52,7 +52,7 @@ public sealed class JoystickInputControl : MonoBehaviour,
     {
         IsEnable = false;
         OnDisabled?.Invoke();
-        OnStand?.Invoke();
+        OnExit?.Invoke();
     }
 
     private void OnDisable() => Disable();
