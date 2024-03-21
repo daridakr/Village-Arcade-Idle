@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,16 +5,16 @@ using UnityEngine.Events;
 
 public class NPC : TrackedCollectionMonoBehavior<NPC>, IEntity, ICaster, ISpawnableEnemy, IEXP_Source
 {
-	[SerializeField, Min(0f), Foldout("Stats")] private float MaxHealth = 1000f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float HealthRegen = 5f;
+	[SerializeField, Min(0f)] private float MaxHealth = 1000f;
+	[SerializeField, Min(0f)] private float HealthRegen = 5f;
 
-	[SerializeField, Min(0f), Foldout("Stats"), Space] private float MaxMana = 500f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float ManaRegen = 10f;
+	[SerializeField, Min(0f), Space] private float MaxMana = 500f;
+	[SerializeField, Min(0f)] private float ManaRegen = 10f;
 
-	[SerializeField, Min(0f), Foldout("Stats"), Space] private float MovementSpeed = 5f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float Armor;
-	[SerializeField, Min(0f), Foldout("Stats")] private float CriticalChance;
-	[SerializeField, Min(0f), Foldout("Stats")] private float LifeSteal;
+	[SerializeField, Min(0f), Space] private float MovementSpeed = 5f;
+	[SerializeField, Min(0f)] private float Armor;
+	[SerializeField, Min(0f)] private float CriticalChance;
+	[SerializeField, Min(0f)] private float LifeSteal;
 
 	private NavMeshAgent navMeshAgent;
 

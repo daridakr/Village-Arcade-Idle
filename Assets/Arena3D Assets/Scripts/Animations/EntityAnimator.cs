@@ -1,14 +1,13 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class EntityAnimator : MonoBehaviour
 {
 	[SerializeField] private Animator animator;
-	[SerializeField, AnimatorParam(nameof(animator), AnimatorControllerParameterType.Float)] private int VelocityX;
-	[SerializeField, AnimatorParam(nameof(animator), AnimatorControllerParameterType.Float)] private int VelocityZ;
+	[SerializeField] private int VelocityX;
+	[SerializeField] private int VelocityZ;
 
-	[SerializeField, AnimatorParam(nameof(animator), AnimatorControllerParameterType.Trigger), Space] private int Death;
+	[SerializeField] private int Death;
 
 	private IEntity entity;
 

@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,8 +19,8 @@ namespace Arena
 
         [SerializeField, Min(1f), Space] private float StartingThreatLevel = 5f;
         [SerializeField, Min(0f)] private float ThreatLevelDelta = 0.2f;
-        [ShowNonSerializedField] private float currentTargetThreatLevel;
-        [ShowNativeProperty] private float currentThreatLevel => GetCurrentTotalThreatLevel();
+        private float currentTargetThreatLevel;
+        private float currentThreatLevel => GetCurrentTotalThreatLevel();
 
         private readonly Queue<ISpawnableEnemy> EnemySpawnQueue = new();
         private PlayerCharacterModelArena _player;
@@ -103,7 +102,6 @@ namespace Arena
 
 
 #if UNITY_EDITOR
-        [Button]
         private void GetAllEnemiesInProject()
         {
             EnemyPrefabs = UnityEditor.AssetDatabase.FindAssets("t:GameObject")

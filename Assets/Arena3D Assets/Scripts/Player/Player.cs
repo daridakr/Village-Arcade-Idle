@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +5,20 @@ using UnityEngine.Events;
 
 public class Player : SingletonMonoBehavior<Player>, ICaster, IEntity, ILeveledEntity, IUpgradeHolder
 {
-	[SerializeField, Min(0f), Foldout("Stats")] private float MaxHealth = 1000f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float HealthRegen = 5f;
+	[SerializeField, Min(0f)] private float MaxHealth = 1000f;
+	[SerializeField, Min(0f)] private float HealthRegen = 5f;
 
-	[SerializeField, Min(0f), Foldout("Stats"), Space] private float MaxMana = 500f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float ManaRegen = 10f;
+	[SerializeField, Min(0f), Space] private float MaxMana = 500f;
+	[SerializeField, Min(0f)] private float ManaRegen = 10f;
 
-	[SerializeField, Min(0f), Foldout("Stats"), Space] private float Strength;
-	[SerializeField, Min(0f), Foldout("Stats")] private float Dexterity;
-	[SerializeField, Min(0f), Foldout("Stats")] private float Intelligence;
+	[SerializeField, Min(0f), Space] private float Strength;
+	[SerializeField, Min(0f)] private float Dexterity;
+	[SerializeField, Min(0f)] private float Intelligence;
 
-	[SerializeField, Min(0f), Foldout("Stats"), Space] private float MovementSpeed = 5f;
-	[SerializeField, Min(0f), Foldout("Stats")] private float Armor;
-	[SerializeField, Min(0f), Foldout("Stats")] private float CriticalChance;
-	[SerializeField, Min(0f), Foldout("Stats")] private float LifeSteal;
+	[SerializeField, Min(0f), Space] private float MovementSpeed = 5f;
+	[SerializeField, Min(0f)] private float Armor;
+	[SerializeField, Min(0f)] private float CriticalChance;
+	[SerializeField, Min(0f)] private float LifeSteal;
 
 	public StatsHandler StatsHandler { get; private set; }
 	string ITargetable.TeamID { get; } = nameof(Player);
@@ -34,9 +33,10 @@ public class Player : SingletonMonoBehavior<Player>, ICaster, IEntity, ILeveledE
 	Action<IDamageSource> IDamageable.OnDeath { get; set; }
 	Action<IDamageSource, float, bool> IDamageable.OnDamageTaken { get; set; }
 	Action<IDamageable> IDamageSource.OnKill { get; set; }
+	
+	int ILeveledEntity.CurrentEXP { get; set; }
+	int ILeveledEntity.CurrentLevel { get; set; }
 
-	[ShowNativeProperty] int ILeveledEntity.CurrentEXP { get; set; }
-	[ShowNativeProperty] int ILeveledEntity.CurrentLevel { get; set; }
 	Action ILeveledEntity.OnLevelUp { get; set; }
 	List<Upgrade> IUpgradeHolder.ActiveUpgrades { get; set; } = new();
 

@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,7 +5,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 	[SerializeField] private Button StartGameButton;
-	[SerializeField, Scene] private int GamePlayScene;
+	[SerializeField] private int GamePlayScene;
 
 	[SerializeField, Space] private Button QuitGameButton;
 
