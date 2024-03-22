@@ -3549,7 +3549,7 @@ MonoBehaviour:
   EnemyPrefabs:
   - {fileID: 4880233426290204094, guid: 34fd0570c4d59f540be07eb8ecd91d70, type: 3}
   ThreatMatchingTimer: 10
-  SpawningTimer: 0.25
+  SpawningTimer: 1
   SpawnRadius: 20
   StartingThreatLevel: 5
   ThreatLevelDelta: 0.2

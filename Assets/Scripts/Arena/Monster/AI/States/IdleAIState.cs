@@ -22,6 +22,7 @@ namespace Arena
             if (!_rotateToFacePlayer)
                 return;
 
+            // need to do physics
             Quaternion playerRotation = Quaternion.LookRotation(_player.position - transform.position, transform.up);
 
             Quaternion rotation = Quaternion.Slerp(

@@ -4,6 +4,6 @@ namespace Arena
 {
     public interface IKnockbackable
     {
-        public void Knockback(Vector3 force);
+        public void Knockback(float force, Vector3 diraction);
     }
 }

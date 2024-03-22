@@ -5,13 +5,12 @@ using UnityEngine.AI;
 namespace Arena
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class MonsterMovement : MonoBehaviour,
-        IKnockbackable
+    public class MonsterMovement : KnockbackableEntity
     {
         [SerializeField] private ChaseAIState _chaseState;
-        [SerializeField] private float _maxKnockbackTime = 0.5f;
 
         private NavMeshAgent _meshAgent;
+        private bool IsEnabled => _meshAgent.enabled;
 
         public event Action<float> OnMove;
 
@@ -19,58 +18,52 @@ namespace Arena
         {
             _meshAgent = GetComponent<NavMeshAgent>();
 
-            _chaseState.OnEnter += OnChaseStateEnter;
+            _chaseState.OnEnter += OnStartChase;
             _chaseState.Updated += UpdateDestination;
-            _chaseState.OnExit += OnChaseStateExit;
+            _chaseState.OnExit += OnStopChase;
         }
 
-        private void Update() => OnMove?.Invoke(_meshAgent.velocity.magnitude);
-
-        private void OnChaseStateEnter(float stoppingDistance) => _meshAgent.stoppingDistance = stoppingDistance;
-        private void UpdateDestination(Vector3 target) => _meshAgent.SetDestination(target);
-        private void OnChaseStateExit() => _meshAgent.ResetPath();
-
-        public void Knockback(Vector3 force)
+        protected override void FixedUpdate()
         {
-            //if (_physicsControl.IsAgentEnabled)
-            //{
-            //    StopCoroutine(_moveCoroutine);
-            //    _moveCoroutine = StartCoroutine(ApplyKnockback(force));
-            //}
+            if (IsEnabled)
+                OnMove?.Invoke(_meshAgent.velocity.magnitude);
+
+            base.FixedUpdate();
         }
 
-        //private IEnumerator ApplyKnockback(Vector3 force)
-        //{
-        //    yield return null;
+        private void OnStartChase(float stoppingDistance)
+        {
+            if (IsEnabled)
+                _meshAgent.stoppingDistance = stoppingDistance;
+        }
 
-        //    _physicsControl.EnableBody();
-        //    _physicsControl.AddBodyForce(force);
 
-        //    yield return new WaitForFixedUpdate();
-        //    float knockbackTime = Time.time;
+        private void UpdateDestination(Vector3 target)
+        {
+            if (IsEnabled)
+                _meshAgent.SetDestination(target);
+        }
 
-        //    yield return new WaitUntil(
-        //        () => _physicsControl.BodyVelocityMagnitude < _stillThreshold || Time.time > knockbackTime + _maxKnockbackTime
-        //    );
+        private void OnStopChase()
+        {
+            if (IsEnabled)
+                _meshAgent.ResetPath();
+        }
 
-        //    yield return new WaitForSeconds(0.25f);
+        public override void Knockback(float force, Vector3 direction)
+        {
+            _meshAgent.enabled = false;
 
-        //    _physicsControl.DisableBody();
-        //    _physicsControl.AgentWarp(transform.position);
+            base.Knockback(force, direction);
+        }
 
-        //    yield return null;
-
-        //    if (_playerPosition != null)
-        //        _moveCoroutine = StartCoroutine(ChasePlayer(_playerPosition));
-        //    else
-        //        _moveCoroutine = StartCoroutine(Roam());
-        //}
+        protected override void OnKnockedback() => _meshAgent.enabled = true;
 
         private void OnDestroy()
         {
-            _chaseState.OnEnter -= OnChaseStateEnter;
+            _chaseState.OnEnter -= OnStartChase;
             _chaseState.Updated -= UpdateDestination;
-            _chaseState.OnExit -= OnChaseStateExit;
+            _chaseState.OnExit -= OnStopChase;
         }
     }
 }

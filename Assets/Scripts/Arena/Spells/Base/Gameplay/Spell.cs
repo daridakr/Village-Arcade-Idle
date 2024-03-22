@@ -40,6 +40,8 @@ namespace Arena
 
             if (currentTime - _lastCustTime >= Cooldown)
             {
+                Custed?.Invoke();
+
                 _lastCustTime = currentTime;
                 Cust(targets);
             }
@@ -50,7 +52,6 @@ namespace Arena
             // start casting by casting time and when time is over invoke performSpell with life time
             // reset cooldown
 
-            Custed?.Invoke();
             Perform(targets);
         }
 

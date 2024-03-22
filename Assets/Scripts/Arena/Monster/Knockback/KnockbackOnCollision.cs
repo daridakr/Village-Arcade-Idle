@@ -10,7 +10,7 @@ namespace LlamAcademy.Guns.Demo
         {
             if (other.collider.TryGetComponent(out IKnockbackable knockbackable))
             {
-                knockbackable.Knockback(-other.impulse / Time.fixedDeltaTime);
+                //knockbackable.Knockback(-other.impulse / Time.fixedDeltaTime);
             }
         }
     }

@@ -6,14 +6,12 @@ namespace Arena
     public sealed class SlashSpellConfig : DamageSpellConfig
     {
         [SerializeField] private float _range = 1.5f;
-        [SerializeField] private float _slashTime;
+        [SerializeField][Range(50, 300)] private float _knockbackForce;
         [SerializeField][Min(0.1f)] private float _speed = 1.5f;
-        [SerializeField] private KnockbackConfig _knockbackConfig;
 
         public float Range => _range;
         public float Speed => _speed;
-        public float SlashTime => _slashTime;
-        public KnockbackConfig KnockbackConfig => _knockbackConfig;
+        public float KnockbackForce => _knockbackForce;
 
         public override Spell InstantiateSpell() => new SlashSpell(this);
 

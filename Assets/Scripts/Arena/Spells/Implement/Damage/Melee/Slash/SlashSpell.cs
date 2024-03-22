@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vampire;
 
 namespace Arena
 {
@@ -6,10 +7,9 @@ namespace Arena
     {
         public float Range => _config.Range;
         public float Speed => _config.Speed;
-        public float SlashTime => _config.SlashTime;
+        public float KnockbackForce => _config.KnockbackForce;
 
         private readonly SlashSpellConfig _config;
-        private KnockbackConfig _knockbackConfig => _config.KnockbackConfig;
 
         public SlashSpell(SlashSpellConfig config) : base(config)
         {
@@ -22,8 +22,9 @@ namespace Arena
 
             if (_target.TryGetComponent(out IKnockbackable knockbackable))
             {
-                Vector3 knockbackForce = (_target.transform.position - _custer.Transform.position).normalized * 50000f;
-                knockbackable.Knockback(knockbackForce);
+                Vector3 direction = (_custer.Transform.position - _target.transform.position).normalized;
+                direction.y = 0;
+                knockbackable.Knockback(KnockbackForce, -direction);
             }
         }
     }

@@ -12,8 +12,8 @@ namespace Arena
         private Transform _target;
 
         public event Action<float> OnEnter;
-        public event Action<Vector3> Updated;
         public event Action OnExit;
+        public override event Action<Vector3> Updated;
         public override event Action<AIState[]> CanTransit;
 
         [Inject]

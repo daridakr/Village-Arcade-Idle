@@ -30,17 +30,23 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Zenject
+    - UniTask
     - Assembly-CSharp-firstpass
     - Assembly-CSharp
+    - UniTask.Linq
     - Zenject-IntegrationTests
     - Cinemachine
+    - UniTask.DOTween
     - Purchasing.Common
     - OtoonShader
+    - UniTask.Addressables
     - Sirenix.OdinInspector.CompatibilityLayer
+    - UniTask.TextMeshPro
     - PPv2URPConverters
     - Zenject-TestFramework
     - OtoonEditor
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - UniTask.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0

@@ -22,5 +22,5 @@ MonoBehaviour:
   _damage: 10
   _verticalOffset: 1.5
   _range: 1
-  _slashTime: 0
+  _knockbackForce: 50
   _speed: 1

@@ -12,5 +12,6 @@ namespace Arena
         public abstract bool CanEnterState();
         public abstract bool CanExitState();
         public abstract event Action<AIState[]> CanTransit;
+        public virtual event Action<Vector3> Updated;
     }
 }
