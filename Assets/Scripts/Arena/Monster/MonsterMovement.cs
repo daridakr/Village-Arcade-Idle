@@ -7,21 +7,16 @@ namespace Arena
     [RequireComponent(typeof(NavMeshAgent))]
     public class MonsterMovement : KnockbackableEntity
     {
-        [SerializeField] private ChaseAIState _chaseState;
+        [SerializeField] private ChaseState _chaseState;
 
         private NavMeshAgent _meshAgent;
         private bool IsEnabled => _meshAgent.enabled;
 
         public event Action<float> OnMove;
 
-        private void OnEnable()
-        {
-            _meshAgent = GetComponent<NavMeshAgent>();
+        private void Awake() => _meshAgent = GetComponent<NavMeshAgent>();
 
-            _chaseState.OnEnter += OnStartChase;
-            _chaseState.Updated += UpdateDestination;
-            _chaseState.OnExit += OnStopChase;
-        }
+        private void OnEnable() => _chaseState.Updated += UpdateDestination;
 
         protected override void FixedUpdate()
         {
@@ -31,23 +26,10 @@ namespace Arena
             base.FixedUpdate();
         }
 
-        private void OnStartChase(float stoppingDistance)
-        {
-            if (IsEnabled)
-                _meshAgent.stoppingDistance = stoppingDistance;
-        }
-
-
         private void UpdateDestination(Vector3 target)
         {
             if (IsEnabled)
                 _meshAgent.SetDestination(target);
-        }
-
-        private void OnStopChase()
-        {
-            if (IsEnabled)
-                _meshAgent.ResetPath();
         }
 
         public override void Knockback(float force, Vector3 direction)
@@ -59,11 +41,6 @@ namespace Arena
 
         protected override void OnKnockedback() => _meshAgent.enabled = true;
 
-        private void OnDestroy()
-        {
-            _chaseState.OnEnter -= OnStartChase;
-            _chaseState.Updated -= UpdateDestination;
-            _chaseState.OnExit -= OnStopChase;
-        }
+        private void OnDestroy() => _chaseState.Updated -= UpdateDestination;
     }
 }

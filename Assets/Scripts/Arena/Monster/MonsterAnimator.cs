@@ -7,7 +7,7 @@ namespace Arena
     {
         [SerializeField] private MonsterMovement _movement;
         [SerializeField] private EnemyHealth _enemyHealth;
-        [SerializeField] private AttackAIState _attackState;
+        [SerializeField] private AttackState _attackState;
 
         private Animator _animator;
 
