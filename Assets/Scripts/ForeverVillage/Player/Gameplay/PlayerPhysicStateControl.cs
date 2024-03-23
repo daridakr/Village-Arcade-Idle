@@ -5,7 +5,7 @@ namespace Village
 {
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerPhysicStateControl : MonoBehaviour
+    public sealed class PlayerPhysicStateControl : MonoBehaviour
     {
         private Collider _collider;
         private Rigidbody _body;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System;
 
 namespace Arena
 {
@@ -14,16 +15,20 @@ namespace Arena
         private float _force;
         private float _knockbackTime;
 
-        private void Awake() => _rigidbody = GetComponent<Rigidbody>();
+        public event Action OnEnter;
+        public event Action OnExit;
 
-        public virtual void Knockback(float force, Vector3 direction)
+        protected virtual void Awake() => _rigidbody = GetComponent<Rigidbody>();
+
+        public void Knockback(float force, Vector3 direction)
         {
             if (force <= 0)
                 return;
 
+            OnEnter?.Invoke();
+
             _direction = direction.normalized;
             _force = force;
-            _rigidbody.isKinematic = false;
             _knockbackTime = CalculateKnockbackTime(_force);
             _canKnockback = true;
         }
@@ -47,11 +52,8 @@ namespace Arena
         {
             await UniTask.WaitForSeconds(_knockbackTime);
 
-            _rigidbody.isKinematic = true;
-            OnKnockedback();
+            OnExit?.Invoke();
             _canKnockback = false;
         }
-
-        protected virtual void OnKnockedback() { }
     }
 }

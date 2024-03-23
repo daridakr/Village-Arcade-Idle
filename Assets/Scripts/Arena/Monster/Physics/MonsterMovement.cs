@@ -14,7 +14,12 @@ namespace Arena
 
         public event Action<float> OnMove;
 
-        private void Awake() => _meshAgent = GetComponent<NavMeshAgent>();
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _meshAgent = GetComponent<NavMeshAgent>();
+        }
 
         private void OnEnable() => _chaseState.Updated += UpdateDestination;
 
@@ -31,15 +36,6 @@ namespace Arena
             if (IsEnabled)
                 _meshAgent.SetDestination(target);
         }
-
-        public override void Knockback(float force, Vector3 direction)
-        {
-            _meshAgent.enabled = false;
-
-            base.Knockback(force, direction);
-        }
-
-        protected override void OnKnockedback() => _meshAgent.enabled = true;
 
         private void OnDestroy() => _chaseState.Updated -= UpdateDestination;
     }

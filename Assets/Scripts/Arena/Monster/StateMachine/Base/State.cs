@@ -10,7 +10,7 @@ namespace Arena
 
         protected Transform _target;
 
-        public virtual event Action<float> OnEnter;
+        public virtual event Action OnEnter;
         public virtual event Action OnExit;
 
         public void Enter(Transform target)
@@ -25,6 +25,8 @@ namespace Arena
                     transition.enabled = true;
                     transition.Init(_target);
                 }
+
+                OnEnter?.Invoke();
             }
         }
 
@@ -47,6 +49,8 @@ namespace Arena
                     transition.enabled = false;
 
                 enabled = false;
+
+                OnExit?.Invoke();
             }
         }
     }
