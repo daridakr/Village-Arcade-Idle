@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21d6510af5336d34ca8b1efa88282976, type: 3}
-  m_Name: SlashMeleeAttack
+  m_Name: SlashSpell
   m_EditorClassIdentifier: 
   _metadata:
     Title: Slash
     Description: 
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 0a2d0bb669833401daab037dc03e1e83, type: 3}
   _castingTime: 0
   _lifeTime: 0
   _cooldownTime: 1.5
   _damage: 10
-  _verticalOffset: 1.5
-  _range: 1
+  _effect: {fileID: 4514758911870386088, guid: baab5ebf23d76d7419c4766ee0f371f7, type: 3}
   _knockbackForce: 50
-  _speed: 1

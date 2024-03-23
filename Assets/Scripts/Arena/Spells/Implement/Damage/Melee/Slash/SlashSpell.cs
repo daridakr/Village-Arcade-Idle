@@ -1,31 +1,37 @@
 using UnityEngine;
-using Vampire;
 
 namespace Arena
 {
     public class SlashSpell : DamageSpell
     {
-        public float Range => _config.Range;
-        public float Speed => _config.Speed;
-        public float KnockbackForce => _config.KnockbackForce;
-
         private readonly SlashSpellConfig _config;
+        private readonly float _knockbackForce;
+        private readonly SpellEffect _effect;
 
         public SlashSpell(SlashSpellConfig config) : base(config)
         {
-            _config = config;
+            _knockbackForce = config.KnockbackForce;
+            _effect = config.Effect;
         }
 
         protected override void Perform(ITargetsInfo targetsInfo)
         {
             base.Perform(targetsInfo);
 
+            PushWave();
+
             if (_target.TryGetComponent(out IKnockbackable knockbackable))
             {
                 Vector3 direction = (_custer.Transform.position - _target.transform.position).normalized;
                 direction.y = 0;
-                knockbackable.Knockback(KnockbackForce, -direction);
+                knockbackable.Knockback(_knockbackForce, -direction);
             }
+        }
+
+        private void PushWave()
+        {
+            SpellEffect spellEffect = Object.Instantiate(_effect, _custer.Transform.position, _effect.transform.rotation);
+            spellEffect.SetTarget(_target.transform);
         }
     }
 }

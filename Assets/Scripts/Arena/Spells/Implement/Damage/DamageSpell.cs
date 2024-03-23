@@ -6,7 +6,6 @@ namespace Arena
         protected Target _target;
 
         public float Damage => _config.Damage;
-        public float VOffset => _config.VerticalOffset;
 
         protected DamageSpell(DamageSpellConfig config) : base(config)
         {
