@@ -17,6 +17,6 @@ MonoBehaviour:
     Description: Slash to enemy forward.
     Icon: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
   _stackCapacity: 1
+  _prefab: {fileID: 143856, guid: 7f6b3d9f92f75d94181a646f279a2b8f, type: 3}
   _perks: []
   _damage: 5
-  _prefab: {fileID: 3546472160137568172, guid: 7f6b3d9f92f75d94181a646f279a2b8f, type: 3}

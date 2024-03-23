@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 0}
-  _weapon: {fileID: 4552943673641473040}
+  _weapon: {fileID: 0}
 --- !u!1 &4362179068316805908
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 4362179068316805904}
   - component: {fileID: 4362179068316805905}
   - component: {fileID: 644421136433192232}
-  - component: {fileID: 4552943673641473040}
   m_Layer: 8
   m_Name: Player Base
   m_TagString: Untagged
@@ -317,18 +316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCoins: {fileID: 3699672682711532087}
   _playerGems: {fileID: 6787695298807926501}
---- !u!114 &4552943673641473040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362179068316805908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21e2d66f50cc14b4693b9cb3bfd8a737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4759516209969989621
 GameObject:
   m_ObjectHideFlags: 0

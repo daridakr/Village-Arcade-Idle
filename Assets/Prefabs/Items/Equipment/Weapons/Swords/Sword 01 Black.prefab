@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 420986}
   - component: {fileID: 3305910}
   - component: {fileID: 2399670}
-  - component: {fileID: 3546472160137568172}
   m_Layer: 0
   m_Name: Sword 01 Black
   m_TagString: Untagged
@@ -84,15 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3546472160137568172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25c631b2a13fcc4c88999a190d0ed52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -7,8 +7,8 @@ namespace Arena
     public sealed class PlayerAttacker : MonoBehaviour
     {
         [SerializeField] private TargetDetector _targetDetector;
-        [SerializeField] private PlayerSpells _spells;
-        [SerializeField] private PlayerWeapon _weapon;
+        [SerializeField] private PlayerSpellsCuster _spells;
+        [SerializeField] private PlayerWeaponArena _weapon;
 
         private float _totalDamage;
         private Spell _mainSpell;
@@ -39,28 +39,7 @@ namespace Arena
             }
 
             if (_isAttacking)
-            {
-                // в общий дамаг плюсуется дамаг от оружия с дамагом главного спелла 
-                _spells.Cust(_targetDetector); //_spells.StartCusting(_weapon);
-
-
-                //_weapon.CauseDamage(_targetDetector);
-                WeaponAttack();
-            }
-        }
-
-        private void AttackIfTargetExists()
-        {
-
-            //if (target == null)
-            //    return;
-
-            //_specialization.ApplySpells(); - smth like that
-        }
-
-        private void WeaponAttack()
-        {
-            //_weapon.CauseDamage();
+                _spells.Cust(_targetDetector, _weapon);
         }
 
         private void StopAttack()
@@ -74,8 +53,7 @@ namespace Arena
 
         private void OnDisable()
         {
-            //_targetDetector.Changed -= OnTargetChanged;
-            //_targetDetector.OnNoneTarget -= StopAttack;
+            _targetDetector.OnNoneTarget -= StopAttack;
             _mainSpell.Custed -= () => Attacked?.Invoke();
         }
     }

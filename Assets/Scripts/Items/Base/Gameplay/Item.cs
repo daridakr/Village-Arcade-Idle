@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace ForeverVillage
 {
-    public abstract class Item : MonoBehaviour,
+    public abstract class Item :
         IItem
     {
-        private ItemConfig _config;
+        private readonly ItemConfig _config;
 
         public string Name => _config.Name;
         public string Description => _config.Description;

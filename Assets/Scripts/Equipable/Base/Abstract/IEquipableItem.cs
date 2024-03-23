@@ -7,8 +7,8 @@ namespace ForeverVillage
     {
         // требования, локи
         // кто может экипировать - тип специализации
-        public Item Prefab { get; }
+        public GameObject Prefab { get; }
         public IItemPerk[] Perks { get; }
-        public Item Equip(Transform rig);
+        public GameObject Equip(Transform rig);
     }
 }

@@ -4,8 +4,8 @@ using Zenject;
 
 namespace Arena
 {
-    public sealed class PlayerSpells : MonoBehaviour,
-        IInitilizable, ICuster
+    public sealed class PlayerSpellsCuster : MonoBehaviour,
+        IInitilizable, IWeaponCuster
     {
         private ISpellsController _spellsController;
         private Spell[] _activeSpells;
@@ -35,25 +35,25 @@ namespace Arena
             Initialized?.Invoke();
         }
 
-        public float GetSpellsDamage()
-        {
-            float damage = 0;
+        //public float GetSpellsDamage()
+        //{
+        //    float damage = 0;
 
-            foreach (var spell in _activeSpells)
-            {
-                DamageSpell damageSpell = spell as DamageSpell;
+        //    foreach (var spell in _activeSpells)
+        //    {
+        //        DamageSpell damageSpell = spell as DamageSpell;
 
-                if (damageSpell != null)
-                    damage += damageSpell.Damage;
-            }
+        //        if (damageSpell != null)
+        //            damage += damageSpell.Damage;
+        //    }
 
-            return damage;
-        }
+        //    return damage;
+        //}
 
-        public void Cust(ITargetsInfo targetsInfo)
+        public void Cust(ITargetsInfo targetsInfo, IPlayerWeaponDamager damager)
         {
             foreach (Spell spell in _activeSpells)
-                spell.StartCusting(this, targetsInfo);
+                spell.StartCusting(this, targetsInfo, damager.TotalDamage);
         }
     }
 }

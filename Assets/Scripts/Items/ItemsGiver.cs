@@ -17,13 +17,13 @@ namespace ForeverVillage
 
         private void Start()
         {
-            ItemConfig[] itemConfigs = _catalog.GetData();
+            //ItemConfig[] itemConfigs = _catalog.GetData();
 
-            foreach (var config in itemConfigs)
-            {
-                var item = config.InstantiateItem();
-                _inventory.PutItem(item, 20);
-            }
+            //foreach (var config in itemConfigs)
+            //{
+            //    var item = config.InstantiateItem();
+            //    _inventory.PutItem(item, 20);
+            //}
         }
     }
 }

@@ -1,3 +1,4 @@
+using ForeverVillage;
 using System;
 using UnityEngine;
 using Zenject;
@@ -30,7 +31,7 @@ namespace Arena
             _config = config;
         }
 
-        public void StartCusting(ICusterPosition custer, ITargetsInfo targets)
+        public void StartCusting(ICusterPosition custer, ITargetsInfo targets, float additionalDamage = 0)
         {
             if (targets == null || targets.All.Length <= 0)
                 throw new NullReferenceException(nameof(targets));
@@ -43,19 +44,17 @@ namespace Arena
                 Custed?.Invoke();
 
                 _lastCustTime = currentTime;
-                Cust(targets);
+                Cust(targets, additionalDamage);
             }
         }
 
-        private void Cust(ITargetsInfo targets)
+        private void Cust(ITargetsInfo targets, float additionalDamage = 0)
         {
             // start casting by casting time and when time is over invoke performSpell with life time
-            // reset cooldown
 
-            Perform(targets);
+            Perform(targets, additionalDamage);
         }
 
-        //protected abstract void Perform();
-        protected abstract void Perform(ITargetsInfo targetInfo); // templtate pattern
+        protected abstract void Perform(ITargetsInfo targetInfo, float additionalDamage); // templtate pattern
     }
 }

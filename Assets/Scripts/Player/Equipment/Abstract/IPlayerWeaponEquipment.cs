@@ -2,6 +2,6 @@
 {
     public interface IPlayerWeaponEquipment
     {
-        public void EquipWeapon(IWeapon weapon);
+        public void EquipWeapon(Weapon weapon);
     }
 }

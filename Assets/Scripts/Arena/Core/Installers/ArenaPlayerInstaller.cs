@@ -37,9 +37,11 @@ namespace Arena
         {
             base.BindComponents();
 
-            Container.Bind<PlayerHealth>().FromComponentOn(Instance.gameObject).AsSingle();
-            Container.Bind<PlayerCharacterModelArena>().FromComponentOn(Instance.Model).AsSingle();
-            Container.Bind<PlayerMovementArena>().FromComponentOn(Instance.gameObject).AsSingle();
+            Container.Bind<PlayerHealth>().FromComponentOn(_playerInstance.gameObject).AsSingle();
+            Container.Bind<PlayerCharacterModelArena>().FromComponentOn(_playerInstance.Model).AsSingle();
+            Container.Bind<PlayerMovementArena>().FromComponentOn(_playerInstance.gameObject).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<PlayerWeaponArena>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
         }
 
         protected override void BindDisplayData()

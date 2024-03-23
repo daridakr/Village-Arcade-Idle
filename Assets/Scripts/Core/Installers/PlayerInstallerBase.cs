@@ -47,7 +47,6 @@ namespace ForeverVillage
             Container.Bind<SpecializationModelInitiator>().AsSingle();
             Container.BindInterfacesTo<AnimatedModelSetuper>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<PlayerWeapon>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerCharacterModel>().FromComponentOn(Instance.Model).AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerAnimation>().FromComponentOn(Instance.Model).AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerEquipment>().FromComponentOn(Instance.Data).AsSingle().NonLazy();

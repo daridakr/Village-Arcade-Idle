@@ -12,12 +12,12 @@ namespace Arena
             _config = config;
         }
 
-        protected override void Perform(ITargetsInfo targetsInfo) // melee
+        protected override void Perform(ITargetsInfo targetsInfo, float additionalDamage) // melee
         {
             _target = targetsInfo.Nearest;
 
             if (_target.TryGetComponent(out IDamagable damagable))
-                damagable.TakeDamage(Damage);
+                damagable.TakeDamage(Damage + additionalDamage);
         }
     }
 }

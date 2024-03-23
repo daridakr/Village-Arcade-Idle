@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 404066}
   - component: {fileID: 3395426}
   - component: {fileID: 2341634}
-  - component: {fileID: -5707269098119459132}
   m_Layer: 0
   m_Name: Shield 03 Purple
   m_TagString: Untagged
@@ -84,15 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5707269098119459132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ac70eb16ff7cc4084937b571ad7a59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

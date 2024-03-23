@@ -17,7 +17,6 @@ MonoBehaviour:
     Description: Protects the Knight.
     Icon: {fileID: 21300000, guid: c28d54c4733dc4fc7bedc4189f66bfbc, type: 3}
   _stackCapacity: 1
+  _prefab: {fileID: 110978, guid: c25a2f9bfa10e0e42b2b995ddbe4dd93, type: 3}
   _perks: []
   _damage: 0
-  _prefab: {fileID: -3860440106106633172, guid: c25a2f9bfa10e0e42b2b995ddbe4dd93,
-    type: 3}

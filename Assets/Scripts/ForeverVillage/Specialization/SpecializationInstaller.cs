@@ -50,12 +50,12 @@ namespace Village
         private void Install()
         {
             _playerWeapon.Init(_specialization.Data.WeaponTypes);
-            AssingWeaponsFor();
+            AssingWeapons();
 
             Initialized?.Invoke();
         }
 
-        private void AssingWeaponsFor()
+        private void AssingWeapons()
         {
             foreach (WeaponConfig config in _specialization.Data.Weapons)
             {

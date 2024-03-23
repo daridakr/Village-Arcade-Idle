@@ -596,6 +596,11 @@ PrefabInstance:
       propertyPath: _model
       value: 
       objectReference: {fileID: 1020910055672743237}
+    - target: {fileID: 5651262292023935724, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+        type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 1181784732130408675}
     - target: {fileID: 7158130998631110034, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -694,16 +699,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _luck: 0
---- !u!114 &6767389783896474613 stripped
+--- !u!114 &1181784732130408675
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4552943673641473040, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7117331186229368805}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794882633121152241}
+  m_GameObject: {fileID: 6561836900302757462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21e2d66f50cc14b4693b9cb3bfd8a737, type: 3}
+  m_Script: {fileID: 11500000, guid: dfac290173a91314c9063267e23ae93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6794882633121152241 stripped
@@ -726,7 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetDetector: {fileID: 637798425555357161}
   _spells: {fileID: 1609096063000064154}
-  _weapon: {fileID: 6767389783896474613}
+  _weapon: {fileID: 1181784732130408675}
 --- !u!114 &1325599364678354953
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,14 +10,14 @@ namespace ForeverVillage
 
         private IArmor[] _armor;
 
-        public void EquipWeapon(IWeapon weapon)
+        public void EquipWeapon(Weapon weapon)
         {
             Transform weaponRig =
                 weapon.BodyPart == WeaponBodyPart.RightHand ?
                 _model.HandRigRight : _model.HandRigLeft;
 
-            Weapon equipedWeapon = weapon.Equip(weaponRig) as Weapon;
-            _weapon.Assign(equipedWeapon);
+            GameObject equiped = weapon.Equip(weaponRig);
+            _weapon.Assign(weapon, equiped);
         }
 
         //private void EquipWeapon(Weapon weapon)

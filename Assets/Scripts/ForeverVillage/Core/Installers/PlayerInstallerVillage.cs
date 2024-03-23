@@ -25,11 +25,13 @@ namespace Village
         {
             base.BindComponents();
 
-            Container.BindInterfacesAndSelfTo<TimerInteractionsController>().FromComponentOn(Instance.gameObject).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<TimerInteractionsController>().FromComponentOn(_playerInstance.gameObject).AsSingle().NonLazy();
 
             Container.Bind<PlayerReferenceVillage>().FromInstance(_playerInstance).AsSingle().NonLazy();
             Container.Bind<PlayerTimerCleaner>().FromComponentOn(_playerInstance.Interactors).AsSingle();
             Container.Bind<PlayerTimerBuilder>().FromComponentOn(_playerInstance.Interactors).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<PlayerWeapon>().FromComponentOn(_playerInstance.Data).AsSingle().NonLazy();
         }
 
         protected override void BindDisplayData()
