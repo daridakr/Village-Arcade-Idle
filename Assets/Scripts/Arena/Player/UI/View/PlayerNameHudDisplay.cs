@@ -4,7 +4,7 @@ using Village;
 
 namespace Vampire.Player
 {
-    public sealed class NameHudDisplay : CanvasAnimatedView
+    public sealed class PlayerNameHudDisplay : CanvasAnimatedView
     {
         [SerializeField] private PlayerName _name;
         [SerializeField] private TMP_Text _nameDisplay;

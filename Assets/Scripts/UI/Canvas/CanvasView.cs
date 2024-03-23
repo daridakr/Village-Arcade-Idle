@@ -13,7 +13,7 @@ public abstract class CanvasView : MonoBehaviour
     public event Action Displayed;
     public event Action Hided;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         Hide();

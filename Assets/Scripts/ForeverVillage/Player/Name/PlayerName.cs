@@ -16,9 +16,6 @@ namespace Village
             Setuped?.Invoke(_name);
         }
 
-        protected override void SetKey()
-        {
-            Key = SaveKeyParams.Player.Name;
-        }
+        protected override void SetKey() => Key = SaveKeyParams.Player.Name;
     }
 }
