@@ -20,5 +20,5 @@ MonoBehaviour:
   _lifeTime: 0
   _cooldownTime: 1.5
   _damage: 10
-  _effect: {fileID: 4514758911870386088, guid: baab5ebf23d76d7419c4766ee0f371f7, type: 3}
+  _effect: {fileID: 6495395203734973721, guid: baab5ebf23d76d7419c4766ee0f371f7, type: 3}
   _knockbackForce: 50

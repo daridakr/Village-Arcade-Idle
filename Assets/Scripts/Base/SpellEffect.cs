@@ -2,21 +2,21 @@ using UnityEngine;
 
 namespace Arena
 {
-    [RequireComponent(typeof(ParticleSystem))]
     public sealed class SpellEffect : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem _particle;
         [SerializeField] private float _speed = 2f;
-
-        private ParticleSystem _particle;
 
         private Transform _target;
         private float _elapsedTime;
 
         private float Duration => _particle.main.duration;
 
-        private void Awake() => _particle = GetComponent<ParticleSystem>();
-
-        public void SetTarget(Transform target) => _target = target;
+        public void SetTarget(Transform target)
+        {
+            _target = target;
+            RotateTowardsTarget();
+        }
 
         private void Update()
         {
@@ -28,7 +28,16 @@ namespace Arena
         }
 
         private void MoveToTarget() =>
-            transform.position = Vector3.Lerp(transform.position, _target.transform.position, Time.deltaTime / Duration * _speed);
+            transform.position = Vector3.Lerp(transform.position, _target.position, Time.deltaTime / Duration * _speed);
+
+        private void RotateTowardsTarget()
+        {
+            Vector3 directionToTarget = (_target.position - transform.position).normalized;
+            Quaternion rotationToTarget = Quaternion.LookRotation(-directionToTarget);
+
+            rotationToTarget = Quaternion.Euler(0f, rotationToTarget.eulerAngles.y, rotationToTarget.eulerAngles.z);
+            transform.rotation = rotationToTarget;
+        }
 
         private void DestroyIfEnd()
         {

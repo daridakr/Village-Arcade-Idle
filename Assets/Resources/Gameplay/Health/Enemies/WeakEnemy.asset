@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe58fd30bbc338e41be2f81eac4d18f2, type: 3}
-  m_Name: BaseEnemyHealthConfig
+  m_Name: WeakEnemy
   m_EditorClassIdentifier: 
   _minValue: 0
-  _maxValue: 30
+  _maxValue: 50
