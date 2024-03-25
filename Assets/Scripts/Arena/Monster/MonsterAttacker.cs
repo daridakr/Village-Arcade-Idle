@@ -6,27 +6,36 @@ namespace Arena
         ITransformCuster
     {
         [SerializeField] private AttackState _attackState;
-        [SerializeField] private DamageSpell _spell;
+        [SerializeField] private DamageSpellConfig _config;
 
         private ITargetsInfo _currentTargets;
+        private Spell _spell;
 
         public Transform Transform => transform;
 
-        private void OnEnable() => _attackState.Attacked += AttackTarget;
+        private void Awake() => _spell = _config.InstantiateSpell();
 
-        private void AttackTarget(ITargetsInfo target)
+        private void OnEnable()
         {
-            _currentTargets = target;
-        }
+            _attackState.Attacked += SetAttackingTargetInfo;
+            _attackState.OnExit += ResetTargetInfo;
+        }    
 
         private void Update()
         {
-            if (_currentTargets == null)
+            if (_currentTargets == null || _spell == null)
                 return;
 
             _spell.StartCusting(this, _currentTargets);
         }
 
-        private void OnDestroy() => _attackState.Attacked -= AttackTarget;
+        private void SetAttackingTargetInfo(ITargetsInfo target) => _currentTargets = target;
+        private void ResetTargetInfo() => _currentTargets = null;
+
+        private void OnDestroy()
+        {
+            _attackState.Attacked -= SetAttackingTargetInfo;
+            _attackState.OnExit -= ResetTargetInfo;
+        }
     }
 }

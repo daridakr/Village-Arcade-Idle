@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace Arena
 {
-    [RequireComponent(typeof(Collider))]
-    public class TargetDetector : MonoBehaviour,
+    public abstract class TargetDetector : MonoBehaviour,
         ITargetsInfo
     {
-        [SerializeField] private TargetTrigger _trigger;
-
-        private List<Target> _targets;
+        protected List<Target> _targets;
 
         public ITargetable[] All => _targets.ToArray();
         public Target Nearest => _targets[0];
@@ -20,18 +17,9 @@ namespace Arena
         public event Action Changed;
         public event Action OnNoneTarget;
 
-        private void OnEnable()
-        {
-            _trigger.Enter += OnTargetEnter;
-            _trigger.Exit += OnTargetExit;
+        protected virtual void Awake() => _targets = new List<Target>();
 
-            OnNoneTarget?.Invoke();
-        }
-
-        private void Awake()
-        {
-            _targets = new List<Target>();
-        }
+        protected virtual void OnEnable() => OnNoneTarget?.Invoke();
 
         private void Update()
         {
@@ -48,26 +36,7 @@ namespace Arena
             }
         }
 
-        private void OnTargetEnter(Target target)
-        {
-            if (target == null)
-                return;
-
-            Target existingTarget = _targets.Find(t => t == target);
-
-            if (existingTarget == null)
-                AddTarget(target);
-        }
-
-        private void OnTargetExit(Target target)
-        {
-            Target existingTarget = _targets.Find(t => t == target);
-
-            if (existingTarget != null)
-                RemoveTarget(target);
-        }
-
-        private void AddTarget(Target target)
+        protected void AddTarget(Target target)
         {
             _targets.Add(target);
             target.Inactived += RemoveTarget;
@@ -76,7 +45,7 @@ namespace Arena
             Changed?.Invoke();
         }
 
-        private void RemoveTarget(Target target)
+        protected void RemoveTarget(Target target)
         {
             _targets.Remove(target);
             target.Inactived -= RemoveTarget;
@@ -90,11 +59,5 @@ namespace Arena
         }
 
         private void SortTargetsByDistance() => _targets.Sort((t1, t2) => t1.Distance.CompareTo(t2.Distance));
-
-        private void OnDisable()
-        {
-            _trigger.Enter -= OnTargetEnter;
-            _trigger.Exit -= OnTargetExit;
-        }
     }
 }

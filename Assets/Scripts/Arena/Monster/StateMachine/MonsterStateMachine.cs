@@ -4,7 +4,7 @@ namespace Arena
 {
     public class MonsterStateMachine : MonoBehaviour
     {
-        [SerializeField] private TargetDetector _targetsDetector;
+        [SerializeField] private PlayerTargetDetector _targetsDetector;
         [SerializeField] private State _first;
 
         private State _current;

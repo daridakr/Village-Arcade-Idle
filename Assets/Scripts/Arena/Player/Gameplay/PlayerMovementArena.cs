@@ -4,7 +4,7 @@ namespace Arena
 {
     public sealed class PlayerMovementArena : PlayerMovement
     {
-        [SerializeField] private TargetDetector _targetDetector;
+        [SerializeField] private RangeTargetDetector _targetDetector;
 
         private Target _currentTarget;
 

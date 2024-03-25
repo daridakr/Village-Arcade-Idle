@@ -5,7 +5,7 @@ namespace Arena
 {
     public sealed class PlayerAttacker : MonoBehaviour
     {
-        [SerializeField] private TargetDetector _targetDetector;
+        [SerializeField] private RangeTargetDetector _targetDetector;
         [SerializeField] private PlayerSpellsCuster _spells;
         [SerializeField] private PlayerWeaponArena _weapon;
 

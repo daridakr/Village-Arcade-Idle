@@ -23,8 +23,8 @@ namespace Arena
 
                 foreach (var transition in _transitions)
                 {
-                    transition.enabled = true;
                     transition.Init(_targetInfo);
+                    transition.enabled = true;
                 }
 
                 OnEnter?.Invoke();

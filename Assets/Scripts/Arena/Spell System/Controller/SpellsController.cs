@@ -27,7 +27,7 @@ namespace Arena
             if (_configs == null)
                 return;
 
-            var spell = _configs[index].InstantiateSpell();
+            Spell spell = _configs[index].InstantiateSpell();
             _activeSpells.Add(spell);
         }
 

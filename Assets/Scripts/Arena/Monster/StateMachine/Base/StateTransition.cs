@@ -16,6 +16,6 @@ namespace Arena
 
         public void Init(ITargetsInfo targetInfo) => _targetInfo = targetInfo;
 
-        private void OnEnable() => NeedTransit = false;
+        protected virtual void OnEnable() => NeedTransit = false;
     }
 }

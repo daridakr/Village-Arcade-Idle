@@ -2,8 +2,10 @@ namespace Arena
 {
     public class ToVictoryTransition : StateTransition
     {
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
             foreach (Target target in Targets)
                 target.Inactived += (target) => OnWinned(target);
         }
