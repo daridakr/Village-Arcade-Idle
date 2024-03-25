@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Arena
 {
@@ -6,6 +7,10 @@ namespace Arena
     {
         [SerializeField] private EnemyHealthConfig _config;
 
-        private void Awake() => InitPoints(_config);
+        [Inject]
+        private void Construct(PlayerLevelArena arenaLevel) =>
+            _config.SetHealthMultiplier(arenaLevel.Level);
+
+        private void Start() => InitPoints(_config);
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 namespace Arena
 {
     public class PlayerWeaponArena : PlayerWeapon,
-        IPlayerWeaponDamager
+        IWeaponDamager
     {
         public float TotalDamage => _weapons.Keys.Sum(x => x.Damage);
     }

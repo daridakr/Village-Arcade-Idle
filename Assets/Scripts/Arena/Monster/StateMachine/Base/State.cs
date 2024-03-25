@@ -10,8 +10,8 @@ namespace Arena
 
         protected Transform _target;
 
-        public virtual event Action OnEnter;
-        public virtual event Action OnExit;
+        public event Action OnEnter;
+        public event Action OnExit;
 
         public void Enter(Transform target)
         {

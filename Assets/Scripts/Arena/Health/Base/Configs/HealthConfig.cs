@@ -9,7 +9,7 @@ namespace Arena
         [SerializeField] private float _maxValue = 100f;
 
         public float Min => _minValue;
-        public float Max => _maxValue;
+        public virtual float Max => _maxValue;
 
         private void OnValidate()
         {

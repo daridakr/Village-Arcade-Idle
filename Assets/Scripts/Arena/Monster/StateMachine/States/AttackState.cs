@@ -1,16 +1,18 @@
 using System;
+using UnityEngine;
 
 namespace Arena
 {
     public class AttackState : State
     {
+        [SerializeField] private DamageSpell _spell;
+
         public event Action Attacked;
 
-        private void OnEnable() => Attack();
-
-        private void Attack()
+        private void Update()
         {
-            Attacked?.Invoke();
+            //_spell.Custed += () => Attacked?.Invoke();
+            //_spell.StartCusting(this, _target);
         }
     }
 }
