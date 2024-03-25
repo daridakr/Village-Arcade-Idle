@@ -670,6 +670,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7117331186229368805}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2362390649933352976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4759516209969989621, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7117331186229368805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2764708220409348803 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4943791836081214758, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
@@ -712,9 +718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84e56fc6b29d7448b88102d882fdcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 7121155364999617204}
-  _attacker: {fileID: 400365557679049072}
-  _health: {fileID: 8130695380754771122}
+  _movementSource: {fileID: 7121155364999617204}
+  _attackSource: {fileID: 400365557679049072}
+  _hitSource: {fileID: 8130695380754771122}
 --- !u!136 &4815041553131997809 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 2312494819297942932, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
@@ -798,6 +804,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 8130695380754771122}
+--- !u!114 &823439556229725980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794882633121152241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb3266137bc99546b81a8e80f4f024d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 8130695380754771122}
+  _gameObjectsToDisable:
+  - {fileID: 2362390649933352976}
+  _componentsToDisable:
+  - {fileID: 1722222429842952131}
+  _componentsDestroy:
+  - {fileID: 400365557679049072}
+  - {fileID: 7121155364999617204}
+  - {fileID: 607703748183650863}
+  - {fileID: 8130695380754771122}
+  - {fileID: 6794882633121152244}
+  - {fileID: 6794882633121152245}
 --- !u!114 &1325599364678354953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,6 +871,18 @@ MonoBehaviour:
 --- !u!4 &6794882633121152242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4362179068316805911, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7117331186229368805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &6794882633121152244 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4362179068316805905, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7117331186229368805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &6794882633121152245 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 4362179068316805904, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
     type: 3}
   m_PrefabInstance: {fileID: 7117331186229368805}
   m_PrefabAsset: {fileID: 0}

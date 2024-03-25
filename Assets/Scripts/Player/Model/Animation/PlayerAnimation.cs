@@ -4,7 +4,7 @@ using Zenject;
 public class PlayerAnimation : MonoBehaviour,
     IInitializable
 {
-    [SerializeField] private PlayerMovement _movement;
+    [SerializeField] private PlayerMovement _movementSource;
 
     protected IAnimatedModel _model;
     protected Animator _animator;
@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour,
             return;
 
         _model.Initialized += OnModelInitialized;
-        _movement.Moving += SetSpeed;
+        _movementSource.Moving += SetSpeed;
 
         _isInitialized = true;
     }
@@ -44,7 +44,7 @@ public class PlayerAnimation : MonoBehaviour,
 
     protected virtual void OnDisable()
     {
-        _movement.Moving -= SetSpeed;
+        _movementSource.Moving -= SetSpeed;
         _model.Initialized -= OnModelInitialized;
     }
 }

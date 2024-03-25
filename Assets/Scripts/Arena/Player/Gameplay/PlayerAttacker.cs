@@ -50,7 +50,7 @@ namespace Arena
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _targetDetector.OnNoneTarget -= StopAttack;
             _mainSpell.Custed -= () => Attacked?.Invoke();

@@ -1,9 +1,11 @@
+using ForeverVillage;
 using UnityEngine;
+using Zenject;
 
 namespace Arena
 {
     [RequireComponent(typeof(Animator))]
-    public class MonsterAnimator : MonoBehaviour
+    public sealed class MonsterAnimator : MonoBehaviour
     {
         [SerializeField] private MonsterMovement _movementSource;
         [SerializeField] private EnemyHealth _hitSource;
@@ -11,31 +13,34 @@ namespace Arena
         [SerializeField] private VictoryState _victorySoutce;
 
         private Animator _animator;
+        private ICharacterAnimation _characterAnimation;
 
-        private void OnEnable()
-        {
-            _movementSource.OnMove += OnMoveAnimation;
-            _hitSource.Damaged += PlayHitAnimation;
-            _hitSource.Emptied += SetTriggerDeathAnimation;
-            _attackSource.OnEnter += StartBasicAttackAnimation;
-            _victorySoutce.Winned += PlayVictoryAnimation;
-        }
+        [Inject]
+        private void Construct(ICharacterAnimation characterAnimation) => _characterAnimation = characterAnimation;
 
         private void Awake() => _animator = GetComponent<Animator>();
 
-        private void OnMoveAnimation(float velocity) => _animator.SetFloat(AnimationParams.Speed, velocity);
-        private void PlayHitAnimation(float _) => _animator.SetTrigger(AnimationParams.Hit);
-        private void SetTriggerDeathAnimation() => _animator.SetTrigger(AnimationParams.Death);
-        private void StartBasicAttackAnimation() => _animator.SetTrigger(AnimationParams.Attack);
+        private void OnEnable()
+        {
+            _movementSource.OnMove += SetMoveAnimation;
+            _victorySoutce.Winned += PlayVictoryAnimation;
+
+            _hitSource.Damaged += (_) => _characterAnimation.SetHitAnimation(_animator);
+            _attackSource.OnEnter += () => _characterAnimation.SetAttackAnimation(_animator);
+            _hitSource.Emptied += () => _characterAnimation.SetDeathAnimation(_animator);
+        }
+
+        private void SetMoveAnimation(float velocity) => _animator.SetFloat(AnimationParams.Speed, velocity);
         private void PlayVictoryAnimation() => _animator.SetTrigger(AnimationParams.Victory);
 
         private void OnDestroy()
         {
-            _movementSource.OnMove -= OnMoveAnimation;
-            _hitSource.Damaged -= PlayHitAnimation;
-            _hitSource.Emptied -= SetTriggerDeathAnimation;
-            _attackSource.OnEnter -= StartBasicAttackAnimation;
+            _movementSource.OnMove -= SetMoveAnimation;
             _victorySoutce.Winned -= PlayVictoryAnimation;
+
+            _hitSource.Damaged -= (_) => _characterAnimation.SetHitAnimation(_animator);
+            _attackSource.OnEnter -= () => _characterAnimation.SetAttackAnimation(_animator);
+            _hitSource.Emptied -= () => _characterAnimation.SetDeathAnimation(_animator);
         }
     }
 }

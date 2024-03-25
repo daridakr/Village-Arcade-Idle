@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46d732bf89733a499a7d4b6f9771272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 2343849037531739885}
+  _movementSource: {fileID: 2343849037531739885}
   _interactionsController: {fileID: 363266591994899753}
 --- !u!114 &3479268912843222355
 MonoBehaviour:
