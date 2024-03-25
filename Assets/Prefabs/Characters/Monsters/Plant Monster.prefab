@@ -1822,9 +1822,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974df3ffbfaa6424c951a6ee16026289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 662529860213722402}
-  _enemyHealth: {fileID: 2196124211581409640}
-  _attackState: {fileID: 7458465936342080854}
+  _movementSource: {fileID: 662529860213722402}
+  _hitSource: {fileID: 2196124211581409640}
+  _attackSource: {fileID: 7458465936342080854}
+  _victorySoutce: {fileID: 8961822071027967421}
 --- !u!1001 &6257973804192139186
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class PlayerAnimation : MonoBehaviour,
             _animator = _model.GetAnimator();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _movement.Moving -= SetSpeed;
         _model.Initialized -= OnModelInitialized;

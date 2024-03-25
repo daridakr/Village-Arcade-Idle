@@ -7,7 +7,8 @@ namespace Arena
         private PlayerTarget[] _players;
 
         [Inject]
-        private void Construct([Inject(Id = "Player")] PlayerTarget[] players) => _players = players;
+        private void Construct([Inject(Id = "Player")] PlayerTarget[] players) => 
+            _players = players;
 
         protected override void Awake()
         {

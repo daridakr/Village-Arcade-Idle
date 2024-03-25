@@ -667,6 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 7121155364999617204}
   _attacker: {fileID: 400365557679049072}
+  _health: {fileID: 8130695380754771122}
 --- !u!136 &4815041553131997809 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 2312494819297942932, guid: 795ef983d927dd94d8d5098bc2a9f3c8,
