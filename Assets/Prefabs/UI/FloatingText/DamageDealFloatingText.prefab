@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3271148685015728753}
   - component: {fileID: 8244826233223738684}
   m_Layer: 5
-  m_Name: FloatingText
+  m_Name: DamageDealFloatingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3748031152043768322
 MonoBehaviour:
   m_ObjectHideFlags: 0
