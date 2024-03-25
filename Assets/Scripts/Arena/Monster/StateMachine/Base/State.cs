@@ -8,22 +8,23 @@ namespace Arena
     {
         [SerializeField] private List<StateTransition> _transitions;
 
-        protected Transform _target;
+        protected ITargetsInfo _targetInfo;
+        protected Transform NearestTarget => _targetInfo.Nearest.transform;
 
         public event Action OnEnter;
         public event Action OnExit;
 
-        public void Enter(Transform target)
+        public void Enter(ITargetsInfo targetInfo)
         {
             if (enabled == false)
             {
-                _target = target;
+                _targetInfo = targetInfo;
                 enabled = true;
 
                 foreach (var transition in _transitions)
                 {
                     transition.enabled = true;
-                    transition.Init(_target);
+                    transition.Init(_targetInfo);
                 }
 
                 OnEnter?.Invoke();

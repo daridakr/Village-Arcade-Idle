@@ -38,6 +38,7 @@ namespace Arena
             base.BindComponents();
 
             Container.Bind<PlayerHealth>().FromComponentOn(_playerInstance.gameObject).AsSingle();
+            Container.Bind<PlayerTarget>().FromComponentOn(_playerInstance.gameObject).AsSingle();
             Container.Bind<PlayerCharacterModelArena>().FromComponentOn(_playerInstance.Model).AsSingle();
             Container.Bind<PlayerMovementArena>().FromComponentOn(_playerInstance.gameObject).AsSingle();
 

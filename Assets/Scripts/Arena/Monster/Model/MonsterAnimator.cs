@@ -15,7 +15,7 @@ namespace Arena
         {
             _movement.OnMove += OnMoveAnimation;
             _enemyHealth.Emptied += SetTriggerDeathAnimation;
-            _attackState.Attacked += StartBasicAttackAnimation;
+            _attackState.OnEnter += StartBasicAttackAnimation;
         }
 
         private void Awake() => _animator = GetComponent<Animator>();
@@ -28,7 +28,7 @@ namespace Arena
         {
             _movement.OnMove -= OnMoveAnimation;
             _enemyHealth.Emptied -= SetTriggerDeathAnimation;
-            _attackState.Attacked -= StartBasicAttackAnimation;
+            _attackState.OnEnter -= StartBasicAttackAnimation;
         }
     }
 }

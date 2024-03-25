@@ -70,7 +70,7 @@ namespace Arena
         private void AddTarget(Target target)
         {
             _targets.Add(target);
-            target.Deslocated += RemoveTarget;
+            target.Inactived += RemoveTarget;
             SortTargetsByDistance();
 
             Changed?.Invoke();
@@ -79,7 +79,7 @@ namespace Arena
         private void RemoveTarget(Target target)
         {
             _targets.Remove(target);
-            target.Deslocated -= RemoveTarget;
+            target.Inactived -= RemoveTarget;
 
             if (_targets.Count > 0)
                 SortTargetsByDistance();

@@ -1,26 +1,22 @@
 using UnityEngine;
-using Zenject;
 
 namespace Arena
 {
     public class MonsterStateMachine : MonoBehaviour
     {
+        [SerializeField] private TargetDetector _targetsDetector;
         [SerializeField] private State _first;
 
         private State _current;
-        private Transform _target;
 
         public State Current => _current;
-
-        [Inject]
-        private void Construct(PlayerMovement player) => _target = player.transform;
 
         private void Start()
         {
             _current = _first;
 
             if (_current != null)
-                _current.Enter(_target);
+                _current.Enter(_targetsDetector);
         }
 
         private void Update()
@@ -42,7 +38,7 @@ namespace Arena
             _current = nextState;
 
             if (_current != null)
-                _current.Enter(_target);
+                _current.Enter(_targetsDetector);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Arena
     {
         [SerializeField] private Health _health;
 
-        public override event Action<Target> Deslocated;
+        public override event Action<Target> Inactived;
 
         private void OnEnable()
         {
@@ -18,7 +18,7 @@ namespace Arena
         {
             _health.Emptied -= OnTargetDead;
 
-            Deslocated?.Invoke(this);
+            Inactived?.Invoke(this);
         }
     }
 }

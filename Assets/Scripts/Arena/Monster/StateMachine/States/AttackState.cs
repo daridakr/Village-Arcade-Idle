@@ -1,18 +1,18 @@
 using System;
-using UnityEngine;
 
 namespace Arena
 {
     public class AttackState : State
     {
-        [SerializeField] private DamageSpell _spell;
+        // future: for multiplayer when monsters can use aoe attack for many players
+        public event Action<ITargetsInfo> Attacked;
 
-        public event Action Attacked;
+        private void OnEnable() => Attacked?.Invoke(_targetInfo);
 
         private void Update()
         {
             //_spell.Custed += () => Attacked?.Invoke();
-            //_spell.StartCusting(this, _target);
+            //
         }
     }
 }

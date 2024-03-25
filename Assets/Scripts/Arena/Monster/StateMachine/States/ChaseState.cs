@@ -7,6 +7,6 @@ namespace Arena
     {
         public event Action<Vector3> Updated;
 
-        private void Update() => Updated?.Invoke(_target.position);
+        private void Update() => Updated?.Invoke(NearestTarget.position);
     }
 }

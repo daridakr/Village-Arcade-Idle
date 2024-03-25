@@ -9,7 +9,8 @@ namespace Arena
         private float _distance;
 
         public float Distance => _distance;
-        public abstract event Action<Target> Deslocated;
+
+        public abstract event Action<Target> Inactived;
 
         public void SetDistanceTo(Vector3 position)
         {

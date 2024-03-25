@@ -2,10 +2,16 @@ namespace Arena
 {
     public class ToVictoryTransition : StateTransition
     {
-        private void Update()
+        private void OnEnable()
         {
-            if (_target == null)
-                NeedTransit = true;
+            foreach (Target target in Targets)
+                target.Inactived += (target) => OnWinned(target);
+        }
+
+        private void OnWinned(Target target)
+        {
+            target.Inactived -= OnWinned;
+            NeedTransit = true;
         }
     }
 }

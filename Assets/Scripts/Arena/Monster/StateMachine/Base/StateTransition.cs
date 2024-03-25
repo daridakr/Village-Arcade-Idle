@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Arena
@@ -6,12 +7,14 @@ namespace Arena
     {
         [SerializeField] private State _targetState;
 
-        protected Transform _target;
+        private ITargetsInfo _targetInfo;
+        protected Transform NearestTarget => _targetInfo.Nearest.transform;
+        protected Target[] Targets => _targetInfo.All as Target[];
 
         public State TargetState => _targetState;
         public bool NeedTransit { get; protected set; }
 
-        public void Init(Transform target) => _target = target;
+        public void Init(ITargetsInfo targetInfo) => _targetInfo = targetInfo;
 
         private void OnEnable() => NeedTransit = false;
     }

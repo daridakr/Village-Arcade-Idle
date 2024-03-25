@@ -8,7 +8,7 @@ namespace Arena
 
         private void Update()
         {
-            if (Vector3.Distance(transform.position, _target.position) < _stoppingDistance)
+            if (Vector3.Distance(transform.position, NearestTarget.transform.position) < _stoppingDistance)
                 NeedTransit = true;
         }
     }
