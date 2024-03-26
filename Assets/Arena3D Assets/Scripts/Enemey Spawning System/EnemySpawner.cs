@@ -1,9 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Vampire;
 using Zenject;
-
 
 namespace Arena
 {
@@ -19,12 +18,16 @@ namespace Arena
 
         [SerializeField, Min(1f), Space] private float StartingThreatLevel = 5f;
         [SerializeField, Min(0f)] private float ThreatLevelDelta = 0.2f;
+
         private float currentTargetThreatLevel;
         private float currentThreatLevel => GetCurrentTotalThreatLevel();
 
         private readonly Queue<ISpawnableEnemy> EnemySpawnQueue = new();
+
         private PlayerCharacterModelArena _player;
         private IEnemyFactory _enemyFactory;
+
+        public event Action MonsterKillded;
 
         [Inject]
         private void Construct(PlayerCharacterModelArena player, IEnemyFactory factory)
@@ -68,7 +71,7 @@ namespace Arena
             ISpawnableEnemy[] validEnemies = SpawnableEnemyPrefabs.Where(E => 0f < E.ThreatLevel && E.ThreatLevel <= threatLevel).ToArray();
 
             float totalWeight = validEnemies.Sum(E => E.SpawnWeight);
-            float randomWeight = Random.Range(0f, totalWeight);
+            float randomWeight = UnityEngine.Random.Range(0f, totalWeight);
 
             foreach (var item in validEnemies)
             {
@@ -92,12 +95,20 @@ namespace Arena
             Transform newEnemy = _enemyFactory.Create(enemy as NPC).transform;
 
             //Transform newEnemy = Instantiate(enemy as Component).transform;
-            int index = Random.Range(1, 100);
+            int index = UnityEngine.Random.Range(1, 100);
             newEnemy.name = (enemy as NPC).name + index;
 
-            Vector2 randomPositionOffset = Random.insideUnitCircle.normalized * SpawnRadius;
+            Vector2 randomPositionOffset = UnityEngine.Random.insideUnitCircle.normalized * SpawnRadius;
             newEnemy.position = transform.position + new Vector3(randomPositionOffset.x, 0f, randomPositionOffset.y);
             newEnemy.LookAt(_player.transform);
+
+            newEnemy.GetComponent<EnemyHealth>().Dead += OnSpawnedMonsterDead;
+        }
+
+        private void OnSpawnedMonsterDead(EnemyHealth enemyHealth)
+        {
+            enemyHealth.Dead -= OnSpawnedMonsterDead;
+            MonsterKillded?.Invoke();
         }
 
 

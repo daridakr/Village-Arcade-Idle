@@ -9609,6 +9609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f455edcb1d8764146bc5ba10ff78d4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemySpawner: {fileID: 770657724}
   _healthConfig: {fileID: 11400000, guid: 66ddfeb06aa0b994fae62cfe989bc635, type: 2}
 --- !u!1 &1926419913
 GameObject:
