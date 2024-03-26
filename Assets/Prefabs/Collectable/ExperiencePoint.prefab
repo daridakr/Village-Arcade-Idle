@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4155588643804030951}
   - component: {fileID: 427457885080243938}
   - component: {fileID: 2725621036072423247}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: ExperiencePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45e8db4ca0225644ae2abe294593820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experience: 4
+  _value: 1
 --- !u!114 &2725621036072423247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 5425098433651907409}
   - component: {fileID: 8999891752141100276}
   - component: {fileID: 6558083921652113470}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

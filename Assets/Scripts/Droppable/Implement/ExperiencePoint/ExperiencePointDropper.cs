@@ -1,7 +1,4 @@
-namespace Village
+namespace ForeverVillage
 {
-    public class ExperiencePointDropper : Dropper<DroppableExperiencePoint>
-    {
-
-    }
+    public sealed class ExperiencePointDropper : Dropper<DroppableExperiencePoint> { }
 }

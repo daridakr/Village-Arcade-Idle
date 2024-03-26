@@ -1,7 +1,6 @@
+using ForeverVillage;
+
 namespace Village
 {
-    public class GemsDropper : Dropper<DroppableGem>
-    {
-
-    }
+    public sealed class GemsDropper : Dropper<DroppableGem> { }
 }

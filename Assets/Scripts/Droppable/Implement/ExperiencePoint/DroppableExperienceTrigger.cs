@@ -1,7 +1,4 @@
-﻿namespace Village
+﻿namespace ForeverVillage
 {
-    public class DroppableExperienceTrigger : DroppableTrigger<DroppableExperiencePoint>
-    {
-
-    }
+    public sealed class DroppableExperienceTrigger : DroppableTrigger<DroppableExperiencePoint> { }
 }

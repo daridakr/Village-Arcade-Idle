@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Village
+namespace ForeverVillage
 {
     public abstract class Dropper<T> : MonoBehaviour where T : DroppableItem
     {
@@ -27,14 +27,17 @@ namespace Village
 
             for (int i = 0; i < count; i++)
             {
-                T spawnedItem = Instantiate(_droppableItemTemplate, _spawnPosition, Random.rotation);
-                spawnedItem.Push(GetRandomDirection() * _pushForce);
+                Drop();
 
                 if (_spawnBetweenDelay != 0)
                     yield return new WaitForSeconds(_spawnBetweenDelay);
             }
+        }
 
-            //PayCompleted?.Invoke();
+        protected virtual void Drop()
+        {
+            T spawnedItem = Instantiate(_droppableItemTemplate, _spawnPosition, Random.rotation);
+            spawnedItem.Push(GetRandomDirection() * _pushForce);
         }
 
         private Vector3 GetRandomDirection()

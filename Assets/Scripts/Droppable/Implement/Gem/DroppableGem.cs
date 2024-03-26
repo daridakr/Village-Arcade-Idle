@@ -1,7 +1,6 @@
+using ForeverVillage;
+
 namespace Village
 {
-    public class DroppableGem : DroppableItem
-    {
-
-    }
+    public sealed class DroppableGem : DroppableItem { }
 }

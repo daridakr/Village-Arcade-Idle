@@ -1,9 +1,8 @@
-using ForeverVillage;
 using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Village
+namespace ForeverVillage
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]

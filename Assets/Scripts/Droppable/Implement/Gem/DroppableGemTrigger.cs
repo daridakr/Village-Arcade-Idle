@@ -1,8 +1,6 @@
+using ForeverVillage;
+
 namespace Village
 {
-
-    public class DroppableGemTrigger : DroppableTrigger<DroppableGem>
-    {
-
-    }
+    public sealed class DroppableGemTrigger : DroppableTrigger<DroppableGem> { }
 }

@@ -1,5 +1,6 @@
+using ForeverVillage;
 using UnityEngine;
-using Village;
+using Vampire;
 
 namespace Arena
 {
@@ -7,7 +8,13 @@ namespace Arena
     {
         [SerializeField] private ExperiencePointDropper _experienceDropper;
         [SerializeField] private int _countOfExpPoints = 1;
+        [SerializeField] private CoinsDropper _coinsDropper;
+        [SerializeField] private int _maxCountOfCoins = 1;
 
-        private void OnEnable() => _experienceDropper.Give(_countOfExpPoints);
+        private void OnEnable()
+        {
+            _experienceDropper.Give(_countOfExpPoints);
+            _coinsDropper.Give(_maxCountOfCoins);
+        }
     }
 }

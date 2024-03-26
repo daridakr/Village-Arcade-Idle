@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 5266109283738829080}
   - component: {fileID: 4523717828584662789}
   - component: {fileID: 3042443466580680449}
+  - component: {fileID: 9120644717387300253}
   m_Layer: 12
   m_Name: Plant Monster
   m_TagString: Untagged
@@ -572,6 +573,23 @@ MonoBehaviour:
     type: 3}
   _spawnOffset: {x: 0.38, y: 2.2, z: 0}
   _prePushDelay: 0.1
+--- !u!114 &9120644717387300253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880233426290204094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8305323290b9054497c5bdec4650b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _droppableItemTemplate: {fileID: 1693952496696783033, guid: 793154771af0aaa44bbe63d6dbd8d810,
+    type: 3}
+  _spawnOffset: {x: 0.38, y: 2.2, z: 0}
+  _prePushDelay: 0.1
+  _dropChance: 0.5
 --- !u!1 &6911923220988264040
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +775,8 @@ MonoBehaviour:
   _transitions: []
   _experienceDropper: {fileID: 3042443466580680449}
   _countOfExpPoints: 1
+  _coinsDropper: {fileID: 9120644717387300253}
+  _maxCountOfCoins: 1
 --- !u!1 &7749125199737201173
 GameObject:
   m_ObjectHideFlags: 0
