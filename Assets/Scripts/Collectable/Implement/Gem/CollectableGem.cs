@@ -2,8 +2,5 @@ using ForeverVillage;
 
 namespace Village
 {
-    public class CollectableGem : Collectable
-    {
-
-    }
+    public sealed class CollectableGem : Collectable { }
 }

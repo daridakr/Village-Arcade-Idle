@@ -7,9 +7,7 @@ namespace Village
     {
         [SerializeField] private PlayerGems _playerGems;
 
-        protected override void OnCollected(CollectableGem collectable)
-        {
+        protected override void OnCollected(CollectableGem collectable) =>
             _playerGems.Recieve(collectable.Value);
-        }
     }
 }

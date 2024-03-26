@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 427457885080243943}
   - component: {fileID: 427457885080243964}
   - component: {fileID: 4155588643804030951}
-  - component: {fileID: 7850766609145214981}
+  - component: {fileID: 1579608228162960110}
   - component: {fileID: 1693952496696783033}
   m_Layer: 15
   m_Name: Coin
@@ -65,7 +65,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7850766609145214981
+--- !u!114 &1579608228162960110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 427457885080243942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81889b565825474aa7a6f38021c866e, type: 3}
+  m_Script: {fileID: 11500000, guid: edd85e4a0910d5948adf9afb9d07151a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _value: 1
+  _value: 5
 --- !u!114 &1693952496696783033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e198bd9d6f9fedf4ab468f2028a00eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 7850766609145214981}
+  _item: {fileID: 1579608228162960110}
   _captureDelay: 0.8
 --- !u!1001 &2199352280549249138
 PrefabInstance:
@@ -113,15 +113,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 21f9ef9f074f5304d9971cd99755a1b6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 21f9ef9f074f5304d9971cd99755a1b6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 21f9ef9f074f5304d9971cd99755a1b6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 21f9ef9f074f5304d9971cd99755a1b6, type: 3}
       propertyPath: m_LocalPosition.x
