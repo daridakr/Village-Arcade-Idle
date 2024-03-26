@@ -33,10 +33,10 @@ namespace Arena
 
             if (currentTime - _lastCustTime >= Cooldown)
             {
+                Custed?.Invoke();
+
                 _lastCustTime = currentTime;
                 Cust(targetInfo, additionalDamage);
-
-                Custed?.Invoke();
             }
         }
 

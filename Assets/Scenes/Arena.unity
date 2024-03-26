@@ -3200,7 +3200,7 @@ PrefabInstance:
     - target: {fileID: 8171350205494774413, guid: fb26d1f3b471bfa4385590792178b468,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4183
+      value: 36951
       objectReference: {fileID: 0}
     - target: {fileID: 8171350205494774414, guid: fb26d1f3b471bfa4385590792178b468,
         type: 3}
@@ -3753,7 +3753,7 @@ MonoBehaviour:
   EnemyPrefabs:
   - {fileID: 4880233426290204094, guid: 34fd0570c4d59f540be07eb8ecd91d70, type: 3}
   ThreatMatchingTimer: 10
-  SpawningTimer: 1
+  SpawningTimer: 5
   SpawnRadius: 20
   StartingThreatLevel: 5
   ThreatLevelDelta: 0.2

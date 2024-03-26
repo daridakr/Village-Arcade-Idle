@@ -1,6 +1,6 @@
 namespace Arena
 {
-    public class ToVictoryTransition : StateTransition
+    public sealed class ToVictoryTransition : StateTransition
     {
         protected override void OnEnable()
         {

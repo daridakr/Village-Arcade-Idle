@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 8046468875892044767}
   - component: {fileID: 5266109283738829080}
   - component: {fileID: 4523717828584662789}
+  - component: {fileID: 3042443466580680449}
   m_Layer: 12
   m_Name: Plant Monster
   m_TagString: Untagged
@@ -555,6 +556,22 @@ MonoBehaviour:
   <ThreatLevel>k__BackingField: 1
   <SpawnWeight>k__BackingField: 100
   <EXPReward>k__BackingField: 100
+--- !u!114 &3042443466580680449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880233426290204094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9807cce23686a43bd6aa52877a37e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _droppableItemTemplate: {fileID: 2725621036072423247, guid: d0cec3377007ba849856ad5260ac47cc,
+    type: 3}
+  _spawnOffset: {x: 0.38, y: 2.2, z: 0}
+  _prePushDelay: 0.1
 --- !u!1 &6911923220988264040
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +589,8 @@ GameObject:
   - component: {fileID: 3937257914318278577}
   - component: {fileID: 8961822071027967421}
   - component: {fileID: 8055656690831501422}
+  - component: {fileID: 2431551295586520537}
+  - component: {fileID: 5971041207786549711}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -636,6 +655,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 8272885304658775344}
+  - {fileID: 2431551295586520537}
+  - {fileID: 3937257914318278577}
 --- !u!114 &8272885304658775344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +686,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 6440803992909914986}
   - {fileID: 3937257914318278577}
+  - {fileID: 2431551295586520537}
 --- !u!114 &3937257914318278577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +728,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetState: {fileID: 7932750162994803482}
   _winningTime: 1
+--- !u!114 &2431551295586520537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911923220988264040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eca69e94166341408b0283ffeb4ee57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetState: {fileID: 5971041207786549711}
+  _health: {fileID: 2196124211581409640}
+--- !u!114 &5971041207786549711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911923220988264040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee7ccd0e84284340ab366219e92e62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitions: []
+  _experienceDropper: {fileID: 3042443466580680449}
+  _countOfExpPoints: 1
 --- !u!1 &7749125199737201173
 GameObject:
   m_ObjectHideFlags: 0

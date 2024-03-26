@@ -2,7 +2,7 @@ using System;
 
 namespace Arena
 {
-    public class VictoryState : State
+    public sealed class VictoryState : State
     {
         public event Action Winned;
 

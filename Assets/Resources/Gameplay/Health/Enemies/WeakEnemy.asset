@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WeakEnemy
   m_EditorClassIdentifier: 
   _minValue: 0
-  _maxValue: 50
+  _maxValue: 30
