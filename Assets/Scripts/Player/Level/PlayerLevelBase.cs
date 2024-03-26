@@ -34,10 +34,7 @@ namespace ForeverVillage
             OnValueChanged();
         }
 
-        public void TakeExp(int value)
-        {
-            _level.AddExperience(value);
-        }
+        public void TakeExp(int value) => _level.AddExperience(value);
 
         protected void OnDisable()
         {

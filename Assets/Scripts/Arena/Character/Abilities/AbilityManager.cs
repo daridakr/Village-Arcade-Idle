@@ -209,7 +209,7 @@ namespace Vampire
         private float OwnedChance()
         {
             float x = _playerLevel.Level % 2 == 0 ? 2 : 1;
-            return 1 + 0.3f * x - 1 / _playerLevel.Luck;
+            return 1 + 0.3f * x - 1 /*/ _playerLevel.Luck*/;
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Vampire
         /// </summary>
         private float FourthChance()
         {
-            return 1 - 1 / _playerLevel.Luck;
+            return 1 - 1 /*/ _playerLevel.Luck*/;
         }
 
         /// <summary>
