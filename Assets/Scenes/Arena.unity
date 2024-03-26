@@ -4720,6 +4720,7 @@ GameObject:
   - component: {fileID: 925809109}
   - component: {fileID: 925809108}
   - component: {fileID: 925809107}
+  - component: {fileID: 925809113}
   m_Layer: 0
   m_Name: Status_Killed
   m_TagString: Untagged
@@ -4862,6 +4863,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925809105}
   m_CullTransparentMesh: 0
+--- !u!114 &925809113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925809105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a921f7b9209b48f44ac3163d1b7a3d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySpawner: {fileID: 770657724}
+  _counterTextDisplay: {fileID: 1432449166}
 --- !u!1 &932271523
 GameObject:
   m_ObjectHideFlags: 0
