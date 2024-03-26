@@ -3,7 +3,7 @@ using Vampire;
 
 public class MiscTesting : MonoBehaviour
 {
-    [SerializeField] private BarPoints healthBar, expBar;
+    //[SerializeField] private BarPoints healthBar, expBar;
     [SerializeField] private EntityManager entityManager;
     [SerializeField] private Character character;
     [SerializeField] private AudioClip audioClip;

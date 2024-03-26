@@ -7,7 +7,9 @@ namespace Arena
     {
         [SerializeField] private PlayerCoins _playerCoins;
 
-        protected override void OnCollected(CollectableCoin collectable) =>
+        protected override void OnCollected(CollectableCoin collectable)
+        {
             _playerCoins.Recieve(collectable.Value);
+        }
     }
 }

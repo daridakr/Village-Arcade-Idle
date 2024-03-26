@@ -1,6 +1,6 @@
+using ForeverVillage;
 using System;
 using UnityEngine;
-using Vampire;
 
 namespace Arena
 {

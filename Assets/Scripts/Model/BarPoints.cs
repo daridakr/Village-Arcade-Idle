@@ -1,6 +1,6 @@
 using System;
 
-namespace Vampire
+namespace ForeverVillage
 {
     public sealed class BarPoints
     {

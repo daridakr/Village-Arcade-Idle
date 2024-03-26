@@ -12,8 +12,8 @@ namespace Vampire
         [SerializeField] protected float lookIndicatorRadius;
         [SerializeField] protected TextMeshProUGUI levelText;
         [SerializeField] protected AbilitySelectionDialog abilitySelectionDialog;
-        [SerializeField] protected BarPoints healthBar;  // 血量條
-        [SerializeField] protected BarPoints expBar;  // 經驗條
+        //[SerializeField] protected BarPoints healthBar;  // 血量條
+        //[SerializeField] protected BarPoints expBar;  // 經驗條
         [SerializeField] protected Collider2D meleeHitboxCollider;
         [SerializeField] protected ParticleSystem dustParticles;
         [SerializeField] protected Material defaultMaterial, hitMaterial, deathMaterial;
