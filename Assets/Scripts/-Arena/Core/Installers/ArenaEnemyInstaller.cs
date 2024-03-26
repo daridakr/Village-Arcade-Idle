@@ -1,8 +1,7 @@
-using Arena;
 using UnityEngine;
 using Zenject;
 
-namespace Vampire
+namespace Arena
 {
     public sealed class ArenaEnemyInstaller : MonoInstaller
     {

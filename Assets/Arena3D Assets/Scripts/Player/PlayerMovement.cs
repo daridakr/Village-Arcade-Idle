@@ -21,8 +21,8 @@ namespace Arena3D
 
         private void FixedUpdate()
         {
-            Vector3 movementInput = GameManager.Instance.GameInput.MovementInputXZ;
-            rigidbody.velocity = MovementSpeed * movementInput;
+            //Vector3 movementInput = GameManager.Instance.GameInput.MovementInputXZ;
+            //rigidbody.velocity = MovementSpeed * movementInput;
         }
     }
 }

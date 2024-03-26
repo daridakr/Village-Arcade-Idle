@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Vampire
+namespace Arena
 {
     public class EnemyFactory : IEnemyFactory
     {

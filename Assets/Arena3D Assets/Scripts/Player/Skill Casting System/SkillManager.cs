@@ -19,9 +19,6 @@ public class SkillManager : MonoBehaviour
 		Skills = Skills.Select(skill => skill.Clone()).ToList();
 	}
 
-	private void OnEnable() => GameManager.Instance.GameInput.OnPlayerSkillCastInput += TryCastSkill;
-	private void OnDisable() => GameManager.Instance.GameInput.OnPlayerSkillCastInput -= TryCastSkill;
-
 	private void TryCastSkill(int skillIndex)
 	{
 		Debug.Log($"Attempting to cast Skill at Index {skillIndex}");

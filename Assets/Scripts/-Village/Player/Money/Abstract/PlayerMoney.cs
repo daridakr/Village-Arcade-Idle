@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,7 +13,9 @@ namespace ForeverVillage
         public int Balance => _balance.Value;
         public bool IsEmpty => _balance.Value <= 0;
 
-        public event UnityAction<int> BalanceChanged;
+        public event Action<int> Recieved;
+        public event Action<int> Spended;
+        public event Action BalanceChanged;
 
         protected virtual void OnEnable()
         {
@@ -26,13 +29,15 @@ namespace ForeverVillage
 
         private void OnBalanceChanged()
         {
-            BalanceChanged?.Invoke(_balance.Value);
+            BalanceChanged?.Invoke();
             _balance.Save();
         }
 
         public void Recieve(int value)
         {
             _balance.Add(value);
+
+            Recieved?.Invoke(value);
 
             //_totalMoneyProgress.Add(value);
             //_totalMoneyProgress.Save();
@@ -41,6 +46,8 @@ namespace ForeverVillage
         public void Spend(int value)
         {
             _balance.Spend(value);
+
+            Spended?.Invoke(value);
         }
 
         public void SetNewBalance(int value)
